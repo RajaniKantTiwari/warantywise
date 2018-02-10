@@ -28,6 +28,8 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
     @Inject
     CommonPresenter presenter;
     private String mobileNumber;
+
+
     private String userName;
 
     @Override
