@@ -45,10 +45,10 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
 
     public void initializeData() {
         try {
-            InstanceID instanceID = InstanceID.getInstance(this);
+            /*InstaceID instanceID = InstanceID.getInstance(this);
 
             String token = instanceID.getAuthToken(getString(R.string.gcm_defaultSenderId),
-                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);*/
 
             //Log.i(TAG, "GCM Registration Token: " + token);
 
