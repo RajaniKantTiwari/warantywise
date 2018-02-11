@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.app.warantywise.utility.CommonUtility" />
+
+        <variable
+            name="merchantResponse"
+            type="com.app.warantywise.network.response.dashboard.MerchantResponse" />
+    </data>
+
+    <FrameLayout style="@style/match_match">
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/layoutMain"
+            style="@style/match_match"
+            android:background="@color/white"
+            android:fillViewport="true">
+
+            <LinearLayout
+                style="@style/match_match"
+                android:orientation="vertical">
+
+                <RelativeLayout style="@style/match_wrap">
+
+                    <RelativeLayout
+                        android:id="@+id/header_lay"
+                        style="@style/match_wrap"
+                        android:minHeight="@dimen/margin_180">
+
+                        <ImageView
+                            android:id="@+id/storeImage"
+                            style="@style/match_wrap"
+                            android:layout_height="@dimen/margin_180"
+                            android:scaleType="fitXY" />
+
+                        <ImageView
+                            style="@style/match_wrap"
+                            android:layout_height="@dimen/margin_180"
+                            android:scaleType="fitCenter"
+                            android:src="@color/transulent_color" />
+
+
+                        <LinearLayout
+                            style="@style/wrap_wrap"
+                            android:layout_alignParentBottom="true"
+                            android:paddingBottom="@dimen/margin_15">
+
+                            <com.app.warantywise.widget.CustomTextView
+                                style="@style/textview_description_wrap"
+                                android:layout_marginBottom="@dimen/margin_5"
+                                android:layout_marginTop="@dimen/margin_5"
+                                android:text="@{CommonUtility.oneDecimalPlaceString(merchantResponse.rating)}"
+                                android:textColor="@color/rating_text_color"
+                                app:customFont="@string/font_bold" />
+
+                            <RatingBar
+                                android:id="@+id/ratingBar"
+                                style="@style/Widget.AppCompat.RatingBar.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:max="5"
+                                android:progressTint="@color/rating_text_color"
+                                android:rating="4" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_review_shopping"
+                        style="@style/wrap_wrap"
+                        android:layout_below="@+id/header_lay"
+                        android:layout_marginEnd="@dimen/margin_30"
+                        android:layout_marginTop="@dimen/margin_12_minus">
+
+                        <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvCall"
+                            style="@style/button_medium_wrap"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/margin_5"
+                            android:background="@drawable/blue_round_btn_bg"
+                            android:gravity="center"
+                            android:paddingBottom="@dimen/margin_3"
+                            android:paddingEnd="@dimen/margin_10"
+                            android:paddingStart="@dimen/margin_10"
+                            android:paddingTop="@dimen/margin_3"
+                            android:text="@string/call"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+
+                    <View
+                        android:id="@+id/div_a"
+                        style="@style/view_layout"
+                        android:layout_below="@+id/layout_review_shopping"
+                        android:layout_marginTop="@dimen/margin_5" />
+
+
+                    <LinearLayout
+                        android:id="@+id/detail_lay"
+                        style="@style/match_wrap"
+                        android:layout_below="@+id/div_a"
+                        android:gravity="start"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/margin_5"
+                        android:paddingEnd="@dimen/margin_15"
+                        android:paddingStart="@dimen/margin_15"
+                        android:paddingTop="@dimen/margin_5">
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_wrap"
+                            android:text="@string/detail"
+                            android:textAllCaps="true"
+                            android:textColor="@color/darker_black_color" />
+
+                        <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvDetails"
+                            style="@style/textview_description_wrap"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="@={merchantResponse.store_descr}"
+                            app:customFont="@string/font_regular" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/div_b"
+                        style="@style/view_layout"
+                        android:layout_below="@+id/detail_lay"
+                        android:layout_marginTop="@dimen/margin_3" />
+
+                    <LinearLayout
+                        android:id="@+id/time_lay"
+                        style="@style/match_wrap"
+                        android:layout_below="@+id/div_b"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_5">
+
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_wrap"
+                            android:text="@string/openning_hour"
+                            android:textAllCaps="true"
+                            android:textColor="@color/darker_black_color" />
+
+                        <LinearLayout
+                            style="@style/wrap_wrap"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                style="@style/wrap_wrap"
+                                android:layout_marginStart="@dimen/margin_2"
+                                android:orientation="vertical">
+
+                                <com.app.warantywise.widget.CustomTextView
+                                    style="@style/textview_description_small_wrap"
+                                    android:text="@string/mon_to_sat"
+                                    android:textColor="@color/color_blue_2" />
+
+
+                                <com.app.warantywise.widget.CustomTextView
+                                    style="@style/textview_description_small_wrap"
+                                    android:text="@{CommonUtility.addStartEndDate(merchantResponse.opentime,merchantResponse.closetime)}" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                style="@style/wrap_wrap"
+                                android:layout_marginStart="@dimen/margin_20"
+                                android:orientation="vertical">
+
+
+                                <com.app.warantywise.widget.CustomTextView
+                                    style="@style/textview_description_small_wrap"
+                                    android:text="@string/sunday"
+                                    android:textColor="@color/color_blue_2" />
+
+
+                                <com.app.warantywise.widget.CustomTextView
+                                    style="@style/textview_description_small_wrap"
+                                    android:text="@{CommonUtility.addStartEndDate(merchantResponse.opentime,merchantResponse.closetime)}" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/div_c"
+                        style="@style/view_layout"
+                        android:layout_below="@+id/time_lay" />
+
+                    <LinearLayout
+                        android:id="@+id/photo_lay"
+                        style="@style/match_wrap"
+                        android:layout_below="@+id/div_c"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:gravity="start"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_5">
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_wrap"
+                            android:text="@string/photos"
+                            android:textAllCaps="true" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/photoRecycler"
+                            style="@style/match_wrap"
+                            android:padding="@dimen/margin_5_minus" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/div_d"
+                        style="@style/view_layout"
+                        android:layout_below="@+id/photo_lay" />
+
+                    <com.app.warantywise.widget.CustomTextView
+                        android:id="@+id/tvReview"
+                        style="@style/textview_description_wrap"
+                        android:layout_below="@+id/div_d"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:padding="@dimen/margin_15"
+                        android:text="@string/review"
+                        android:textAllCaps="true" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvReview"
+                        style="@style/match_wrap"
+                        android:layout_below="@+id/tvReview" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <include
+            android:id="@+id/layoutNoData"
+            layout="@layout/layout_no_data_found"
+            android:visibility="gone" />
+    </FrameLayout>
+</layout>

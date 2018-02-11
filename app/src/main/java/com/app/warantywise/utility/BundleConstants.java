@@ -9,4 +9,8 @@ public interface BundleConstants {
     String MOBILE_NUMBER = "mobile_number";
     String VISIBLE = "visible";
     String TITLE = "title";
+    String IMAGE_LIST = "image_list";
+    String POSITION = "position";
+    long ANIMATION_TIME = 500;
+
 }

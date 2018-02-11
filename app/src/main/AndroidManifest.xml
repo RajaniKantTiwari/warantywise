@@ -51,5 +51,9 @@
             android:name=".ui.dashboard.DashBoardActivity"
             android:theme="@style/dashboard"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
+        <activity
+            android:name=".ui.activity.ZoomAnimationImageActivity"
+            android:theme="@style/Theme.Transparent" />
     </application>
 </manifest>

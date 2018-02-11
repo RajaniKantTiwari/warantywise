@@ -99,7 +99,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
-        CommonUtility.register(this);
+        //CommonUtility.register(this);
         hideSoftKeyboard(mBinding.getRoot());
         initDashboardComponent();
         attachView();
@@ -306,6 +306,6 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        CommonUtility.unregister(this);
+        //CommonUtility.unregister(this);
     }
 }

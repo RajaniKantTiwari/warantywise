@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    style="@style/wrap_wrap"
+    android:padding="@dimen/margin_5">
+<ImageView
+    android:id="@+id/ivStoreImage"
+    style="@style/image_60_70"
+    android:background="@drawable/grey_corner_bg"/>
+</LinearLayout>
+</layout>

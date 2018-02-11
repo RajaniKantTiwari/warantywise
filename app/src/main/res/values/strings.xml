@@ -106,6 +106,13 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="any_two_document_mendatory">Any two documents are mandatory*</string>
+    <string name="call">Call</string>
+    <string name="detail">Detail</string>
+    <string name="openning_hour">Opening Hour</string>
+    <string name="mon_to_sat">Mon to Sat</string>
+    <string name="sunday">Sunday</string>
+    <string name="photos">Photos &amp; Video</string>
+    <string name="review">Reviews</string>
 
 
     <string-array name="left_drawer">

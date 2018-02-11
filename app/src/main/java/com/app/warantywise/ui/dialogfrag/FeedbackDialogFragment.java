@@ -16,12 +16,12 @@ import com.app.warantywise.utility.CommonUtility;
 public class FeedbackDialogFragment extends DialogFragment implements View.OnClickListener {
     private Dialog dialog;
     private FeedbackDialogBinding mBinding;
-    private OrderDialogListener listener;
+    private FeedbackDialogListener listener;
 
-    public interface OrderDialogListener {
+    public interface FeedbackDialogListener {
         void submit(String submit);
     }
-    public void addListener(OrderDialogListener listener) {
+    public void addListener(FeedbackDialogListener listener) {
         this.listener = listener;
     }
 

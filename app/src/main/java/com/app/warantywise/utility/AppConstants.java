@@ -33,6 +33,8 @@ public interface AppConstants {
     long SPLASH_TIME = 800;
     int CORNER_RADIUS = 10;
     int PRODUCT=4;
+    String RESPONSE = "response";
+
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT})
     @Retention(RetentionPolicy.SOURCE)
