@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(WarantyApplication.isDebug){
+               /* if(WarantyApplication.isDebug){
                     ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, DashBoardActivity.class);
                 }else{
                     if (PreferenceUtils.isLogin()) {
@@ -31,7 +31,8 @@ public class SplashActivity extends AppCompatActivity {
                         ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
 
                     }
-                }
+                }*/
+                ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
                 finish();
             }
         }, AppConstants.SPLASH_TIME);

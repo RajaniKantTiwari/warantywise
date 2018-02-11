@@ -1,102 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<ScrollView
-    style="@style/match_match"
-    android:background="@android:color/white"
-    >
-    <LinearLayout
-        style="@style/match_wrap"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_10">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <com.app.warantywise.widget.CustomTextView
-            style="@style/textview_description_large_match"
-            android:drawableTop="@drawable/app_icon"
-            android:gravity="center_horizontal"
-            android:text="@string/verify_account"
-            android:textColor="@color/dark_black_color"
-            android:textAllCaps="true"
-            app:customFont="@string/font_bold" />
-
-        <com.app.warantywise.widget.CustomTextView
-            style="@style/textview_description_small_match"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/margin_50"
-            android:gravity="center_horizontal"
-            android:text="@string/please_enter_verification_code"
-            app:customFont="@string/font_bold" />
+    <RelativeLayout
+        style="@style/match_match"
+        android:background="@color/background">
 
         <LinearLayout
+            android:id="@+id/layoutVerification"
             style="@style/match_wrap"
-            android:layout_marginEnd="@dimen/margin_40"
-            android:layout_marginStart="@dimen/margin_40"
-            android:layout_marginTop="@dimen/margin_15"
-            android:orientation="horizontal">
-            <LinearLayout style="@style/linear_layout_wrap">
+            android:orientation="vertical">
 
-                <com.app.warantywise.widget.CustomEditText
-                    android:id="@+id/edFirst"
-                    style="@style/otp_back"
-                    android:background="@drawable/otp_bg"
-                    android:cursorVisible="true"/>
+            <include
+                android:id="@+id/headerLayout"
+                layout="@layout/header_layout" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_header_large_match"
+                android:layout_below="@+id/headerLayout"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_40"
+                android:gravity="center_horizontal"
+                android:text="@string/verification_code"
+                android:textColor="@color/button_text_color" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_match"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_8"
+                android:gravity="center_horizontal"
+                android:text="@string/please_type_verification"
+                android:textColor="@color/button_text_color" />
+
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/mobileNumber"
+                style="@style/textview_description_match"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_4"
+                android:gravity="center_horizontal"
+                android:text="@string/to"
+                android:textColor="@color/button_text_color" />
+
+            <LinearLayout
+                style="@style/match_wrap"
+                android:layout_marginEnd="@dimen/margin_40"
+                android:layout_marginStart="@dimen/margin_40"
+                android:layout_marginTop="@dimen/margin_15"
+                android:orientation="horizontal">
+
+                <LinearLayout style="@style/linear_layout_wrap">
+
+                    <com.app.warantywise.widget.CustomEditText
+                        android:id="@+id/edFirst"
+                        style="@style/otp_back"
+                        android:background="@drawable/otp_bg"
+                        android:cursorVisible="true" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/linear_layout_wrap">
+
+                    <com.app.warantywise.widget.CustomEditText
+                        android:id="@+id/edSecond"
+                        style="@style/otp_back"
+                        android:background="@drawable/otp_bg" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/linear_layout_wrap">
+
+                    <com.app.warantywise.widget.CustomEditText
+                        android:id="@+id/edThird"
+                        style="@style/otp_back"
+                        android:background="@drawable/otp_bg" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/linear_layout_wrap">
+
+                    <com.app.warantywise.widget.CustomEditText
+                        android:id="@+id/edFourth"
+                        style="@style/otp_back"
+                        android:background="@drawable/otp_bg" />
+                </LinearLayout>
+
             </LinearLayout>
-
-            <LinearLayout style="@style/linear_layout_wrap">
-
-                <com.app.warantywise.widget.CustomEditText
-                    android:id="@+id/edSecond"
-                    style="@style/otp_back"
-                    android:background="@drawable/otp_bg"
-                    />
-            </LinearLayout>
-
-            <LinearLayout style="@style/linear_layout_wrap">
-
-                <com.app.warantywise.widget.CustomEditText
-                    android:id="@+id/edThird"
-                    style="@style/otp_back"
-                    android:background="@drawable/otp_bg" />
-            </LinearLayout>
-
-            <LinearLayout style="@style/linear_layout_wrap">
-
-                <com.app.warantywise.widget.CustomEditText
-                    android:id="@+id/edFourth"
-                    style="@style/otp_back"
-                    android:background="@drawable/otp_bg"
-                    />
-            </LinearLayout>
-
         </LinearLayout>
 
-        <ImageView
-            style="@style/view_layout"
-            android:layout_margin="@dimen/margin_10" />
-
-        <RelativeLayout
-            style="@style/match_wrap"
-            android:layout_marginStart="@dimen/margin_10"
-            android:layout_marginEnd="@dimen/margin_10">
-
-            <com.app.warantywise.widget.CustomTextView
-                android:id="@+id/tvResend"
-                style="@style/textview_description_small_wrap"
-                android:layout_alignParentLeft="true"
-                android:text="@string/resend_otp"
-                android:textColor="@color/dark_black_color"
-                android:padding="@dimen/margin_8"
-                app:customFont="@string/font_bold"/>
-
-            <com.app.warantywise.widget.CustomTextView
-                android:id="@+id/tvChange"
-                style="@style/textview_description_small_wrap"
-                android:layout_alignParentRight="true"
-                android:text="@string/change_number"
-                android:padding="@dimen/margin_8"
-                android:textColor="@color/dark_black_color"
-                />
-        </RelativeLayout>
-    </LinearLayout>
-</ScrollView>
+        <include
+            android:id="@+id/butLayout"
+            layout="@layout/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_60"
+            android:layout_below="@+id/layoutVerification"/>
+    </RelativeLayout>
 </layout>

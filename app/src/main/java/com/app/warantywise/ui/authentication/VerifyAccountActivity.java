@@ -6,8 +6,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -40,9 +40,9 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
     StringBuilder otpNumber = new StringBuilder();
     @Inject
     CommonPresenter presenter;
-    private String mobileNumber;
     private String userName;
-    private static String TAG =VerifyAccountActivity.class.getSimpleName();
+    private String mobileNumber;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,35 +68,101 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
         mBinding.edSecond.setOnKeyListener(this);
         mBinding.edThird.setOnKeyListener(this);
         mBinding.edFourth.setOnKeyListener(this);
-        mBinding.tvResend.setOnClickListener(this);
-        mBinding.tvChange.setOnClickListener(this);
 
+
+        mBinding.butLayout.tvOne.setOnClickListener(this);
+        mBinding.butLayout.tvTwo.setOnClickListener(this);
+        mBinding.butLayout.tvthree.setOnClickListener(this);
+        mBinding.butLayout.tvFour.setOnClickListener(this);
+        mBinding.butLayout.tvFive.setOnClickListener(this);
+        mBinding.butLayout.tvSix.setOnClickListener(this);
+        mBinding.butLayout.tvSeven.setOnClickListener(this);
+        mBinding.butLayout.tvEight.setOnClickListener(this);
+        mBinding.butLayout.tvNine.setOnClickListener(this);
+        mBinding.butLayout.tvZero.setOnClickListener(this);
+        mBinding.butLayout.layoutBack.setOnClickListener(this);
+        mBinding.headerLayout.ivBack.setOnClickListener(this);
     }
 
     public void initializeData() {
         Intent intent = getIntent();
+        mBinding.edFirst.setInputType(InputType.TYPE_NULL);
+        mBinding.edSecond.setInputType(InputType.TYPE_NULL);
+        mBinding.edThird.setInputType(InputType.TYPE_NULL);
+        mBinding.edFourth.setInputType(InputType.TYPE_NULL);
         if (isNotNull(intent)) {
             Bundle bundle = intent.getExtras();
             if (isNotNull(bundle)) {
                 mobileNumber = bundle.getString(BundleConstants.MOBILE_NUMBER);
                 userName = bundle.getString(BundleConstants.USER_NAME);
+                mBinding.mobileNumber.setText(getResources().getString(R.string.to)+" "+mobileNumber);
             }
         }
     }
 
     @Override
     public void onClick(View view) {
-        if (view == mBinding.tvResend) {
-            CommonUtility.clicked(mBinding.tvResend);
-            presenter.getLoginDetail(this, new LoginRequest(userName, mobileNumber,
-                    PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
-        } else if (view == mBinding.tvChange) {
-            //CommonUtils.clicked(mBinding.tvChange);
-            Bundle bundle = new Bundle();
-            bundle.putString(BundleConstants.TITLE, getResources().getString(R.string.please_enter_mobile_number));
-            bundle.putBoolean(BundleConstants.VISIBLE, true);
-            CommonUtility.showDialog(this, bundle, this);
+        if (view == mBinding.butLayout.tvOne) {
+            setText("1");
+        } else if (view == mBinding.butLayout.tvTwo) {
+            setText("2");
+        } else if (view == mBinding.butLayout.tvthree) {
+            setText("3");
+        } else if (view == mBinding.butLayout.tvFour) {
+            setText("4");
+        } else if (view == mBinding.butLayout.tvFive) {
+            setText("5");
+        } else if (view == mBinding.butLayout.tvSix) {
+            setText("6");
+        } else if (view == mBinding.butLayout.tvSeven) {
+            setText("7");
+        } else if (view == mBinding.butLayout.tvEight) {
+            setText("8");
+        } else if (view == mBinding.butLayout.tvNine) {
+            setText("9");
+        } else if (view == mBinding.butLayout.tvZero) {
+            setText("0");
+        } else if (view == mBinding.butLayout.layoutBack) {
+           back();
+        }else if(view==mBinding.headerLayout.ivBack){
+            finish();
         }
+    }
+
+    private void back() {
+        if (otpNumber.length() == 1) {
+            mBinding.edFirst.setText("");
+            mBinding.edFirst.requestFocus();
+            otpNumber.deleteCharAt(0);
+        } else if (otpNumber.length() == 2) {
+            mBinding.edSecond.clearFocus();
+            mBinding.edSecond.setText("");
+            mBinding.edFirst.requestFocus();
+            otpNumber.deleteCharAt(1);
+        } else if (otpNumber.length() == 3) {
+            mBinding.edThird.clearFocus();
+            mBinding.edThird.setText("");
+
+            mBinding.edSecond.requestFocus();
+            otpNumber.deleteCharAt(2);
+        } else if (otpNumber.length() == 4) {
+            mBinding.edFourth.clearFocus();
+            mBinding.edFourth.setText("");
+            mBinding.edThird.requestFocus();
+            otpNumber.deleteCharAt(3);
+        }
+    }
+    private void setText(String text) {
+        if (mBinding.edFirst.hasFocus()) {
+            mBinding.edFirst.setText(text);
+        } else if (mBinding.edSecond.hasFocus()) {
+            mBinding.edSecond.setText(text);
+        } else if (mBinding.edThird.hasFocus()) {
+            mBinding.edThird.setText(text);
+        } else if (mBinding.edFourth.hasFocus()) {
+            mBinding.edFourth.setText(text);
+        }
+
     }
 
     @Override
@@ -176,7 +242,6 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        Log.e("CharSequence", "" + otpNumber.length());
         if (otpNumber.length() == 0 && mBinding.edFirst.length() == 1) {
             otpNumber.append(s);
             mBinding.edFirst.clearFocus();
@@ -203,7 +268,8 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
     @Override
     public void afterTextChanged(Editable s) {
         if (otpNumber.length() == 4) {
-            presenter.verifyMobileNumber(this, new VerifyMobileRequest(mobileNumber, Integer.parseInt(otpNumber.toString())));
+
+            //presenter.verifyMobileNumber(this, new VerifyMobileRequest(mobileNumber, Integer.parseInt(otpNumber.toString())));
         }
     }
 
@@ -211,7 +277,6 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
     public boolean onKey(View v, int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_DEL) {
             if (otpNumber.length() == 1) {
-                mBinding.edSecond.clearFocus();
                 mBinding.edFirst.requestFocus();
                 otpNumber.deleteCharAt(0);
             } else if (otpNumber.length() == 2) {

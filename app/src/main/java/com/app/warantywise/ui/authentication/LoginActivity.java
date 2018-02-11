@@ -41,8 +41,7 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
     }
 
     public void setListener() {
-        mBinding.tvGetOtp.setOnClickListener(this);
-        mBinding.tvSignupForAccount.setOnClickListener(this);
+        mBinding.tvSubmit.setOnClickListener(this);
     }
 
     public void initializeData() {
@@ -89,16 +88,15 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
 
     @Override
     public void onClick(View view) {
-        if(view==mBinding.tvGetOtp){
-            CommonUtility.clicked(mBinding.tvGetOtp);
-           if(isValid()){
+        if(view==mBinding.tvSubmit){
+            CommonUtility.clicked(mBinding.tvSubmit);
+            ExplicitIntent.getsInstance().navigateTo(this,VerifyAccountActivity.class);
+           /* if(isValid()){
                if(isNetworkConnected()){
                    presenter.getLoginDetail(this,new LoginRequest(userName,mobileNumber,
                            PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
                }
-           }
-        }else if(view==mBinding.tvSignupForAccount){
-            CommonUtility.clicked(mBinding.tvSignupForAccount);
+           }*/
         }
     }
 

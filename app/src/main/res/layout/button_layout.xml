@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        style="@style/match_match"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/layout_ver_match_1">
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvOne"
+                style="@style/button_style"
+                android:text="@string/one"
+                android:paddingStart="@dimen/margin_15"
+                android:gravity="left|center_vertical"
+                app:customFont="@string/font_regular"
+                />
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvTwo"
+                style="@style/button_style"
+                android:text="@string/two"
+                android:gravity="center"
+                app:customFont="@string/font_regular"
+
+                />
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvthree"
+                style="@style/button_style"
+                android:gravity="right|center_vertical"
+                android:paddingEnd="@dimen/margin_15"
+                android:text="@string/three"
+                app:customFont="@string/font_regular"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout style="@style/layout_ver_match_1">
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvFour"
+                style="@style/button_style"
+                android:text="@string/four"
+                android:paddingStart="@dimen/margin_15"
+                android:gravity="left|center_vertical"
+                app:customFont="@string/font_regular"
+
+                />
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvFive"
+                style="@style/button_style"
+                android:text="@string/five"
+                android:gravity="center"
+                app:customFont="@string/font_regular"
+
+                />
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvSix"
+                style="@style/button_style"
+                android:gravity="right|center_vertical"
+                android:paddingEnd="@dimen/margin_15"
+                android:text="@string/six"
+                app:customFont="@string/font_regular"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout style="@style/layout_ver_match_1">
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvSeven"
+                style="@style/button_style"
+                android:text="@string/seven"
+                android:paddingStart="@dimen/margin_15"
+                android:gravity="left|center_vertical"
+                app:customFont="@string/font_regular"
+                />
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvEight"
+                style="@style/button_style"
+                android:text="@string/eight"
+                android:gravity="center"
+                app:customFont="@string/font_regular"
+
+                />
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvNine"
+                style="@style/button_style"
+                android:gravity="right|center_vertical"
+                android:paddingEnd="@dimen/margin_15"
+                android:text="@string/nine"
+                app:customFont="@string/font_regular"
+                />
+        </LinearLayout>
+
+        <LinearLayout style="@style/layout_ver_match_1">
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/button_style"
+                android:text="@string/one"
+                android:paddingStart="@dimen/margin_15"
+                android:gravity="left|center_vertical"
+                android:visibility="invisible"
+                />
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvZero"
+                style="@style/button_style"
+                android:layout_height="match_parent"
+                android:text="@string/zero"
+                app:customFont="@string/font_regular"
+                android:gravity="center"
+                />
+            <RelativeLayout
+                android:id="@+id/layoutBack"
+                style="@style/layout_ver_match_1"
+                android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/tvBack"
+                android:layout_width="@dimen/margin_40"
+                android:layout_height="@dimen/margin_35"
+                android:src="@drawable/back"
+                android:layout_centerInParent="true"
+                />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

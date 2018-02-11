@@ -75,6 +75,9 @@
     <color name="blue">#17A4BF</color>
     <color name="button_bg_color">#1a9fde</color>
     <color name="button_text_color">#67bfd7</color>
+    <color name="otp_bg">#67bfd7</color>
+    <color name="otp_solid_color">#b1c472</color>
+
     <color name="dark_sky_blue">#3668C1</color>
     <color name="color_dark_sky">#1893FF</color>
     <color name="color_sky_blue">#009FE1</color>
@@ -98,7 +101,7 @@
     <color name="colorBackgroundNav">#F8F8F8</color>
     <color name="colorNavAccentSelected">#18A3BF</color>
     <color name="color_blue_order">#36A5E2</color>
-    <color name="radio_unchecked">#cccccc</color>
+    <color name="text_hint">#cccccc</color>
 
 
     <color name="white">#ffffff</color>
