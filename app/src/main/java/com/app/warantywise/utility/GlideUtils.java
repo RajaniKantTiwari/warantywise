@@ -129,7 +129,8 @@ public class GlideUtils {
     }
 
     //load image using glide with rounded corner center crop with placeholder
-    public static void loadImageRoundedCorner(final Context mContext, String imageUrl, final ImageView imageView, final ProgressBar progressBar, final int placeHolder) {
+    public static void loadImageRoundedCorner(final Context mContext, String imageUrl, final ImageView imageView,
+                                              final ProgressBar progressBar, final int placeHolder,int cornerRadius) {
         showProgressBar(progressBar);
         Glide.with(mContext).load(imageUrl).asBitmap().placeholder(placeHolder)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE).listener(new RequestListener<String, Bitmap>() {
@@ -150,7 +151,7 @@ public class GlideUtils {
             protected void setResource(Bitmap resource) {
                 RoundedBitmapDrawable roundedBitmapDrawable =
                         RoundedBitmapDrawableFactory.create(mContext.getResources(), resource);
-                roundedBitmapDrawable.setCornerRadius(convertDpToPx(6, mContext));
+                roundedBitmapDrawable.setCornerRadius(convertDpToPx(cornerRadius, mContext));
                 roundedBitmapDrawable.setAntiAlias(true);
                 imageView.setImageDrawable(roundedBitmapDrawable);
                 //progressBarVisibility(progressBar);

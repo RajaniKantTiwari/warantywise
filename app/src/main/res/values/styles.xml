@@ -345,6 +345,23 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+
+    <style name="textview_product" parent="textview_description_large_match">
+        <item name="android:layout_marginStart">@dimen/margin_10</item>
+        <item name="android:layout_marginEnd">@dimen/margin_10</item>
+        <item name="android:layout_marginTop">@dimen/margin_10</item>
+    </style>
+
+    <style name="edittext_add_product" parent="textview_description_large_match">
+        <item name="android:layout_marginStart">@dimen/margin_10</item>
+        <item name="android:layout_marginEnd">@dimen/margin_10</item>
+        <item name="android:padding">@dimen/margin_6</item>
+        <item name="android:background">@drawable/grey_corner_bg</item>
+        <item name="android:textColorHint">@color/text_hint_color</item>
+
+    </style>
+
+
     <style name="textview_description_smaller_wrap" parent="wrap_wrap">
         <item name="android:textSize">@dimen/textSize_description_smaller</item>
         <item name="android:textColor">@color/black</item>

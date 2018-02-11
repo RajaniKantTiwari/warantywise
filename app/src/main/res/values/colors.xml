@@ -102,6 +102,7 @@
     <color name="colorNavAccentSelected">#18A3BF</color>
     <color name="color_blue_order">#36A5E2</color>
     <color name="text_hint">#cccccc</color>
+    <color name="text_hint_color">#b2b2b2</color>
 
 
     <color name="white">#ffffff</color>
@@ -124,6 +125,8 @@
 
 
     <color name="red">#FF0011</color>
+    <color name="red_term">#Fc091b</color>
+
     <color name="red_color">#FF0066</color>
     <color name="redish_color">#FF0000</color>
     <color name="redish_dark">#ED1B23</color>
@@ -143,6 +146,8 @@
     <color name="tab_sel_txt_clr">#1e5a3c</color>
 
     <color name="tab_selected">#283340</color>
+
+
     <color name="color_drawer_header">#553b94</color>
 
     <color name="search_bg_color">#DDDBDB</color>

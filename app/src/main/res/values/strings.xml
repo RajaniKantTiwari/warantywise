@@ -91,7 +91,21 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="zero">0</string>
-
+    <string name="welcome">Welcome</string>
+    <string name="product_name">Product Name</string>
+    <string name="nokia">Nokia</string>
+    <string name="company_name">Company Name</string>
+    <string name="type_name_mention_on_bill">Type name mention on bill</string>
+    <string name="serial_number">Serial Number</string>
+    <string name="product_serial_number">Product serial number</string>
+    <string name="purchased_date">Purchase Date</string>
+    <string name="waranty_period">Warranty Period</string>
+    <string name="one_year">1 year</string>
+    <string name="may_2016">12 may 2016</string>
+    <string name="extended_waranty">Extended Warranty</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="any_two_document_mendatory">Any two documents are mandatory*</string>
 
 
     <string-array name="left_drawer">

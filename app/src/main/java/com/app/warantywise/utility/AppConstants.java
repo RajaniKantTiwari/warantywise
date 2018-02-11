@@ -31,6 +31,8 @@ public interface AppConstants {
     int TERM_CONDITION = 6;
     int PAYMENT_HEIGHT = 48;
     long SPLASH_TIME = 800;
+    int CORNER_RADIUS = 10;
+    int PRODUCT=4;
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT})
     @Retention(RetentionPolicy.SOURCE)

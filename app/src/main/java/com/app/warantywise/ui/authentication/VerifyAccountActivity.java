@@ -268,7 +268,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
     @Override
     public void afterTextChanged(Editable s) {
         if (otpNumber.length() == 4) {
-
+             ExplicitIntent.getsInstance().navigateTo(this,AddProductActivity.class);
             //presenter.verifyMobileNumber(this, new VerifyMobileRequest(mobileNumber, Integer.parseInt(otpNumber.toString())));
         }
     }

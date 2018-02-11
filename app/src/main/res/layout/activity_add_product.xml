@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        style="@style/match_match"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            style="@style/match_wrap"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/headerLayout"
+                layout="@layout/header_layout" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_header_match"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center_horizontal"
+                android:text="@string/welcome"
+                android:textColor="@color/dark_black_color" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_large_match"
+                android:layout_marginTop="@dimen/margin_3"
+                android:gravity="center_horizontal"
+                android:text="Mr. Ashok Kumar"
+                android:textColor="@color/dark_black_color" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_smaller_match"
+                android:gravity="center_horizontal"
+                android:text="999-999-999"
+                android:textColor="@color/dark_black_color" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_product"
+                android:text="@string/product_name"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomEditText
+                android:id="@+id/tvProductName"
+                style="@style/edittext_add_product"
+                android:hint="@string/nokia"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_product"
+                android:text="@string/company_name"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomEditText
+                android:id="@+id/tvCompanyName"
+                style="@style/edittext_add_product"
+                android:hint="@string/type_name_mention_on_bill"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_product"
+                android:text="@string/serial_number"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomEditText
+                android:id="@+id/tvSerialNumber"
+                style="@style/edittext_add_product"
+                android:hint="@string/product_serial_number"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_product"
+                android:text="@string/purchased_date"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvCalendar"
+                style="@style/edittext_add_product"
+                android:drawableEnd="@drawable/camera"
+                android:hint="@string/may_2016"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_product"
+                android:text="@string/waranty_period"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomEditText
+                style="@style/edittext_add_product"
+                android:hint="@string/one_year"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_product"
+                android:text="@string/extended_waranty"
+                app:customFont="@string/font_regular" />
+
+            <LinearLayout style="@style/match_wrap">
+
+                <LinearLayout
+                    android:id="@+id/layoutYes"
+                    style="@style/wrap_wrap">
+
+                    <RadioButton
+                        android:id="@+id/radioYes"
+                        style="@style/textview_description_wrap"
+                        android:buttonTint="@color/color_sky_blue"
+                        android:clickable="false"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5" />
+
+                    <com.app.warantywise.widget.CustomTextView
+                        style="@style/textview_description_small_wrap"
+                        android:paddingEnd="@dimen/margin_15"
+                        android:text="@string/yes"
+                        android:textColor="@color/text_hint_color"
+                        app:customFont="@string/font_regular" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutNo"
+                    style="@style/wrap_wrap"
+                    android:paddingEnd="@dimen/margin_15"
+                    android:paddingStart="@dimen/margin_15">
+
+                    <RadioButton
+                        android:id="@+id/radioButton"
+                        style="@style/textview_description_wrap"
+                        android:buttonTint="@color/color_sky_blue"
+                        android:checked="true"
+                        android:clickable="false"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5" />
+
+                    <com.app.warantywise.widget.CustomTextView
+                        style="@style/textview_description_small_wrap"
+                        android:text="@string/no"
+                        android:textColor="@color/text_hint_color"
+                        app:customFont="@string/font_regular" />
+                </LinearLayout>
+            </LinearLayout>
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/rvDocument"
+               style="@style/match_wrap"
+               android:paddingStart="@dimen/margin_10"/>
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_product"
+                android:textSize="@dimen/textSize_description_smaller"
+                android:text="@string/any_two_document_mendatory"
+                android:textColor="@color/red_term"
+                app:customFont="@string/font_regular" />
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvSubmit"
+                android:layout_width="@dimen/margin_200"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_50"
+                android:layout_marginTop="@dimen/margin_40"
+                android:background="@drawable/yellow_button_bg"
+                android:elevation="@dimen/margin_5"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/margin_12"
+                android:text="@string/submit"
+                android:textAllCaps="true"
+                android:textColor="@color/button_text_color"
+                android:textSize="@dimen/button_large"
+                app:customFont="@string/font_bold" />
+        </LinearLayout>
+    </ScrollView>
+</layout>
