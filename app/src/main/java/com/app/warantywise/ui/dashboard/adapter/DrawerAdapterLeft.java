@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.DrawerLeftRowItemBinding;
 import com.app.warantywise.utility.CommonUtility;
-import com.app.warantywise.utility.PreferenceUtils;
 import com.app.warantywise.widget.CustomTextView;
 
 import java.util.ArrayList;
@@ -26,6 +24,9 @@ public class DrawerAdapterLeft extends RecyclerView.Adapter<DrawerAdapterLeft.St
     private final AppCompatActivity activity;
     private DrawerLeftListener listener;
     private ArrayList<String> drawerList;
+    private int[] drawerImageList = new int[]{R.drawable.ic_home,
+            R.drawable.waranty, R.drawable.my_insurance, R.drawable.edit_profile,
+            R.drawable.help, R.drawable.senior_citizen, R.drawable.add_file};
 
     public interface DrawerLeftListener {
         void onLeftDrawerItemClicked(int adapterPosition);
@@ -49,16 +50,6 @@ public class DrawerAdapterLeft extends RecyclerView.Adapter<DrawerAdapterLeft.St
     public void onBindViewHolder(StoreViewHolder holder, int position) {
         if (CommonUtility.isNotNull(drawerList) && drawerList.size() > position) {
             holder.setData(drawerList.get(position));
-            if (position == 2) {
-                holder.tvChange.setVisibility(View.VISIBLE);
-                if (PreferenceUtils.getAddress() != null) {
-                    holder.tvChange.setText(PreferenceUtils.getAddress());
-                } else {
-                    holder.tvChange.setText(PreferenceUtils.getAddress(activity, PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
-                }
-            } else {
-                holder.tvChange.setVisibility(View.GONE);
-            }
         }
     }
 
@@ -87,6 +78,7 @@ public class DrawerAdapterLeft extends RecyclerView.Adapter<DrawerAdapterLeft.St
 
         public void setData(String str) {
             mBinding.tvMenuName.setText(str);
+            //mBinding.imageView.setImage
         }
     }
 }

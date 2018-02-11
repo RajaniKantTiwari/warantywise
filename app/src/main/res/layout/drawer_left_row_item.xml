@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    style="@style/match_wrap"
+    android:gravity="center_vertical">
+    <ImageView
+        android:id="@+id/imageView"
+        style="@style/image_30"
+        android:src="@drawable/camera"/>
+    <LinearLayout
         android:id="@+id/layoutUserItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/match_wrap"
         android:minHeight="@dimen/margin_50"
         android:orientation="vertical"
         android:gravity="center_vertical">
@@ -23,6 +27,6 @@
             android:layout_centerVertical="true"
             android:textColor="@color/white"
             android:visibility="gone"/>
-
     </LinearLayout>
+</LinearLayout>
 </layout>

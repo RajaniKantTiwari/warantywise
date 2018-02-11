@@ -8,11 +8,11 @@
         android:orientation="vertical">
         <com.app.warantywise.widget.CustomTextView
             android:id="@+id/tvProductName"
-            style="@style/textview_description_smaller_wrap"
+            style="@style/textview_description_small_wrap"
             android:text="@string/product_name"
             app:customFont="@string/font_regular" />
         <RelativeLayout
-            style="@style/image_70"
+            style="@style/image_80"
             android:background="@drawable/grey_corner_bg">
 
             <ImageView

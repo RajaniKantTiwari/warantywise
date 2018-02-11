@@ -15,8 +15,10 @@ import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.presenter.CommonPresenter;
 import com.app.warantywise.ui.adapter.ProductAdapter;
+import com.app.warantywise.ui.dashboard.DashBoardActivity;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
+import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.LogUtils;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -45,7 +47,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private static String TAG = AddProductActivity.class.getSimpleName();
 
     private String profilePicFilePath;
-    private int adapterPosition=-1;
+    private int adapterPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +58,13 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     }
 
     private void setListener() {
-
+        mBinding.tvSubmit.setOnClickListener(this);
     }
 
     private void initializeData() {
         setList();
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mBinding.rvDocument.setLayoutManager(layoutManager);
         productAdapter = new ProductAdapter(this, productList, this);
         mBinding.rvDocument.setAdapter(productAdapter);
@@ -92,7 +95,10 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     @Override
     public void onClick(View view) {
-
+        if (mBinding.tvSubmit == view) {
+            //setToken();
+            ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+        }
     }
 
     @Override
@@ -121,28 +127,31 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             }
         }
     }
+
     private void setImageFromLocal(String filePath) {
         profilePicFilePath = filePath;
-        if(productList.size()>adapterPosition){
-            Product product=productList.get(adapterPosition);
+        if (productList.size() > adapterPosition) {
+            Product product = productList.get(adapterPosition);
             product.setImageUrl(profilePicFilePath);
-            productList.set(adapterPosition,product);
+            productList.set(adapterPosition, product);
             productAdapter.notifyDataSetChanged();
         }
         //loadImageToServer();
     }
+
     private void gotoCropper(Uri sourceUri) {
         CropImage.activity(sourceUri).setAspectRatio(1, 1)
                 .setGuidelines(CropImageView.Guidelines.ON)
-                .setCropShape(CropImageView.CropShape.OVAL)
                 .start(this);
     }
+
     @Override
     public void onItemClick(int position) {
-        adapterPosition=position;
+        adapterPosition = position;
 
         showImageChooserDialog();
     }
+
     private void showImageChooserDialog() {
         //ImagePickerUtils.add(getSupportFragmentManager(), this);
 
@@ -175,6 +184,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         dialog.show();
 
     }
+
     /**
      * Open camera to capture image
      */
