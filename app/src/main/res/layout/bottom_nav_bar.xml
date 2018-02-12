@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_navi_height"
         card_view:cardCornerRadius="@dimen/margin_3"
-        card_view:cardElevation="@dimen/margin_10"
+        card_view:cardElevation="@dimen/margin_3"
         card_view:cardUseCompatPadding="false">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

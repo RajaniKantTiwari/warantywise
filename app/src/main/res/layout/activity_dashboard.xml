@@ -29,12 +29,14 @@
                 android:layout_height="@dimen/bottom_navi_height"
                 android:layout_alignParentBottom="true"/>
             <com.app.warantywise.widget.MovableFloatingActionButton
-                android:id="@+id/fab"
+                android:id="@+id/fabButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="40dp"
-                app:elevation="40dp"
+                android:layout_margin="@dimen/margin_20"
+                app:elevation="@dimen/margin_8"
+                app:borderWidth="0dp"
+                android:layout_centerHorizontal="true"
                 android:src="@drawable/close_icon"/>
         </RelativeLayout>
         <LinearLayout
