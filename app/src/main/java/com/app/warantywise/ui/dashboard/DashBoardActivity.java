@@ -144,7 +144,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
     private void changeIcon(int position) {
         for (int i = 0; i < AppConstants.NO_OF_TAB; i++) {
             switch (i) {
-                case 0:
+                /*case 0:
                     if (i == position) {
                         mBinding.bottomLayout.viewBar1.setVisibility(View.VISIBLE);
                         mBinding.bottomLayout.imageViewBar1.setImageResource(R.drawable.ic_home);
@@ -162,8 +162,8 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                         mBinding.bottomLayout.viewBar2.setVisibility(View.INVISIBLE);
                         mBinding.bottomLayout.imageViewBar2.setImageResource(R.drawable.ic_gift_light);
                     }
-                    break;
-                case 2:
+                    break;*/
+                case 0:
                     if (i == position) {
                         mBinding.bottomLayout.viewBar3.setVisibility(View.VISIBLE);
                         mBinding.bottomLayout.imageViewBar3.setImageResource(R.drawable.ic_notification);
@@ -172,7 +172,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                         mBinding.bottomLayout.imageViewBar3.setImageResource(R.drawable.ic_notification_light);
                     }
                     break;
-                case 3:
+                case 1:
                     if (i == position) {
                         mBinding.bottomLayout.viewBar4.setVisibility(View.VISIBLE);
                         mBinding.bottomLayout.imageViewBar4.setImageResource(R.drawable.ic_user);
@@ -204,8 +204,8 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
     }
 
     public void initializeData() {
-        mBinding.layoutDrawerLeft.tvName.setText(PreferenceUtils.getUserName());
-        mBinding.layoutDrawerLeft.tvMobile.setText(PreferenceUtils.getUserMono());
+        //mBinding.layoutDrawerLeft.tvName.setText(PreferenceUtils.getUserName());
+        //mBinding.layoutDrawerLeft.tvMobile.setText(PreferenceUtils.getUserMono());
         DeviceTokenRequest request = new DeviceTokenRequest();
         request.setUserid(PreferenceUtils.getUserId());
         DeviceToken token = new DeviceToken();
@@ -243,6 +243,10 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         } else if (mBinding.layoutDrawerLeft.ivUpdate == view) {
             closeDrawerLeft();
             ExplicitIntent.getsInstance().navigateTo(this, EditProfileActivity.class);
+        }else if(view == mBinding.bottomLayout.linearLayoutBar3){
+            changeIcon(NOTIFICATION_FRAGMENT);
+            clearAllBackStack();
+            pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE);
         }else if (view == mBinding.bottomLayout.linearLayoutBar4) {
             changeIcon(USER_FRAGMENT);
             clearAllBackStack();

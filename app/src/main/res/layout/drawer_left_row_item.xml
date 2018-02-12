@@ -1,32 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
+    android:id="@+id/layoutUserItem"
     style="@style/match_wrap"
     android:gravity="center_vertical">
     <ImageView
         android:id="@+id/imageView"
         style="@style/image_30"
-        android:src="@drawable/camera"/>
-    <LinearLayout
-        android:id="@+id/layoutUserItem"
-        style="@style/match_wrap"
-        android:minHeight="@dimen/margin_50"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
-
-
+        android:paddingTop="@dimen/margin_5"
+        android:paddingBottom="@dimen/margin_5"
+        android:paddingStart="@dimen/margin_5"/>
         <com.app.warantywise.widget.CustomTextView
             android:id="@+id/tvMenuName"
-            style="@style/textview_title_small_match"
-            android:textColor="@color/white" />
-        <com.app.warantywise.widget.CustomTextView
-            android:id="@+id/tvChange"
-            style="@style/textview_description_smaller_wrap"
-            android:text="@string/change_location"
-            android:maxLines="2"
-            android:layout_centerVertical="true"
-            android:textColor="@color/white"
-            android:visibility="gone"/>
-    </LinearLayout>
+            style="@style/textview_title_small_match"/>
 </LinearLayout>
 </layout>

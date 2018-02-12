@@ -32,7 +32,8 @@ public class SplashActivity extends AppCompatActivity {
 
                     }
                 }*/
-                ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
+                //ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
+                ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, DashBoardActivity.class);
                 finish();
             }
         }, AppConstants.SPLASH_TIME);

@@ -60,12 +60,10 @@ public class DrawerAdapterLeft extends RecyclerView.Adapter<DrawerAdapterLeft.St
 
     class StoreViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final DrawerLeftRowItemBinding mBinding;
-        private final CustomTextView tvChange;
 
         public StoreViewHolder(DrawerLeftRowItemBinding itemView) {
             super(itemView.getRoot());
             mBinding = itemView;
-            tvChange = itemView.tvChange;
             itemView.layoutUserItem.setOnClickListener(this);
         }
 
