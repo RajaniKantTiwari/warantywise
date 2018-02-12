@@ -250,7 +250,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        String month=CommonUtility.getMonth(monthOfYear);
+        String date = dayOfMonth+" "+month+" "+year;
         mBinding.tvCalendar.setText(date);
     }
 }
