@@ -22,7 +22,7 @@ import com.app.warantywise.injector.module.DashboardModule;
 import com.app.warantywise.network.request.DeviceToken;
 import com.app.warantywise.network.request.DeviceTokenRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.ui.authentication.EditProfileActivity;
+import com.app.warantywise.ui.dashboard.user.ProfileFragment;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.adapter.DrawerAdapterLeft;
 import com.app.warantywise.ui.dashboard.drawer.HelpActivity;
@@ -32,11 +32,9 @@ import com.app.warantywise.ui.dashboard.drawer.SeniorCitizenActivity;
 import com.app.warantywise.ui.dashboard.drawer.TermConditionActivity;
 import com.app.warantywise.ui.dashboard.drawer.WarantyActivity;
 import com.app.warantywise.ui.dashboard.notification.NotificationFragment;
-import com.app.warantywise.ui.dashboard.user.UserProfileFragment;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
-import com.app.warantywise.utility.GlideUtils;
 import com.app.warantywise.utility.LogUtils;
 import com.app.warantywise.utility.PreferenceUtils;
 
@@ -75,7 +73,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 ExplicitIntent.getsInstance().navigateTo(this, InsuranceActivity.class);
                 break;
             case AppConstants.EDIT_PROFILE:
-                ExplicitIntent.getsInstance().navigateTo(this, EditProfileActivity.class);
+                ExplicitIntent.getsInstance().navigateTo(this, ProfileFragment.class);
                 break;
             case AppConstants.HELP:
                 ExplicitIntent.getsInstance().navigateTo(this, HelpActivity.class);
@@ -127,7 +125,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 openFragment(new NotificationFragment(), null, false, false, NONE);
                 break;
             case USER_FRAGMENT:
-                openFragment(new UserProfileFragment(), null, false, false, NONE);
+                openFragment(new ProfileFragment(), null, false, false, NONE);
                 break;
         }
     }
@@ -242,7 +240,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
             onTabSelected(USER_FRAGMENT);
         } else if (mBinding.layoutDrawerLeft.ivUpdate == view) {
             closeDrawerLeft();
-            ExplicitIntent.getsInstance().navigateTo(this, EditProfileActivity.class);
+            ExplicitIntent.getsInstance().navigateTo(this, ProfileFragment.class);
         }else if(view == mBinding.bottomLayout.linearLayoutBar3){
             changeIcon(NOTIFICATION_FRAGMENT);
             clearAllBackStack();
@@ -250,7 +248,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         }else if (view == mBinding.bottomLayout.linearLayoutBar4) {
             changeIcon(USER_FRAGMENT);
             clearAllBackStack();
-            pushFragment(new UserProfileFragment(), null, R.id.container, true, false, NONE);
+            pushFragment(new ProfileFragment(), null, R.id.container, true, false, NONE);
         }
     }
     void setupDrawerToggleLeft() {

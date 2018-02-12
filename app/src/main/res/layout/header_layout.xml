@@ -9,10 +9,12 @@
 
         <ImageView
             android:id="@+id/ivBack"
-            style="@style/image_40"
+            style="@style/image_60"
             android:layout_centerVertical="true"
             android:paddingStart="@dimen/margin_10"
-            android:paddingEnd="@dimen/margin_20"
+            android:paddingEnd="@dimen/margin_30"
+            android:paddingTop="@dimen/margin_15"
+            android:paddingBottom="@dimen/margin_15"
             android:src="@drawable/ic_back" />
 
         <com.app.warantywise.widget.CustomEditText

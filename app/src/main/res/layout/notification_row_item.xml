@@ -14,7 +14,9 @@
             <ImageView
                 android:id="@+id/ivNotification"
                 style="@style/image_40"
-                android:src="@drawable/icon_wise"/>
+                android:src="@drawable/icon_wise"
+                android:padding="@dimen/margin_10"
+                android:background="@drawable/yellow_button_bg"/>
 
             <RelativeLayout
                 style="@style/match_wrap"

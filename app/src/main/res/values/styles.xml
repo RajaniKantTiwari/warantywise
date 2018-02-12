@@ -193,6 +193,10 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/textSize_title</item>
     </style>
+    <style name="image_25" >
+        <item name="android:layout_height">@dimen/margin_25</item>
+        <item name="android:layout_width">@dimen/margin_25</item>
+    </style>
     <style name="image_30" >
         <item name="android:layout_height">@dimen/margin_30</item>
         <item name="android:layout_width">@dimen/margin_30</item>
@@ -237,6 +241,11 @@
     <style name="image_80" >
         <item name="android:layout_width">@dimen/margin_80</item>
         <item name="android:layout_height">@dimen/margin_80</item>
+    </style>
+
+    <style name="image_80_100" >
+        <item name="android:layout_width">@dimen/margin_80</item>
+        <item name="android:layout_height">@dimen/margin_100</item>
     </style>
 
     <style name="image_90_80" >
@@ -494,6 +503,9 @@
     </style>
 
     <style name="button_large_wrap" parent="wrap_wrap">
+        <item name="android:textSize">@dimen/button_large</item>
+    </style>
+    <style name="button_larger_wrap" parent="wrap_wrap">
         <item name="android:textSize">@dimen/button_large</item>
     </style>
 

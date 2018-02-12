@@ -1,4 +1,4 @@
-package com.app.warantywise.ui.authentication;
+package com.app.warantywise.ui.dashboard.user;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -8,19 +8,25 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.app.warantywise.R;
-import com.app.warantywise.databinding.ActivityUpdateProfileBinding;
+import com.app.warantywise.databinding.FragmentEdProfileBinding;
 import com.app.warantywise.network.request.PaymentOption;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.ui.adapter.PaymentAdapter;
+import com.app.warantywise.ui.authentication.LoginActivity;
+import com.app.warantywise.ui.authentication.adapter.ProfileSettingsAdapter;
 import com.app.warantywise.ui.base.MvpView;
+import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
+import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.GlideUtils;
 import com.app.warantywise.utility.LogUtils;
 import com.app.warantywise.utility.PreferenceUtils;
+import com.app.warantywise.utility.SimpleDividerItemDecoration;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -32,61 +38,49 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by arvind on 06/11/17.
  */
 
-public class EditProfileActivity extends CommonActivity implements MvpView, View.OnClickListener {
+public class ProfileFragment extends DashboardFragment implements MvpView, View.OnClickListener,ProfileSettingsAdapter.ProductListener {
 
-    ActivityUpdateProfileBinding mBinding;
-    private static String TAG = EditProfileActivity.class.getSimpleName();
+    FragmentEdProfileBinding mBinding;
+    private static String TAG = ProfileFragment.class.getSimpleName();
     private List<PaymentOption> paymentList = new ArrayList<>();
-    private PaymentAdapter paymentAdapter;
+    private ProfileSettingsAdapter settingAdapter;
     private String profilePicFilePath;
 
+
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_update_profile);
-        initializeData();
-        setListener();
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding =DataBindingUtil.inflate(inflater,R.layout.fragment_ed_profile,container,false);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     public void setListener() {
         mBinding.ivProfile.setOnClickListener(this);
-        mBinding.tvDone.setOnClickListener(this);
+        mBinding.tvLogout.setOnClickListener(this);
+    }
+
+    @Override
+    public String getFragmentName() {
+        return ProfileFragment.class.getSimpleName();
     }
 
     public void initializeData() {
-        mBinding.edName.setText(PreferenceUtils.getUserName());
-        mBinding.tvMobile.setText(PreferenceUtils.getUserMono());
-        mBinding.edEmail.setText(PreferenceUtils.getUserMono());
-        mBinding.edCreditDetails.setText(PreferenceUtils.getUserMono());
-        CommonUtility.showCursorEnd(mBinding.edName);
-        CommonUtility.showCursorEnd(mBinding.edEmail);
-        CommonUtility.showCursorEnd(mBinding.edCreditDetails);
-        mBinding.edName.setCursorVisible(true);
-        GlideUtils.loadImageProfilePic(this, PreferenceUtils.getImage(), mBinding.ivProfile, null, R.drawable.avatar);
-        setPaymentOption();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        GlideUtils.loadImageProfilePic(getDashboardActivity(), PreferenceUtils.getImage(), mBinding.ivProfile, null, R.drawable.avatar);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvPayment.setLayoutManager(layoutManager);
-        paymentAdapter = new PaymentAdapter(this, paymentList);
-        mBinding.rvPayment.setAdapter(paymentAdapter);
+        mBinding.rvPayment.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
+        settingAdapter = new ProfileSettingsAdapter(getDashboardActivity(), this);
+        mBinding.rvPayment.setAdapter(settingAdapter);
         CommonUtility.setRecyclerViewHeight(mBinding.rvPayment, paymentList, AppConstants.PAYMENT_HEIGHT);
-    }
-
-    private void setPaymentOption() {
-        PaymentOption option1 = new PaymentOption();
-        option1.setPaymentString(getResources().getString(R.string.cash_on_delivery));
-        PaymentOption option2 = new PaymentOption();
-        option2.setPaymentString(getResources().getString(R.string.credit_debit_card));
-        PaymentOption option3 = new PaymentOption();
-        option3.setPaymentString(getResources().getString(R.string.paytm));
-        paymentList.add(option1);
-        paymentList.add(option2);
-        paymentList.add(option3);
 
     }
+
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
@@ -102,8 +96,10 @@ public class EditProfileActivity extends CommonActivity implements MvpView, View
     public void onClick(View view) {
             if(mBinding.ivProfile==view){
                 showImageChooserDialog();
-            }else if(mBinding.tvDone==view){
-                updateProfile();
+            }else if(mBinding.tvLogout==view){
+                ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
+                getDashboardActivity().finish();
+                //updateProfile();
             }
     }
 
@@ -111,7 +107,7 @@ public class EditProfileActivity extends CommonActivity implements MvpView, View
     private void showImageChooserDialog() {
         //ImagePickerUtils.add(getSupportFragmentManager(), this);
 
-            BottomSheetDialog dialog = new BottomSheetDialog(this);
+            BottomSheetDialog dialog = new BottomSheetDialog(getContext());
             dialog.setContentView(R.layout.profile_dialog_layout);
             View layoutCamera = dialog.findViewById(R.id.layoutCamera);
             View layoutGallery = dialog.findViewById(R.id.layoutGallery);
@@ -148,7 +144,7 @@ public class EditProfileActivity extends CommonActivity implements MvpView, View
      * Open camera to capture image
      */
     private void openImageCamera() {
-        new ImagePicker.Builder(this)
+        new ImagePicker.Builder(getDashboardActivity())
                 .mode(ImagePicker.Mode.CAMERA)
                 .compressLevel(ImagePicker.ComperesLevel.HARD)
                 .directory(ImagePicker.Directory.DEFAULT)
@@ -163,7 +159,7 @@ public class EditProfileActivity extends CommonActivity implements MvpView, View
      * Open camera to capture image
      */
     private void openImageGallery() {
-        new ImagePicker.Builder(this)
+        new ImagePicker.Builder(getDashboardActivity())
                 .mode(ImagePicker.Mode.GALLERY)
                 .compressLevel(ImagePicker.ComperesLevel.HARD)
                 .directory(ImagePicker.Directory.DEFAULT)
@@ -176,7 +172,7 @@ public class EditProfileActivity extends CommonActivity implements MvpView, View
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == ImagePicker.IMAGE_PICKER_REQUEST_CODE) {
@@ -200,14 +196,14 @@ public class EditProfileActivity extends CommonActivity implements MvpView, View
         profilePicFilePath=filePath;
         File f = new File(filePath);
         if (f.exists()) {
-            GlideUtils.loadImageProfilePic(this, filePath, mBinding.ivProfile, null, R.drawable.avatar);
+            GlideUtils.loadImageProfilePic(getDashboardActivity(), filePath, mBinding.ivProfile, null, R.drawable.avatar);
         }
     }
     private void gotoCropper(Uri sourceUri) {
         CropImage.activity(sourceUri).setAspectRatio(1, 1)
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setCropShape(CropImageView.CropShape.OVAL)
-                .start(this);
+                .start(getDashboardActivity());
     }
 
     private void updateProfile() {
@@ -235,5 +231,8 @@ public class EditProfileActivity extends CommonActivity implements MvpView, View
     }
 
 
+    @Override
+    public void onItemClick(int position) {
 
+    }
 }

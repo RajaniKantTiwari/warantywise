@@ -42,6 +42,9 @@
 
     <color name="color_blue">#03a9f4</color>
     <color name="color_blue_2">#03B3F2</color>
+    <color name="profile_button_color">#67BFD7</color>
+
+
 
     <color name="grey_color">#999999</color>
     <color name="light_grey">#666666</color>
@@ -101,6 +104,9 @@
     <color name="colorBackgroundNav">#F8F8F8</color>
     <color name="colorNavAccentSelected">#18A3BF</color>
     <color name="color_blue_order">#36A5E2</color>
+    <color name="add_color">#23cdfd</color>
+
+
     <color name="text_hint">#cccccc</color>
     <color name="text_hint_color">#b2b2b2</color>
 

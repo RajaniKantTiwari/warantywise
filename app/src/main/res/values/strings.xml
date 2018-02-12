@@ -113,6 +113,15 @@
     <string name="sunday">Sunday</string>
     <string name="photos">Photos &amp; Video</string>
     <string name="review">Reviews</string>
+    <string name="product">Product</string>
+    <string name="claim">Claim</string>
+    <string name="insurance">Insurance</string>
+    <string name="account_setting">Account Settings</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="add_another_payment_method">+ Add other payment method</string>
+    <string name="update_my_detail">Update my details</string>
+    <string name="update_my_email">Update my email address</string>
+    <string name="change_my_password">Change my password</string>
 
 
     <string-array name="left_drawer">
@@ -123,5 +132,11 @@
         <item>@string/help</item>
         <item>@string/senior_citizen</item>
         <item>@string/term_condition</item>
+    </string-array>
+
+    <string-array name="update">
+        <item>@string/update_my_detail</item>
+        <item>@string/update_my_email</item>
+        <item>@string/change_my_password</item>
     </string-array>
 </resources>

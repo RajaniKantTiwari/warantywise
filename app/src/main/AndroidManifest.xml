@@ -28,7 +28,7 @@
         <activity android:name=".ui.authentication.LoginActivity" />
         <activity android:name=".ui.authentication.VerifyAccountActivity"
             android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".ui.authentication.EditProfileActivity" />
+        <activity android:name=".ui.dashboard.user.ProfileFragment" />
         <activity android:name=".ui.dashboard.drawer.HelpActivity" />
         <activity android:name=".ui.dashboard.drawer.InsuranceActivity" />
         <activity android:name=".ui.dashboard.drawer.SeniorCitizenActivity" />

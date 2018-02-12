@@ -182,19 +182,19 @@ public class CommonUtility {
 
     public static void clicked(View view) {
         view.setEnabled(false);
-        final Animation animation = new AlphaAnimation(1.0f, 0.6f);
-        animation.setDuration(200);
+        final Animation animation = new AlphaAnimation(1.0f, 0.3f);
+        animation.setDuration(100);
         animation.setFillAfter(true);
         view.startAnimation(animation);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                final Animation animation = new AlphaAnimation(0.6f, 1.0f);
-                animation.setDuration(200);
+                final Animation animation = new AlphaAnimation(0.3f, 1.0f);
+                animation.setDuration(100);
                 animation.setFillAfter(true);
                 view.startAnimation(animation);
             }
-        }, 200);
+        }, 110);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
