@@ -1,9 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    style="@style/match_match">
+    <include
+        android:id="@+id/layoutHeader"
+        layout="@layout/header_layout"/>
+    <RelativeLayout
+        style="@style/layout_ver_match_1"
+        android:background="@color/color_term_header">
+        <ImageView
+            android:layout_width="@dimen/margin_150"
+            android:layout_height="@dimen/margin_130"
+            android:layout_centerInParent="true"
+            android:src="@drawable/shubh"
+            android:scaleType="fitXY"/>
+    </RelativeLayout>
+    <RelativeLayout
+        style="@style/layout_ver_match_1_6"
+        android:padding="@dimen/margin_10">
+        <com.app.warantywise.widget.CustomTextView
+            android:id="@+id/tvTerms"
+            style="@style/textview_title_wrap"
+            android:text="@string/term_and_condition"
+             />
+        <ScrollView
+            android:id="@+id/termCondition"
+            android:layout_below="@+id/tvTerms"
+            android:layout_above="@+id/tvSubmit"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_10"
+            style="@style/match_match">
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_large_match"
+                android:text="@string/lorem_ipsum_2"
+                app:customFont="@string/font_regular"
+                />
+        </ScrollView>
+        <com.app.warantywise.widget.CustomTextView
+            android:id="@+id/tvSubmit"
+            style="@style/match_wrap"
+            android:background="@drawable/term_button_bg"
+            android:elevation="@dimen/margin_10"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/margin_12"
+            android:layout_marginStart="@dimen/margin_30"
+            android:layout_marginEnd="@dimen/margin_30"
+            android:layout_alignParentBottom="true"
+            android:text="@string/frequently_asked_question"
+            android:textAllCaps="true"
+            android:textColor="@color/background"
+            android:textSize="@dimen/button_large"
+            app:customFont="@string/font_bold" />
+    </RelativeLayout>
 </LinearLayout>
 </layout>

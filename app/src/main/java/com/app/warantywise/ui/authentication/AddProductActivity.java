@@ -62,6 +62,9 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private void setListener() {
         mBinding.tvSubmit.setOnClickListener(this);
         mBinding.tvCalendar.setOnClickListener(this);
+        mBinding.layoutYes.setOnClickListener(this);
+        mBinding.layoutNo.setOnClickListener(this);
+
     }
 
     private void initializeData() {
@@ -99,10 +102,18 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     @Override
     public void onClick(View view) {
         if (mBinding.tvSubmit == view) {
+            CommonUtility.clicked(mBinding.tvSubmit);
             //setToken();
             ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
         }else if(mBinding.tvCalendar==view){
             CommonUtility.openDatePicker(this);
+        }else if(mBinding.layoutYes==view){
+            mBinding.radioYes.setChecked(true);
+            mBinding.radioNo.setChecked(false);
+
+        }else if(mBinding.layoutNo==view){
+            mBinding.radioYes.setChecked(false);
+            mBinding.radioNo.setChecked(true);
         }
     }
 

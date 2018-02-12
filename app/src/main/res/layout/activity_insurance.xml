@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
-<com.app.warantywise.widget.CustomTextView
-    style="@style/wrap_wrap"
-    android:text="Home"
-    />
+    <com.app.warantywise.widget.CustomTextView
+        style="@style/wrap_wrap"
+        android:text="Insurance"
+        />
 </LinearLayout>
 </layout>

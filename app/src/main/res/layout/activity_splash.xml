@@ -7,7 +7,7 @@
     android:background="@color/background">
 
     <ImageView
-        style="@style/wrap_wrap"
+        style="@style/image_100"
         android:layout_centerInParent="true"
         android:src="@drawable/icon_wise"/>
 </RelativeLayout>

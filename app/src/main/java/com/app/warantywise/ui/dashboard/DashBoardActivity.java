@@ -73,17 +73,15 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 ExplicitIntent.getsInstance().navigateTo(this, InsuranceActivity.class);
                 break;
             case AppConstants.EDIT_PROFILE:
-                ExplicitIntent.getsInstance().navigateTo(this, ProfileFragment.class);
+                changeIcon(USER_FRAGMENT);
+                openFragment(new ProfileFragment(), null, true, false, NONE);
                 break;
             case AppConstants.HELP:
                 ExplicitIntent.getsInstance().navigateTo(this, HelpActivity.class);
-
-                changeIcon(NOTIFICATION_FRAGMENT);
                 openFragment(new NotificationFragment(), null, false, false, NONE);
                 break;
             case AppConstants.SENIOR_CITIZEN:
                 ExplicitIntent.getsInstance().navigateTo(this, SeniorCitizenActivity.class);
-
                 break;
             case AppConstants.TERM_CONDITION:
                 ExplicitIntent.getsInstance().navigateTo(this, TermConditionActivity.class);

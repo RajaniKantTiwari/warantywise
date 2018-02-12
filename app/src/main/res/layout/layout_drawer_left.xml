@@ -93,7 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_50"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/margin_10">
+            android:layout_marginBottom="@dimen/margin_10"
+            android:visibility="gone">
 
             <com.app.warantywise.widget.CustomTextView
                 android:id="@+id/tvLogout"

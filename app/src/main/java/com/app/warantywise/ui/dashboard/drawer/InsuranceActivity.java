@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.app.warantywise.R;
+import com.app.warantywise.databinding.ActivityInsuranceBinding;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.presenter.CommonPresenter;
 import com.app.warantywise.ui.base.BaseActivity;
@@ -21,12 +22,12 @@ public class InsuranceActivity extends BaseActivity {
 
     @Inject
     CommonPresenter presenter;
-
+    private ActivityInsuranceBinding mBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DataBindingUtil.setContentView(this,R.layout.activity_waranty);
+        mBinding=DataBindingUtil.setContentView(this,R.layout.activity_insurance);
     }
 
     @Override

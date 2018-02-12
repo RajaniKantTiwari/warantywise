@@ -120,5 +120,8 @@
     <dimen name="margin_110">110dp</dimen>
     <dimen name="margin_35">35dp</dimen>
     <dimen name="margin_45">45dp</dimen>
+    <dimen name="margin_300">300dp</dimen>
+    <dimen name="margin_160">160dp</dimen>
+    <dimen name="margin_130">130dp</dimen>
 
 </resources>

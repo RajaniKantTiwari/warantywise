@@ -88,6 +88,9 @@
     <color name="color_black_cart">#343851</color>
     <color name="color_green_cart">#009933</color>
 
+    <color name="color_term_header">#FBB962</color>
+
+
 
     <color name="black_cart">#4D4D4D</color>
     <color name="grey_cart">#D4D4D4</color>

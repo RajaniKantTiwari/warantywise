@@ -123,7 +123,7 @@
                     android:paddingStart="@dimen/margin_15">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
+                        android:id="@+id/radioNo"
                         style="@style/textview_description_wrap"
                         android:buttonTint="@color/color_sky_blue"
                         android:checked="true"
