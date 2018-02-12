@@ -49,7 +49,7 @@ public class DrawerAdapterLeft extends RecyclerView.Adapter<DrawerAdapterLeft.St
     @Override
     public void onBindViewHolder(StoreViewHolder holder, int position) {
         if (CommonUtility.isNotNull(drawerList) && drawerList.size() > position) {
-            holder.setData(drawerList.get(position));
+            holder.setData(position);
         }
     }
 
@@ -76,9 +76,9 @@ public class DrawerAdapterLeft extends RecyclerView.Adapter<DrawerAdapterLeft.St
             }
         }
 
-        public void setData(String str) {
-            mBinding.tvMenuName.setText(str);
-            //mBinding.imageView.setImage
+        public void setData(int position) {
+            mBinding.tvMenuName.setText(drawerList.get(position));
+            mBinding.imageView.setImageResource(drawerImageList[position]);
         }
     }
 }

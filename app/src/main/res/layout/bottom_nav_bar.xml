@@ -13,11 +13,33 @@
             android:id="@+id/panelAddress"
             style="@style/match_match"
             android:background="@color/colorBackgroundNav">
+            <RelativeLayout
+                android:id="@+id/linearLayoutBar3"
+                style="@style/linear_layout_match"
+                android:foreground="?android:attr/selectableItemBackground">
 
+                <View
+                    android:id="@+id/viewBar3"
+                    style="@style/view_layout_nav_bar"
+                    android:visibility="invisible" />
+
+                <RelativeLayout style="@style/layout_bottom_image">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageViewBar3"
+                        style="@style/home_view"
+                        android:src="@drawable/ic_notification" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <ImageView style="@style/view_layout_vertical"
+                android:visibility="invisible"/>
             <RelativeLayout
                 android:id="@+id/linearLayoutBar1"
                 style="@style/linear_layout_match"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:foreground="?android:attr/selectableItemBackground"
+                android:visibility="invisible">
 
                 <View
                     android:id="@+id/viewBar1"
@@ -33,12 +55,14 @@
 
             </RelativeLayout>
 
-            <ImageView style="@style/view_layout_vertical" />
+            <ImageView style="@style/view_layout_vertical"
+                android:visibility="gone"/>
 
             <RelativeLayout
                 android:id="@+id/linearLayoutBar2"
                 style="@style/linear_layout_match"
-                android:foreground="?android:attr/selectableItemBackground">
+                android:foreground="?android:attr/selectableItemBackground"
+                android:visibility="gone">
 
                 <View
                     android:id="@+id/viewBar2"
@@ -55,29 +79,10 @@
 
             </RelativeLayout>
 
-            <ImageView style="@style/view_layout_vertical" />
+            <ImageView style="@style/view_layout_vertical"
+                android:visibility="gone"/>
 
-            <RelativeLayout
-                android:id="@+id/linearLayoutBar3"
-                style="@style/linear_layout_match"
-                android:foreground="?android:attr/selectableItemBackground">
 
-                <View
-                    android:id="@+id/viewBar3"
-                    style="@style/view_layout_nav_bar"
-                    android:visibility="invisible" />
-
-                <RelativeLayout style="@style/layout_bottom_image">
-
-                    <android.support.v7.widget.AppCompatImageView
-                        android:id="@+id/imageViewBar3"
-                        style="@style/home_view"
-                        android:src="@drawable/ic_notification_light" />
-                </RelativeLayout>
-
-            </RelativeLayout>
-
-            <ImageView style="@style/view_layout_vertical" />
 
             <RelativeLayout
                 android:id="@+id/linearLayoutBar4"

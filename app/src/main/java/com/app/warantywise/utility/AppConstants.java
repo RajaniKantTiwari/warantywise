@@ -32,9 +32,14 @@ public interface AppConstants {
     int PAYMENT_HEIGHT = 48;
     long SPLASH_TIME = 800;
     int CORNER_RADIUS = 10;
-    int PRODUCT=4;
+    int LIST_PRODUCT = 1;
+    int MAP_PRODUCT = 2;
     String RESPONSE = "response";
-
+    int PERMISSIONS_REQUEST_LOCATION = 99;
+    int MAX_LENGTH = 50;
+    float MAX_ZOOM = 17;
+    float TILT = 90;
+    float BEARING = 45;
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT})
     @Retention(RetentionPolicy.SOURCE)
