@@ -133,7 +133,9 @@ dependencies {
     //image from camera gallery
     implementation project(':libary')
     //end
-
+//image from camera gallery
+    implementation project(':date_library')
+    //end
     compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
         transitive = true
     }

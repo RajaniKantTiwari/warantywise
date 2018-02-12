@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.app.warantywise.BuildConfig;
 import com.app.warantywise.R;
+import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dialogfrag.CustomDialogFragment;
@@ -36,6 +37,7 @@ import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
 import com.app.warantywise.widget.CustomEditText;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -465,5 +467,24 @@ public class CommonUtility {
             e.printStackTrace();
         }
         return createdDate;
+    }
+
+    public static void openDatePicker(AddProductActivity activity) {
+        DatePickerDialog dpd=null;
+
+        Calendar now = Calendar.getInstance();
+        if (dpd == null) {
+            dpd = DatePickerDialog.newInstance(
+                    activity,
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH),
+                    now.get(Calendar.DAY_OF_MONTH)
+            );
+        }
+        dpd.vibrate(false);
+        dpd.setVersion(DatePickerDialog.Version.VERSION_1);
+            dpd.setAccentColor(Color.parseColor("#9C27B0"));
+
+        dpd.show(activity.getFragmentManager(), "Datepickerdialog");
     }
 }

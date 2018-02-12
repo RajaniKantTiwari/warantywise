@@ -22,6 +22,7 @@ import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.LogUtils;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import net.alhazmy13.mediapicker.Image.ImagePicker;
 
@@ -38,7 +39,8 @@ import okhttp3.MultipartBody;
  * Created by rajnikant on 11/02/18.
  */
 
-public class AddProductActivity extends CommonActivity implements ProductAdapter.ProductListener {
+public class AddProductActivity extends CommonActivity implements ProductAdapter.ProductListener ,
+ DatePickerDialog.OnDateSetListener{
     @Inject
     CommonPresenter presenter;
     private ActivityAddProductBinding mBinding;
@@ -59,6 +61,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     private void setListener() {
         mBinding.tvSubmit.setOnClickListener(this);
+        mBinding.tvCalendar.setOnClickListener(this);
     }
 
     private void initializeData() {
@@ -98,6 +101,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         if (mBinding.tvSubmit == view) {
             //setToken();
             ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+        }else if(mBinding.tvCalendar==view){
+            CommonUtility.openDatePicker(this);
         }
     }
 
@@ -241,5 +246,11 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         }
 
 
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        mBinding.tvCalendar.setText(date);
     }
 }

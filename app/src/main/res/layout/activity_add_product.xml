@@ -75,7 +75,7 @@
             <com.app.warantywise.widget.CustomTextView
                 android:id="@+id/tvCalendar"
                 style="@style/edittext_add_product"
-                android:drawableEnd="@drawable/camera"
+                android:drawableEnd="@drawable/calender"
                 android:hint="@string/may_2016"
                 app:customFont="@string/font_regular" />
 
