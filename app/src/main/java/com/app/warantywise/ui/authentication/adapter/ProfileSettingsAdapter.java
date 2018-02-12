@@ -34,6 +34,7 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
     }
 
     public ProfileSettingsAdapter(AppCompatActivity activity,ProductListener listener) {
+        settingList=new ArrayList<>();
         mInflater = LayoutInflater.from(activity);
         this.activity = activity;
         this.listener = listener;

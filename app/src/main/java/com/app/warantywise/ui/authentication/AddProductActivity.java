@@ -60,6 +60,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     }
 
     private void setListener() {
+        mBinding.headerLayout.ivBack.setOnClickListener(this);
         mBinding.tvSubmit.setOnClickListener(this);
         mBinding.tvCalendar.setOnClickListener(this);
         mBinding.layoutYes.setOnClickListener(this);
@@ -114,6 +115,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         }else if(mBinding.layoutNo==view){
             mBinding.radioYes.setChecked(false);
             mBinding.radioNo.setChecked(true);
+        } else if(mBinding.headerLayout.ivBack==view){
+            finish();
         }
     }
 

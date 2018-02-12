@@ -210,6 +210,9 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         token.setDeviceType(AppConstants.DEVICETYPE);
         request.setInfo(token);
         //mPresenter.setDeviceToken(this, request);
+        changeIcon(NOTIFICATION_FRAGMENT);
+        clearAllBackStack();
+        pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE);
     }
 
     public void setListener() {
@@ -222,7 +225,6 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         mBinding.bottomLayout.linearLayoutBar2.setOnClickListener(this);
         mBinding.bottomLayout.linearLayoutBar3.setOnClickListener(this);
         mBinding.bottomLayout.linearLayoutBar4.setOnClickListener(this);
-
     }
 
 
