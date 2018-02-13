@@ -9,6 +9,7 @@ import com.app.warantywise.WarantyApplication;
 import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.authentication.VerifyAccountActivity;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
+import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.PreferenceUtils;
@@ -33,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }*/
                 //ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
-                ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
+                ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, DashBoardActivity.class);
                 finish();
             }
         }, AppConstants.SPLASH_TIME);

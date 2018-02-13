@@ -3,15 +3,23 @@ package com.app.warantywise.ui.dashboard.home;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentYourProductBinding;
+import com.app.warantywise.network.request.dashboard.InsurancePlan;
+import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
+import com.app.warantywise.ui.dashboard.home.adapter.InsurancePlansAdapter;
+import com.app.warantywise.ui.dashboard.home.adapter.PlansAdapter;
+import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
+
+import java.util.ArrayList;
 
 
 /**
@@ -19,9 +27,14 @@ import com.app.warantywise.utility.CommonUtility;
  * To inject activity reference.
  */
 
-public class YourProductFragment extends DashboardFragment {
+public class YourProductFragment extends DashboardFragment implements InsurancePlansAdapter.PlanInsuranceListener,
+        PlansAdapter.PlanListener {
 
     private FragmentYourProductBinding mBinding;
+    private PlansAdapter mPlanAdapter;
+    private InsurancePlansAdapter mInsurancePlanAdapter;
+    private ArrayList<Plans> planList;
+    private ArrayList<InsurancePlan> insurancePlanList;
 
 
     @Nullable
@@ -38,8 +51,7 @@ public class YourProductFragment extends DashboardFragment {
 
     @Override
     public void setListener() {
-        mBinding.tvRaiseAnIssue.setOnClickListener(this);
-        mBinding.tvHome.setOnClickListener(this);
+        mBinding.tvBuy.setOnClickListener(this);
 
     }
 
@@ -50,17 +62,31 @@ public class YourProductFragment extends DashboardFragment {
 
     @Override
     public void initializeData() {
+        //For Plan
+        LinearLayoutManager plansManager = new LinearLayoutManager(getDashboardActivity());
+        mBinding.rvPlan.setLayoutManager(plansManager);
+        planList = new ArrayList<>();
+        CommonUtility.setPlan(planList);
+        CommonUtility.setRecyclerViewHeight(mBinding.rvPlan, planList, AppConstants.PLANHEIGHT);
+        mPlanAdapter = new PlansAdapter(getDashboardActivity(), planList, this);
+        mBinding.rvPlan.setAdapter(mPlanAdapter);
+
+        //for Insurance plan
+        LinearLayoutManager insurancePlanManager = new LinearLayoutManager(getDashboardActivity());
+        mBinding.rvInsurancePlan.setLayoutManager(insurancePlanManager);
+        insurancePlanList = new ArrayList<>();
+        CommonUtility.setInsurancePlan(insurancePlanList);
+        CommonUtility.setRecyclerViewHeight(mBinding.rvInsurancePlan, planList, AppConstants.INSURANCE_PLANHEIGHT);
+        mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
+        mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
+        //end
     }
 
     @Override
     public void onClick(View view) {
-        if (view == mBinding.tvRaiseAnIssue) {
-            CommonUtility.clicked(mBinding.tvRaiseAnIssue);
-            //getDashboardActivity().addFragmentInContainer(new HelpsAndSupportFragment(),null,true,true, BaseActivity.AnimationType.NONE);
-            //mFragmentNavigation.pushFragment(HelpsAndSupportFragment.newInstance(mInt + 1));
-        } else if (view == mBinding.tvHome) {
-            CommonUtility.clicked(mBinding.tvHome);
-           // mFragmentNavigation.popFragment();
+        if (view == mBinding.tvBuy) {
+            CommonUtility.clicked(mBinding.tvBuy);
+            // mFragmentNavigation.popFragment();
         }
     }
 
@@ -69,4 +95,31 @@ public class YourProductFragment extends DashboardFragment {
 
     }
 
+    @Override
+    public void setOnInsuranceItemClick(int position) {
+        for (int i = 0; i < insurancePlanList.size(); i++) {
+            InsurancePlan plan = insurancePlanList.get(i);
+            if (i == position) {
+                plan.setSelected(true);
+            } else {
+                plan.setSelected(false);
+            }
+            insurancePlanList.set(i, plan);
+        }
+        mInsurancePlanAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setOnPlanClicked(int position) {
+        for (int i = 0; i < planList.size(); i++) {
+            Plans plan = planList.get(i);
+            if (i == position) {
+                plan.setChecked(true);
+            } else {
+                plan.setChecked(false);
+            }
+            planList.set(i, plan);
+        }
+        mPlanAdapter.notifyDataSetChanged();
+    }
 }

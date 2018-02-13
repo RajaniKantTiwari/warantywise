@@ -132,6 +132,8 @@
 
 
     <color name="red">#FF0011</color>
+    <color name="red_col">#FC0D1B</color>
+
     <color name="red_term">#Fc091b</color>
 
     <color name="red_color">#FF0066</color>

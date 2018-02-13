@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="plans"
+            type="com.app.warantywise.network.request.dashboard.Plans" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/layoutPlans"
+        style="@style/match_wrap"
+        android:layout_marginEnd="@dimen/margin_10"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_6"
+        android:background="@drawable/grey_corner_bg">
+
+        <LinearLayout
+            style="@style/match_wrap"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/radio"
+            android:paddingStart="@dimen/margin_10">
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_small_wrap"
+                android:layout_width="@dimen/margin_70"
+                android:text="@={plans.planRate}"
+                android:textColor="@color/red_col"
+                app:customFont="@string/font_regular" />
+
+            <android.support.v4.widget.Space style="@style/layout_hori_match_1" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_small_wrap"
+                android:layout_width="@dimen/margin_70"
+                android:text="@={plans.planRate}"
+                app:customFont="@string/font_regular" />
+
+            <android.support.v4.widget.Space style="@style/layout_hori_match_1" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_smaller_wrap"
+                android:layout_width="@dimen/margin_140"
+                android:text="@={plans.replaceMentService}"
+                android:textColor="@color/grey_color"
+                app:customFont="@string/font_regular" />
+
+            <android.support.v4.widget.Space style="@style/layout_hori_match_3" />
+        </LinearLayout>
+        <RadioButton
+            android:id="@+id/radio"
+            style="@style/wrap_wrap"
+            android:layout_alignParentEnd="true"
+            android:buttonTint="@color/background"
+            android:clickable="false"
+            android:layoutDirection="rtl"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:textAllCaps="true"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/textSize_description_smaller"
+            android:textStyle="normal" />
+    </RelativeLayout>
+</layout>

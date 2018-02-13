@@ -22,6 +22,7 @@ import com.app.warantywise.injector.module.DashboardModule;
 import com.app.warantywise.network.request.DeviceToken;
 import com.app.warantywise.network.request.DeviceTokenRequest;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.ui.dashboard.home.YourProductFragment;
 import com.app.warantywise.ui.dashboard.user.ProfileFragment;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.adapter.DrawerAdapterLeft;
@@ -77,7 +78,8 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 openFragment(new ProfileFragment(), null, true, false, NONE);
                 break;
             case AppConstants.HELP:
-                ExplicitIntent.getsInstance().navigateTo(this, HelpActivity.class);
+                //ExplicitIntent.getsInstance().navigateTo(this, HelpActivity.class);
+                pushFragment(new YourProductFragment(), null, R.id.container, true, false, NONE);
                 break;
             case AppConstants.SENIOR_CITIZEN:
                 ExplicitIntent.getsInstance().navigateTo(this, SeniorCitizenActivity.class);

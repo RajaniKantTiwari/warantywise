@@ -5,7 +5,9 @@
         android:id="@+id/headerLayout"
         xmlns:tools="http://schemas.android.com/tools"
         style="@style/match_wrap"
-        android:layout_height="@dimen/margin_50">
+        android:layout_height="@dimen/margin_50"
+        android:background="@color/background"
+        >
 
         <ImageView
             android:id="@+id/ivBack"

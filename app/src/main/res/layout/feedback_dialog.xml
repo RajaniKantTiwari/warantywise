@@ -12,9 +12,9 @@
             style="@style/match_wrap"
             android:background="@drawable/white_round_btnbg"
             android:orientation="vertical"
-            android:padding="@dimen/margin_12">
+            android:padding="@dimen/margin_14">
             <RatingBar
-                style="?android:attr/ratingBarStyleIndicator"
+                style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -26,25 +26,30 @@
                 android:id="@+id/tvName"
                 style="@style/textview_header_small_match"
                 android:layout_gravity="center"
-                android:text="Mother Diary"
+                android:text="Nokia"
+                android:textAllCaps="true"
                 android:padding="@dimen/margin_4"
                 android:gravity="center_horizontal" />
 
             <com.app.warantywise.widget.CustomTextView
                 android:id="@+id/tvAddress"
-                style="@style/textview_title_match"
+                style="@style/textview_description_small_match"
                 android:textColor="@color/color_black"
                 android:layout_gravity="center"
+                android:text="Sec 49, Gurugram"
                 android:gravity="center_horizontal"
                 app:customFont="@string/font_regular"/>
             <com.app.warantywise.widget.CustomEditText
                 android:layout_marginTop="@dimen/margin_15"
                 android:id="@+id/edFeedBack"
                 style="@style/edit_text_style_larger"
-                android:textColorHint="@color/background"
+                android:textColorHint="@color/grey_color"
                 android:hint="@string/any_other_feedback"
-                android:padding="@dimen/margin_5"/>
-            <ImageView style="@style/view_layout" />
+                android:padding="@dimen/margin_5"
+                app:customFont="@string/font_regular"
+                />
+            <ImageView style="@style/view_layout"
+                />
             <LinearLayout
                 style="@style/match_wrap"
                 android:layout_marginBottom="@dimen/margin_30">
@@ -55,7 +60,7 @@
                     android:padding="@dimen/margin_6"
                     android:gravity="center"
                     android:text="@string/submit"
-                    android:textColor="@color/color_green_cart"
+                    android:textColor="@color/button_text_color"
                     android:textAllCaps="true"
                     app:customFont="@string/font_bold"/>
 

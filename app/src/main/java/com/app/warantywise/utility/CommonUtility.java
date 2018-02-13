@@ -29,6 +29,8 @@ import android.widget.Toast;
 
 import com.app.warantywise.BuildConfig;
 import com.app.warantywise.R;
+import com.app.warantywise.network.request.dashboard.InsurancePlan;
+import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.base.BaseActivity;
@@ -373,6 +375,58 @@ public class CommonUtility {
         Days day7 = new Days();
         day7.setNameOfDays("Saturday");
         daysArrayList.add(day7);
+    }
+
+    public static void setPlan(ArrayList<Plans> daysArrayList) {
+        Plans plan1 = new Plans();
+        plan1.setPlanRate("Rs 765");
+        plan1.setWarantyPeriod("for 1 Year");
+        plan1.setReplaceMentService("Replacement & on spot service");
+        daysArrayList.add(plan1);
+
+
+        Plans plan2 = new Plans();
+        plan2.setPlanRate("Rs 865");
+        plan2.setWarantyPeriod("for 2 Year");
+        plan2.setReplaceMentService("Replacement & on spot service");
+        daysArrayList.add(plan2);
+
+        Plans plan3 = new Plans();
+        plan3.setPlanRate("Rs 877");
+        plan3.setWarantyPeriod("for 3 Year");
+        plan3.setReplaceMentService("Replacement & on spot service");
+        daysArrayList.add(plan3);
+
+
+    }
+
+
+    public static void setInsurancePlan(ArrayList<InsurancePlan> insurancePlansList) {
+        InsurancePlan plan1 = new InsurancePlan();
+        plan1.setImageUrl("");
+        plan1.setInsuranceCompanyName("Thomas cook");
+        plan1.setInsuranceServiceName("Thomas cook product save insurance");
+        plan1.setInsurancePlanRate("Rs 765");
+
+        insurancePlansList.add(plan1);
+
+
+        InsurancePlan plan2 = new InsurancePlan();
+        plan2.setImageUrl("");
+        plan2.setInsuranceCompanyName("Tata AIG");
+        plan2.setInsuranceServiceName("Tata AUI insurance");
+        plan2.setInsurancePlanRate("Rs 665");
+
+        insurancePlansList.add(plan2);
+
+        InsurancePlan plan3 = new InsurancePlan();
+        plan3.setImageUrl("");
+        plan3.setInsuranceCompanyName("Reliance Insurance");
+        plan3.setInsurancePlanRate("Rs 865");
+        plan3.setInsuranceServiceName("Reliance general product");
+        insurancePlansList.add(plan3);
+
+
     }
 
     public static String getDeviceUniqueId(Activity activity) {

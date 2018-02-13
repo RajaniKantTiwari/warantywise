@@ -42,6 +42,8 @@ public interface AppConstants {
     float MAX_ZOOM = 17;
     float TILT = 90;
     float BEARING = 45;
+    int PLANHEIGHT = 48;
+    int INSURANCE_PLANHEIGHT = 50;
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT})
     @Retention(RetentionPolicy.SOURCE)
