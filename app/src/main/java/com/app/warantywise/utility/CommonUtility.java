@@ -36,6 +36,7 @@ import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dialogfrag.CustomDialogFragment;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
+import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
 import com.app.warantywise.ui.dialogfrag.ProfileDialogFragment;
 import com.app.warantywise.widget.CustomEditText;
 import com.google.android.gms.common.ConnectionResult;
@@ -54,6 +55,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -112,6 +115,15 @@ public class CommonUtility {
     public static void showUpdateDialog(AppCompatActivity activity, Bundle bundle, ProfileDialogFragment.ProfileDialogListener listener) {
         FragmentManager fm = activity.getSupportFragmentManager();
         ProfileDialogFragment alertdFragment = new ProfileDialogFragment();
+        alertdFragment.addListener(listener);
+        alertdFragment.setArguments(bundle);
+        // Show Alert CustomDialogFragment
+        alertdFragment.show(fm, "");
+    }
+
+    public static void showOfferDialog(AppCompatActivity activity, Bundle bundle, OfferDialogFragment.OfferDialogListener listener) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        OfferDialogFragment alertdFragment = new OfferDialogFragment();
         alertdFragment.addListener(listener);
         alertdFragment.setArguments(bundle);
         // Show Alert CustomDialogFragment
@@ -584,5 +596,13 @@ public class CommonUtility {
 
         }
         return null;
+    }
+    public static String capitalize(String capString) {
+        StringBuffer capBuffer = new StringBuffer();
+        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
+        while (capMatcher.find()) {
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+        }
+        return capMatcher.appendTail(capBuffer).toString();
     }
 }

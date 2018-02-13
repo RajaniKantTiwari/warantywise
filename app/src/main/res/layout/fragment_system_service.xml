@@ -34,6 +34,7 @@
                             android:id="@+id/storeImage"
                             style="@style/match_wrap"
                             android:layout_height="@dimen/margin_180"
+                            android:background="@drawable/shubh"
                             android:scaleType="fitXY" />
 
                         <ImageView
@@ -73,7 +74,7 @@
                         style="@style/wrap_wrap"
                         android:layout_below="@+id/header_lay"
                         android:layout_marginEnd="@dimen/margin_30"
-                        android:layout_marginTop="@dimen/margin_12_minus">
+                        android:layout_marginTop="@dimen/margin_13_minus">
 
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/tvCall"
@@ -82,10 +83,10 @@
                             android:layout_marginEnd="@dimen/margin_5"
                             android:background="@drawable/blue_round_btn_bg"
                             android:gravity="center"
-                            android:paddingBottom="@dimen/margin_3"
-                            android:paddingEnd="@dimen/margin_10"
-                            android:paddingStart="@dimen/margin_10"
-                            android:paddingTop="@dimen/margin_3"
+                            android:paddingBottom="@dimen/margin_4"
+                            android:paddingEnd="@dimen/margin_35"
+                            android:paddingStart="@dimen/margin_35"
+                            android:paddingTop="@dimen/margin_4"
                             android:text="@string/call"
                             android:textColor="@color/white" />
                     </RelativeLayout>

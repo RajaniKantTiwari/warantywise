@@ -158,6 +158,9 @@
     <string name="buy">Buy</string>
     <string name="choose_plan">Choose Plan</string>
     <string name="choose_insurance_plan_for_product">Choose a insurance plane for your product</string>
+    <string name="choose_provider">Choose Provider</string>
+    <string name="you_can_also_choose_warranty_plan">You Can Also Choose Warranty Plan</string>
+    <string name="close">Close</string>
 
     <string-array name="left_drawer">
         <item>@string/home</item>
