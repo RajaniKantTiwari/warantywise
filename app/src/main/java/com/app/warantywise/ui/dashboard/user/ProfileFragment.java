@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentEdProfileBinding;
 import com.app.warantywise.network.request.PaymentOption;
+import com.app.warantywise.network.request.Profile;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.authentication.adapter.ProfileSettingsAdapter;
@@ -248,7 +249,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     }
 
     @Override
-    public void update(String submit) {
+    public void update(Profile profile) {
 
     }
 

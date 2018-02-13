@@ -8,17 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.app.warantywise.R;
-import com.app.warantywise.databinding.FeedbackDialogBinding;
+import com.app.warantywise.databinding.ProfileDialogBinding;
+import com.app.warantywise.network.request.Profile;
 import com.app.warantywise.utility.CommonUtility;
 
 
 public class ProfileDialogFragment extends DialogFragment implements View.OnClickListener {
     private Dialog dialog;
-    private FeedbackDialogBinding mBinding;
+    private ProfileDialogBinding mBinding;
     private ProfileDialogListener listener;
-
     public interface ProfileDialogListener {
-        void update(String submit);
+        void update(Profile profile);
     }
     public void addListener(ProfileDialogListener listener) {
         this.listener = listener;
@@ -49,15 +49,20 @@ public class ProfileDialogFragment extends DialogFragment implements View.OnClic
     }
 
     public void setListener() {
-        mBinding.tvSubmit.setOnClickListener(this);
+        mBinding.tvUpdate.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if (view == mBinding.tvSubmit) {
+        if (view == mBinding.tvUpdate) {
             dialog.cancel();
             if(CommonUtility.isNotNull(listener)){
-                listener.update(mBinding.edFeedBack.getText().toString());
+                Profile profile=new Profile();
+                profile.setUserName(mBinding.edProductName.getText().toString());
+                profile.setMobileNumber(mBinding.edMobileNumber.getText().toString());
+                profile.setDateOfBirth(mBinding.tvDateOfBirth.getText().toString());
+                profile.setAniversery(mBinding.tvAniversary.getText().toString());
+                listener.update(profile);
             }
         }
     }

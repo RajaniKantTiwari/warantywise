@@ -36,7 +36,7 @@
             android:id="@+id/tvHeader"
             style="@style/textview_title_wrap"
             android:layout_centerInParent="true"
-            android:textColor="@color/white"
+            android:textColor="@color/button_text_color"
             android:textAllCaps="true"
             android:visibility="gone"/>
 

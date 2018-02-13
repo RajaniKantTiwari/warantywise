@@ -25,7 +25,7 @@
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomEditText
-                android:id="@+id/tvProductName"
+                android:id="@+id/edProductName"
                 style="@style/edittext_add_product"
                 android:hint="@string/name"
                 app:customFont="@string/font_regular" />
@@ -36,7 +36,7 @@
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomEditText
-                android:id="@+id/tvCompanyName"
+                android:id="@+id/edMobileNumber"
                 style="@style/edittext_add_product"
                 android:inputType="number"
                 android:hint="999-999-999"
@@ -62,7 +62,7 @@
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView
-                android:id="@+id/tvCalendar"
+                android:id="@+id/tvAniversary"
                 style="@style/edittext_add_product"
                 android:drawableEnd="@drawable/calender"
                 android:hint="@string/may_2016"

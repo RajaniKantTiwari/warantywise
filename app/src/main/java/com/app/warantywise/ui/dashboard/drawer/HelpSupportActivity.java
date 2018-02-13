@@ -34,9 +34,8 @@ public class HelpSupportActivity extends BaseActivity {
     }
 
     private void initializeData() {
-        mBinding.layoutHeader.headerLayout.setBackgroundColor(CommonUtility.getColor(this,R.color.background));
         mBinding.layoutHeader.tvHeader.setVisibility(View.VISIBLE);
-        mBinding.layoutHeader.tvHeader.setText(getResources().getString(R.string.term_and_condition));
+        mBinding.layoutHeader.tvHeader.setText(getResources().getString(R.string.help_support));
     }
 
     @Override

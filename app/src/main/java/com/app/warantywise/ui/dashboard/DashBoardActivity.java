@@ -22,12 +22,13 @@ import com.app.warantywise.injector.module.DashboardModule;
 import com.app.warantywise.network.request.DeviceToken;
 import com.app.warantywise.network.request.DeviceTokenRequest;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.ui.dashboard.drawer.HelpSupportActivity;
 import com.app.warantywise.ui.dashboard.home.HomeFragment;
+import com.app.warantywise.ui.dashboard.home.InsuranceChoiceFragment;
 import com.app.warantywise.ui.dashboard.home.YourProductListFragment;
 import com.app.warantywise.ui.dashboard.user.ProfileFragment;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.adapter.DrawerAdapterLeft;
-import com.app.warantywise.ui.dashboard.drawer.InsuranceActivity;
 import com.app.warantywise.ui.dashboard.drawer.SeniorCitizenActivity;
 import com.app.warantywise.ui.dashboard.drawer.TermConditionActivity;
 import com.app.warantywise.ui.dashboard.drawer.WarantyActivity;
@@ -68,18 +69,14 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 ExplicitIntent.getsInstance().navigateTo(this, WarantyActivity.class);
                 break;
             case AppConstants.INSURANCE:
-                ExplicitIntent.getsInstance().navigateTo(this, InsuranceActivity.class);
+                openFragment(new InsuranceChoiceFragment(), null, false, false, NONE);
                 break;
             case AppConstants.EDIT_PROFILE:
                 changeIcon(USER_FRAGMENT);
                 openFragment(new ProfileFragment(), null, true, false, NONE);
                 break;
             case AppConstants.HELP:
-                //ExplicitIntent.getsInstance().navigateTo(this, HelpActivity.class);
-                //pushFragment(new YourProductFragment(), null, R.id.container, true, false, NONE);
-                //pushFragment(new SystemServiceFragment(), null, R.id.container, true, false, NONE);
-                //pushFragment(new InsuranceChoiceFragment(), null, R.id.container, true, false, NONE);
-                pushFragment(new YourProductListFragment(), null, R.id.container, true, false, NONE);
+                ExplicitIntent.getsInstance().navigateTo(this, HelpSupportActivity.class);
                 break;
             case AppConstants.SENIOR_CITIZEN:
                 ExplicitIntent.getsInstance().navigateTo(this, SeniorCitizenActivity.class);
