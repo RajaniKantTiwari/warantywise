@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 
 import com.app.warantywise.R;
@@ -53,7 +54,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.PaymentV
 
     class PaymentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final PaymentRowBinding mBinding;
-        private final LinearLayout layoutRadio;
+        private final RelativeLayout layoutRadio;
 
         public PaymentViewHolder(PaymentRowBinding itemView) {
             super(itemView.getRoot());

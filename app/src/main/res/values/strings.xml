@@ -58,6 +58,9 @@
     <string name="term_condition">Terms and Conditions</string>
     <string name="term_and_condition">Terms &amp; Conditions</string>
 
+    <string name="term_and_condition_privacy">T&amp;C &amp; Our Privacy Policy</string>
+
+
     <string name="logout">Logout</string>
     <string name="verify_account">Verify Account</string>
     <string name="please_enter_verification_code">Please enter the verification code we \nsent to your email address</string>
@@ -161,6 +164,12 @@
     <string name="choose_provider">Choose Provider</string>
     <string name="you_can_also_choose_warranty_plan">You Can Also Choose Warranty Plan</string>
     <string name="close">Close</string>
+    <string name="need_some_help">Need some help?</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="warranty">Warranty</string>
+    <string name="extend">Extend</string>
+    <string name="buy_insurance">Buy Insurance</string>
+    <string name="offer">Offer</string>
 
     <string-array name="left_drawer">
         <item>@string/home</item>

@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentEdProfileBinding;
@@ -36,6 +37,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.MultipartBody;
 
@@ -53,6 +55,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     private List<PaymentOption> paymentList = new ArrayList<>();
     private ProfileSettingsAdapter settingAdapter;
     private String profilePicFilePath;
+    private int numberOfPaymentMethod;
 
 
     @Nullable
@@ -64,8 +67,9 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
 
     public void setListener() {
         mBinding.ivProfile.setOnClickListener(this);
+        mBinding.imgEditPic.setOnClickListener(this);
         mBinding.tvLogout.setOnClickListener(this);
-
+        mBinding.tvAddPaymentMethod.setOnClickListener(this);
     }
 
     @Override
@@ -96,7 +100,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
 
     @Override
     public void onClick(View view) {
-            if(mBinding.ivProfile==view){
+            if(mBinding.ivProfile==view||mBinding.imgEditPic==view){
                 showImageChooserDialog();
             }else if(mBinding.tvLogout==view){
                 ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
@@ -104,6 +108,8 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
                 //updateProfile();
             }else if(mBinding.tvLogout==view){
                 ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(),LoginActivity.class);
+            }else if(mBinding.tvAddPaymentMethod==view){
+                addChildView(numberOfPaymentMethod);
             }
     }
 
@@ -244,5 +250,36 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     @Override
     public void update(String submit) {
 
+    }
+
+    /**
+     * Here User Can Add Gratitude if neede more than 3 maximum 10
+     *
+     * @param number
+     */
+    private void addChildView(int number) {
+        View child = getLayoutInflater().inflate(R.layout.payment_row, null);
+        RadioButton radioButton = child.findViewById(R.id.radioButton);
+        radioButton.setText(String.format(Locale.getDefault(), "%s %d", getResources().getString(R.string.payment_method), number));
+        child.findViewById(R.id.ivClose).setVisibility(View.VISIBLE);
+        child.findViewById(R.id.ivClose).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBinding.layoutPaymentOption.removeView(child);
+                numberOfPaymentMethod = numberOfPaymentMethod - 1;
+                changeHeading();
+            }
+        });
+        mBinding.layoutPaymentOption.addView(child);
+    }
+    /**
+     * Set Heading for All Gratitude
+     */
+    private void changeHeading() {
+        for (int i = 0; i < numberOfPaymentMethod; i++) {
+            View view = mBinding.layoutPaymentOption.getChildAt(i);
+            RadioButton radioButton = view.findViewById(R.id.radioButton);
+            radioButton.setText(String.format(Locale.getDefault(), "%s %d", getResources().getString(R.string.payment_method), (i + 1)));
+        }
     }
 }

@@ -197,6 +197,10 @@
         <item name="android:layout_height">@dimen/margin_25</item>
         <item name="android:layout_width">@dimen/margin_25</item>
     </style>
+    <style name="image_20" >
+        <item name="android:layout_height">@dimen/margin_20</item>
+        <item name="android:layout_width">@dimen/margin_20</item>
+    </style>
     <style name="image_30" >
         <item name="android:layout_height">@dimen/margin_30</item>
         <item name="android:layout_width">@dimen/margin_30</item>
@@ -535,6 +539,27 @@
     <style name="button_smaller_wrap" parent="wrap_wrap">
         <item name="android:textSize">@dimen/button_smaller</item>
     </style>
+
+    <style name="btn_style" parent="wrap_wrap">
+        <item name="android:elevation">@dimen/margin_5</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/button_very_small</item>
+
+        <item name="android:paddingStart">@dimen/margin_7</item>
+        <item name="android:paddingEnd">@dimen/margin_7</item>
+        <item name="android:paddingTop">@dimen/margin_5</item>
+        <item name="android:paddingBottom">@dimen/margin_5</item>
+    </style>
+
+
+
+
+    android:background="@drawable/yellow_button_bg"
+    android:textAllCaps="true"
+    android:layout_gravity="center_horizontal"
+    android:textSize="@dimen/button_large"
+
     <style name="mySpinnerLook"
         parent="@android:style/Widget.TextView.SpinnerItem">
         <item name="android:textSize">@dimen/textSize_description_smaller</item>

@@ -91,7 +91,6 @@
                        android:layout_height="wrap_content"
                        android:layout_alignParentEnd="true"
                        android:layout_margin="@dimen/margin_14"
-
                        android:layout_marginEnd="@dimen/margin_7"
                        android:orientation="vertical">
                        <com.app.warantywise.widget.CustomTextView

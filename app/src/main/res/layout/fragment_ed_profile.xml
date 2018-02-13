@@ -40,6 +40,7 @@
                     android:id="@+id/userLayout"
                     style="@style/match_wrap"
                     android:layout_marginBottom="@dimen/margin_8"
+                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_toEndOf="@+id/ivProfile"
                     android:orientation="vertical">
 
@@ -71,6 +72,7 @@
                     android:id="@+id/line"
                     style="@style/view_layout_brown_1"
                     android:layout_below="@+id/userLayout"
+                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_15"
                     android:layout_toEndOf="@+id/ivProfile" />
 
@@ -78,6 +80,7 @@
                     style="@style/match_wrap"
                     android:layout_below="@+id/line"
                     android:layout_toEndOf="@+id/ivProfile"
+                    android:layout_marginStart="@dimen/margin_20"
                     android:paddingBottom="@dimen/margin_4"
                     android:paddingTop="@dimen/margin_7">
 
@@ -178,9 +181,14 @@
                         style="@style/textview_description_small_match"
                         android:text="@string/add_another_payment_method"
                         android:layout_marginTop="@dimen/margin_7"
-                        android:padding="@dimen/margin_5"
+                        android:padding="@dimen/margin_7"
                         android:textColor="@color/add_color"
                         android:background="@drawable/grey_corner_bg"/>
+                    <LinearLayout
+                        android:id="@+id/layoutPaymentOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
                 </LinearLayout>
 
 
