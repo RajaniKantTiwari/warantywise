@@ -28,14 +28,14 @@
                 <com.app.warantywise.widget.CustomTextView
                     android:id="@+id/reviewer_name"
                     style="@style/textview_description_wrap"
-                    android:text="App Name"
+                    android:text="Warranty Wise"
                     />
 
                 <com.app.warantywise.widget.CustomTextView
                     android:id="@+id/post_time"
                     style="@style/textview_description_smaller_wrap"
                     android:layout_below="@+id/reviewer_name"
-                    android:text="9:34 am"
+                    android:text="9:34 am "
                     />
 
                 <com.app.warantywise.widget.CustomTextView
@@ -52,6 +52,7 @@
                 style="@style/textview_description_large_wrap"
                 android:text="Read"
                 android:textColor="@color/blue"
+                android:textAllCaps="true"
                 android:layout_alignParentEnd="true"
                 />
         </RelativeLayout>

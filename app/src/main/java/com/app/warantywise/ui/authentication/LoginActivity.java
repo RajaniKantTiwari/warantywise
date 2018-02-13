@@ -90,13 +90,16 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
     public void onClick(View view) {
         if(view==mBinding.tvSubmit){
             CommonUtility.clicked(mBinding.tvSubmit);
-            ExplicitIntent.getsInstance().navigateTo(this,VerifyAccountActivity.class);
-           /* if(isValid()){
-               if(isNetworkConnected()){
+            if(isValid()){
+                Bundle bundle=new Bundle();
+                bundle.putString(BundleConstants.USER_NAME,userName);
+                bundle.putString(BundleConstants.MOBILE_NUMBER,mobileNumber);
+                ExplicitIntent.getsInstance().navigateTo(this,VerifyAccountActivity.class,bundle);
+               /*if(isNetworkConnected()){
                    presenter.getLoginDetail(this,new LoginRequest(userName,mobileNumber,
                            PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
-               }
-           }*/
+               }*/
+           }
         }
     }
 

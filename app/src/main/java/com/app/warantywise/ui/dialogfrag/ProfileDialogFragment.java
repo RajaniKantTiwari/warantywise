@@ -15,12 +15,12 @@ import com.app.warantywise.utility.CommonUtility;
 public class ProfileDialogFragment extends DialogFragment implements View.OnClickListener {
     private Dialog dialog;
     private FeedbackDialogBinding mBinding;
-    private FeedbackDialogListener listener;
+    private ProfileDialogListener listener;
 
-    public interface FeedbackDialogListener {
-        void submit(String submit);
+    public interface ProfileDialogListener {
+        void update(String submit);
     }
-    public void addListener(FeedbackDialogListener listener) {
+    public void addListener(ProfileDialogListener listener) {
         this.listener = listener;
     }
 
@@ -57,7 +57,7 @@ public class ProfileDialogFragment extends DialogFragment implements View.OnClic
         if (view == mBinding.tvSubmit) {
             dialog.cancel();
             if(CommonUtility.isNotNull(listener)){
-                listener.submit(mBinding.edFeedBack.getText().toString());
+                listener.update(mBinding.edFeedBack.getText().toString());
             }
         }
     }

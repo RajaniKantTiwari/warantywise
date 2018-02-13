@@ -30,7 +30,9 @@ public interface AppConstants {
     int SENIOR_CITIZEN = 5;
     int TERM_CONDITION = 6;
     int PAYMENT_HEIGHT = 48;
-    long SPLASH_TIME = 800;
+    int SETTING_HEIGHT = 42;
+
+    long SPLASH_TIME = 3000;
     int CORNER_RADIUS = 10;
     int LIST_PRODUCT = 1;
     int MAP_PRODUCT = 2;

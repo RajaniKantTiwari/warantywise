@@ -143,7 +143,19 @@
     <string name="update_my_email">Update my email address</string>
     <string name="change_my_password">Change my password</string>
     <string name="frequently_asked_question">Frequently asked question</string>
-
+    <string name="add_product">Add Product</string>
+    <string name="update_details">Update Details</string>
+    <string name="welcomes">Welcome!</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="message">Messages</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="anniversary">Anniversary</string>
+    <string name="thank_you">Thank You</string>
+    <string name="your_exyended_warranty_successful">Your Extended Waranty Successful</string>
+    <string name="back_to_home">Back to home</string>
+    <string name="raise_an_issue">Raise an issue</string>
+    <string name="buy">Buy</string>
 
     <string-array name="left_drawer">
         <item>@string/home</item>

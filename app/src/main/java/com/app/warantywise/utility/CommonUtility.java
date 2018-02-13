@@ -34,6 +34,7 @@ import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dialogfrag.CustomDialogFragment;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
+import com.app.warantywise.ui.dialogfrag.ProfileDialogFragment;
 import com.app.warantywise.widget.CustomEditText;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -106,7 +107,14 @@ public class CommonUtility {
         // Show Alert CustomDialogFragment
         alertdFragment.show(fm, "");
     }
-
+    public static void showUpdateDialog(AppCompatActivity activity, Bundle bundle, ProfileDialogFragment.ProfileDialogListener listener) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        ProfileDialogFragment alertdFragment = new ProfileDialogFragment();
+        alertdFragment.addListener(listener);
+        alertdFragment.setArguments(bundle);
+        // Show Alert CustomDialogFragment
+        alertdFragment.show(fm, "");
+    }
 
 
     public static boolean isNotNull(Object object) {

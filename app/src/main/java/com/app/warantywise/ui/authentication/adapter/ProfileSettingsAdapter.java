@@ -71,6 +71,11 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter<ProfileSettings
         public void setData(int position) {
             mBinding.ivSetting.setImageResource(drawerImageList[position]);
             mBinding.tvSetting.setText(settingList.get(position));
+            if(settingList.size()==position+1){
+                mBinding.layoutId.setVisibility(View.GONE);
+            }else{
+                mBinding.layoutId.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override

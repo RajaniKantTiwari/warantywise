@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
+            style="@style/match_match"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <LinearLayout
+                style="@style/layout_ver_match_1"
+                android:gravity="center"
+                android:background="@color/background"
+                android:orientation="vertical">
+                <android.support.v4.widget.Space
+                    style="@style/layout_ver_match_1"
+                    />
+            <ImageView
+                style="@style/wrap_wrap"
+                android:src="@drawable/icon_wise"
+                />
+                <android.support.v4.widget.Space
+                    style="@style/layout_ver_match_1"
+                    />
+                <com.app.warantywise.widget.CustomTextView
+                    style="@style/textview_header_small_match"
+                    android:text="@string/thank_you"
+                    android:textColor="@color/button_text_color"
+                    android:gravity="center"
+                    app:customFont="@string/font_bold"
+                    />
+                <android.support.v4.widget.Space
+                    style="@style/layout_ver_match_1"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                style="@style/layout_ver_match_1"
+                android:orientation="vertical">
+
+                <com.app.warantywise.widget.CustomTextView
+                    style="@style/textview_description_match"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:text="@string/your_exyended_warranty_successful"
+                    android:gravity="center"
+                    app:customFont="@string/font_bold"
+                    android:textColor="@color/button_text_color"
+                    />
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_100"
+                    android:layout_margin="@dimen/margin_10"
+                    android:layout_toStartOf="@+id/layout"
+                    android:background="@drawable/grey_corner_bg">
+                   <ImageView
+                       android:id="@+id/ivProductImage"
+                       style="@style/image_100"
+                       android:src="@drawable/shubh"
+                       android:scaleType="fitXY"
+                       android:padding="@dimen/margin_4"/>
+                    <LinearLayout
+                        style="@style/match_wrap"
+                        android:layout_toEndOf="@+id/ivProductImage"
+                        android:orientation="vertical">
+                    <com.app.warantywise.widget.CustomTextView
+                        style="@style/textview_title_wrap"
+                        android:text="Worhlpool"
+                        app:customFont="@string/font_bold"
+                        android:padding="@dimen/margin_4"
+                        />
+                    <com.app.warantywise.widget.CustomTextView
+                        style="@style/textview_description_smaller_wrap"
+                        android:text="Under Warranty"
+                        app:customFont="@string/font_bold"
+                        />
+                    <com.app.warantywise.widget.CustomTextView
+                        style="@style/textview_description_small_wrap"
+                        android:text="27 may 2017"
+                        app:customFont="@string/font_bold"
+                        android:padding="@dimen/margin_4"
+                        android:drawableStart="@drawable/calender"
+                        />
+                    </LinearLayout>
+                </RelativeLayout>
+                   <LinearLayout
+                       android:id="@+id/layout"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentEnd="true"
+                       android:layout_margin="@dimen/margin_14"
+
+                       android:layout_marginEnd="@dimen/margin_7"
+                       android:orientation="vertical">
+                       <com.app.warantywise.widget.CustomTextView
+                           style="@style/textview_description_large_wrap"
+                           android:text="Under Warranty"
+                           app:customFont="@string/font_bold"
+                           android:padding="@dimen/margin_4"
+                           android:textColor="@color/white"
+                           android:background="@drawable/blue_round"
+                           />
+                       <com.app.warantywise.widget.CustomTextView
+                           style="@style/textview_description_smaller_wrap"
+                           android:text="Expire on"
+                           app:customFont="@string/font_bold"
+                           />
+                       <com.app.warantywise.widget.CustomTextView
+                           style="@style/textview_description_large_wrap"
+                           android:text="27 may 2009"
+                           app:customFont="@string/font_bold"
+                           android:textColor="@color/button_text_color"
+                           />
+                   </LinearLayout>
+
+               </RelativeLayout>
+                <com.app.warantywise.widget.CustomTextView
+                    android:id="@+id/tvHome"
+                    android:layout_width="@dimen/margin_200"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_28"
+                    android:background="@drawable/yellow_button_bg"
+                    android:elevation="@dimen/margin_5"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/margin_12"
+                    android:text="@string/back_to_home"
+                    android:textAllCaps="true"
+                    android:textColor="@color/button_text_color"
+                    android:textSize="@dimen/button_large"
+                    app:customFont="@string/font_bold" />
+
+                <com.app.warantywise.widget.CustomTextView
+                    android:id="@+id/tvRaiseAnIssue"
+                    style="@style/textview_description_wrap"
+                    android:padding="@dimen/margin_13"
+                    android:text="@string/raise_an_issue"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    app:customFont="@string/font_bold"
+                    android:textColor="@color/reddish"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+</layout>

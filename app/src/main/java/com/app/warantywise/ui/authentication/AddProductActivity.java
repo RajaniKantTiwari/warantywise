@@ -70,6 +70,11 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     private void initializeData() {
         setList();
+        mBinding.headerLayout.headerLayout.setBackgroundColor(CommonUtility.getColor(this,R.color.background));
+        mBinding.headerLayout.ivBack.setVisibility(View.GONE);
+        mBinding.headerLayout.tvHeader.setVisibility(View.VISIBLE);
+        mBinding.headerLayout.tvHeader.setText(getResources().getString(R.string.add_product));
+        mBinding.headerLayout.tvHeader.setTextColor(CommonUtility.getColor(this,R.color.button_text_color));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mBinding.rvDocument.setLayoutManager(layoutManager);

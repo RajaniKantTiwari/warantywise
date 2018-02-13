@@ -61,7 +61,7 @@
                 android:orientation="vertical">
                 <com.app.warantywise.widget.CustomTextView
                     style="@style/textview_header_large_wrap"
-                    android:text="@string/welcome" />
+                    android:text="@string/welcomes" />
                 <com.app.warantywise.widget.CustomTextView
                     android:id="@+id/tvName"
                     style="@style/textview_description_small_wrap"

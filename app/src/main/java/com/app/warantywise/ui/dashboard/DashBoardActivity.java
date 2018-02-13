@@ -78,7 +78,6 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 break;
             case AppConstants.HELP:
                 ExplicitIntent.getsInstance().navigateTo(this, HelpActivity.class);
-                openFragment(new NotificationFragment(), null, false, false, NONE);
                 break;
             case AppConstants.SENIOR_CITIZEN:
                 ExplicitIntent.getsInstance().navigateTo(this, SeniorCitizenActivity.class);
@@ -120,9 +119,11 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         changeIcon(position);
         switch (position) {
             case NOTIFICATION_FRAGMENT:
+                setHeaderTitle(getResources().getString(R.string.message));
                 openFragment(new NotificationFragment(), null, false, false, NONE);
                 break;
             case USER_FRAGMENT:
+                setHeaderTitle(getResources().getString(R.string.your_profile));
                 openFragment(new ProfileFragment(), null, false, false, NONE);
                 break;
         }
@@ -212,6 +213,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         //mPresenter.setDeviceToken(this, request);
         changeIcon(NOTIFICATION_FRAGMENT);
         clearAllBackStack();
+        setHeaderTitle(getResources().getString(R.string.message));
         pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE);
     }
 
@@ -240,14 +242,16 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
             onTabSelected(USER_FRAGMENT);
         } else if (mBinding.layoutDrawerLeft.ivUpdate == view) {
             closeDrawerLeft();
-            ExplicitIntent.getsInstance().navigateTo(this, ProfileFragment.class);
+            setHeaderTitle(getResources().getString(R.string.your_profile));
         }else if(view == mBinding.bottomLayout.linearLayoutBar3){
             changeIcon(NOTIFICATION_FRAGMENT);
             clearAllBackStack();
+            setHeaderTitle(getResources().getString(R.string.message));
             pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE);
         }else if (view == mBinding.bottomLayout.linearLayoutBar4) {
             changeIcon(USER_FRAGMENT);
             clearAllBackStack();
+            setHeaderTitle(getResources().getString(R.string.your_profile));
             pushFragment(new ProfileFragment(), null, R.id.container, true, false, NONE);
         }
     }

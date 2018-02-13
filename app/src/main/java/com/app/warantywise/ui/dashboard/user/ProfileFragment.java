@@ -20,13 +20,13 @@ import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.authentication.adapter.ProfileSettingsAdapter;
 import com.app.warantywise.ui.base.MvpView;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
+import com.app.warantywise.ui.dialogfrag.ProfileDialogFragment;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.GlideUtils;
 import com.app.warantywise.utility.LogUtils;
 import com.app.warantywise.utility.PreferenceUtils;
-import com.app.warantywise.utility.SimpleDividerItemDecoration;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -34,6 +34,7 @@ import net.alhazmy13.mediapicker.Image.ImagePicker;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -44,7 +45,8 @@ import static android.app.Activity.RESULT_OK;
  * Created by arvind on 06/11/17.
  */
 
-public class ProfileFragment extends DashboardFragment implements MvpView, View.OnClickListener,ProfileSettingsAdapter.ProductListener {
+public class ProfileFragment extends DashboardFragment implements MvpView, View.OnClickListener,
+        ProfileSettingsAdapter.ProductListener ,ProfileDialogFragment.ProfileDialogListener {
 
     FragmentEdProfileBinding mBinding;
     private static String TAG = ProfileFragment.class.getSimpleName();
@@ -63,6 +65,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     public void setListener() {
         mBinding.ivProfile.setOnClickListener(this);
         mBinding.tvLogout.setOnClickListener(this);
+
     }
 
     @Override
@@ -71,13 +74,12 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     }
 
     public void initializeData() {
-        GlideUtils.loadImageProfilePic(getDashboardActivity(), PreferenceUtils.getImage(), mBinding.ivProfile, null, R.drawable.avatar);
+        GlideUtils.loadImageProfilePic(getDashboardActivity(), PreferenceUtils.getImage(), mBinding.ivProfile, null, R.drawable.shubh);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvPayment.setLayoutManager(layoutManager);
-        mBinding.rvPayment.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
         settingAdapter = new ProfileSettingsAdapter(getDashboardActivity(), this);
         mBinding.rvPayment.setAdapter(settingAdapter);
-        CommonUtility.setRecyclerViewHeight(mBinding.rvPayment, paymentList, AppConstants.PAYMENT_HEIGHT);
+        CommonUtility.setRecyclerViewHeight(mBinding.rvPayment, Arrays.asList(getResources().getStringArray(R.array.update)), AppConstants.SETTING_HEIGHT);
 
     }
 
@@ -100,6 +102,8 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
                 ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
                 getDashboardActivity().finish();
                 //updateProfile();
+            }else if(mBinding.tvLogout==view){
+                ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(),LoginActivity.class);
             }
     }
 
@@ -233,6 +237,12 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
 
     @Override
     public void onItemClick(int position) {
+        Bundle bundle=new Bundle();
+        CommonUtility.showUpdateDialog(getDashboardActivity(),bundle,this);
+    }
+
+    @Override
+    public void update(String submit) {
 
     }
 }

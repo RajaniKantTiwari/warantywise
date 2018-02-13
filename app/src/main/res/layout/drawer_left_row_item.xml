@@ -14,6 +14,7 @@
         android:paddingStart="@dimen/margin_5"/>
         <com.app.warantywise.widget.CustomTextView
             android:id="@+id/tvMenuName"
-            style="@style/textview_title_small_match"/>
+            style="@style/textview_title_small_match"
+            android:textAllCaps="true"/>
 </LinearLayout>
 </layout>
