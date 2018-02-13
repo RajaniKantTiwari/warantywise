@@ -22,15 +22,11 @@ import com.app.warantywise.injector.module.DashboardModule;
 import com.app.warantywise.network.request.DeviceToken;
 import com.app.warantywise.network.request.DeviceTokenRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.ui.dashboard.home.InsuranceFragment;
-import com.app.warantywise.ui.dashboard.home.SystemServiceFragment;
-import com.app.warantywise.ui.dashboard.home.YourProductFragment;
+import com.app.warantywise.ui.dashboard.home.HomeFragment;
 import com.app.warantywise.ui.dashboard.home.YourProductListFragment;
 import com.app.warantywise.ui.dashboard.user.ProfileFragment;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.adapter.DrawerAdapterLeft;
-import com.app.warantywise.ui.dashboard.drawer.HelpActivity;
-import com.app.warantywise.ui.dashboard.drawer.HomeFragment;
 import com.app.warantywise.ui.dashboard.drawer.InsuranceActivity;
 import com.app.warantywise.ui.dashboard.drawer.SeniorCitizenActivity;
 import com.app.warantywise.ui.dashboard.drawer.TermConditionActivity;
@@ -57,8 +53,6 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
     public DashboardComponent mDashboardComponent;
     @Inject
     public DashboardPresenter mPresenter;
-    //Sliding drawer
-    private ActionBarDrawerToggle mDrawerToggleRight;
 
     private ActionBarDrawerToggle mDrawerToggleLeft;
     private DrawerAdapterLeft mDrawerAdapterLeft;
@@ -84,9 +78,8 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 //ExplicitIntent.getsInstance().navigateTo(this, HelpActivity.class);
                 //pushFragment(new YourProductFragment(), null, R.id.container, true, false, NONE);
                 //pushFragment(new SystemServiceFragment(), null, R.id.container, true, false, NONE);
-                //pushFragment(new InsuranceFragment(), null, R.id.container, true, false, NONE);
+                //pushFragment(new InsuranceChoiceFragment(), null, R.id.container, true, false, NONE);
                 pushFragment(new YourProductListFragment(), null, R.id.container, true, false, NONE);
-
                 break;
             case AppConstants.SENIOR_CITIZEN:
                 ExplicitIntent.getsInstance().navigateTo(this, SeniorCitizenActivity.class);

@@ -58,6 +58,9 @@
     <color name="background_doctor">#FAFAFA</color>
 
     <color name="black">#000000</color>
+    <color name="call_color">#063796</color>
+    <color name="view_color">#FC6621</color>
+
 
     <color name="dark_black">#344453</color>
     <color name="color_blackish">#000000</color>

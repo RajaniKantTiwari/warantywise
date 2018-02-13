@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
-<com.app.warantywise.widget.CustomTextView
-    style="@style/wrap_wrap"
-    android:text="Home"
-    />
-</LinearLayout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/container"
+        style="@style/match_match">
+        <com.app.warantywise.widget.MovableFloatingActionButton
+            android:id="@+id/listButton"
+            style="@style/wrap_wrap"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="@dimen/margin_25"
+            android:layout_marginEnd="@dimen/margin_15"
+            android:src="@drawable/location"
+            app:backgroundTint="@color/white"/>
+    </FrameLayout>
 </layout>

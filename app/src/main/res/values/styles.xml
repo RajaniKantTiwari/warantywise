@@ -246,6 +246,14 @@
         <item name="android:layout_width">@dimen/margin_80</item>
         <item name="android:layout_height">@dimen/margin_80</item>
     </style>
+    <style name="image_120" >
+        <item name="android:layout_width">@dimen/margin_120</item>
+        <item name="android:layout_height">@dimen/margin_120</item>
+    </style>
+    <style name="image_100_50" >
+        <item name="android:layout_width">@dimen/margin_100</item>
+        <item name="android:layout_height">@dimen/margin_50</item>
+    </style>
     <style name="image_100" >
         <item name="android:layout_width">@dimen/margin_100</item>
         <item name="android:layout_height">@dimen/margin_100</item>

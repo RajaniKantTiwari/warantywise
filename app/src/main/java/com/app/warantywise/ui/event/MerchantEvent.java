@@ -2,7 +2,7 @@ package com.app.warantywise.ui.event;
 
 
 
-import com.app.warantywise.network.response.dashboard.MerchantResponse;
+import com.app.warantywise.network.response.dashboard.ProductResponse;
 
 import java.util.ArrayList;
 
@@ -16,13 +16,13 @@ public class MerchantEvent {
     //use 1 for list 2 for map
     private int listMap;
 
-    private ArrayList<MerchantResponse> productList;
+    private ArrayList<ProductResponse> productList;
 
-    public ArrayList<MerchantResponse> getProductList() {
+    public ArrayList<ProductResponse> getProductList() {
         return productList;
     }
 
-    public void setProductList(ArrayList<MerchantResponse> productList) {
+    public void setProductList(ArrayList<ProductResponse> productList) {
         this.productList = productList;
     }
 

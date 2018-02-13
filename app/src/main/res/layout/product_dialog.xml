@@ -5,7 +5,7 @@
         <import type="com.app.warantywise.utility.CommonUtility"/>
         <variable
             name="merchantResponse"
-            type="com.app.warantywise.network.response.dashboard.MerchantResponse" />
+            type="com.app.warantywise.network.response.dashboard.ProductResponse" />
     </data>
 
     <LinearLayout
@@ -17,55 +17,73 @@
         android:gravity="center">
 
         <android.support.v7.widget.CardView
-            android:layout_width="307dp"
+            android:layout_width="@dimen/margin_180"
             android:layout_height="wrap_content"
             android:elevation="@dimen/margin_5"
-            app:cardCornerRadius="@dimen/margin_4">
+            app:cardCornerRadius="@dimen/margin_6">
 
             <LinearLayout
                 style="@style/match_match"
-                android:layout_margin="@dimen/margin_5">
+                android:orientation="vertical"
+                android:layout_margin="@dimen/margin_1">
 
                 <ImageView
                     android:id="@+id/ivProduct"
-                    style="@style/image_60_70"
+                    android:layout_width="@dimen/margin_180"
+                    android:layout_height="@dimen/margin_50"
                     android:background="@drawable/stroke_grey"/>
 
-                <RelativeLayout
-                    style="@style/match_wrap"
-                    android:layout_height="@dimen/margin_70"
+                <com.app.warantywise.widget.CustomTextView
+                    android:id="@+id/tvService"
+                    style="@style/textview_description_large_wrap"
+                    android:text="@string/term_and_condition"
                     android:layout_marginStart="@dimen/margin_5"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical">
-
+                    app:customFont="@string/font_regular"
+                    android:textColor="@color/black"
+                    android:maxLines="1" />
+                <com.app.warantywise.widget.CustomTextView
+                    android:id="@+id/tvAddress"
+                    style="@style/textview_description_small_wrap"
+                    android:text="@string/term_and_condition"
+                    android:layout_marginStart="@dimen/margin_5"
+                    app:customFont="@string/font_regular"
+                    android:textColor="@color/black"
+                    android:maxLines="1" />
+                <LinearLayout
+                    style="@style/match_wrap"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginBottom="@dimen/margin_5">
+                    <android.support.v4.widget.Space
+                        style="@style/layout_hori_wrap_4" />
                     <com.app.warantywise.widget.CustomTextView
-                        android:id="@+id/tvTitle"
-                        style="@style/textview_description_ex_large_wrap"
-                        android:layout_marginStart="@dimen/margin_5"
-                        android:maxLines="1" />
-
-                    <com.app.warantywise.widget.CustomTextView
-                        android:id="@+id/tvAddress"
+                        android:id="@+id/tvCall"
                         style="@style/textview_description_small_wrap"
+                        android:text="@string/call"
                         android:layout_marginStart="@dimen/margin_5"
-                        android:layout_below="@+id/tvTitle"
-                        android:maxLines="2" />
-
-                    <com.app.warantywise.widget.CustomTextView
-                        android:id="@+id/tvType"
-                        style="@style/textview_description_wrap"
-                        android:layout_below="@+id/tvAddress"
-                        android:layout_marginStart="@dimen/margin_5"
+                        android:background="@drawable/call_bg"
+                        android:padding="@dimen/margin_4"
+                        android:paddingStart="@dimen/margin_20"
+                        android:paddingEnd="@dimen/margin_20"
+                        app:customFont="@string/font_regular"
+                        android:textColor="@color/call_color"
                         android:maxLines="1" />
+                    <android.support.v4.widget.Space
+                        style="@style/layout_hori_wrap_1" />
                     <com.app.warantywise.widget.CustomTextView
-                        android:id="@+id/tvDistance"
-                        style="@style/textview_description_wrap"
-                        android:layout_toEndOf="@+id/tvType"
-                        android:layout_below="@+id/tvAddress"
+                        android:id="@+id/tvView"
+                        style="@style/textview_description_small_wrap"
+                        android:text="@string/view"
+                        android:background="@drawable/view_bg"
+                        android:padding="@dimen/margin_4"
+                        android:paddingStart="@dimen/margin_20"
+                        android:paddingEnd="@dimen/margin_20"
                         android:layout_marginStart="@dimen/margin_5"
-                        android:drawableStart="@drawable/location"
+                        app:customFont="@string/font_regular"
+                        android:textColor="@color/view_color"
                         android:maxLines="1" />
-                </RelativeLayout>
+                    <android.support.v4.widget.Space
+                        style="@style/layout_hori_wrap_4" />
+                </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>

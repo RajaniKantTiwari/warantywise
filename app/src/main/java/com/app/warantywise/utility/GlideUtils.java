@@ -217,7 +217,11 @@ public class GlideUtils {
     }
 
     //load image using glide with two rounded corner
-    public static void loadImageTwoRoundedCorner(final Context mContext, String imageUrl, final ImageView imageView, final ProgressBar progressBar, final int placeHolder) {
+    public static void loadImageTwoRoundedCorner(final Context mContext, String imageUrl,
+                                                 final ImageView imageView,
+                                                 final ProgressBar progressBar,
+                                                 final int placeHolder,int topLeftCorner, int topRightCorner,
+                                                 int bottomRightCorner, int bottomLeftCorner) {
         showProgressBar(progressBar);
         try {
             Glide.with(mContext).load(imageUrl).asBitmap().placeholder(placeHolder)
@@ -239,7 +243,10 @@ public class GlideUtils {
                 protected void setResource(Bitmap resource) {
                     hideProgressBar(progressBar);
                     if (resource != null) {
-                        Bitmap bm = createRoundedRectBitmap(resource, convertDpToPx(12, mContext), 0, 0, convertDpToPx(12, mContext));
+                        Bitmap bm = createRoundedRectBitmap(resource, convertDpToPx(topLeftCorner, mContext),
+                                convertDpToPx(topRightCorner, mContext) ,
+                                convertDpToPx(bottomRightCorner, mContext)
+                                , convertDpToPx(bottomLeftCorner, mContext));
                         imageView.setImageBitmap(bm);
                     }
                 }

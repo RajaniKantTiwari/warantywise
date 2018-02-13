@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ProductRowItemBinding;
 import com.app.warantywise.network.request.Product;
+import com.app.warantywise.network.response.dashboard.ProductResponse;
+
+import java.util.ArrayList;
 
 /**
  * Created by ashok on 25/12/17.
@@ -20,8 +23,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private final LayoutInflater mInflater;
     private final AppCompatActivity activity;
     private ProductListListener listener;
+    private ArrayList<ProductResponse> productList;
+
     public interface ProductListListener {
-        void onItemClick(int position);
+        void onOfferClicked(int position);
+
+        void onBuyInsuranceClicked(int position);
+
+        void onExtendClicked(int position);
+
+        void onWarrantyClicked(int position);
     }
     public ProductListAdapter(AppCompatActivity activity, ProductListListener listener) {
         mInflater = LayoutInflater.from(activity);
@@ -34,7 +45,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         ProductRowItemBinding mBinding = DataBindingUtil.inflate(mInflater, R.layout.product_row_item, parent, false);
         return new ProductViewHolder(mBinding);
     }
-
+    public void setLocationList(ArrayList<ProductResponse> productList) {
+        this.productList = productList;
+        notifyDataSetChanged();
+    }
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
 
@@ -52,7 +66,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         public ProductViewHolder(ProductRowItemBinding itemView) {
             super(itemView.getRoot());
             mBinding = itemView;
-            //mBinding.productImage.setOnClickListener(this);
+            mBinding.tvWarranty.setOnClickListener(this);
+            mBinding.tvExtend.setOnClickListener(this);
+            mBinding.tvBuyInsurance.setOnClickListener(this);
+            mBinding.tvOffer.setOnClickListener(this);
+
         }
 
         public void setData(Product product) {
@@ -61,7 +79,18 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         @Override
         public void onClick(View view) {
-            listener.onItemClick(getAdapterPosition());
+            if(mBinding.tvWarranty==view){
+                listener.onWarrantyClicked(getAdapterPosition());
+            }else if(mBinding.tvExtend==view){
+                listener.onExtendClicked(getAdapterPosition());
+
+            }else if(mBinding.tvBuyInsurance==view){
+                listener.onBuyInsuranceClicked(getAdapterPosition());
+
+            }else if(mBinding.tvOffer==view){
+                listener.onOfferClicked(getAdapterPosition());
+
+            }
         }
     }
 }

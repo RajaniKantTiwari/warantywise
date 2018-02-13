@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * To inject activity reference.
  */
 
-public class InsuranceFragment extends DashboardFragment implements InsurancePlansAdapter.PlanInsuranceListener,
+public class InsuranceChoiceFragment extends DashboardFragment implements InsurancePlansAdapter.PlanInsuranceListener,
         PlansAdapter.PlanListener,OfferDialogFragment.OfferDialogListener {
 
     private FragmentInsuranceBinding mBinding;
@@ -57,7 +57,7 @@ public class InsuranceFragment extends DashboardFragment implements InsurancePla
 
     @Override
     public String getFragmentName() {
-        return InsuranceFragment.class.getSimpleName();
+        return InsuranceChoiceFragment.class.getSimpleName();
     }
 
     @Override
@@ -109,7 +109,7 @@ public class InsuranceFragment extends DashboardFragment implements InsurancePla
 
     @Override
     public void setOnPlanClicked(int position) {
-        CommonUtility.showOfferDialog(getDashboardActivity(),null,this);
+        //CommonUtility.showOfferDialog(getDashboardActivity(),null,this);
         for (int i = 0; i < planList.size(); i++) {
             Plans plan = planList.get(i);
             if (i == position) {

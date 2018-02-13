@@ -5,6 +5,8 @@ import android.support.annotation.IntDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
+import static com.app.warantywise.utility.AppConstants.FRAGMENTS.MERCHANT_LIST_FRAGMENT;
+import static com.app.warantywise.utility.AppConstants.FRAGMENTS.MERCHANT_MAP_FRAGMENT;
 import static com.app.warantywise.utility.AppConstants.FRAGMENTS.NOTIFICATION_FRAGMENT;
 import static com.app.warantywise.utility.AppConstants.FRAGMENTS.USER_FRAGMENT;
 
@@ -31,6 +33,7 @@ public interface AppConstants {
     int TERM_CONDITION = 6;
     int PAYMENT_HEIGHT = 48;
     int SETTING_HEIGHT = 42;
+    int REQUEST_CALL = 1;
 
     long SPLASH_TIME = 3000;
     int CORNER_RADIUS = 10;
@@ -44,11 +47,16 @@ public interface AppConstants {
     float BEARING = 45;
     int PLANHEIGHT = 48;
     int INSURANCE_PLANHEIGHT = 50;
+    int COVER_HEIGHT = 33;
+    String MOBILE_NUMBER = "mobile_number";
 
-    @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT})
+    @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT,MERCHANT_MAP_FRAGMENT,
+            MERCHANT_LIST_FRAGMENT})
     @Retention(RetentionPolicy.SOURCE)
     @interface FRAGMENTS {
         int NOTIFICATION_FRAGMENT=0;
         int USER_FRAGMENT=1;
+        int MERCHANT_MAP_FRAGMENT = 3;
+        int MERCHANT_LIST_FRAGMENT = 4;
     }
 }

@@ -8,7 +8,7 @@
 
         <variable
             name="merchantResponse"
-            type="com.app.warantywise.network.response.dashboard.MerchantResponse" />
+            type="com.app.warantywise.network.response.dashboard.ProductResponse" />
     </data>
 
     <FrameLayout style="@style/match_match">

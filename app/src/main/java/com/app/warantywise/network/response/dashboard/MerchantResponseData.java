@@ -10,13 +10,13 @@ import java.util.ArrayList;
  */
 
 public class MerchantResponseData extends BaseResponse {
-   private ArrayList<MerchantResponse> info;
+   private ArrayList<ProductResponse> info;
 
-    public ArrayList<MerchantResponse> getInfo() {
+    public ArrayList<ProductResponse> getInfo() {
         return info;
     }
 
-    public void setInfo(ArrayList<MerchantResponse> info) {
+    public void setInfo(ArrayList<ProductResponse> info) {
         this.info = info;
     }
 }

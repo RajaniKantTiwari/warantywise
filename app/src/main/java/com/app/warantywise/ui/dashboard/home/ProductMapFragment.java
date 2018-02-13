@@ -1,12 +1,15 @@
 package com.app.warantywise.ui.dashboard.home;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
@@ -16,13 +19,12 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentLocationMapBinding;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.network.response.dashboard.MerchantResponse;
+import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.adapter.MarkerInfoWindowAdapter;
 import com.app.warantywise.ui.event.MerchantEvent;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
-import com.app.warantywise.utility.GPSTracker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,15 +46,16 @@ import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 
 import static com.app.warantywise.utility.AppConstants.PERMISSIONS_REQUEST_LOCATION;
+import static com.app.warantywise.utility.AppConstants.REQUEST_CALL;
 
 
-public class ProductMapFragment extends DashboardFragment implements OnMapReadyCallback {
+public class ProductMapFragment extends DashboardFragment implements OnMapReadyCallback,MarkerInfoWindowAdapter.MarkerInfoListener {
 
     private GoogleMap mMap;
     private FragmentLocationMapBinding mBinder;
-    private GPSTracker gpsTracker;
     private SupportMapFragment mapFragment;
-    private HashMap<Marker, MerchantResponse> mMarkersHashMap;
+    private HashMap<Marker, ProductResponse> mMarkersHashMap;
+    private Intent callIntent;
 
 
     @Nullable
@@ -109,9 +112,9 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         }
     }
 
-    private void showMarkerList(ArrayList<MerchantResponse> meetingEventList) {
+    private void showMarkerList(ArrayList<ProductResponse> meetingEventList) {
         if (CommonUtility.isNotNull(meetingEventList)) {
-            for (MerchantResponse response : meetingEventList) {
+            for (ProductResponse response : meetingEventList) {
                 addMarker(response);
             }
         }
@@ -124,7 +127,8 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
         //Set Custom InfoWindow Adapter
-        MarkerInfoWindowAdapter adapter = new MarkerInfoWindowAdapter(getBaseActivity(), mMarkersHashMap);
+        MarkerInfoWindowAdapter adapter = new MarkerInfoWindowAdapter(getBaseActivity(),
+                mMarkersHashMap,this);
         mMap.setInfoWindowAdapter(adapter);
         checkPermition();
     }
@@ -145,10 +149,17 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
                     getCurrentLocation();
                 }
                 break;
+            case REQUEST_CALL:
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startActivity(callIntent);
+            }else {
+                getBaseActivity().showToast(getResources().getString(R.string.permition_denied));
+            }
+
         }
     }
 
-    private void addMarker(MerchantResponse response) {
+    private void addMarker(ProductResponse response) {
         if (ActivityCompat.checkSelfPermission(getBaseActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getBaseActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -166,7 +177,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         }
     }
 
-    private void ShowMarker(Marker marker, MerchantResponse response) {
+    private void ShowMarker(Marker marker, ProductResponse response) {
         try {
             marker.showInfoWindow();
             Geocoder geocoder = new Geocoder(getBaseActivity(), Locale.getDefault());
@@ -188,6 +199,10 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
 
     private void moveCamera(LatLng latLng) {
         if(CommonUtility.isNotNull(mMap)){
+            Marker marker = mMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.camera)));
+            mMarkersHashMap.put(marker, new ProductResponse());
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLng)
@@ -270,4 +285,20 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         }
     }
 
+    @Override
+    public void call(String mobileNumber) {
+        callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + mobileNumber));
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+            return;
+        } else
+            startActivity(callIntent);
+    }
+
+
+    @Override
+    public void view(String view) {
+
+    }
 }

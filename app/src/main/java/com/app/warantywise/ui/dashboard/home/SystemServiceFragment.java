@@ -13,7 +13,7 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentSystemServiceBinding;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.network.response.dashboard.MerchantResponse;
+import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
 import com.app.warantywise.network.response.dashboard.ReviewResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponseData;
@@ -44,7 +44,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
     private ReviewAdapter mReviewAdapter;
     private ArrayList<ReviewResponse> reviewList;
 
-    private MerchantResponse merchantResponse;
+    private ProductResponse merchantResponse;
     @Inject
     DashboardInsidePresenter presenter;
     private ArrayList<StoreImages> imageList;
@@ -141,9 +141,9 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
             if (CommonUtility.isNotNull(response) && response instanceof MerchantResponseData) {
                 MerchantResponseData data = (MerchantResponseData) response;
                 if (CommonUtility.isNotNull(data)) {
-                    ArrayList<MerchantResponse> infoList = data.getInfo();
+                    ArrayList<ProductResponse> infoList = data.getInfo();
                     if (CommonUtility.isNotNull(infoList) && infoList.size() > 0) {
-                        MerchantResponse merchantResponse = infoList.get(0);
+                        ProductResponse merchantResponse = infoList.get(0);
                         CommonUtility.setVisibility(mBinding.layoutMain,mBinding.layoutNoData.layoutNoData,true);
                         if (CommonUtility.isNotNull(merchantResponse)) {
                             mBinding.setMerchantResponse(merchantResponse);
@@ -174,7 +174,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
 
     }
 
-    private void setImage(MerchantResponse merchantResponse) {
+    private void setImage(ProductResponse merchantResponse) {
         if (CommonUtility.isNotNull(merchantResponse.getRating())) {
             mBinding.ratingBar.setRating(CommonUtility.setRating(merchantResponse.getRating()));
         }

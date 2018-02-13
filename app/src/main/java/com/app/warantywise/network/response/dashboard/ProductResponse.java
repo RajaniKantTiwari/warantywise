@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by rajnikant on 19/01/18.
  */
 
-public class MerchantResponse implements Parcelable,Observable {
+public class ProductResponse implements Parcelable,Observable {
     private PropertyChangeRegistry registry = new PropertyChangeRegistry();
 
     private String id;
@@ -51,7 +51,7 @@ public class MerchantResponse implements Parcelable,Observable {
 
     private ArrayList<StoreImages> storeimages;
 
-    public MerchantResponse() {
+    public ProductResponse() {
     }
 
     public String getOffer() {
@@ -255,7 +255,7 @@ public class MerchantResponse implements Parcelable,Observable {
         this.storeimages = storeimages;
     }
 
-    protected MerchantResponse(Parcel in) {
+    protected ProductResponse(Parcel in) {
         id = in.readString();
         image = in.readString();
         name = in.readString();
@@ -317,15 +317,15 @@ public class MerchantResponse implements Parcelable,Observable {
         return 0;
     }
 
-    public static final Creator<MerchantResponse> CREATOR = new Creator<MerchantResponse>() {
+    public static final Creator<ProductResponse> CREATOR = new Creator<ProductResponse>() {
         @Override
-        public MerchantResponse createFromParcel(Parcel in) {
-            return new MerchantResponse(in);
+        public ProductResponse createFromParcel(Parcel in) {
+            return new ProductResponse(in);
         }
 
         @Override
-        public MerchantResponse[] newArray(int size) {
-            return new MerchantResponse[size];
+        public ProductResponse[] newArray(int size) {
+            return new ProductResponse[size];
         }
     };
     @Override

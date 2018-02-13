@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="cover"
+            type="com.app.warantywise.network.request.Cover"/>
+    </data>
+<LinearLayout
+    android:id="@+id/layoutRadio"
+    style="@style/match_wrap"
+    android:layout_height="@dimen/margin_30"
+    android:layout_marginEnd="@dimen/margin_10"
+    android:layout_marginStart="@dimen/margin_10"
+    android:background="@drawable/grey_corner_bg"
+    android:gravity="center_vertical">
+    <ImageView
+        style="@style/image_20"
+        android:src="@drawable/checked"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/margin_5"/>
+    <com.app.warantywise.widget.CustomTextView
+        style="@style/textview_description_small_match"
+        android:layout_marginStart="@dimen/margin_8"
+        android:text="@={cover.cover}"
+        app:customFont="@string/font_bold"
+        />
+</LinearLayout>
+
+</layout>
