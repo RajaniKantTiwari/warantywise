@@ -220,7 +220,8 @@
                         style="@style/textview_title_wrap"
                         android:layout_below="@+id/div_d"
                         android:layout_marginTop="@dimen/margin_10"
-                        android:padding="@dimen/margin_15"
+                        android:layout_marginBottom="@dimen/margin_10"
+                        android:paddingStart="@dimen/margin_15"
                         android:text="@string/your_review"
                         android:textColor="@color/button_text_color"
                         app:customFont="@string/font_regular"/>

@@ -222,7 +222,7 @@ public class CommonUtility {
             public void run() {
                 view.setEnabled(true);
             }
-        }, 3000);
+        }, 1000);
     }
 
     public static void setDialog(Dialog dialog) {

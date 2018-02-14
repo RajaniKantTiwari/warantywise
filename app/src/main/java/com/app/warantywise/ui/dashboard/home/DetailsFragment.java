@@ -42,7 +42,6 @@ public class DetailsFragment extends DashboardFragment implements
     private ProductResponse merchantResponse;
     @Inject
     DashboardInsidePresenter presenter;
-    private ArrayList<StoreImages> imageList;
 
     private DetailsAdapter detailsAdapter;
     private List<Product> productList = new ArrayList<>();
@@ -86,7 +85,6 @@ public class DetailsFragment extends DashboardFragment implements
             merchantResponse = bundle.getParcelable(AppConstants.RESPONSE);
         }
         reviewList = new ArrayList<>();
-        imageList = new ArrayList<>();
 
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
@@ -98,6 +96,7 @@ public class DetailsFragment extends DashboardFragment implements
     }
 
     private void setProductList() {
+        productList.clear();
         Product product1 = new Product();
         product1.setProductName("Product Image");
         productList.add(product1);
@@ -165,11 +164,7 @@ public class DetailsFragment extends DashboardFragment implements
         if (CommonUtility.isNotNull(merchantResponse.getRating())) {
             //mBinding.ratingBar.setRating(CommonUtility.setRating(merchantResponse.getRating()));
         }
-        //GlideUtils.loadImage(getDashboardActivity(), merchantResponse.getBanner_image(), mBinding.storeImage, null, 0);
-        if (CommonUtility.isNotNull(imageList) && CommonUtility.isNotNull(merchantResponse.getStoreimages())) {
-            imageList.addAll(merchantResponse.getStoreimages());
-            //mImageAdapter.notifyDataSetChanged();
-        }
+
     }
 
 

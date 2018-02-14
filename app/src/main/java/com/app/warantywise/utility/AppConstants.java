@@ -32,7 +32,7 @@ public interface AppConstants {
     int SENIOR_CITIZEN = 5;
     int TERM_CONDITION = 6;
     int PAYMENT_HEIGHT = 48;
-    int SETTING_HEIGHT = 42;
+    int SETTING_HEIGHT = 41;
     int REQUEST_CALL = 1;
 
     long SPLASH_TIME = 3000;
