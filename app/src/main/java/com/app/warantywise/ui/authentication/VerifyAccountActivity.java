@@ -81,7 +81,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
         mBinding.butLayout.tvNine.setOnClickListener(this);
         mBinding.butLayout.tvZero.setOnClickListener(this);
         mBinding.butLayout.layoutBack.setOnClickListener(this);
-        mBinding.headerLayout.ivBack.setOnClickListener(this);
+        mBinding.headerLayout.ivDrawer.setOnClickListener(this);
     }
 
     public void initializeData() {
@@ -124,7 +124,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
             setText("0");
         } else if (view == mBinding.butLayout.layoutBack) {
            back();
-        }else if(view==mBinding.headerLayout.ivBack){
+        }else if(view==mBinding.headerLayout.ivDrawer){
             finish();
         }
     }

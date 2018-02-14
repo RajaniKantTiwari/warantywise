@@ -15,10 +15,10 @@
 
         <LinearLayout style="@style/wrap_wrap"
             >
-
             <ImageView
                 android:id="@+id/ivReview"
-                style="@style/image_40" />
+                style="@style/image_40"
+                android:src="@drawable/avatar"/>
 
             <RelativeLayout
                 style="@style/wrap_wrap"

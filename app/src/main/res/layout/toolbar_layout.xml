@@ -24,7 +24,6 @@
                 <com.app.warantywise.widget.CustomTextView
                     android:id="@+id/tvHeading"
                     style="@style/textview_title_wrap"
-                    android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:textColor="@color/button_text_color" />
             <ImageView
@@ -35,6 +34,7 @@
                 android:contentDescription="@null"
                 android:padding="@dimen/margin_12"
                 android:src="@drawable/ic_back"
+                android:visibility="gone"
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

@@ -10,11 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.warantywise.R;
+import com.app.warantywise.databinding.FragmentDetailsBinding;
 import com.app.warantywise.databinding.FragmentSystemServiceBinding;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
+import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponseData;
 import com.app.warantywise.network.response.dashboard.StoreImages;
@@ -28,7 +29,6 @@ import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
-import com.app.warantywise.utility.GlideUtils;
 import com.app.warantywise.utility.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -37,9 +37,9 @@ import javax.inject.Inject;
 
 import static android.content.ContentValues.TAG;
 
-public class SystemServiceFragment extends DashboardFragment implements FeedbackDialogFragment.FeedbackDialogListener,ImageAdapter.ImageListener {
+public class DetailsFragment extends DashboardFragment implements FeedbackDialogFragment.FeedbackDialogListener,ImageAdapter.ImageListener {
 
-    private FragmentSystemServiceBinding mBinding;
+    private FragmentDetailsBinding mBinding;
     private ImageAdapter mImageAdapter;
     private ReviewAdapter mReviewAdapter;
     private ArrayList<ReviewResponse> reviewList;
@@ -52,7 +52,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_system_service, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false);
         initializeView();
         return mBinding.getRoot();
     }
@@ -78,7 +78,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
 
     @Override
     public String getFragmentName() {
-        return SystemServiceFragment.class.getSimpleName();
+        return DetailsFragment.class.getSimpleName();
     }
 
     public void initializeData() {

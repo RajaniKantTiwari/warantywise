@@ -60,7 +60,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     }
 
     private void setListener() {
-        mBinding.headerLayout.ivBack.setOnClickListener(this);
+        mBinding.headerLayout.ivDrawer.setOnClickListener(this);
         mBinding.tvSubmit.setOnClickListener(this);
         mBinding.tvCalendar.setOnClickListener(this);
         mBinding.layoutYes.setOnClickListener(this);
@@ -70,11 +70,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     private void initializeData() {
         setList();
-        mBinding.headerLayout.headerLayout.setBackgroundColor(CommonUtility.getColor(this,R.color.background));
-        mBinding.headerLayout.ivBack.setVisibility(View.GONE);
-        mBinding.headerLayout.tvHeader.setVisibility(View.VISIBLE);
-        mBinding.headerLayout.tvHeader.setText(getResources().getString(R.string.add_product));
-        mBinding.headerLayout.tvHeader.setTextColor(CommonUtility.getColor(this,R.color.button_text_color));
+        mBinding.headerLayout.ivDrawer.setVisibility(View.GONE);
+        mBinding.headerLayout.tvHeading.setText(getResources().getString(R.string.add_product));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mBinding.rvDocument.setLayoutManager(layoutManager);
@@ -120,7 +117,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         }else if(mBinding.layoutNo==view){
             mBinding.radioYes.setChecked(false);
             mBinding.radioNo.setChecked(true);
-        } else if(mBinding.headerLayout.ivBack==view){
+        } else if(mBinding.headerLayout.ivDrawer==view){
             finish();
         }
     }

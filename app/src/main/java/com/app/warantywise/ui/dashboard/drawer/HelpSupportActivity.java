@@ -34,8 +34,8 @@ public class HelpSupportActivity extends BaseActivity {
     }
 
     private void initializeData() {
-        mBinding.layoutHeader.tvHeader.setVisibility(View.VISIBLE);
-        mBinding.layoutHeader.tvHeader.setText(getResources().getString(R.string.help_support));
+        mBinding.layoutHeader.ivDrawer.setImageResource(R.drawable.ic_back);
+        mBinding.layoutHeader.tvHeading.setText(getResources().getString(R.string.help_support));
     }
 
     @Override

@@ -175,6 +175,8 @@
     <string name="view">View</string>
     <string name="permition_denied">Permition Denied</string>
     <string name="help_support"><![CDATA[Help & Support]]></string>
+    <string name="under_warranty">Under Warranty</string>
+    <string name="expire_on">Expire On</string>
 
 
     <string-array name="left_drawer">
