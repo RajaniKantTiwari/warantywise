@@ -23,8 +23,10 @@ import com.app.warantywise.network.request.DeviceToken;
 import com.app.warantywise.network.request.DeviceTokenRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.ui.dashboard.drawer.HelpSupportActivity;
+import com.app.warantywise.ui.dashboard.home.DetailsFragment;
 import com.app.warantywise.ui.dashboard.home.HomeFragment;
 import com.app.warantywise.ui.dashboard.home.InsuranceChoiceFragment;
+import com.app.warantywise.ui.dashboard.home.InsurancePaymentFragment;
 import com.app.warantywise.ui.dashboard.home.SystemServiceFragment;
 import com.app.warantywise.ui.dashboard.home.YourProductListFragment;
 import com.app.warantywise.ui.dashboard.user.ProfileFragment;
@@ -68,10 +70,14 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 break;
             case AppConstants.MYWARANTY:
                 //ExplicitIntent.getsInstance().navigateTo(this, WarantyActivity.class);
-                openFragment(new SystemServiceFragment(), null, false, false, NONE);
+                /*openFragment(new SystemServiceFragment(), null, false, false, NONE);*/
+                openFragment(new DetailsFragment(), null, false, false, NONE);
                 break;
             case AppConstants.INSURANCE:
-                openFragment(new InsuranceChoiceFragment(), null, false, false, NONE);
+                //openFragment(new InsuranceChoiceFragment(), null, false, false, NONE);
+
+                openFragment(new InsurancePaymentFragment(), null, false, false, NONE);
+
                 break;
             case AppConstants.EDIT_PROFILE:
                 changeIcon(USER_FRAGMENT);

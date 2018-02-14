@@ -562,6 +562,30 @@ public class CommonUtility {
         dpd.show(activity.getFragmentManager(), "Datepickerdialog");
     }
 
+    public static void openDatePickerProfile(ProfileDialogFragment fragment,android.app.FragmentManager fragmentManager) {
+        DatePickerDialog dpd=null;
+
+        Calendar now = Calendar.getInstance();
+        if (dpd == null) {
+            dpd = DatePickerDialog.newInstance(
+                    fragment,
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH),
+                    now.get(Calendar.DAY_OF_MONTH)
+            );
+        }
+        dpd.vibrate(false);
+        dpd.setVersion(DatePickerDialog.Version.VERSION_1);
+        dpd.setAccentColor(Color.parseColor("#9C27B0"));
+
+        dpd.show(fragmentManager, "Datepickerdialog");
+    }
+    public static String getIntMonth(int monthOfYear) {
+        if(monthOfYear<10){
+          return "0"+monthOfYear;
+        }
+        return ""+monthOfYear;
+    }
     public static String getMonth(int monthOfYear) {
         switch (monthOfYear){
             case 0:

@@ -177,6 +177,9 @@
     <string name="help_support"><![CDATA[Help & Support]]></string>
     <string name="under_warranty">Under Warranty</string>
     <string name="expire_on">Expire On</string>
+    <string name="your_review">Your Review</string>
+    <string name="customer_name">Consumer Name</string>
+    <string name="warranty_period">Warranty Period</string>
 
 
     <string-array name="left_drawer">

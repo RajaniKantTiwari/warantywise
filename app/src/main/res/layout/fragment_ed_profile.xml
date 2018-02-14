@@ -166,7 +166,7 @@
                         app:customFont="@string/font_regular" />
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvPayment"
+                        android:id="@+id/rvUpdate"
                         style="@style/match_wrap"
                         android:layout_marginTop="@dimen/margin_4"
                         android:background="@drawable/grey_corner_bg"/>

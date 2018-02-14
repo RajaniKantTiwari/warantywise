@@ -81,10 +81,10 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     public void initializeData() {
         GlideUtils.loadImageProfilePic(getDashboardActivity(), PreferenceUtils.getImage(), mBinding.ivProfile, null, R.drawable.shubh);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
-        mBinding.rvPayment.setLayoutManager(layoutManager);
+        mBinding.rvUpdate.setLayoutManager(layoutManager);
         settingAdapter = new ProfileSettingsAdapter(getDashboardActivity(), this);
-        mBinding.rvPayment.setAdapter(settingAdapter);
-        CommonUtility.setRecyclerViewHeight(mBinding.rvPayment, Arrays.asList(getResources().getStringArray(R.array.update)), AppConstants.SETTING_HEIGHT);
+        mBinding.rvUpdate.setAdapter(settingAdapter);
+        CommonUtility.setRecyclerViewHeight(mBinding.rvUpdate, Arrays.asList(getResources().getStringArray(R.array.update)), AppConstants.SETTING_HEIGHT);
 
     }
 

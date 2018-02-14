@@ -3,6 +3,7 @@ package com.app.warantywise.ui.dashboard.home;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentDetailsBinding;
 import com.app.warantywise.databinding.FragmentSystemServiceBinding;
+import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
@@ -20,6 +22,7 @@ import com.app.warantywise.network.response.dashboard.ReviewResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponseData;
 import com.app.warantywise.network.response.dashboard.StoreImages;
 import com.app.warantywise.ui.activity.ZoomAnimationImageActivity;
+import com.app.warantywise.ui.adapter.ProductAdapter;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.DashboardInsidePresenter;
 import com.app.warantywise.ui.dashboard.adapter.ImageAdapter;
@@ -32,12 +35,14 @@ import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import static android.content.ContentValues.TAG;
 
-public class DetailsFragment extends DashboardFragment implements FeedbackDialogFragment.FeedbackDialogListener,ImageAdapter.ImageListener {
+public class DetailsFragment extends DashboardFragment implements
+        FeedbackDialogFragment.FeedbackDialogListener, ImageAdapter.ImageListener, ProductAdapter.ProductListener {
 
     private FragmentDetailsBinding mBinding;
     private ImageAdapter mImageAdapter;
@@ -49,6 +54,9 @@ public class DetailsFragment extends DashboardFragment implements FeedbackDialog
     DashboardInsidePresenter presenter;
     private ArrayList<StoreImages> imageList;
 
+    private ProductAdapter productAdapter;
+    private List<Product> productList = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,12 +66,13 @@ public class DetailsFragment extends DashboardFragment implements FeedbackDialog
     }
 
     private void initializeView() {
-        LinearLayoutManager photoManager = new LinearLayoutManager(getDashboardActivity());
-        photoManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mBinding.photoRecycler.setLayoutManager(photoManager);
-        LinearLayoutManager reviewManager = new LinearLayoutManager(getDashboardActivity());
-        mBinding.rvReview.setLayoutManager(reviewManager);
-        mBinding.rvReview.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
+
+//for setting product Image
+        setProductList();
+        GridLayoutManager layoutManager = new GridLayoutManager(getDashboardActivity(),3);
+        mBinding.rvDocument.setLayoutManager(layoutManager);
+        productAdapter = new ProductAdapter(getDashboardActivity(), productList, this);
+        mBinding.rvDocument.setAdapter(productAdapter);
     }
 
     @Override
@@ -73,7 +82,7 @@ public class DetailsFragment extends DashboardFragment implements FeedbackDialog
     }
 
     public void setListener() {
-        mBinding.tvCall.setOnClickListener(this);
+        mBinding.tvUnderWarranty.setOnClickListener(this);
     }
 
     @Override
@@ -87,10 +96,8 @@ public class DetailsFragment extends DashboardFragment implements FeedbackDialog
             merchantResponse = bundle.getParcelable(AppConstants.RESPONSE);
         }
         reviewList = new ArrayList<>();
-        imageList=new ArrayList<>();
-        setList();
-        mImageAdapter = new ImageAdapter(getDashboardActivity(),imageList,this);
-        mBinding.photoRecycler.setAdapter(mImageAdapter);
+        imageList = new ArrayList<>();
+
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
         if (CommonUtility.isNotNull(merchantResponse)) {
@@ -100,37 +107,28 @@ public class DetailsFragment extends DashboardFragment implements FeedbackDialog
 
     }
 
-    private void setList() {
-        try {
-            StoreImages image = new StoreImages();
-            image.setPath("https://api.androidhive.info/images/glide/small/deadpool.jpg");
-            imageList.add(image);
+    private void setProductList() {
+        Product product1 = new Product();
+        product1.setProductName("Product Image");
+        productList.add(product1);
+        Product product2 = new Product();
+        product2.setProductName("Bill Image");
+        productList.add(product2);
 
-            StoreImages image1 = new StoreImages();
-            image1.setPath("https://api.androidhive.info/images/glide/large/bvs.jpg");
-            imageList.add(image1);
+        Product product3 = new Product();
+        product3.setProductName("BarCode Image");
+        productList.add(product3);
 
-            StoreImages image2 = new StoreImages();
-            image2.setPath("https://api.androidhive.info/images/glide/large/cacw.jpg");
-            imageList.add(image2);
+        Product product4 = new Product();
+        product4.setProductName("Warranty card Image");
+        productList.add(product4);
 
-            StoreImages image3 = new StoreImages();
-            image3.setPath("https://api.androidhive.info/images/glide/large/bourne.jpg");
-            imageList.add(image3);
-
-            StoreImages image4 = new StoreImages();
-            image4.setPath("https://api.androidhive.info/images/glide/large/squad.jpg");
-            imageList.add(image4);
-
-        } catch (Exception e) {
-            Log.e(TAG, "Json parsing error: " + e.getMessage());
-        }
     }
 
     @Override
     public void onClick(View view) {
-        if (view == mBinding.tvCall) {
-            CommonUtility.clicked(mBinding.tvCall);
+        if (view == mBinding.tvUnderWarranty) {
+            CommonUtility.clicked(mBinding.tvUnderWarranty);
             CommonUtility.showOrderDialog(getDashboardActivity(), null, this);
         }
     }
@@ -144,20 +142,19 @@ public class DetailsFragment extends DashboardFragment implements FeedbackDialog
                     ArrayList<ProductResponse> infoList = data.getInfo();
                     if (CommonUtility.isNotNull(infoList) && infoList.size() > 0) {
                         ProductResponse merchantResponse = infoList.get(0);
-                        CommonUtility.setVisibility(mBinding.layoutMain,mBinding.layoutNoData.layoutNoData,true);
+                        CommonUtility.setVisibility(mBinding.layoutMain, mBinding.layoutNoData.layoutNoData, true);
                         if (CommonUtility.isNotNull(merchantResponse)) {
                             mBinding.setMerchantResponse(merchantResponse);
                             setImage(merchantResponse);
-                        }else{
-                            CommonUtility.setVisibility(mBinding.layoutMain,mBinding.layoutNoData.layoutNoData,false);
+                        } else {
+                            CommonUtility.setVisibility(mBinding.layoutMain, mBinding.layoutNoData.layoutNoData, false);
                         }
                     }
+                } else {
+                    CommonUtility.setVisibility(mBinding.layoutMain, mBinding.layoutNoData.layoutNoData, false);
                 }
-                else{
-                    CommonUtility.setVisibility(mBinding.layoutMain,mBinding.layoutNoData.layoutNoData,false);
-                }
-            }else{
-                CommonUtility.setVisibility(mBinding.layoutMain,mBinding.layoutNoData.layoutNoData,false);
+            } else {
+                CommonUtility.setVisibility(mBinding.layoutMain, mBinding.layoutNoData.layoutNoData, false);
             }
         } else if (requestCode == 2) {
             reviewList.clear();
@@ -179,7 +176,7 @@ public class DetailsFragment extends DashboardFragment implements FeedbackDialog
             //mBinding.ratingBar.setRating(CommonUtility.setRating(merchantResponse.getRating()));
         }
         //GlideUtils.loadImage(getDashboardActivity(), merchantResponse.getBanner_image(), mBinding.storeImage, null, 0);
-        if (CommonUtility.isNotNull(imageList)&&CommonUtility.isNotNull(merchantResponse.getStoreimages())) {
+        if (CommonUtility.isNotNull(imageList) && CommonUtility.isNotNull(merchantResponse.getStoreimages())) {
             imageList.addAll(merchantResponse.getStoreimages());
             mImageAdapter.notifyDataSetChanged();
         }
@@ -194,9 +191,9 @@ public class DetailsFragment extends DashboardFragment implements FeedbackDialog
     @Override
     public void onItemClick(int position) {
         Bundle bundle = new Bundle();
-        bundle.putInt(BundleConstants.POSITION,position);
-        bundle.putParcelableArrayList(BundleConstants.IMAGE_LIST,imageList);
-        ExplicitIntent.getsInstance().navigateToZoom(getDashboardActivity(), ZoomAnimationImageActivity.class,bundle);
+        bundle.putInt(BundleConstants.POSITION, position);
+        bundle.putParcelableArrayList(BundleConstants.IMAGE_LIST, imageList);
+        ExplicitIntent.getsInstance().navigateToZoom(getDashboardActivity(), ZoomAnimationImageActivity.class, bundle);
         /*getDashboardActivity().pushFragment(ZOOMIMAGE_FRAGMENT,bundle,android.R.id.content,
                 true,true, BaseActivity.AnimationType.ZOOM);*/
     }

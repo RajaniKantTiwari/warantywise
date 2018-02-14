@@ -10,13 +10,19 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ProfileDialogBinding;
 import com.app.warantywise.network.request.Profile;
+import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 
-public class ProfileDialogFragment extends DialogFragment implements View.OnClickListener {
+public class ProfileDialogFragment extends DialogFragment implements View.OnClickListener,DatePickerDialog.OnDateSetListener {
     private Dialog dialog;
     private ProfileDialogBinding mBinding;
     private ProfileDialogListener listener;
+    //1 for date of birth 2 for Aniversary
+    private int dateOfBirth;
+
+
     public interface ProfileDialogListener {
         void update(Profile profile);
     }
@@ -49,7 +55,9 @@ public class ProfileDialogFragment extends DialogFragment implements View.OnClic
     }
 
     public void setListener() {
+        mBinding.tvDateOfBirth.setOnClickListener(this);
         mBinding.tvUpdate.setOnClickListener(this);
+        mBinding.tvAniversary.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +72,22 @@ public class ProfileDialogFragment extends DialogFragment implements View.OnClic
                 profile.setAniversery(mBinding.tvAniversary.getText().toString());
                 listener.update(profile);
             }
+        }else if(view==mBinding.tvDateOfBirth){
+            dateOfBirth=AppConstants.DATE_OF_BIRTH;
+            CommonUtility.openDatePickerProfile(this,getActivity().getFragmentManager());
+        }
+        else if(view==mBinding.tvAniversary){
+            dateOfBirth=AppConstants.ANIVERSARY;
+            CommonUtility.openDatePickerProfile(this,getActivity().getFragmentManager());
+        }
+    }
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String date = dayOfMonth+"-"+CommonUtility.getIntMonth(monthOfYear+1)+"-"+year;
+        if(dateOfBirth== AppConstants.DATE_OF_BIRTH){
+            mBinding.tvDateOfBirth.setText(date);
+        }else if(dateOfBirth== AppConstants.ANIVERSARY){
+            mBinding.tvAniversary.setText(date);
         }
     }
 }

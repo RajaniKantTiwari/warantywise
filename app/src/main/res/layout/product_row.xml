@@ -12,7 +12,7 @@
             android:text="@string/product_name"
             app:customFont="@string/font_regular" />
         <RelativeLayout
-            style="@style/image_80"
+            style="@style/image_100"
             android:background="@drawable/grey_corner_bg">
 
             <ImageView

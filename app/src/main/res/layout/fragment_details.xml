@@ -11,12 +11,13 @@
             type="com.app.warantywise.network.response.dashboard.ProductResponse" />
     </data>
 
-    <FrameLayout style="@style/match_match">
+    <FrameLayout style="@style/match_match"
+        android:background="@color/white"
+        >
 
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/layoutMain"
             style="@style/match_match"
-            android:background="@color/white"
             android:fillViewport="true">
 
             <LinearLayout
@@ -147,48 +148,82 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_70"
                         android:orientation="horizontal">
+                        <include layout="@layout/details_policy_row"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/layou"
+                        style="@style/match_wrap"
+                        android:paddingStart="@dimen/margin_15"
+                        android:paddingEnd="@dimen/margin_15"
+                        android:layout_below="@+id/layout_warranty"
+                        android:orientation="vertical">
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_match"
+                            android:text="@string/company_name"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:textColor="@color/button_text_color"/>
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_match"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="Nokia"/>
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_match"
+                            android:text="@string/customer_name"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:textColor="@color/button_text_color"/>
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_match"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="John Doe"/>
 
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_match"
+                            android:text="@string/purchased_date"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:textColor="@color/button_text_color"/>
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_match"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="21 may 2016"/>
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_match"
+                            android:text="@string/warranty_period"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:textColor="@color/button_text_color"/>
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_match"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:layout_marginBottom="@dimen/margin_10"
+                            android:text="1 year"/>
                     </LinearLayout>
 
                     <View
                         android:id="@+id/div_c"
                         style="@style/view_layout"
-                        android:layout_below="@+id/layout_warranty" />
+                        android:layout_below="@+id/layou" />
 
-                    <LinearLayout
-                        android:id="@+id/photo_lay"
-                        style="@style/match_wrap"
-                        android:layout_below="@+id/div_c"
-                        android:layout_marginStart="@dimen/margin_10"
-                        android:gravity="start"
-                        android:orientation="vertical"
-                        android:padding="@dimen/margin_5">
 
-                        <com.app.warantywise.widget.CustomTextView
-                            style="@style/textview_description_wrap"
-                            android:text="@string/photos"
-                            android:textAllCaps="true" />
 
                         <android.support.v7.widget.RecyclerView
-                            android:id="@+id/photoRecycler"
+                            android:id="@+id/rvDocument"
                             style="@style/match_wrap"
-                            android:padding="@dimen/margin_5_minus" />
+                            android:layout_below="@+id/div_c"/>
 
-                    </LinearLayout>
 
                     <View
                         android:id="@+id/div_d"
                         style="@style/view_layout"
-                        android:layout_below="@+id/photo_lay" />
+                        android:layout_below="@+id/rvDocument" />
 
                     <com.app.warantywise.widget.CustomTextView
                         android:id="@+id/tvReview"
-                        style="@style/textview_description_wrap"
+                        style="@style/textview_title_wrap"
                         android:layout_below="@+id/div_d"
                         android:layout_marginTop="@dimen/margin_10"
                         android:padding="@dimen/margin_15"
-                        android:text="@string/review"
-                        android:textAllCaps="true" />
+                        android:text="@string/your_review"
+                        android:textColor="@color/button_text_color"
+                        app:customFont="@string/font_regular"/>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvReview"
