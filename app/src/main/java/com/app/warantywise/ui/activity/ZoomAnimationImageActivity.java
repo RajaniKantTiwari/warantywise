@@ -62,7 +62,7 @@ public class ZoomAnimationImageActivity extends BaseActivity {
     };
 
     private void displayMetaInfo(int position) {
-        if(CommonUtility.isNotNull(storeImageList)){
+        if(CommonUtility.isNotNull(storeImageList)&&storeImageList.size()>position){
             mBinding.tvCount.setText((position + 1) + " of " + storeImageList.size());
             StoreImages storeImage = storeImageList.get(position);
             //lblTitle.setText(storeImage.getCreated_at());

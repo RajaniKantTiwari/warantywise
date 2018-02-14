@@ -4,15 +4,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentDetailsBinding;
-import com.app.warantywise.databinding.FragmentSystemServiceBinding;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.response.BaseResponse;
@@ -21,31 +18,24 @@ import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponseData;
 import com.app.warantywise.network.response.dashboard.StoreImages;
-import com.app.warantywise.ui.activity.ZoomAnimationImageActivity;
-import com.app.warantywise.ui.adapter.ProductAdapter;
+import com.app.warantywise.ui.adapter.DetailsAdapter;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.DashboardInsidePresenter;
 import com.app.warantywise.ui.dashboard.adapter.ImageAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.ReviewAdapter;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
 import com.app.warantywise.utility.AppConstants;
-import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
-import com.app.warantywise.utility.ExplicitIntent;
-import com.app.warantywise.utility.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import static android.content.ContentValues.TAG;
-
 public class DetailsFragment extends DashboardFragment implements
-        FeedbackDialogFragment.FeedbackDialogListener, ImageAdapter.ImageListener, ProductAdapter.ProductListener {
+        FeedbackDialogFragment.FeedbackDialogListener, ImageAdapter.ImageListener, DetailsAdapter.DetailsListener {
 
     private FragmentDetailsBinding mBinding;
-    private ImageAdapter mImageAdapter;
     private ReviewAdapter mReviewAdapter;
     private ArrayList<ReviewResponse> reviewList;
 
@@ -54,7 +44,7 @@ public class DetailsFragment extends DashboardFragment implements
     DashboardInsidePresenter presenter;
     private ArrayList<StoreImages> imageList;
 
-    private ProductAdapter productAdapter;
+    private DetailsAdapter detailsAdapter;
     private List<Product> productList = new ArrayList<>();
 
     @Nullable
@@ -71,8 +61,8 @@ public class DetailsFragment extends DashboardFragment implements
         setProductList();
         GridLayoutManager layoutManager = new GridLayoutManager(getDashboardActivity(),3);
         mBinding.rvDocument.setLayoutManager(layoutManager);
-        productAdapter = new ProductAdapter(getDashboardActivity(), productList, this);
-        mBinding.rvDocument.setAdapter(productAdapter);
+        detailsAdapter = new DetailsAdapter(getDashboardActivity(), productList, this);
+        mBinding.rvDocument.setAdapter(detailsAdapter);
     }
 
     @Override
@@ -178,7 +168,7 @@ public class DetailsFragment extends DashboardFragment implements
         //GlideUtils.loadImage(getDashboardActivity(), merchantResponse.getBanner_image(), mBinding.storeImage, null, 0);
         if (CommonUtility.isNotNull(imageList) && CommonUtility.isNotNull(merchantResponse.getStoreimages())) {
             imageList.addAll(merchantResponse.getStoreimages());
-            mImageAdapter.notifyDataSetChanged();
+            //mImageAdapter.notifyDataSetChanged();
         }
     }
 
@@ -190,11 +180,94 @@ public class DetailsFragment extends DashboardFragment implements
 
     @Override
     public void onItemClick(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putInt(BundleConstants.POSITION, position);
-        bundle.putParcelableArrayList(BundleConstants.IMAGE_LIST, imageList);
-        ExplicitIntent.getsInstance().navigateToZoom(getDashboardActivity(), ZoomAnimationImageActivity.class, bundle);
-        /*getDashboardActivity().pushFragment(ZOOMIMAGE_FRAGMENT,bundle,android.R.id.content,
-                true,true, BaseActivity.AnimationType.ZOOM);*/
+       // showImageChooserDialog();
     }
+   /* private void showImageChooserDialog() {
+        //ImagePickerUtils.add(getSupportFragmentManager(), this);
+
+        BottomSheetDialog dialog = new BottomSheetDialog(getDashboardActivity());
+        dialog.setContentView(R.layout.profile_dialog_layout);
+        View layoutCamera = dialog.findViewById(R.id.layoutCamera);
+        View layoutGallery = dialog.findViewById(R.id.layoutGallery);
+        View layoutCancel = dialog.findViewById(R.id.layoutCancel);
+        layoutCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                openImageCamera();
+            }
+        });
+        layoutGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                openImageGallery();
+            }
+        });
+        layoutCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                clearImage();
+            }
+        });
+        dialog.show();
+
+    }
+    *//**
+     * Open camera to capture image
+     *//*
+    private void openImageCamera() {
+        new ImagePicker.Builder(getDashboardActivity())
+                .mode(ImagePicker.Mode.CAMERA)
+                .compressLevel(ImagePicker.ComperesLevel.HARD)
+                .directory(ImagePicker.Directory.DEFAULT)
+                .extension(ImagePicker.Extension.JPG)
+                .scale(512, 512)
+                .allowMultipleImages(false)
+                .enableDebuggingMode(true)
+                .build();
+    }
+
+    *//**
+     * Open camera to capture image
+     *//*
+    private void openImageGallery() {
+        new ImagePicker.Builder(getDashboardActivity())
+                .mode(ImagePicker.Mode.GALLERY)
+                .compressLevel(ImagePicker.ComperesLevel.HARD)
+                .directory(ImagePicker.Directory.DEFAULT)
+                .extension(ImagePicker.Extension.JPG)
+                .scale(512, 512)
+                .allowMultipleImages(false)
+                .enableDebuggingMode(true)
+                .build();
+    }
+
+    private void clearImage() {
+        profilePicFilePath = "";
+    }
+    private void loadImageToServer() {
+        try {
+            //int age = Integer.parseInt(mBinding.edtAge.getText().toString().trim());
+            //String name = mBinding.edtName.getText().toString().trim();
+            //String phoneNumber = mBinding.edtPhone.getText().toString().trim();
+            if (TextUtils.isEmpty(profilePicFilePath)) {
+                // presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
+            } else {
+                MultipartBody.Part body = CommonUtility.createMultipart(profilePicFilePath, AppConstants.PROFILE_UPDATE_PARAMETER);
+                if (body != null) {
+                    // presenter.updateProfile(this, name, phoneNumber, age, currentGender, body);
+                } else {
+                    //presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
+                }
+
+            }
+
+        } catch (Exception e) {
+            LogUtils.LOGE("ProfileUpdate", e.toString());
+        }
+
+
+    }*/
 }

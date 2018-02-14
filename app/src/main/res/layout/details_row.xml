@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        style="@style/wrap_wrap"
+        android:layout_margin="@dimen/margin_5"
+        android:orientation="vertical">
+        <com.app.warantywise.widget.CustomTextView
+            android:id="@+id/tvProductName"
+            style="@style/textview_description_small_wrap"
+            android:text="@string/product_name"
+            app:customFont="@string/font_regular" />
+        <RelativeLayout
+            style="@style/image_100"
+            android:background="@drawable/grey_corner_bg">
+
+            <ImageView
+                android:id="@+id/productImage"
+                style="@style/match_match"
+                android:scaleType="centerInside" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>
