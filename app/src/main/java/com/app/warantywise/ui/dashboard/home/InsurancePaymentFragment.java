@@ -48,7 +48,6 @@ public class InsurancePaymentFragment extends DashboardFragment implements Cover
 
     @Override
     public void setListener() {
-        mBinding.tvRaiseAnIssue.setOnClickListener(this);
         mBinding.tvHome.setOnClickListener(this);
 
     }
@@ -64,20 +63,32 @@ public class InsurancePaymentFragment extends DashboardFragment implements Cover
         LinearLayoutManager plansManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvCover.setLayoutManager(plansManager);
         coverList = new ArrayList<>();
+        setList();
         CommonUtility.setRecyclerViewHeight(mBinding.rvCover, coverList, AppConstants.COVER_HEIGHT);
         coverAdapter = new CoverAdapter(getDashboardActivity(), coverList, this);
         mBinding.rvCover.setAdapter(coverAdapter);
     }
 
+    private void setList() {
+        Cover cover = new Cover();
+        cover.setCover("Insurance");
+        coverList.add(cover);
+        Cover cover1 = new Cover();
+        cover1.setCover("Insurance Helth");
+        coverList.add(cover1);
+        Cover cover2 = new Cover();
+        cover2.setCover("Body Checkup");
+        coverList.add(cover2);
+        Cover cover3 = new Cover();
+        cover3.setCover("Nokia Insurance");
+        coverList.add(cover3);
+    }
+
     @Override
     public void onClick(View view) {
-        if (view == mBinding.tvRaiseAnIssue) {
-            CommonUtility.clicked(mBinding.tvRaiseAnIssue);
-            //getDashboardActivity().addFragmentInContainer(new HelpsAndSupportFragment(),null,true,true, BaseActivity.AnimationType.NONE);
-            //mFragmentNavigation.pushFragment(HelpsAndSupportFragment.newInstance(mInt + 1));
-        } else if (view == mBinding.tvHome) {
+        if (view == mBinding.tvHome) {
             CommonUtility.clicked(mBinding.tvHome);
-           // mFragmentNavigation.popFragment();
+            // mFragmentNavigation.popFragment();
         }
     }
 

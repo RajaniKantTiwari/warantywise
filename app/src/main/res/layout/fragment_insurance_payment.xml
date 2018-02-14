@@ -138,19 +138,6 @@
                     android:textColor="@color/button_text_color"
                     android:textSize="@dimen/button_large"
                     app:customFont="@string/font_bold" />
-
-                <com.app.warantywise.widget.CustomTextView
-                    android:id="@+id/tvRaiseAnIssue"
-                    style="@style/textview_description_wrap"
-                    android:padding="@dimen/margin_13"
-                    android:text="@string/raise_an_issue"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    app:customFont="@string/font_bold"
-                    android:textColor="@color/reddish"
-                    />
             </LinearLayout>
         </LinearLayout>
-
-
 </layout>
