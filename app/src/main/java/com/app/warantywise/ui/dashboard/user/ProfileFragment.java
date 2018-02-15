@@ -287,8 +287,8 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             @Override
             public void onClick(View v) {
                 mBinding.layoutPaymentOption.removeView(child);
-                numberOfPaymentMethod = numberOfPaymentMethod - 1;
                 viewList.remove(numberOfPaymentMethod);
+                numberOfPaymentMethod = numberOfPaymentMethod - 1;
                 changeHeading();
             }
         });

@@ -11,6 +11,7 @@ import com.app.warantywise.databinding.ActivityTermConditionBinding;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.presenter.CommonPresenter;
 import com.app.warantywise.ui.base.BaseActivity;
+import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
 
 import javax.inject.Inject;
@@ -30,12 +31,19 @@ public class HelpSupportActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding=DataBindingUtil.setContentView(this,R.layout.activity_help_support);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_help_support);
         initializeData();
+        setListener();
+    }
+
+    private void setListener() {
+        mBinding.layoutHeader.ivDrawer.setOnClickListener(this);
     }
 
     private void initializeData() {
         mBinding.layoutHeader.ivDrawer.setImageResource(R.drawable.ic_back);
+        mBinding.layoutHeader.ivDrawer.setPadding(CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this),
+                CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this));
         mBinding.layoutHeader.tvHeading.setText(getResources().getString(R.string.help_support));
     }
 
@@ -51,6 +59,8 @@ public class HelpSupportActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
-
+        if (mBinding.layoutHeader.ivDrawer == view){
+            finish();
+        }
     }
 }

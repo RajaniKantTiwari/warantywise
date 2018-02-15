@@ -51,6 +51,7 @@ public interface AppConstants {
     String MOBILE_NUMBER = "mobile_number";
     int DATE_OF_BIRTH=1;
     int ANIVERSARY=2;
+    int PADDING = 17;
 
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT,MERCHANT_MAP_FRAGMENT,

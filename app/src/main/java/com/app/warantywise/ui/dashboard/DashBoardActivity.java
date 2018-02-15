@@ -3,6 +3,7 @@ package com.app.warantywise.ui.dashboard;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -81,7 +82,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 break;
             case AppConstants.EDIT_PROFILE:
                 changeIcon(USER_FRAGMENT);
-                openFragment(new ProfileFragment(), null, true, false, NONE);
+                openFragment(new ProfileFragment(), null, false, false, NONE);
                 break;
             case AppConstants.HELP:
                 ExplicitIntent.getsInstance().navigateTo(this, HelpSupportActivity.class);
