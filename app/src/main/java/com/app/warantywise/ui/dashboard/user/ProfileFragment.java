@@ -54,6 +54,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     FragmentEdProfileBinding mBinding;
     private static String TAG = ProfileFragment.class.getSimpleName();
     private List<PaymentOption> paymentList = new ArrayList<>();
+    private List<View> viewList=new ArrayList<>();
     private ProfileSettingsAdapter settingAdapter;
     private String profilePicFilePath;
     private int numberOfPaymentMethod;
@@ -71,6 +72,10 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
         mBinding.imgEditPic.setOnClickListener(this);
         mBinding.tvLogout.setOnClickListener(this);
         mBinding.tvAddPaymentMethod.setOnClickListener(this);
+        mBinding.layoutProfile.setOnClickListener(this);
+        mBinding.layoutEmail.setOnClickListener(this);
+        mBinding.layoutPassword.setOnClickListener(this);
+
     }
 
     @Override
@@ -81,10 +86,10 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     public void initializeData() {
         GlideUtils.loadImageProfilePic(getDashboardActivity(), PreferenceUtils.getImage(), mBinding.ivProfile, null, R.drawable.shubh);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
-        mBinding.rvUpdate.setLayoutManager(layoutManager);
+       /* mBinding.rvUpdate.setLayoutManager(layoutManager);
         settingAdapter = new ProfileSettingsAdapter(getDashboardActivity(), this);
         mBinding.rvUpdate.setAdapter(settingAdapter);
-        CommonUtility.setRecyclerViewHeight(mBinding.rvUpdate, Arrays.asList(getResources().getStringArray(R.array.update)), AppConstants.SETTING_HEIGHT);
+        CommonUtility.setRecyclerViewHeight(mBinding.rvUpdate, Arrays.asList(getResources().getStringArray(R.array.update)), AppConstants.SETTING_HEIGHT);*/
 
     }
 
@@ -111,7 +116,14 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
         } else if (mBinding.tvAddPaymentMethod == view) {
             addChildView(numberOfPaymentMethod);
+        }else if(mBinding.layoutPassword==view||mBinding.layoutProfile==view|| mBinding.layoutEmail==view){
+            showProfileDialog();
         }
+    }
+
+    private void showProfileDialog() {
+        Bundle bundle = new Bundle();
+        CommonUtility.showUpdateDialog(getDashboardActivity(), bundle, this);
     }
 
 
@@ -266,6 +278,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
         paymentOption.setPaymentString(String.format(Locale.getDefault(), "%s %d", getResources().getString(R.string.payment_method), number));
         paymentList.add(paymentOption);
         View child = getLayoutInflater().inflate(R.layout.payment_row, null);
+        viewList.add(child);
         RadioButton radioButton = child.findViewById(R.id.radioButton);
         radioButton.setText(paymentOption.getPaymentString());
         child.findViewById(R.id.ivClose).setVisibility(View.VISIBLE);
@@ -275,6 +288,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             public void onClick(View v) {
                 mBinding.layoutPaymentOption.removeView(child);
                 numberOfPaymentMethod = numberOfPaymentMethod - 1;
+                viewList.remove(numberOfPaymentMethod);
                 changeHeading();
             }
         });
@@ -291,6 +305,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
                             } else {
                                 option.setChecked(true);
                             }
+                            ((RadioButton)viewList.get(i).findViewById(R.id.radioButton)).setChecked(option.isChecked());
                         }
                     }
                 }
