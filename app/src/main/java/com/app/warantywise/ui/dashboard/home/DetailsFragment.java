@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,7 +86,8 @@ public class DetailsFragment extends DashboardFragment implements
             merchantResponse = bundle.getParcelable(AppConstants.RESPONSE);
         }
         reviewList = new ArrayList<>();
-
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
+        mBinding.rvReview.setLayoutManager(layoutManager);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
         if (CommonUtility.isNotNull(merchantResponse)) {

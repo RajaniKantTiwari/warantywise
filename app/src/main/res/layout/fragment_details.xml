@@ -150,12 +150,17 @@
                         android:orientation="horizontal">
                         <include layout="@layout/details_policy_row"/>
                     </LinearLayout>
+                    <View
+                        android:id="@+id/div"
+                        style="@style/view_layout"
+                        android:layout_below="@+id/layout_warranty"
+                        android:layout_marginTop="@dimen/margin_3" />
                     <LinearLayout
                         android:id="@+id/layou"
                         style="@style/match_wrap"
                         android:paddingStart="@dimen/margin_15"
                         android:paddingEnd="@dimen/margin_15"
-                        android:layout_below="@+id/layout_warranty"
+                        android:layout_below="@+id/div"
                         android:orientation="vertical">
                         <com.app.warantywise.widget.CustomTextView
                             style="@style/textview_description_match"

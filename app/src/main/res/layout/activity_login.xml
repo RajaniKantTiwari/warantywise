@@ -53,6 +53,7 @@
                     android:paddingBottom="@dimen/margin_5"
                     android:paddingTop="@dimen/margin_5"
                     android:hint="@string/your_mobile_number"
+                    android:maxLength="@integer/mono_length"
                     android:singleLine="true"
                     app:customFont="@string/font_bold" />
                 <ImageView style="@style/view_layout" />

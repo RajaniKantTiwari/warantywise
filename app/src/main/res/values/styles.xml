@@ -551,11 +551,9 @@
     <style name="btn_style" parent="wrap_wrap">
         <item name="android:elevation">@dimen/margin_5</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">@dimen/button_very_small</item>
-
-        <item name="android:paddingStart">@dimen/margin_7</item>
-        <item name="android:paddingEnd">@dimen/margin_7</item>
+        <item name="android:textSize">@dimen/button_very_smaller</item>
+        <item name="android:paddingStart">@dimen/margin_5</item>
+        <item name="android:paddingEnd">@dimen/margin_5</item>
         <item name="android:paddingTop">@dimen/margin_5</item>
         <item name="android:paddingBottom">@dimen/margin_5</item>
     </style>

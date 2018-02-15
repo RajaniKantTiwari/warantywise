@@ -34,7 +34,7 @@
     <dimen name="textSize_app_name">28sp</dimen>
     <dimen name="button_text_size">40sp</dimen>
     <dimen name="textSize_header_ex_large">25sp</dimen>
-
+    <integer name="mono_length">10</integer>
     <dimen name="textSize_header_large">21sp</dimen>
     <dimen name="textSize_header">19sp</dimen>
     <dimen name="textSize_header_small">17sp</dimen>
@@ -52,6 +52,8 @@
     <dimen name="edit_textSize_small">11sp</dimen>
     <dimen name="edit_textSize_smaller">10sp</dimen>
     <dimen name="button_very_small">9sp</dimen>
+    <dimen name="button_very_smaller">8sp</dimen>
+
     <dimen name="button_smaller">10sp</dimen>
     <dimen name="button_small">11sp</dimen>
     <dimen name="button_medium">12sp</dimen>
