@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.app.warantywise.R;
+import com.app.warantywise.databinding.ActivityHelpSupportBinding;
 import com.app.warantywise.databinding.ActivityTermConditionBinding;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.presenter.CommonPresenter;
@@ -23,7 +24,7 @@ public class HelpSupportActivity extends BaseActivity {
 
     @Inject
     CommonPresenter presenter;
-    private ActivityTermConditionBinding mBinding;
+    private ActivityHelpSupportBinding mBinding;
 
 
     @Override

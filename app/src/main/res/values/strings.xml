@@ -180,6 +180,12 @@
     <string name="your_review">Your Review</string>
     <string name="customer_name">Consumer Name</string>
     <string name="warranty_period">Warranty Period</string>
+    <string name="please_enter_product_name">Please Enter Product Name</string>
+    <string name="please_enter_company_name">Please Enter Company Name</string>
+    <string name="please_enter_serial_number">Please Enter Serial Number</string>
+    <string name="please_enter_purchase_date">Please Enter Purchase Date</string>
+    <string name="please_enter_Warranty_period">Please Enter Warranty Period</string>
+    <string name="please_select_two_document">Please Select Two Document</string>
 
 
     <string-array name="left_drawer">

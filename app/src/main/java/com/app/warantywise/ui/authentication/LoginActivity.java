@@ -115,7 +115,6 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
             showToast(getResources().getString(R.string.please_enter_mobile_number));
             return false;
         }
-
     }
 
 

@@ -39,8 +39,8 @@ import okhttp3.MultipartBody;
  * Created by rajnikant on 11/02/18.
  */
 
-public class AddProductActivity extends CommonActivity implements ProductAdapter.ProductListener ,
- DatePickerDialog.OnDateSetListener{
+public class AddProductActivity extends CommonActivity implements ProductAdapter.ProductListener,
+        DatePickerDialog.OnDateSetListener {
     @Inject
     CommonPresenter presenter;
     private ActivityAddProductBinding mBinding;
@@ -50,6 +50,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     private String profilePicFilePath;
     private int adapterPosition = -1;
+    private String productName;
+    private String companyName;
+    private String serialNumber;
+    private String purchaseDate;
+    private String warrantyPeriod;
+    private int docNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +68,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private void setListener() {
         mBinding.headerLayout.ivDrawer.setOnClickListener(this);
         mBinding.tvSubmit.setOnClickListener(this);
-        mBinding.tvCalendar.setOnClickListener(this);
+        mBinding.tvPurchaseDate.setOnClickListener(this);
         mBinding.layoutYes.setOnClickListener(this);
         mBinding.layoutNo.setOnClickListener(this);
 
@@ -107,19 +113,64 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         if (mBinding.tvSubmit == view) {
             CommonUtility.clicked(mBinding.tvSubmit);
             //setToken();
-            ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
-        }else if(mBinding.tvCalendar==view){
+            if (isValid()) {
+                ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+            }
+        } else if (mBinding.tvPurchaseDate == view) {
             CommonUtility.openDatePicker(this);
-        }else if(mBinding.layoutYes==view){
+        } else if (mBinding.layoutYes == view) {
             mBinding.radioYes.setChecked(true);
             mBinding.radioNo.setChecked(false);
 
-        }else if(mBinding.layoutNo==view){
+        } else if (mBinding.layoutNo == view) {
             mBinding.radioYes.setChecked(false);
             mBinding.radioNo.setChecked(true);
-        } else if(mBinding.headerLayout.ivDrawer==view){
+        } else if (mBinding.headerLayout.ivDrawer == view) {
             finish();
         }
+    }
+
+    private boolean isValid() {
+        docNumber = 0;
+        for (Product product : productList) {
+            if (CommonUtility.isNotNull(product) && CommonUtility.isNotNull(product.getImageUrl()) && product.getImageUrl().length() > 0) {
+                docNumber = docNumber + 1;
+            }
+        }
+        productName = mBinding.tvProductName.getText().toString();
+        companyName = mBinding.tvCompanyName.getText().toString();
+        serialNumber = mBinding.tvSerialNumber.getText().toString();
+        purchaseDate = mBinding.tvPurchaseDate.getText().toString();
+        warrantyPeriod = mBinding.tvWarrantyPeriod.getText().toString();
+        if ((isNotNull(productName) && productName.trim().length() > 0)
+                && (isNotNull(companyName) && companyName.trim().length() > 0)
+                && (isNotNull(serialNumber) && serialNumber.trim().length() > 0)
+                && (isNotNull(purchaseDate) && purchaseDate.trim().length() > 0)
+                && (isNotNull(warrantyPeriod) && warrantyPeriod.trim().length() > 0)
+                &&docNumber>=2) {
+            return true;
+        }else if (isNull(productName) || productName.trim().length() == 0) {
+            showToast(getResources().getString(R.string.please_enter_product_name));
+            return false;
+        }
+        else if (isNull(companyName) || companyName.trim().length() == 0) {
+            showToast(getResources().getString(R.string.please_enter_company_name));
+            return false;
+        }
+        else if (isNull(serialNumber) || serialNumber.trim().length() == 0) {
+            showToast(getResources().getString(R.string.please_enter_serial_number));
+            return false;
+        }else if (isNull(purchaseDate) || purchaseDate.trim().length() == 0) {
+            showToast(getResources().getString(R.string.please_enter_purchase_date));
+            return false;
+        }else if (isNull(warrantyPeriod) || warrantyPeriod.trim().length() == 0) {
+            showToast(getResources().getString(R.string.please_enter_Warranty_period));
+            return false;
+        }else if (docNumber<2) {
+            showToast(getResources().getString(R.string.please_select_two_document));
+            return false;
+        }
+        return false;
     }
 
     @Override
@@ -266,8 +317,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String month=CommonUtility.getMonth(monthOfYear);
-        String date = dayOfMonth+" "+month+" "+year;
-        mBinding.tvCalendar.setText(date);
+        String month = CommonUtility.getMonth(monthOfYear);
+        String date = dayOfMonth + " " + month + " " + year;
+        mBinding.tvPurchaseDate.setText(date);
     }
 }

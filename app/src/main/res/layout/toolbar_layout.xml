@@ -25,6 +25,7 @@
                     android:id="@+id/tvHeading"
                     style="@style/textview_title_wrap"
                     android:layout_centerInParent="true"
+                    android:textAllCaps="true"
                     android:textColor="@color/button_text_color" />
             <ImageView
                 android:id="@+id/ivSearch"

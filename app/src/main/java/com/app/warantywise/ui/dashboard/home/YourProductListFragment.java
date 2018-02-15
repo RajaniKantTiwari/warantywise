@@ -36,8 +36,6 @@ public class YourProductListFragment extends DashboardFragment implements
     private ProductListAdapter mProductAdapter;
     private ArrayList<ProductResponse> productList;
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

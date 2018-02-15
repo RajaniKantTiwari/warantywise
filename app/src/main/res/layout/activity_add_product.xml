@@ -74,7 +74,7 @@
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView
-                android:id="@+id/tvCalendar"
+                android:id="@+id/tvPurchaseDate"
                 style="@style/edittext_add_product"
                 android:drawableEnd="@drawable/calender"
                 android:hint="@string/may_2016"
@@ -86,6 +86,7 @@
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomEditText
+                android:id="@+id/tvWarrantyPeriod"
                 style="@style/edittext_add_product"
                 android:hint="@string/one_year"
                 app:customFont="@string/font_regular" />
