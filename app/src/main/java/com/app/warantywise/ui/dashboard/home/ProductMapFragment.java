@@ -63,6 +63,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinder = DataBindingUtil.inflate(inflater, R.layout.fragment_location_map, container, false);
         CommonUtility.register(this);
+        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.add_product));
         if (CommonUtility.checkService(getBaseActivity())) {
             initMap();
         }

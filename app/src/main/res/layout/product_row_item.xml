@@ -47,6 +47,7 @@
                     android:drawableStart="@drawable/calender"
                     android:maxLines="1"
                     android:padding="@dimen/margin_4"
+                    android:drawablePadding="@dimen/margin_4"
                     android:text="27 may 2017"
                     app:customFont="@string/font_bold" />
             </LinearLayout>
@@ -125,7 +126,9 @@
                 <com.app.warantywise.widget.CustomTextView
                     android:id="@+id/tvOffer"
                     style="@style/btn_style"
+                    android:textSize="@dimen/textSize_description"
                     android:text="@string/offer"
+                    android:textAllCaps="true"
                     android:textColor="@color/offer_btn_color"
                     app:customFont="@string/font_bold" />
                 </LinearLayout>

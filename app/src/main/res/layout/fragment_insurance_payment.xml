@@ -109,6 +109,7 @@
                     android:layout_marginTop="@dimen/margin_30"
                     android:drawableStart="@drawable/rupee_black"
                     android:drawablePadding="@dimen/margin_5"
+                    android:layout_marginStart="@dimen/margin_5"
                     android:text="785"
                     android:textAllCaps="true"
                     app:customFont="@string/font_bold"
@@ -117,12 +118,14 @@
                     style="@style/textview_description_match"
                     android:text="Must Cover"
                     app:customFont="@string/font_bold"
-                    android:padding="@dimen/margin_4"
+                    android:padding="@dimen/margin_5"
                     android:textColor="@color/grey_color"
                     />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvCover"
-                    style="@style/match_wrap"/>
+                    style="@style/match_wrap"
+                    android:layout_marginStart="@dimen/margin_5"
+                    />
                 <com.app.warantywise.widget.CustomTextView
                     android:id="@+id/tvHome"
                     android:layout_width="@dimen/margin_150"

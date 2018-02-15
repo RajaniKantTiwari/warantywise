@@ -49,7 +49,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class ProfileFragment extends DashboardFragment implements MvpView, View.OnClickListener,
-        ProfileSettingsAdapter.ProductListener ,ProfileDialogFragment.ProfileDialogListener {
+        ProfileSettingsAdapter.ProductListener, ProfileDialogFragment.ProfileDialogListener {
 
     FragmentEdProfileBinding mBinding;
     private static String TAG = ProfileFragment.class.getSimpleName();
@@ -62,7 +62,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding =DataBindingUtil.inflate(inflater,R.layout.fragment_ed_profile,container,false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_ed_profile, container, false);
         return mBinding.getRoot();
     }
 
@@ -101,42 +101,42 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
 
     @Override
     public void onClick(View view) {
-            if(mBinding.ivProfile==view||mBinding.imgEditPic==view){
-                showImageChooserDialog();
-            }else if(mBinding.tvLogout==view){
-                ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
-                getDashboardActivity().finish();
-                //updateProfile();
-            }else if(mBinding.tvLogout==view){
-                ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(),LoginActivity.class);
-            }else if(mBinding.tvAddPaymentMethod==view){
-                addChildView(numberOfPaymentMethod);
-            }
+        if (mBinding.ivProfile == view || mBinding.imgEditPic == view) {
+            showImageChooserDialog();
+        } else if (mBinding.tvLogout == view) {
+            ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
+            getDashboardActivity().finish();
+            //updateProfile();
+        } else if (mBinding.tvLogout == view) {
+            ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
+        } else if (mBinding.tvAddPaymentMethod == view) {
+            addChildView(numberOfPaymentMethod);
+        }
     }
 
 
     private void showImageChooserDialog() {
         //ImagePickerUtils.add(getSupportFragmentManager(), this);
 
-            BottomSheetDialog dialog = new BottomSheetDialog(getContext());
-            dialog.setContentView(R.layout.profile_dialog_layout);
-            View layoutCamera = dialog.findViewById(R.id.layoutCamera);
-            View layoutGallery = dialog.findViewById(R.id.layoutGallery);
-            View layoutCancel=dialog.findViewById(R.id.layoutCancel);
-            layoutCamera.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    openImageCamera();
-                }
-            });
-            layoutGallery.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    openImageGallery();
-                }
-            });
+        BottomSheetDialog dialog = new BottomSheetDialog(getContext());
+        dialog.setContentView(R.layout.profile_dialog_layout);
+        View layoutCamera = dialog.findViewById(R.id.layoutCamera);
+        View layoutGallery = dialog.findViewById(R.id.layoutGallery);
+        View layoutCancel = dialog.findViewById(R.id.layoutCancel);
+        layoutCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                openImageCamera();
+            }
+        });
+        layoutGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                openImageGallery();
+            }
+        });
         layoutCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,13 +144,14 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
                 clearImage();
             }
         });
-            dialog.show();
+        dialog.show();
 
     }
 
     private void clearImage() {
         profilePicFilePath = "";
     }
+
     /**
      * Open camera to capture image
      */
@@ -189,7 +190,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             if (requestCode == ImagePicker.IMAGE_PICKER_REQUEST_CODE) {
                 List<String> mPaths = (List<String>) data.getSerializableExtra(ImagePicker.EXTRA_IMAGE_PATH);
                 profilePicFilePath = mPaths.get(0);
-                profilePicFilePath="file:///"+profilePicFilePath;
+                profilePicFilePath = "file:///" + profilePicFilePath;
                 gotoCropper(Uri.parse(profilePicFilePath));
             } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
                 LogUtils.LOGD(TAG, "CROP");
@@ -203,13 +204,15 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             }
         }
     }
+
     private void setImageFromLocal(String filePath) {
-        profilePicFilePath=filePath;
+        profilePicFilePath = filePath;
         File f = new File(filePath);
         if (f.exists()) {
             GlideUtils.loadImageProfilePic(getDashboardActivity(), filePath, mBinding.ivProfile, null, R.drawable.avatar);
         }
     }
+
     private void gotoCropper(Uri sourceUri) {
         CropImage.activity(sourceUri).setAspectRatio(1, 1)
                 .setGuidelines(CropImageView.Guidelines.ON)
@@ -223,11 +226,11 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             //String name = mBinding.edtName.getText().toString().trim();
             //String phoneNumber = mBinding.edtPhone.getText().toString().trim();
             if (TextUtils.isEmpty(profilePicFilePath)) {
-               // presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
+                // presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
             } else {
                 MultipartBody.Part body = CommonUtility.createMultipart(profilePicFilePath, AppConstants.PROFILE_UPDATE_PARAMETER);
                 if (body != null) {
-                   // presenter.updateProfile(this, name, phoneNumber, age, currentGender, body);
+                    // presenter.updateProfile(this, name, phoneNumber, age, currentGender, body);
                 } else {
                     //presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
                 }
@@ -244,8 +247,8 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
 
     @Override
     public void onItemClick(int position) {
-        Bundle bundle=new Bundle();
-        CommonUtility.showUpdateDialog(getDashboardActivity(),bundle,this);
+        Bundle bundle = new Bundle();
+        CommonUtility.showUpdateDialog(getDashboardActivity(), bundle, this);
     }
 
     @Override
@@ -254,15 +257,19 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     }
 
     /**
-     * Here User Can Add Gratitude if neede more than 3 maximum 10
+     * Here User Can Add Payment if needed
      *
      * @param number
      */
     private void addChildView(int number) {
+        PaymentOption paymentOption = new PaymentOption();
+        paymentOption.setPaymentString(String.format(Locale.getDefault(), "%s %d", getResources().getString(R.string.payment_method), number));
+        paymentList.add(paymentOption);
         View child = getLayoutInflater().inflate(R.layout.payment_row, null);
         RadioButton radioButton = child.findViewById(R.id.radioButton);
-        radioButton.setText(String.format(Locale.getDefault(), "%s %d", getResources().getString(R.string.payment_method), number));
+        radioButton.setText(paymentOption.getPaymentString());
         child.findViewById(R.id.ivClose).setVisibility(View.VISIBLE);
+        child.setTag(number);
         child.findViewById(R.id.ivClose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -271,8 +278,27 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
                 changeHeading();
             }
         });
+        child.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (CommonUtility.isNotNull(child.getTag())) {
+                    int getNumber = (Integer) child.getTag();
+                    if (paymentList.size() > getNumber) {
+                        for (int i = 0; i < numberOfPaymentMethod; i++) {
+                            PaymentOption option = paymentList.get(i);
+                            if (i == getNumber) {
+                                option.setChecked(false);
+                            } else {
+                                option.setChecked(true);
+                            }
+                        }
+                    }
+                }
+            }
+        });
         mBinding.layoutPaymentOption.addView(child);
     }
+
     /**
      * Set Heading for All Gratitude
      */

@@ -14,14 +14,12 @@
             <ImageView
                 style="@style/image_20"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/margin_5"
-                android:src="@drawable/checked" />
+                android:src="@drawable/unchecked" />
 
             <com.app.warantywise.widget.CustomTextView
-                style="@style/textview_description_small_wrap"
-                android:layout_marginStart="@dimen/margin_5"
+                style="@style/style_product"
                 android:text="@string/warranty"
-                app:customFont="@string/font_bold" />
+                app:customFont="@string/font_regular" />
         </LinearLayout>
 
         <ImageView
@@ -37,14 +35,12 @@
             <ImageView
                 style="@style/image_20"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/margin_5"
-                android:src="@drawable/checked" />
+                android:src="@drawable/extended_waranty" />
 
             <com.app.warantywise.widget.CustomTextView
-                style="@style/textview_description_small_wrap"
-                android:layout_marginStart="@dimen/margin_5"
-                android:text="@string/warranty"
-                app:customFont="@string/font_bold" />
+                style="@style/style_product"
+                android:text="@string/extended_waranty"
+                app:customFont="@string/font_regular" />
         </LinearLayout>
 
         <ImageView
@@ -60,14 +56,12 @@
             <ImageView
                 style="@style/image_20"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/margin_5"
-                android:src="@drawable/checked" />
+                android:src="@drawable/buy_insurance" />
 
             <com.app.warantywise.widget.CustomTextView
-                style="@style/textview_description_small_wrap"
-                android:layout_marginStart="@dimen/margin_5"
-                android:text="@string/warranty"
-                app:customFont="@string/font_bold" />
+                style="@style/style_product"
+                android:text="@string/buy_insurance"
+                app:customFont="@string/font_regular" />
         </LinearLayout>
 
         <ImageView
@@ -83,14 +77,12 @@
             <ImageView
                 style="@style/image_20"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/margin_5"
-                android:src="@drawable/checked" />
+                android:src="@drawable/unchecked" />
 
             <com.app.warantywise.widget.CustomTextView
-                style="@style/textview_description_small_wrap"
-                android:layout_marginStart="@dimen/margin_5"
-                android:text="@string/warranty"
-                app:customFont="@string/font_bold" />
+                style="@style/style_product"
+                android:text="@string/others"
+                app:customFont="@string/font_regular" />
         </LinearLayout>
     </LinearLayout>
 

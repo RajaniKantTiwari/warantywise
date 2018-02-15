@@ -61,7 +61,7 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void initializeData() {
-        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.home));
+        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.your_product));
         //For Plan
         LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvProductList.setLayoutManager(layoutManager);

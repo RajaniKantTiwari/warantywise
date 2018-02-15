@@ -68,7 +68,7 @@ public class CoverAdapter extends RecyclerView.Adapter<CoverAdapter.CoverViewHol
         }
 
         public void setData(Cover cover) {
-            //mBinding.setPayment(product);
+            mBinding.setCover(cover);
         }
 
         @Override

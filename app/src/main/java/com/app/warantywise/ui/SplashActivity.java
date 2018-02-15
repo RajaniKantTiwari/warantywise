@@ -1,18 +1,14 @@
 package com.app.warantywise.ui;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.app.warantywise.R;
-import com.app.warantywise.WarantyApplication;
 import com.app.warantywise.ui.authentication.LoginActivity;
-import com.app.warantywise.ui.authentication.VerifyAccountActivity;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
-import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.ExplicitIntent;
-import com.app.warantywise.utility.PreferenceUtils;
 
 public class SplashActivity extends AppCompatActivity {
 

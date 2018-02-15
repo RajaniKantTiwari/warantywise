@@ -105,7 +105,7 @@
 
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/productName"
-                            style="@style/textview_description_wrap"
+                            style="@style/textview_title_wrap"
                             android:text="Nokia Mobile"
                             android:textColor="@color/darker_black_color" />
 

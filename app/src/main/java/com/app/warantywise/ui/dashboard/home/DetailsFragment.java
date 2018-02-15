@@ -56,10 +56,10 @@ public class DetailsFragment extends DashboardFragment implements
     }
 
     private void initializeView() {
-
+        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.details));
 //for setting product Image
         setProductList();
-        GridLayoutManager layoutManager = new GridLayoutManager(getDashboardActivity(),3);
+        GridLayoutManager layoutManager = new GridLayoutManager(getDashboardActivity(), 3);
         mBinding.rvDocument.setLayoutManager(layoutManager);
         detailsAdapter = new DetailsAdapter(getDashboardActivity(), productList, this);
         mBinding.rvDocument.setAdapter(detailsAdapter);
@@ -177,7 +177,7 @@ public class DetailsFragment extends DashboardFragment implements
 
     @Override
     public void onItemClick(int position) {
-       // showImageChooserDialog();
+        // showImageChooserDialog();
     }
    /* private void showImageChooserDialog() {
         //ImagePickerUtils.add(getSupportFragmentManager(), this);

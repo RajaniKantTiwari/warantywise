@@ -21,6 +21,7 @@
         android:padding="@dimen/margin_10">
         <com.app.warantywise.widget.CustomTextView
             android:id="@+id/tvTerms"
+            android:textAllCaps="true"
             style="@style/textview_title_wrap"
             android:text="@string/term_and_condition"
              />

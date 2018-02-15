@@ -32,7 +32,7 @@ public interface AppConstants {
     int SENIOR_CITIZEN = 5;
     int TERM_CONDITION = 6;
     int PAYMENT_HEIGHT = 48;
-    int SETTING_HEIGHT = 41;
+    int SETTING_HEIGHT = 44;
     int REQUEST_CALL = 1;
 
     long SPLASH_TIME = 3000;
@@ -47,7 +47,7 @@ public interface AppConstants {
     float BEARING = 45;
     int PLANHEIGHT = 48;
     int INSURANCE_PLANHEIGHT = 50;
-    int COVER_HEIGHT = 33;
+    int COVER_HEIGHT = 38;
     String MOBILE_NUMBER = "mobile_number";
     int DATE_OF_BIRTH=1;
     int ANIVERSARY=2;

@@ -10,6 +10,8 @@
             android:id="@+id/tvProductName"
             style="@style/textview_description_small_wrap"
             android:text="@string/product_name"
+            android:layout_marginBottom="@dimen/margin_4"
+            android:textColor="@color/button_text_color"
             app:customFont="@string/font_regular" />
         <RelativeLayout
             style="@style/image_100"

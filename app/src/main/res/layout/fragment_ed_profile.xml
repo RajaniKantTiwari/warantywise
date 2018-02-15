@@ -26,8 +26,8 @@
                 <ImageView
                     android:id="@+id/imgEditPic"
                     style="@style/wrap_wrap"
-                    android:padding="@dimen/margin_10"
                     android:layout_marginStart="@dimen/margin_70"
+                    android:padding="@dimen/margin_10"
                     android:src="@drawable/ic_edit_profile_pic" />
 
                 <ImageView
@@ -72,15 +72,15 @@
                     android:id="@+id/line"
                     style="@style/view_layout_brown_1"
                     android:layout_below="@+id/userLayout"
-                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_15"
+                    android:layout_marginStart="@dimen/margin_20"
                     android:layout_toEndOf="@+id/ivProfile" />
 
                 <LinearLayout
                     style="@style/match_wrap"
                     android:layout_below="@+id/line"
-                    android:layout_toEndOf="@+id/ivProfile"
                     android:layout_marginStart="@dimen/margin_20"
+                    android:layout_toEndOf="@+id/ivProfile"
                     android:paddingBottom="@dimen/margin_4"
                     android:paddingTop="@dimen/margin_7">
 
@@ -155,8 +155,8 @@
                     style="@style/match_wrap"
                     android:layout_below="@+id/divider"
                     android:orientation="vertical"
-                    android:paddingStart="@dimen/margin_11"
-                    android:paddingEnd="@dimen/margin_10">
+                    android:paddingEnd="@dimen/margin_10"
+                    android:paddingStart="@dimen/margin_11">
 
                     <com.app.warantywise.widget.CustomTextView
                         android:id="@+id/tvSetting"
@@ -169,25 +169,28 @@
                         android:id="@+id/rvUpdate"
                         style="@style/match_wrap"
                         android:layout_marginTop="@dimen/margin_4"
-                        android:background="@drawable/grey_corner_bg"/>
+                         />
+
                     <com.app.warantywise.widget.CustomTextView
                         android:id="@+id/tvPaymentMethod"
                         style="@style/textview_description_wrap"
+                        android:layout_marginTop="@dimen/margin_8"
                         android:text="@string/payment_method"
-                        app:customFont="@string/font_regular"
-                        android:layout_marginTop="@dimen/margin_8"/>
+                        app:customFont="@string/font_regular" />
+
                     <com.app.warantywise.widget.CustomTextView
                         android:id="@+id/tvAddPaymentMethod"
                         style="@style/textview_description_small_match"
-                        android:text="@string/add_another_payment_method"
                         android:layout_marginTop="@dimen/margin_7"
+                        android:background="@drawable/grey_corner_bg"
                         android:padding="@dimen/margin_7"
-                        android:textColor="@color/add_color"
-                        android:background="@drawable/grey_corner_bg"/>
+                        android:text="@string/add_another_payment_method"
+                        android:textColor="@color/add_color" />
+
                     <LinearLayout
                         android:id="@+id/layoutPaymentOption"
-                        android:layout_marginTop="@dimen/margin_10"
                         style="@style/match_wrap"
+                        android:layout_marginTop="@dimen/margin_10"
                         android:orientation="vertical" />
                 </LinearLayout>
 

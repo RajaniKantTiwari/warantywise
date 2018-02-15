@@ -186,6 +186,9 @@
     <string name="please_enter_purchase_date">Please Enter Purchase Date</string>
     <string name="please_enter_Warranty_period">Please Enter Warranty Period</string>
     <string name="please_select_two_document">Please Select Two Document</string>
+    <string name="others">Others</string>
+    <string name="your_product">Your Product</string>
+    <string name="details">Details</string>
 
 
     <string-array name="left_drawer">
