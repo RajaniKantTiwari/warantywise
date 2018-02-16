@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ProductDialogBinding;
@@ -15,7 +16,7 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.util.HashMap;
 
-public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter,GoogleMap.OnInfoWindowClickListener {
 
     private final LayoutInflater mInflator;
     private Activity mActivity;
@@ -42,6 +43,12 @@ public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     @Override
     public View getInfoContents(Marker marker) {
         ProductDialogBinding mBinding = DataBindingUtil.inflate(mInflator, R.layout.product_dialog, null, false);
+        mBinding.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mActivity,"Clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
         ProductResponse response = mMarkersHashMap.get(marker);
         if (CommonUtility.isNotNull(response)) {
             GlideUtils.loadImage(mActivity, response.getImage(), mBinding.ivProduct, null, R.drawable.icon_placeholder);
@@ -66,5 +73,11 @@ public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             });
         }
         return mBinding.getRoot();
+    }
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        /*Toast.makeText(getBaseContext(), "Info Window clicked@" + marker.getId(),
+                Toast.LENGTH_SHORT).show();*/
+
     }
 }

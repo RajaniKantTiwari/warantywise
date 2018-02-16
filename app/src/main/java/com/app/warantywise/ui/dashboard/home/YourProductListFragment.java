@@ -12,6 +12,7 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentProductListBinding;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
+import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.ProductListAdapter;
 import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
@@ -115,6 +116,6 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onWarrantyClicked(int position) {
-
+        getDashboardActivity().addFragmentInContainer(new DetailsFragment(),null,true,true, BaseActivity.AnimationType.NONE);
     }
 }

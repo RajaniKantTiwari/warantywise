@@ -76,9 +76,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 break;
             case AppConstants.INSURANCE:
                 //openFragment(new InsuranceChoiceFragment(), null, false, false, NONE);
-
                 openFragment(new InsurancePaymentFragment(), null, false, false, NONE);
-
                 break;
             case AppConstants.EDIT_PROFILE:
                 changeIcon(USER_FRAGMENT);

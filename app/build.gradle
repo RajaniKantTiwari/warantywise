@@ -126,7 +126,14 @@ dependencies {
     //to get exact location
     compile 'io.nlopez.smartlocation:library:3.3.3'
     compile 'com.roughike:bottom-bar:2.3.1'
-    compile 'me.leolin:ShortcutBadger:1.1.16@aar'
+    //for badge
+    compile 'me.leolin:ShortcutBadger:1.1.21@aar'
+//end
+
+    //for showing window
+    compile 'com.appolica:interactive-info-window:v1.0.6'
+    //end
+
     //cropping image library
     implementation project(':cropper')
     //end

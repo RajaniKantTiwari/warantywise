@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentLocationMapBinding;
@@ -101,6 +102,14 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
                 return false;
             }
         });
+
+
+        /*mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                marker.showInfoWindow();
+            }
+        });*/
     }
 
     @Subscribe
@@ -169,7 +178,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
             LatLng latLng = new LatLng(Double.parseDouble(response.getLatitude()), Double.parseDouble(response.getLongitude()));
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(latLng)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.camera)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.location)));
             mMarkersHashMap.put(marker, response);
             if(CommonUtility.isNotNull(response)&&response.getId().equalsIgnoreCase("0")){
                 ShowMarker(marker,response);
@@ -202,7 +211,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         if(CommonUtility.isNotNull(mMap)){
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(latLng)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.camera)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.location)));
             mMarkersHashMap.put(marker, new ProductResponse());
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             CameraPosition cameraPosition = new CameraPosition.Builder()
