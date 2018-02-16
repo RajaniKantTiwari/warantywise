@@ -67,28 +67,35 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         closeDrawerLeft();
         switch (position) {
             case AppConstants.HOME:
-                openFragment(new HomeFragment(), null, false, false, NONE);
+                closeDrawerLeft();
+                openFragment(new HomeFragment(), null, false, false, NONE,true);
                 break;
             case AppConstants.MYWARANTY:
                 //ExplicitIntent.getsInstance().navigateTo(this, WarantyActivity.class);
                 /*openFragment(new SystemServiceFragment(), null, false, false, NONE);*/
-                openFragment(new DetailsFragment(), null, false, false, NONE);
+                closeDrawerLeft();
+                openFragment(new DetailsFragment(), null, false, false, NONE,true);
                 break;
             case AppConstants.INSURANCE:
+                closeDrawerLeft();
                 //openFragment(new InsuranceChoiceFragment(), null, false, false, NONE);
-                openFragment(new InsurancePaymentFragment(), null, false, false, NONE);
+                openFragment(new InsurancePaymentFragment(), null, false, false, NONE,true);
                 break;
             case AppConstants.EDIT_PROFILE:
+                closeDrawerLeft();
                 changeIcon(USER_FRAGMENT);
-                openFragment(new ProfileFragment(), null, false, false, NONE);
+                openFragment(new ProfileFragment(), null, false, false, NONE,true);
                 break;
             case AppConstants.HELP:
+                closeDrawerLeft();
                 ExplicitIntent.getsInstance().navigateTo(this, HelpSupportActivity.class);
                 break;
             case AppConstants.SENIOR_CITIZEN:
+                closeDrawerLeft();
                 ExplicitIntent.getsInstance().navigateTo(this, SeniorCitizenActivity.class);
                 break;
             case AppConstants.TERM_CONDITION:
+                closeDrawerLeft();
                 ExplicitIntent.getsInstance().navigateTo(this, TermConditionActivity.class);
                 break;
 
@@ -126,22 +133,23 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         switch (position) {
             case NOTIFICATION_FRAGMENT:
                 setHeaderTitle(getResources().getString(R.string.message));
-                openFragment(new NotificationFragment(), null, false, false, NONE);
+                openFragment(new NotificationFragment(), null, false, false, NONE,false);
                 break;
             case USER_FRAGMENT:
-                setHeaderTitle(getResources().getString(R.string.your_profile));
-                openFragment(new ProfileFragment(), null, false, false, NONE);
+                openFragment(new ProfileFragment(), null, false, false, NONE,false);
                 break;
         }
     }
 
-    private void openFragment(Fragment fragment, Bundle bundle, boolean addToBackStack, boolean shouldAdd, @AnimationType int animationType) {
-        pushFragment(fragment, bundle, R.id.container, addToBackStack, shouldAdd, animationType);
+    private void openFragment(Fragment fragment, Bundle bundle, boolean addToBackStack, boolean shouldAdd, @AnimationType int animationType
+    ,boolean isFromDrawer) {
+        pushFragment(fragment, bundle, R.id.container, addToBackStack, shouldAdd, animationType,isFromDrawer);
         clearAllBackStack();
     }
 
-    public void addFragmentInContainer(Fragment fragment, Bundle bundle, boolean addToBackStack, boolean shouldAdd, @AnimationType int animationType) {
-        pushFragment(fragment, bundle, R.id.container, addToBackStack, shouldAdd, animationType);
+    public void addFragmentInContainer(Fragment fragment, Bundle bundle, boolean addToBackStack, boolean shouldAdd,
+                                       @AnimationType int animationType,boolean isFromDrawer) {
+        pushFragment(fragment, bundle, R.id.container, addToBackStack, shouldAdd, animationType,isFromDrawer);
     }
 
     private void changeIcon(int position) {
@@ -220,7 +228,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         changeIcon(NOTIFICATION_FRAGMENT);
         clearAllBackStack();
         setHeaderTitle(getResources().getString(R.string.message));
-        pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE);
+        pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE,false);
     }
 
     public void setListener() {
@@ -253,12 +261,12 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
             changeIcon(NOTIFICATION_FRAGMENT);
             clearAllBackStack();
             setHeaderTitle(getResources().getString(R.string.message));
-            pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE);
+            pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE,false);
         }else if (view == mBinding.bottomLayout.linearLayoutBar4) {
             changeIcon(USER_FRAGMENT);
             clearAllBackStack();
             setHeaderTitle(getResources().getString(R.string.your_profile));
-            pushFragment(new ProfileFragment(), null, R.id.container, true, false, NONE);
+            pushFragment(new ProfileFragment(), null, R.id.container, true, false, NONE,false);
         }
     }
     void setupDrawerToggleLeft() {

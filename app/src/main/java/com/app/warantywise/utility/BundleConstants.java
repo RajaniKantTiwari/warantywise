@@ -13,4 +13,5 @@ public interface BundleConstants {
     String POSITION = "position";
     long ANIMATION_TIME = 500;
 
+    String PRODUCT_RESPONSE = "product_response";
 }

@@ -13,7 +13,6 @@ import android.view.View;
 
 public abstract class BaseFragment extends Fragment implements MvpView,View.OnClickListener {
     private BaseActivity mActivity;
-
     public abstract void initializeData();
 
     public abstract void setListener();

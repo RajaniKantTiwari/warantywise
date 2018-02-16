@@ -49,9 +49,9 @@ public class HomeFragment extends DashboardFragment {
         event = new MerchantEvent();
         event.setListMap(AppConstants.LIST_PRODUCT);
         getBaseActivity().pushChildFragment(getChildFragmentManager(), AppConstants.FRAGMENTS.MERCHANT_MAP_FRAGMENT,
-                null, R.id.container, true, false, BaseActivity.AnimationType.NONE);
+                null, R.id.container, true, false, BaseActivity.AnimationType.NONE,false);
         getBaseActivity().pushChildFragment(getChildFragmentManager(), AppConstants.FRAGMENTS.MERCHANT_LIST_FRAGMENT,
-                null, R.id.container, true, false, BaseActivity.AnimationType.NONE);
+                null, R.id.container, true, false, BaseActivity.AnimationType.NONE,false);
     }
 
 

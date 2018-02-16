@@ -217,7 +217,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         return fragment;
     }
 
-    public Fragment pushChildFragment(FragmentManager manager, int fragmentId, Bundle args, int containerViewId, boolean shouldAdd, boolean addToBackStack, @AnimationType int animationType) {
+    public Fragment pushChildFragment(FragmentManager manager, int fragmentId, Bundle args, int containerViewId, boolean shouldAdd, boolean addToBackStack, @AnimationType int animationType,
+                                      boolean isFromDrawer) {
         try {
             Fragment fragment = getFragment(fragmentId);
             if (fragment == null) return null;
@@ -225,7 +226,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
                 fragment.setArguments(args);
 
             FragmentTransaction transaction = manager.beginTransaction();
-            setAnimation(containerViewId, shouldAdd, addToBackStack, animationType, fragment, transaction);
+            setAnimation(containerViewId, shouldAdd, addToBackStack, animationType, fragment, transaction, isFromDrawer);
             return fragment;
 
         } catch (Exception ex) {
@@ -235,14 +236,16 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
 
     }
 
-    public Fragment pushFragment(Fragment fragment, Bundle args, int containerViewId, boolean addToBackStack, boolean shouldAdd, @AnimationType int animationType) {
+    public Fragment pushFragment(Fragment fragment, Bundle args,
+                                 int containerViewId, boolean addToBackStack, boolean shouldAdd,
+                                 @AnimationType int animationType,boolean isFromDrawer) {
         try {
             if (fragment == null) return null;
             if (args != null)
                 fragment.setArguments(args);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            setAnimation(containerViewId, shouldAdd, addToBackStack, animationType, fragment, ft);
+            setAnimation(containerViewId, shouldAdd, addToBackStack, animationType, fragment, ft,isFromDrawer);
             return fragment;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -250,7 +253,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         return null;
     }
 
-    private void setAnimation(int containerViewId, boolean shouldAdd, boolean addToBackStack, @AnimationType int animationType, Fragment fragment, FragmentTransaction transaction) {
+    private void setAnimation(int containerViewId, boolean shouldAdd, boolean addToBackStack, @AnimationType int animationType, Fragment fragment, FragmentTransaction transaction,
+                              boolean isFromDrawer) {
         switch (animationType) {
             case DEFAULT:
             case SLIDE:
@@ -272,8 +276,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
             transaction.replace(containerViewId, fragment, fragment.getClass().getSimpleName());
         if (addToBackStack)
             transaction.addToBackStack(fragment.getClass().getSimpleName());
+        if(isFromDrawer){
+            transaction.commitNow();
 
-        transaction.commitAllowingStateLoss();
+        }else{
+            transaction.commitAllowingStateLoss();
+        }
     }
 
     public void clearAllBackStack() {

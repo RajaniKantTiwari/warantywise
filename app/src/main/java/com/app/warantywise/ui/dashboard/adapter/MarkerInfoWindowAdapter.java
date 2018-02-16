@@ -1,3 +1,4 @@
+/*
 package com.app.warantywise.ui.dashboard.adapter;
 
 import android.app.Activity;
@@ -76,8 +77,11 @@ public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter,Goog
     }
     @Override
     public void onInfoWindowClick(Marker marker) {
-        /*Toast.makeText(getBaseContext(), "Info Window clicked@" + marker.getId(),
-                Toast.LENGTH_SHORT).show();*/
+        */
+/*Toast.makeText(getBaseContext(), "Info Window clicked@" + marker.getId(),
+                Toast.LENGTH_SHORT).show();*//*
+
 
     }
 }
+*/

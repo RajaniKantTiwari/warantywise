@@ -9,22 +9,23 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentLocationMapBinding;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
-import com.app.warantywise.ui.dashboard.adapter.MarkerInfoWindowAdapter;
+import com.app.warantywise.ui.dashboard.home.mapview.InfoWindow;
+import com.app.warantywise.ui.dashboard.home.mapview.InfoWindowManager;
+import com.app.warantywise.ui.dashboard.home.mapview.ShowWindowFragment;
 import com.app.warantywise.ui.event.MerchantEvent;
 import com.app.warantywise.utility.AppConstants;
+import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,7 +40,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -50,13 +50,18 @@ import static com.app.warantywise.utility.AppConstants.PERMISSIONS_REQUEST_LOCAT
 import static com.app.warantywise.utility.AppConstants.REQUEST_CALL;
 
 
-public class ProductMapFragment extends DashboardFragment implements OnMapReadyCallback,MarkerInfoWindowAdapter.MarkerInfoListener {
+public class ProductMapFragment extends DashboardFragment implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener
+        ,ShowWindowFragment.MarkerInfoListener {
 
     private GoogleMap mMap;
     private FragmentLocationMapBinding mBinder;
     private SupportMapFragment mapFragment;
-    private HashMap<Marker, ProductResponse> mMarkersHashMap;
+    private static final String FORM_VIEW = "FORM_VIEW_MARKER";
+    private InfoWindowManager infoWindowManager;
+
+    //private HashMap<Marker, ProductResponse> mMarkersHashMap;
     private Intent callIntent;
+    private InfoWindow infoWindow;
 
 
     @Nullable
@@ -68,11 +73,14 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         if (CommonUtility.checkService(getBaseActivity())) {
             initMap();
         }
+
+        infoWindowManager = new InfoWindowManager(getDashboardActivity().getSupportFragmentManager());
+        infoWindowManager.onParentViewCreated(mBinder.mapViewContainer, savedInstanceState);
         return mBinder.getRoot();
     }
 
     private void initMap() {
-        mMarkersHashMap = new HashMap();
+        //mMarkersHashMap = new HashMap();
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         getCurrentLocation();
@@ -95,13 +103,14 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
 
     @Override
     public void onClick(View view) {
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        /*mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                infoWindowManager.toggle(formWindow, true);
                 marker.showInfoWindow();
                 return false;
             }
-        });
+        });*/
 
 
         /*mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -134,12 +143,14 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         if (CommonUtility.isNull(googleMap))
             return;
+        infoWindowManager.onMapReady(googleMap);
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(this);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        //Set Custom InfoWindow Adapter
+       /* //Set Custom InfoWindow Adapter
         MarkerInfoWindowAdapter adapter = new MarkerInfoWindowAdapter(getBaseActivity(),
                 mMarkersHashMap,this);
-        mMap.setInfoWindowAdapter(adapter);
+        mMap.setInfoWindowAdapter(adapter);*/
         checkPermition();
     }
 
@@ -177,17 +188,32 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         if (CommonUtility.isNotNull(mMap)&&CommonUtility.isNotNull(response)) {
             LatLng latLng = new LatLng(Double.parseDouble(response.getLatitude()), Double.parseDouble(response.getLongitude()));
             Marker marker = mMap.addMarker(new MarkerOptions()
-                    .position(latLng)
+                    .position(latLng).snippet(FORM_VIEW)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.location)));
-            mMarkersHashMap.put(marker, response);
+            showWindow(marker,response);
+
+            //mMarkersHashMap.put(marker, response);
             if(CommonUtility.isNotNull(response)&&response.getId().equalsIgnoreCase("0")){
-                ShowMarker(marker,response);
+                showMarker(marker,response);
                 marker.showInfoWindow();
             }
         }
     }
 
-    private void ShowMarker(Marker marker, ProductResponse response) {
+    private void showWindow(Marker marker, ProductResponse response) {
+        ShowWindowFragment fragment=new ShowWindowFragment(this);
+        Bundle bundle=new Bundle();
+        bundle.putParcelable(BundleConstants.PRODUCT_RESPONSE,response);
+        fragment.setArguments(bundle);
+        final int offsetX = (int) getResources().getDimension(R.dimen.marker_offset_x);
+        final int offsetY = (int) getResources().getDimension(R.dimen.marker_offset_y);
+
+        final InfoWindow.MarkerSpecification markerSpec =
+                new InfoWindow.MarkerSpecification(offsetX, offsetY);
+        infoWindow = new InfoWindow(marker, markerSpec, fragment);
+    }
+
+    private void showMarker(Marker marker, ProductResponse response) {
         try {
             marker.showInfoWindow();
             Geocoder geocoder = new Geocoder(getBaseActivity(), Locale.getDefault());
@@ -212,7 +238,8 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(latLng)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.location)));
-            mMarkersHashMap.put(marker, new ProductResponse());
+            showWindow(marker,new ProductResponse());
+            //mMarkersHashMap.put(marker, new ProductResponse());
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLng)
@@ -260,7 +287,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        infoWindowManager.onDestroy();
     }
 
     @Override
@@ -296,6 +323,12 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     }
 
     @Override
+    public boolean onMarkerClick(Marker marker) {
+        infoWindowManager.toggle(infoWindow, true);
+        return true;
+    }
+
+    @Override
     public void call(String mobileNumber) {
         callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + mobileNumber));
@@ -309,6 +342,6 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
 
     @Override
     public void view(String view) {
-
+        getDashboardActivity().showToast("View Clicked");
     }
 }

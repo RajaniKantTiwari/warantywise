@@ -64,6 +64,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_ed_profile, container, false);
+        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.your_profile));
         return mBinding.getRoot();
     }
 

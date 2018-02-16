@@ -130,9 +130,6 @@ dependencies {
     compile 'me.leolin:ShortcutBadger:1.1.21@aar'
 //end
 
-    //for showing window
-    compile 'com.appolica:interactive-info-window:v1.0.6'
-    //end
 
     //cropping image library
     implementation project(':cropper')

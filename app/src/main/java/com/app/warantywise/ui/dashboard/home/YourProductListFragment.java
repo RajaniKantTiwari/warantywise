@@ -116,6 +116,7 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onWarrantyClicked(int position) {
-        getDashboardActivity().addFragmentInContainer(new DetailsFragment(),null,true,true, BaseActivity.AnimationType.NONE);
+        getDashboardActivity().addFragmentInContainer(new DetailsFragment(),null,true
+                ,true, BaseActivity.AnimationType.NONE,false);
     }
 }
