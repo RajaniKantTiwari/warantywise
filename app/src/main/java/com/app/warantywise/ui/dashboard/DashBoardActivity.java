@@ -71,14 +71,11 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 openFragment(new HomeFragment(), null, false, false, NONE,true);
                 break;
             case AppConstants.MYWARANTY:
-                //ExplicitIntent.getsInstance().navigateTo(this, WarantyActivity.class);
-                /*openFragment(new SystemServiceFragment(), null, false, false, NONE);*/
                 closeDrawerLeft();
                 openFragment(new DetailsFragment(), null, false, false, NONE,true);
                 break;
             case AppConstants.INSURANCE:
                 closeDrawerLeft();
-                //openFragment(new InsuranceChoiceFragment(), null, false, false, NONE);
                 openFragment(new InsurancePaymentFragment(), null, false, false, NONE,true);
                 break;
             case AppConstants.EDIT_PROFILE:

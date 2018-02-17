@@ -39,10 +39,8 @@ public class HomeFragment extends DashboardFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
-        addFragment();
         return mBinding.getRoot();
     }
-
     private void addFragment() {
         mBinding.listButton.setTag(R.drawable.location);
         mBinding.listButton.setVisibility(View.VISIBLE);
@@ -57,6 +55,7 @@ public class HomeFragment extends DashboardFragment {
 
     @Override
     public void initializeData() {
+        addFragment();
         Bundle bundle=getArguments();
 
        // getPresenter().getMerchantListBySearch(getBaseActivity(),search);
