@@ -13,6 +13,7 @@ import com.app.warantywise.databinding.FragmentConfirmOrderBinding;
 import com.app.warantywise.databinding.FragmentInsurancePaymentBinding;
 import com.app.warantywise.network.request.Cover;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.CoverAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.PlansAdapter;
@@ -48,7 +49,7 @@ public class InsurancePaymentFragment extends DashboardFragment implements Cover
 
     @Override
     public void setListener() {
-        mBinding.tvHome.setOnClickListener(this);
+        mBinding.tvPay.setOnClickListener(this);
 
     }
 
@@ -59,6 +60,7 @@ public class InsurancePaymentFragment extends DashboardFragment implements Cover
 
     @Override
     public void initializeData() {
+        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.insurance));
         //For Plan
         LinearLayoutManager plansManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvCover.setLayoutManager(plansManager);
@@ -86,9 +88,10 @@ public class InsurancePaymentFragment extends DashboardFragment implements Cover
 
     @Override
     public void onClick(View view) {
-        if (view == mBinding.tvHome) {
-            CommonUtility.clicked(mBinding.tvHome);
-            // mFragmentNavigation.popFragment();
+        if (view == mBinding.tvPay) {
+            CommonUtility.clicked(mBinding.tvPay);
+            getDashboardActivity().addFragmentInContainer(new ConfirmOrderFragment(),null,true
+                    ,true, BaseActivity.AnimationType.NONE,false);
         }
     }
 

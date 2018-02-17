@@ -63,6 +63,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
 
     @Override
     public void initializeData() {
+        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.your_product));
         //For Plan
         LinearLayoutManager plansManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvPlan.setLayoutManager(plansManager);
@@ -77,7 +78,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
         mBinding.rvInsurancePlan.setLayoutManager(insurancePlanManager);
         insurancePlanList = new ArrayList<>();
         CommonUtility.setInsurancePlan(insurancePlanList);
-        CommonUtility.setRecyclerViewHeight(mBinding.rvInsurancePlan, planList, AppConstants.INSURANCE_PLANHEIGHT);
+        CommonUtility.setRecyclerViewHeight(mBinding.rvInsurancePlan, insurancePlanList, AppConstants.INSURANCE_PLANHEIGHT);
         mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
         mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
         //end

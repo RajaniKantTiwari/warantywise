@@ -1,8 +1,13 @@
 package com.app.warantywise.ui.dashboard.home;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +41,8 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import static android.content.ContentValues.TAG;
+import static com.app.warantywise.utility.AppConstants.PERMISSIONS_REQUEST_LOCATION;
+import static com.app.warantywise.utility.AppConstants.REQUEST_CALL;
 
 public class SystemServiceFragment extends DashboardFragment implements FeedbackDialogFragment.FeedbackDialogListener,ImageAdapter.ImageListener {
 
@@ -48,6 +55,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
     @Inject
     DashboardInsidePresenter presenter;
     private ArrayList<StoreImages> imageList;
+    private Intent callIntent;
 
     @Nullable
     @Override
@@ -82,6 +90,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
     }
 
     public void initializeData() {
+        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.system_service));
         Bundle bundle = getArguments();
         if (CommonUtility.isNotNull(bundle)) {
             merchantResponse = bundle.getParcelable(AppConstants.RESPONSE);
@@ -131,10 +140,29 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
     public void onClick(View view) {
         if (view == mBinding.tvCall) {
             CommonUtility.clicked(mBinding.tvCall);
-            CommonUtility.showOrderDialog(getDashboardActivity(), null, this);
+            call("9821945433");
         }
     }
 
+    private void call(String mobileNumber) {
+        callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + mobileNumber));
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+            return;
+        } else
+            startActivity(callIntent);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if(requestCode==REQUEST_CALL){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startActivity(callIntent);
+            }else {
+                getBaseActivity().showToast(getResources().getString(R.string.permition_denied));
+            }
+        }
+    }
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
         if (requestCode == 1) {

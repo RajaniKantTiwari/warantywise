@@ -10,8 +10,6 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layoutPlans"
         style="@style/match_wrap"
-        android:layout_marginEnd="@dimen/margin_10"
-        android:layout_marginStart="@dimen/margin_10"
         android:layout_marginTop="@dimen/margin_6"
         android:background="@drawable/grey_corner_bg">
 
@@ -23,14 +21,12 @@
         <com.app.warantywise.widget.CustomTextView
             android:id="@+id/tvCompanyName"
             android:layout_toEndOf="@+id/ivProductImage"
-            style="@style/textview_description_smaller_wrap"
+            style="@style/textview_description_small_wrap"
             android:layout_margin="@dimen/margin_4"
             android:layout_width="@dimen/margin_70"
             android:maxLines="1"
-            android:textColor="@color/red_col"
             android:layout_toStartOf="@+id/tvPlanRate"
-            android:text="@={insurancePlan.insuranceCompanyName}"
-            app:customFont="@string/font_regular" />
+            android:text="@={insurancePlan.insuranceCompanyName}"/>
 
 
         <com.app.warantywise.widget.CustomTextView
@@ -38,7 +34,7 @@
             android:layout_below="@+id/tvCompanyName"
             android:layout_toStartOf="@+id/tvPlanRate"
             android:maxLines="1"
-            style="@style/textview_description_smaller_wrap"
+            style="@style/textview_description_small_wrap"
             android:layout_width="@dimen/margin_70"
             android:text="@={insurancePlan.insuranceServiceName}"
             android:textColor="@color/light_grey"
@@ -50,11 +46,11 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:maxLines="1"
+            android:drawableStart="@drawable/rupee_black"
+            android:drawablePadding="@dimen/margin_5"
             android:layout_marginEnd="@dimen/margin_7"
-            style="@style/textview_description_smaller_wrap"
-            android:text="@={insurancePlan.insurancePlanRate}"
-            android:textColor="@color/grey_color"
-            app:customFont="@string/font_regular" />
+            style="@style/textview_title_wrap"
+            android:text="@={insurancePlan.insurancePlanRate}"/>
 
 
     </RelativeLayout>

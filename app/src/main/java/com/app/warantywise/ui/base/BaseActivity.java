@@ -291,6 +291,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         }
     }
 
+    public void clearAllTopFragment(String name) {
+        FragmentManager fm = getSupportFragmentManager();
+        for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+            fm.popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
     @IntDef({SLIDE, FADE, DEFAULT, NONE, ZOOM})
     @Retention(RetentionPolicy.SOURCE)
     public @interface AnimationType {

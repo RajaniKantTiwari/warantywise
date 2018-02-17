@@ -11,8 +11,6 @@
     <RelativeLayout
         android:id="@+id/layoutPlans"
         style="@style/match_wrap"
-        android:layout_marginEnd="@dimen/margin_10"
-        android:layout_marginStart="@dimen/margin_10"
         android:layout_marginTop="@dimen/margin_6"
         android:background="@drawable/grey_corner_bg">
 
@@ -23,25 +21,23 @@
             android:paddingStart="@dimen/margin_10">
 
             <com.app.warantywise.widget.CustomTextView
-                style="@style/textview_description_small_wrap"
+                style="@style/textview_description_large_wrap"
                 android:layout_width="@dimen/margin_70"
                 android:text="@={plans.planRate}"
-                android:textColor="@color/red_col"
-                app:customFont="@string/font_regular" />
+                android:textColor="@color/red_col"/>
 
             <android.support.v4.widget.Space style="@style/layout_hori_match_1" />
 
             <com.app.warantywise.widget.CustomTextView
                 style="@style/textview_description_small_wrap"
                 android:layout_width="@dimen/margin_70"
-                android:text="@={plans.planRate}"
-                app:customFont="@string/font_regular" />
+                android:text="@={plans.planRate}"/>
 
             <android.support.v4.widget.Space style="@style/layout_hori_match_1" />
 
             <com.app.warantywise.widget.CustomTextView
-                style="@style/textview_description_smaller_wrap"
-                android:layout_width="@dimen/margin_140"
+                style="@style/textview_description_small_wrap"
+                android:layout_width="@dimen/margin_160"
                 android:text="@={plans.replaceMentService}"
                 android:textColor="@color/grey_color"
                 app:customFont="@string/font_regular" />

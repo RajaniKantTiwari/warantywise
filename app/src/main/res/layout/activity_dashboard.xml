@@ -36,6 +36,7 @@
                 android:layout_margin="@dimen/margin_20"
                 app:elevation="@dimen/margin_8"
                 app:borderWidth="0dp"
+                app:backgroundTint="@color/button_text_color"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/close_icon"/>
         </RelativeLayout>

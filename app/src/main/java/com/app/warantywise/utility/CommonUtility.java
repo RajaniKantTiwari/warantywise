@@ -418,7 +418,7 @@ public class CommonUtility {
         plan1.setImageUrl("");
         plan1.setInsuranceCompanyName("Thomas cook");
         plan1.setInsuranceServiceName("Thomas cook product save insurance");
-        plan1.setInsurancePlanRate("Rs 765");
+        plan1.setInsurancePlanRate("765");
 
         insurancePlansList.add(plan1);
 
@@ -427,14 +427,14 @@ public class CommonUtility {
         plan2.setImageUrl("");
         plan2.setInsuranceCompanyName("Tata AIG");
         plan2.setInsuranceServiceName("Tata AUI insurance");
-        plan2.setInsurancePlanRate("Rs 665");
+        plan2.setInsurancePlanRate("665");
 
         insurancePlansList.add(plan2);
 
         InsurancePlan plan3 = new InsurancePlan();
         plan3.setImageUrl("");
         plan3.setInsuranceCompanyName("Reliance Insurance");
-        plan3.setInsurancePlanRate("Rs 865");
+        plan3.setInsurancePlanRate("865");
         plan3.setInsuranceServiceName("Reliance general product");
         insurancePlansList.add(plan3);
 
