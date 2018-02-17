@@ -46,7 +46,7 @@ public interface AppConstants {
     float TILT = 90;
     float BEARING = 45;
     int PLANHEIGHT = 48;
-    int INSURANCE_PLANHEIGHT = 52;
+    int INSURANCE_PLANHEIGHT = 54;
     int COVER_HEIGHT = 38;
     String MOBILE_NUMBER = "mobile_number";
     int DATE_OF_BIRTH=1;

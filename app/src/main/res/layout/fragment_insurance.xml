@@ -103,8 +103,8 @@
                         style="@style/match_wrap"/>
 
                     <com.app.warantywise.widget.CustomTextView
-                        android:layout_marginTop="@dimen/margin_25"
-                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginTop="@dimen/margin_18"
+                        android:layout_marginBottom="@dimen/margin_3"
                         style="@style/textview_description_wrap"
                         android:text="@string/you_can_also_choose_warranty_plan"
                         android:textColor="@color/button_text_color"
