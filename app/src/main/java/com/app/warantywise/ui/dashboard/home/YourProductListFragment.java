@@ -106,12 +106,14 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onBuyInsuranceClicked(int position) {
-
+        getDashboardActivity().addFragmentInContainer(new InsuranceChoiceFragment(),null,true
+                ,true, BaseActivity.AnimationType.NONE,false);
     }
 
     @Override
     public void onExtendClicked(int position) {
-
+        getDashboardActivity().addFragmentInContainer(new YourProductFragment(),null,true
+                ,true, BaseActivity.AnimationType.NONE,false);
     }
 
     @Override

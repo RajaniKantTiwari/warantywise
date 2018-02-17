@@ -12,6 +12,7 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.ProductRowItemBinding;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
+import com.app.warantywise.utility.CommonUtility;
 
 import java.util.ArrayList;
 
@@ -34,10 +35,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         void onWarrantyClicked(int position);
     }
+
     public ProductListAdapter(AppCompatActivity activity, ProductListListener listener) {
         mInflater = LayoutInflater.from(activity);
         this.activity = activity;
-        this.listener=listener;
+        this.listener = listener;
     }
 
     @Override
@@ -45,10 +47,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         ProductRowItemBinding mBinding = DataBindingUtil.inflate(mInflater, R.layout.product_row_item, parent, false);
         return new ProductViewHolder(mBinding);
     }
+
     public void setLocationList(ArrayList<ProductResponse> productList) {
         this.productList = productList;
         notifyDataSetChanged();
     }
+
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
 
@@ -79,15 +83,19 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         @Override
         public void onClick(View view) {
-            if(mBinding.tvWarranty==view){
+            if (mBinding.tvWarranty == view) {
+                CommonUtility.clicked(mBinding.tvWarranty);
                 listener.onWarrantyClicked(getAdapterPosition());
-            }else if(mBinding.tvExtend==view){
+            } else if (mBinding.tvExtend == view) {
+                CommonUtility.clicked(mBinding.tvExtend);
                 listener.onExtendClicked(getAdapterPosition());
-
-            }else if(mBinding.tvBuyInsurance==view){
+            } else if (mBinding.tvBuyInsurance == view) {
+                CommonUtility.clicked(mBinding.tvBuyInsurance);
                 listener.onBuyInsuranceClicked(getAdapterPosition());
 
-            }else if(mBinding.tvOffer==view){
+            } else if (mBinding.tvOffer == view) {
+                CommonUtility.clicked(mBinding.tvOffer);
+
                 listener.onOfferClicked(getAdapterPosition());
 
             }

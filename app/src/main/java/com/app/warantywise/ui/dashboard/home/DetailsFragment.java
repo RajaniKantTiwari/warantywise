@@ -20,6 +20,7 @@ import com.app.warantywise.network.response.dashboard.ReviewResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponseData;
 import com.app.warantywise.network.response.dashboard.StoreImages;
 import com.app.warantywise.ui.adapter.DetailsAdapter;
+import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.DashboardInsidePresenter;
 import com.app.warantywise.ui.dashboard.adapter.ImageAdapter;
@@ -120,7 +121,8 @@ public class DetailsFragment extends DashboardFragment implements
     public void onClick(View view) {
         if (view == mBinding.tvUnderWarranty) {
             CommonUtility.clicked(mBinding.tvUnderWarranty);
-            CommonUtility.showOrderDialog(getDashboardActivity(), null, this);
+            getDashboardActivity().addFragmentInContainer(new SystemServiceFragment(),null,true
+                    ,true, BaseActivity.AnimationType.NONE,false);
         }
     }
 

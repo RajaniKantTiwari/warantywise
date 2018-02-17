@@ -9,6 +9,7 @@ import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.ExplicitIntent;
+import com.app.warantywise.utility.PreferenceUtils;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -19,18 +20,12 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               /* if(WarantyApplication.isDebug){
+                if (PreferenceUtils.isLogin()) {
                     ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, DashBoardActivity.class);
-                }else{
-                    if (PreferenceUtils.isLogin()) {
-                        ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, DashBoardActivity.class);
-                    } else {
-                        ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
+                } else {
+                    ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
 
-                    }
-                }*/
-                //ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
-                ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, DashBoardActivity.class);
+                }
                 finish();
             }
         }, AppConstants.SPLASH_TIME);

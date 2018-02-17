@@ -13,6 +13,7 @@ import com.app.warantywise.databinding.FragmentYourProductBinding;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.InsurancePlansAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.PlansAdapter;
@@ -86,7 +87,8 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
     public void onClick(View view) {
         if (view == mBinding.tvBuy) {
             CommonUtility.clicked(mBinding.tvBuy);
-            // mFragmentNavigation.popFragment();
+            getDashboardActivity().addFragmentInContainer(new InsurancePaymentFragment(),null,true
+                    ,true, BaseActivity.AnimationType.NONE,false);
         }
     }
 

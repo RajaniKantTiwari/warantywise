@@ -114,6 +114,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             getDashboardActivity().finish();
             //updateProfile();
         } else if (mBinding.tvLogout == view) {
+            PreferenceUtils.setLogin(false);
             ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
         } else if (mBinding.tvAddPaymentMethod == view) {
             addChildView(numberOfPaymentMethod);
