@@ -81,10 +81,13 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
         mBinding.butLayout.tvNine.setOnClickListener(this);
         mBinding.butLayout.tvZero.setOnClickListener(this);
         mBinding.butLayout.layoutBack.setOnClickListener(this);
-        mBinding.headerLayout.ivDrawer.setOnClickListener(this);
+        mBinding.layoutHeader.ivDrawer.setOnClickListener(this);
     }
 
     public void initializeData() {
+        mBinding.layoutHeader.ivDrawer.setImageResource(R.drawable.ic_back);
+        mBinding.layoutHeader.ivDrawer.setPadding(CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this),
+                CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this));
         Intent intent = getIntent();
         mBinding.edFirst.setInputType(InputType.TYPE_NULL);
         mBinding.edSecond.setInputType(InputType.TYPE_NULL);
@@ -124,7 +127,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
             setText("0");
         } else if (view == mBinding.butLayout.layoutBack) {
            back();
-        }else if(view==mBinding.headerLayout.ivDrawer){
+        }else if(view==mBinding.layoutHeader.ivDrawer){
             finish();
         }
     }

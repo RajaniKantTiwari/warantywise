@@ -32,6 +32,14 @@ public class ExplicitIntent {
         activity.startActivity(intent);
         activity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
+
+    public void navigateFromLeftToRight(Activity activity, Class<?> aClass){
+        Intent intent = new Intent(activity,aClass);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(R.anim.animation_enter,
+                R.anim.animation_leave);
+    }
+
     public void clearPreviousNavigateTo(Activity activity, Class<?> aClass){
         Intent intent = new Intent(activity,aClass);
         // set the new task and clear flags
