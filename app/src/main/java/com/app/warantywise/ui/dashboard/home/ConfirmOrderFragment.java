@@ -10,11 +10,14 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentConfirmOrderBinding;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.drawer.HelpSupportFragment;
 import com.app.warantywise.ui.dashboard.notification.NotificationFragment;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
+
+import static com.app.warantywise.ui.base.BaseActivity.AnimationType.NONE;
 
 
 /**
@@ -59,10 +62,12 @@ public class ConfirmOrderFragment extends DashboardFragment {
     public void onClick(View view) {
         if (view == mBinding.tvRaiseAnIssue) {
             CommonUtility.clicked(mBinding.tvRaiseAnIssue);
-            ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), HelpSupportFragment.class);
+            getDashboardActivity().addFragmentInContainer(new HelpSupportFragment(), null, false, false, NONE,false);
         } else if (view == mBinding.tvHome) {
             CommonUtility.clicked(mBinding.tvHome);
-            getDashboardActivity().clearAllTopFragment(NotificationFragment.class.getSimpleName());
+            getDashboardActivity().clearAllBackStack();
+            getDashboardActivity().addFragmentInContainer(new NotificationFragment(),
+                    null,true,true, BaseActivity.AnimationType.NONE,false);
         }
     }
 

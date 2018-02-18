@@ -10,15 +10,8 @@
             type="com.app.warantywise.network.response.dashboard.ProductResponse" />
     </data>
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/layout"
-        style="@style/match_wrap"
-        android:layout_marginEnd="@dimen/margin_12"
-        android:layout_marginStart="@dimen/margin_13"
-        android:layout_marginTop="@dimen/margin_15"
-        android:gravity="center">
 
-        <android.support.v7.widget.CardView
+        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="@dimen/margin_180"
             android:layout_height="wrap_content"
             android:elevation="@dimen/margin_5"
@@ -26,16 +19,13 @@
 
             <LinearLayout
                 style="@style/match_match"
-                android:layout_margin="@dimen/margin_1"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/ivProduct"
                     android:layout_width="@dimen/margin_180"
                     android:layout_height="@dimen/margin_50"
-                    android:src="@drawable/shubh"
-                    android:background="@drawable/stroke_grey"
-                    android:scaleType="fitXY" />
+                    android:background="@drawable/stroke_grey" />
 
                 <com.app.warantywise.widget.CustomTextView
                     android:id="@+id/tvService"
@@ -83,5 +73,4 @@
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
-    </LinearLayout>
 </layout>

@@ -50,6 +50,8 @@ public class ShowWindowFragment extends Fragment implements View.OnClickListener
     private void initializeData() {
         Bundle bundle = getArguments();
         if(CommonUtility.isNotNull(bundle)){
+            GlideUtils.loadImageTwoRoundedCorner(activity,"https://api.androidhive.info/images/glide/large/cacw.jpg",
+                    mBinding.ivProduct,null,R.drawable.shubh,6,6,0,0);
             response=bundle.getParcelable(BundleConstants.PRODUCT_RESPONSE);
         }
     }
