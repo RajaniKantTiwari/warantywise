@@ -2,7 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout style="@style/match_match"
+    <FrameLayout
+        style="@style/match_match"
         android:background="@color/white">
 
         <ScrollView style="@style/match_match">
@@ -10,6 +11,7 @@
             <LinearLayout
                 style="@style/match_wrap"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -98,26 +100,36 @@
                         android:text="@string/choose_provider"
                         android:textColor="@color/button_text_color"
                         app:customFont="@string/font_bold" />
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvInsurancePlan"
-                        style="@style/match_wrap"/>
+                        style="@style/match_wrap" />
+
+                    <ImageView
+                        style="@style/view_layout"
+                        android:layout_marginBottom="@dimen/margin_3"
+                        android:layout_marginEnd="@dimen/margin_13_minus"
+                        android:layout_marginStart="@dimen/margin_13_minus"
+                        android:layout_marginTop="@dimen/margin_3" />
 
                     <com.app.warantywise.widget.CustomTextView
-                        android:layout_marginTop="@dimen/margin_18"
-                        android:layout_marginBottom="@dimen/margin_3"
                         style="@style/textview_description_wrap"
+                        android:layout_marginBottom="@dimen/margin_3"
+                        android:layout_marginTop="@dimen/margin_18"
                         android:text="@string/you_can_also_choose_warranty_plan"
                         android:textColor="@color/button_text_color"
                         app:customFont="@string/font_bold" />
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvPlan"
-                        android:layout_marginTop="@dimen/margin_5"
-                        style="@style/match_wrap" />
+                        style="@style/match_wrap"
+                        android:layout_marginTop="@dimen/margin_5" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+
         <include
             layout="@layout/layout_no_data_found"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </FrameLayout>
 </layout>

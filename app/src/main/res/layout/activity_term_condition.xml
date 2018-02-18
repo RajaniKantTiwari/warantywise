@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/match_match"
-        android:orientation="vertical">
-
-        <include
-            android:id="@+id/layoutHeader"
-            layout="@layout/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout style="@style/match_match">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            style="@style/match_match">
 
             <ScrollView
                 android:id="@+id/termCondition"
@@ -69,5 +60,4 @@
                 android:textSize="@dimen/button_large"
                 app:customFont="@string/font_bold" />
         </RelativeLayout>
-    </LinearLayout>
 </layout>

@@ -4,13 +4,16 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ActivityTermConditionBinding;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.presenter.CommonPresenter;
 import com.app.warantywise.ui.base.BaseActivity;
+import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
 
@@ -21,30 +24,34 @@ import javax.inject.Inject;
  * Created by ashok on 13/11/17.
  */
 
-public class TermConditionActivity extends BaseActivity {
+public class TermConditionFragment extends DashboardFragment {
 
     @Inject
     CommonPresenter presenter;
     private ActivityTermConditionBinding mBinding;
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.activity_term_condition, container, false);
+        return mBinding.getRoot();
+    }
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding=DataBindingUtil.setContentView(this,R.layout.activity_term_condition);
-        initializeData();
-        setListener();
+    public void initializeData() {
+        getDashboardActivity().setHeaderTitle(getResources().getString(R.string.term_and_condition));
+
     }
 
-    private void setListener() {
-        mBinding.layoutHeader.ivDrawer.setOnClickListener(this);
+    @Override
+    public void setListener() {
+
     }
 
-    private void initializeData() {
-        mBinding.layoutHeader.ivDrawer.setImageResource(R.drawable.ic_back);
-        mBinding.layoutHeader.ivDrawer.setPadding(CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this),
-                CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this));
-        mBinding.layoutHeader.tvHeading.setText(getResources().getString(R.string.term_and_condition));
+    @Override
+    public String getFragmentName() {
+        return null;
     }
 
     @Override
@@ -59,8 +66,6 @@ public class TermConditionActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
-      if(view==mBinding.layoutHeader.ivDrawer){
-          finish();
-      }
+
     }
 }

@@ -3,7 +3,6 @@ package com.app.warantywise.ui.dashboard;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,19 +22,15 @@ import com.app.warantywise.injector.module.DashboardModule;
 import com.app.warantywise.network.request.DeviceToken;
 import com.app.warantywise.network.request.DeviceTokenRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.ui.dashboard.drawer.HelpSupportActivity;
+import com.app.warantywise.ui.dashboard.drawer.HelpSupportFragment;
 import com.app.warantywise.ui.dashboard.home.DetailsFragment;
 import com.app.warantywise.ui.dashboard.home.HomeFragment;
-import com.app.warantywise.ui.dashboard.home.InsuranceChoiceFragment;
 import com.app.warantywise.ui.dashboard.home.InsurancePaymentFragment;
-import com.app.warantywise.ui.dashboard.home.SystemServiceFragment;
-import com.app.warantywise.ui.dashboard.home.YourProductListFragment;
 import com.app.warantywise.ui.dashboard.user.ProfileFragment;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.adapter.DrawerAdapterLeft;
 import com.app.warantywise.ui.dashboard.drawer.SeniorCitizenActivity;
-import com.app.warantywise.ui.dashboard.drawer.TermConditionActivity;
-import com.app.warantywise.ui.dashboard.drawer.WarantyActivity;
+import com.app.warantywise.ui.dashboard.drawer.TermConditionFragment;
 import com.app.warantywise.ui.dashboard.notification.NotificationFragment;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
@@ -85,7 +80,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 break;
             case AppConstants.HELP:
                 closeDrawerLeft();
-                ExplicitIntent.getsInstance().navigateTo(this, HelpSupportActivity.class);
+                openFragment(new HelpSupportFragment(), null, false, false, NONE,true);
                 break;
             case AppConstants.SENIOR_CITIZEN:
                 closeDrawerLeft();
@@ -93,7 +88,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 break;
             case AppConstants.TERM_CONDITION:
                 closeDrawerLeft();
-                ExplicitIntent.getsInstance().navigateTo(this, TermConditionActivity.class);
+                openFragment(new TermConditionFragment(), null, false, false, NONE,true);
                 break;
 
         }

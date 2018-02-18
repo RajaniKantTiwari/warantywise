@@ -127,7 +127,7 @@
                     android:id="@+id/tvOffer"
                     style="@style/btn_style"
                     android:textSize="@dimen/textSize_description"
-                    android:text="@string/offer"
+                    android:text="@string/offers"
                     android:textAllCaps="true"
                     android:textColor="@color/offer_btn_color"
                     app:customFont="@string/font_bold" />
