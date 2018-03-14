@@ -84,6 +84,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
 
     public void initializeData() {
         mBinding.layoutHeader.ivDrawer.setImageResource(R.drawable.ic_back);
+        mBinding.mobileNumber.setText(CommonUtility.addStrings(getResources().getString(R.string.to),PreferenceUtils.getUserMono()));
         mBinding.layoutHeader.ivDrawer.setPadding(CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this),
                 CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this));
         mBinding.edFirst.setInputType(InputType.TYPE_NULL);
@@ -199,7 +200,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
                             PreferenceUtils.setLogin(true);
 
                             //setToken();
-                            ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+                            ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, AddProductActivity.class);
                             finish();
                         } else {
                             hideKeyboard();

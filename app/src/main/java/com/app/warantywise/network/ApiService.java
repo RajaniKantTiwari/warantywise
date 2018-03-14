@@ -36,4 +36,9 @@ public interface ApiService {
     @POST("product/insertproductdetails")
     Observable<BaseResponse> addProduct(@Body AddProductRequest request);
 
+    @POST("product/getmyproducts")
+    Observable<BaseResponse> yourProduct();
+
+
+
 }

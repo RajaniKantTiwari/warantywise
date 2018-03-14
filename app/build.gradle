@@ -40,7 +40,7 @@ android {
             signingConfig signingConfigs.config
             applicationId 'com.app.warantywise'
             dimension "environment"
-            buildConfigField "String", "BASE_URL", "\"http://dev.warranteewise.in/rest/web/index.php/v1/\""
+            buildConfigField "String", "BASE_URL", "\"http://warranteewise.in/rest/web/index.php/v1/\""
         }
         qa {
             signingConfig signingConfigs.config

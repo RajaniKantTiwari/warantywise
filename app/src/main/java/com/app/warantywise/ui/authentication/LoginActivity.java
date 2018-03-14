@@ -83,7 +83,6 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
                 Bundle bundle=new Bundle();
                 bundle.putString(BundleConstants.USER_NAME,userName);
                 bundle.putString(BundleConstants.MOBILE_NUMBER,mobileNumber);
-                ExplicitIntent.getsInstance().navigateTo(this,VerifyAccountActivity.class,bundle);
                if(isNetworkConnected()){
                    presenter.getLoginDetail(this,new LoginRequest(userName,mobileNumber,
                            PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
