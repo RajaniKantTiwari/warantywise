@@ -45,17 +45,9 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
     }
 
     public void initializeData() {
-        try {
-            /*InstaceID instanceID = InstanceID.getInstance(this);
+        PreferenceUtils.setLatitude(28.544869);
+        PreferenceUtils.setLongitude(77.128134);
 
-            String token = instanceID.getAuthToken(getString(R.string.gcm_defaultSenderId),
-                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);*/
-
-            //Log.i(TAG, "GCM Registration Token: " + token);
-
-        } catch (Exception e) {
-            Log.d(TAG, "Failed to complete token refresh", e);
-        }
     }
 
     @Override
@@ -75,10 +67,7 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
                     if(type.equals(AppConstants.SUCCESS)){
                         PreferenceUtils.setUserName(userName);
                         PreferenceUtils.setUserMono(mobileNumber);
-                        Bundle bundle=new Bundle();
-                        bundle.putString(BundleConstants.USER_NAME,userName);
-                        bundle.putString(BundleConstants.MOBILE_NUMBER,mobileNumber);
-                        ExplicitIntent.getsInstance().navigateTo(this,VerifyAccountActivity.class,bundle);
+                        ExplicitIntent.getsInstance().navigateTo(this,VerifyAccountActivity.class);
                     }
                 }
             }
@@ -95,10 +84,10 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
                 bundle.putString(BundleConstants.USER_NAME,userName);
                 bundle.putString(BundleConstants.MOBILE_NUMBER,mobileNumber);
                 ExplicitIntent.getsInstance().navigateTo(this,VerifyAccountActivity.class,bundle);
-               /*if(isNetworkConnected()){
+               if(isNetworkConnected()){
                    presenter.getLoginDetail(this,new LoginRequest(userName,mobileNumber,
                            PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
-               }*/
+               }
            }
         }
     }

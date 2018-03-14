@@ -40,8 +40,6 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
     StringBuilder otpNumber = new StringBuilder();
     @Inject
     CommonPresenter presenter;
-    private String userName;
-    private String mobileNumber;
 
 
     @Override
@@ -88,19 +86,11 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
         mBinding.layoutHeader.ivDrawer.setImageResource(R.drawable.ic_back);
         mBinding.layoutHeader.ivDrawer.setPadding(CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this),
                 CommonUtility.convertDpToPx(AppConstants.PADDING, this), CommonUtility.convertDpToPx(AppConstants.PADDING, this));
-        Intent intent = getIntent();
         mBinding.edFirst.setInputType(InputType.TYPE_NULL);
         mBinding.edSecond.setInputType(InputType.TYPE_NULL);
         mBinding.edThird.setInputType(InputType.TYPE_NULL);
         mBinding.edFourth.setInputType(InputType.TYPE_NULL);
-        if (isNotNull(intent)) {
-            Bundle bundle = intent.getExtras();
-            if (isNotNull(bundle)) {
-                mobileNumber = bundle.getString(BundleConstants.MOBILE_NUMBER);
-                userName = bundle.getString(BundleConstants.USER_NAME);
-                mBinding.mobileNumber.setText(getResources().getString(R.string.to)+" "+mobileNumber);
-            }
-        }
+
     }
 
     @Override
@@ -272,8 +262,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
     public void afterTextChanged(Editable s) {
         if (otpNumber.length() == 4) {
             PreferenceUtils.setLogin(true);
-             ExplicitIntent.getsInstance().navigateTo(this,AddProductActivity.class);
-            //presenter.verifyMobileNumber(this, new VerifyMobileRequest(mobileNumber, Integer.parseInt(otpNumber.toString())));
+            presenter.verifyMobileNumber(this, new VerifyMobileRequest(PreferenceUtils.getUserMono(), Integer.parseInt(otpNumber.toString())));
         }
     }
 
@@ -302,8 +291,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
 
     @Override
     public void ok(String str) {
-        mobileNumber = str;
-        presenter.getLoginDetail(this, new LoginRequest(userName, mobileNumber,
+        presenter.getLoginDetail(this, new LoginRequest(PreferenceUtils.getUserName(), PreferenceUtils.getUserMono(),
                 PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
         hideKeyboard();
     }

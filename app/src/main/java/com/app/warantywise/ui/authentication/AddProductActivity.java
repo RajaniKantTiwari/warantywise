@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ActivityAddProductBinding;
+import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.presenter.CommonPresenter;
@@ -26,13 +27,11 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import net.alhazmy13.mediapicker.Image.ImagePicker;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.fabric.sdk.android.services.common.CommonUtils;
 import okhttp3.MultipartBody;
 
 /**
@@ -105,15 +104,18 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     @Override
     public void attachView() {
-
+        getActivityComponent().inject(this);
+        presenter.attachView(this);
     }
 
     @Override
     public void onClick(View view) {
         if (mBinding.tvSubmit == view) {
             CommonUtility.clicked(mBinding.tvSubmit);
-            //setToken();
             if (isValid()) {
+                AddProductRequest request = new AddProductRequest();
+                setData(request);
+                presenter.addProduct(this, request);
                 ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
             }
         } else if (mBinding.tvPurchaseDate == view) {
@@ -127,6 +129,26 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             mBinding.radioNo.setChecked(true);
         } else if (mBinding.headerLayout.ivDrawer == view) {
             finish();
+        }
+    }
+
+    private void setData(AddProductRequest request) {
+        request.setProduct_name(productName);
+        request.setCompany_id(companyName);
+        request.setSerial_no(serialNumber);
+        request.setPurchase_date(purchaseDate);
+        request.setExtended_warranty(mBinding.radioYes.isChecked() ? "yes" : "no");
+        if (productList.get(0).getImageUrl() != null && productList.get(0).getImageUrl().length() > 0) {
+             request.setProduct_image(productList.get(0).getImageUrl());
+        }
+        if (productList.get(1).getImageUrl() != null && productList.get(1).getImageUrl().length() > 0) {
+
+        }
+        if (productList.get(2).getImageUrl() != null && productList.get(2).getImageUrl().length() > 0) {
+            request.setBarcode_image(productList.get(2).getImageUrl());
+        }
+        if (productList.get(3).getImageUrl() != null && productList.get(3).getImageUrl().length() > 0) {
+
         }
     }
 
@@ -147,26 +169,24 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 && (isNotNull(serialNumber) && serialNumber.trim().length() > 0)
                 && (isNotNull(purchaseDate) && purchaseDate.trim().length() > 0)
                 && (isNotNull(warrantyPeriod) && warrantyPeriod.trim().length() > 0)
-                &&docNumber>=2) {
+                && docNumber >= 2) {
             return true;
-        }else if (isNull(productName) || productName.trim().length() == 0) {
+        } else if (isNull(productName) || productName.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_product_name));
             return false;
-        }
-        else if (isNull(companyName) || companyName.trim().length() == 0) {
+        } else if (isNull(companyName) || companyName.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_company_name));
             return false;
-        }
-        else if (isNull(serialNumber) || serialNumber.trim().length() == 0) {
+        } else if (isNull(serialNumber) || serialNumber.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_serial_number));
             return false;
-        }else if (isNull(purchaseDate) || purchaseDate.trim().length() == 0) {
+        } else if (isNull(purchaseDate) || purchaseDate.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_purchase_date));
             return false;
-        }else if (isNull(warrantyPeriod) || warrantyPeriod.trim().length() == 0) {
+        } else if (isNull(warrantyPeriod) || warrantyPeriod.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_Warranty_period));
             return false;
-        }else if (docNumber<2) {
+        } else if (docNumber < 2) {
             showToast(getResources().getString(R.string.please_select_two_document));
             return false;
         }

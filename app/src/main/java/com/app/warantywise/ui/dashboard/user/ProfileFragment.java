@@ -54,7 +54,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     FragmentEdProfileBinding mBinding;
     private static String TAG = ProfileFragment.class.getSimpleName();
     private List<PaymentOption> paymentList = new ArrayList<>();
-    private List<View> viewList=new ArrayList<>();
+    private List<View> viewList = new ArrayList<>();
     private ProfileSettingsAdapter settingAdapter;
     private String profilePicFilePath;
     private int numberOfPaymentMethod;
@@ -97,12 +97,17 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
-
+        if (CommonUtility.isNotNull(response)) {
+            if (requestCode == AppConstants.LOGOUT) {
+                PreferenceUtils.setLogin(false);
+                ExplicitIntent.getsInstance().clearPreviousNavigateTo(getDashboardActivity(), LoginActivity.class);
+            }
+        }
     }
 
     @Override
     public void attachView() {
-
+        getPresenter().attachView(this);
     }
 
     @Override
@@ -110,15 +115,10 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
         if (mBinding.ivProfile == view || mBinding.imgEditPic == view) {
             showImageChooserDialog();
         } else if (mBinding.tvLogout == view) {
-            ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
-            getDashboardActivity().finish();
-            //updateProfile();
-        } else if (mBinding.tvLogout == view) {
-            PreferenceUtils.setLogin(false);
-            ExplicitIntent.getsInstance().navigateTo(getDashboardActivity(), LoginActivity.class);
+            getPresenter().logout(getDashboardActivity());
         } else if (mBinding.tvAddPaymentMethod == view) {
             addChildView(numberOfPaymentMethod);
-        }else if(mBinding.layoutPassword==view||mBinding.layoutProfile==view|| mBinding.layoutEmail==view){
+        } else if (mBinding.layoutPassword == view || mBinding.layoutProfile == view || mBinding.layoutEmail == view) {
             showProfileDialog();
         }
     }
@@ -307,7 +307,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
                             } else {
                                 option.setChecked(true);
                             }
-                            ((RadioButton)viewList.get(i).findViewById(R.id.radioButton)).setChecked(option.isChecked());
+                            ((RadioButton) viewList.get(i).findViewById(R.id.radioButton)).setChecked(option.isChecked());
                         }
                     }
                 }

@@ -2,6 +2,7 @@ package com.app.warantywise.network;
 
 
 import com.app.warantywise.network.request.LoginRequest;
+import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.response.BaseResponse;
@@ -31,4 +32,8 @@ public interface ApiService {
 
     @GET("register/logout")
     Observable<BaseResponse> logout();
+
+    @POST("product/insertproductdetails")
+    Observable<BaseResponse> addProduct(@Body AddProductRequest request);
+
 }

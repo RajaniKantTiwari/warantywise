@@ -1,5 +1,6 @@
 package com.app.warantywise.network;
 
+import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
@@ -44,6 +45,11 @@ public class RetrofitRepository implements Repository {
     @Override
     public Observable<BaseResponse> logout() {
         return apiService.logout();
+    }
+
+    @Override
+    public Observable<BaseResponse> addProduct(AddProductRequest request) {
+        return apiService.addProduct(request);
     }
 
 
