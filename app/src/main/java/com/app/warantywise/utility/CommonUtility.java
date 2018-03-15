@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
@@ -628,5 +630,9 @@ public class CommonUtility {
             capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
         }
         return capMatcher.appendTail(capBuffer).toString();
+    }
+    public static Bitmap getBitmap(String profilePicFilePath) {
+        return BitmapFactory.decodeFile(profilePicFilePath);
+
     }
 }

@@ -36,7 +36,7 @@ public interface AppConstants {
     int REQUEST_CALL = 1;
 
     long SPLASH_TIME = 3000;
-    int CORNER_RADIUS = 10;
+    int CORNER_RADIUS = 6;
     int LIST_PRODUCT = 1;
     int MAP_PRODUCT = 2;
     String RESPONSE = "response";
@@ -52,6 +52,10 @@ public interface AppConstants {
     int DATE_OF_BIRTH=1;
     int ANIVERSARY=2;
     int PADDING = 17;
+    int PRODUCT_IMAGE = 0;
+    int BILL_IMAGE=1;
+    int BARCODE_IMAGE = 2;
+    int WARRANTY_CARD_IMAGE = 3;
 
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT,MERCHANT_MAP_FRAGMENT,

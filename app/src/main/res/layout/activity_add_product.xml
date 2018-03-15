@@ -44,6 +44,8 @@
                 android:id="@+id/tvProductName"
                 style="@style/edittext_add_product"
                 android:hint="@string/nokia"
+                android:imeOptions="actionNext"
+                android:inputType="text"
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView
@@ -55,6 +57,8 @@
                 android:id="@+id/tvCompanyName"
                 style="@style/edittext_add_product"
                 android:hint="@string/type_name_mention_on_bill"
+                android:imeOptions="actionNext"
+                android:inputType="text"
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView
@@ -65,6 +69,8 @@
             <com.app.warantywise.widget.CustomEditText
                 android:id="@+id/tvSerialNumber"
                 style="@style/edittext_add_product"
+                android:imeOptions="actionNext"
+                android:inputType="text"
                 android:hint="@string/product_serial_number"
                 app:customFont="@string/font_regular" />
 
@@ -89,6 +95,7 @@
                 android:id="@+id/tvWarrantyPeriod"
                 style="@style/edittext_add_product"
                 android:hint="@string/one_year"
+                android:inputType="text"
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView

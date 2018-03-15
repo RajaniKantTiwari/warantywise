@@ -417,6 +417,8 @@
         <item name="android:padding">@dimen/margin_6</item>
         <item name="android:background">@drawable/grey_corner_bg</item>
         <item name="android:textColorHint">@color/text_hint_color</item>
+        <item name="android:maxLines">1</item>
+
 
     </style>
 

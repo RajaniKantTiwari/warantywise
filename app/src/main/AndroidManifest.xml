@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.authentication.AddProductActivity"
             android:clearTaskOnLaunch="true"
             android:theme="@style/ThemeFullScreen">
 
@@ -41,7 +41,7 @@
         <activity android:name=".ui.dashboard.drawer.HelpActivity" />
         <activity android:name=".ui.dashboard.drawer.SeniorCitizenActivity" />
         <activity android:name=".ui.dashboard.drawer.WarantyActivity" />
-        <activity android:name=".ui.authentication.AddProductActivity" />
+       <!-- <activity android:name=".ui.authentication.AddProductActivity" />-->
         <!--Crop Activity-->
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"

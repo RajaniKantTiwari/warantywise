@@ -15,6 +15,8 @@ public class AddProductRequest {
     private String company_id;
     private String product_image;
     private String barcode_image;
+    private String billImage;
+    private String warrantyCardImage;
 
     public String getProduct_name() {
         return product_name;
@@ -94,5 +96,21 @@ public class AddProductRequest {
 
     public void setBarcode_image(String barcode_image) {
         this.barcode_image = barcode_image;
+    }
+
+    public void setBillImage(String billImage) {
+        this.billImage = billImage;
+    }
+
+    public String getBillImage() {
+        return billImage;
+    }
+
+    public void setWarrantyCardImage(String warrantyCardImage) {
+        this.warrantyCardImage = warrantyCardImage;
+    }
+
+    public String getWarrantyCardImage() {
+        return warrantyCardImage;
     }
 }

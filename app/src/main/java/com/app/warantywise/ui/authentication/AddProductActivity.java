@@ -11,12 +11,14 @@ import android.view.View;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ActivityAddProductBinding;
+import com.app.warantywise.event.EncodedBitmap;
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.presenter.CommonPresenter;
 import com.app.warantywise.ui.adapter.ProductAdapter;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
+import com.app.warantywise.ui.uploadfile.UploadImage;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
@@ -26,6 +28,8 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import net.alhazmy13.mediapicker.Image.ImagePicker;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,10 +59,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private String purchaseDate;
     private String warrantyPeriod;
     private int docNumber;
+    private AddProductRequest request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CommonUtility.register(this);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_product);
         initializeData();
         setListener();
@@ -74,6 +80,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     }
 
     private void initializeData() {
+       request = new AddProductRequest();
         setList();
         mBinding.headerLayout.ivDrawer.setVisibility(View.GONE);
         mBinding.headerLayout.tvHeading.setText(getResources().getString(R.string.add_product));
@@ -113,10 +120,9 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         if (mBinding.tvSubmit == view) {
             CommonUtility.clicked(mBinding.tvSubmit);
             if (isValid()) {
-                AddProductRequest request = new AddProductRequest();
                 setData(request);
                 presenter.addProduct(this, request);
-                ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+                //ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
             }
         } else if (mBinding.tvPurchaseDate == view) {
             CommonUtility.openDatePicker(this);
@@ -138,18 +144,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         request.setSerial_no(serialNumber);
         request.setPurchase_date(purchaseDate);
         request.setExtended_warranty(mBinding.radioYes.isChecked() ? "yes" : "no");
-        if (productList.get(0).getImageUrl() != null && productList.get(0).getImageUrl().length() > 0) {
-             request.setProduct_image(productList.get(0).getImageUrl());
-        }
-        if (productList.get(1).getImageUrl() != null && productList.get(1).getImageUrl().length() > 0) {
-
-        }
-        if (productList.get(2).getImageUrl() != null && productList.get(2).getImageUrl().length() > 0) {
-            request.setBarcode_image(productList.get(2).getImageUrl());
-        }
-        if (productList.get(3).getImageUrl() != null && productList.get(3).getImageUrl().length() > 0) {
-
-        }
     }
 
     private boolean isValid() {
@@ -195,7 +189,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
-
+         ExplicitIntent.getsInstance().clearPreviousNavigateTo(this,DashBoardActivity.class);
     }
 
     @Override
@@ -224,13 +218,23 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         profilePicFilePath = filePath;
         if (productList.size() > adapterPosition) {
             Product product = productList.get(adapterPosition);
-            product.setImageUrl(profilePicFilePath);
+            if(CommonUtility.isNotNull(profilePicFilePath)&&profilePicFilePath.length()>0){
+                storeImage(adapterPosition, profilePicFilePath);
+                product.setImageUrl(profilePicFilePath);
+            }
             productList.set(adapterPosition, product);
             productAdapter.notifyDataSetChanged();
         }
         //loadImageToServer();
     }
-
+    private void storeImage(int type, String imageUrl) {
+        try {
+            UploadImage postImage = new UploadImage(this, CommonUtility.getBitmap(imageUrl), type);
+            postImage.execute();
+        } catch (Exception e) {
+            LogUtils.LOGE("StoreImage", e.toString());
+        }
+    }
     private void gotoCropper(Uri sourceUri) {
         CropImage.activity(sourceUri).setAspectRatio(1, 1)
                 .setGuidelines(CropImageView.Guidelines.ON)
@@ -240,7 +244,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     @Override
     public void onItemClick(int position) {
         adapterPosition = position;
-
         showImageChooserDialog();
     }
 
@@ -334,11 +337,29 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
 
     }
-
+    @Subscribe
+    public void onImageEncoded(EncodedBitmap event) {
+        int type = event.getType();
+        if (type == AppConstants.PRODUCT_IMAGE) {
+            request.setProduct_image(event.getEncodeImage());
+        } else if (type == AppConstants.BILL_IMAGE) {
+            request.setBillImage(event.getEncodeImage());
+        } else if (type == AppConstants.BARCODE_IMAGE) {
+            request.setBarcode_image(event.getEncodeImage());
+        } else if (type == AppConstants.WARRANTY_CARD_IMAGE) {
+            request.setWarrantyCardImage(event.getEncodeImage());
+        }
+    }
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         String month = CommonUtility.getMonth(monthOfYear);
         String date = dayOfMonth + " " + month + " " + year;
         mBinding.tvPurchaseDate.setText(date);
+    }
+
+    @Override
+    protected void onDestroy() {
+        CommonUtility.unregister(this);
+        super.onDestroy();
     }
 }

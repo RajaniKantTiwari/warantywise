@@ -195,6 +195,7 @@
     <string name="your_product">Your Product</string>
     <string name="details">Details</string>
     <string name="system_service">System Service</string>
+    <string name="cap_small_letter_with_space">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz</string>
 
 
     <string-array name="left_drawer">
