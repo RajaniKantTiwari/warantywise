@@ -5,9 +5,11 @@ import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
+import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
+import com.app.warantywise.network.response.dashboard.GetProductDetailData;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
 import com.app.warantywise.network.response.dashboard.ReviewResponseData;
 
@@ -38,6 +40,10 @@ public interface ApiService {
 
     @POST("product/getmyproducts")
     Observable<BaseResponse> yourProduct();
+
+    @POST("product/getproductdetails")
+    Observable<GetProductDetailData> getProductDetails(@Body ProductDetailsRequest request);
+
 
 
 

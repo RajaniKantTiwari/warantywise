@@ -3,14 +3,12 @@ package com.app.warantywise.network;
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
-import com.app.warantywise.network.request.dashboard.MerchantRequest;
+import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
-import com.app.warantywise.network.response.dashboard.MerchantResponseData;
-import com.app.warantywise.network.response.dashboard.ReviewResponseData;
+import com.app.warantywise.network.response.dashboard.GetProductDetailData;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
 
@@ -33,16 +31,6 @@ public class RetrofitRepository implements Repository {
     }
 
     @Override
-    public Observable<MerchantResponseData> getMerchantDetail(MerchantRequest merchantRequest) {
-        return apiService.getMerchantDetails(merchantRequest);
-    }
-
-    @Override
-    public Observable<ReviewResponseData> getMerchantReviews(MerchantRequest merchantRequest) {
-        return apiService.getMerchantReviews(merchantRequest);
-    }
-
-    @Override
     public Observable<BaseResponse> logout() {
         return apiService.logout();
     }
@@ -50,6 +38,16 @@ public class RetrofitRepository implements Repository {
     @Override
     public Observable<BaseResponse> addProduct(AddProductRequest request) {
         return apiService.addProduct(request);
+    }
+
+    @Override
+    public Observable<BaseResponse> yourProduct() {
+        return apiService.yourProduct();
+    }
+
+    @Override
+    public Observable<GetProductDetailData> getProductDetails(ProductDetailsRequest request) {
+        return apiService.getProductDetails(request);
     }
 
 

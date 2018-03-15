@@ -13,16 +13,15 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentDetailsBinding;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
+import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponse;
 import com.app.warantywise.network.response.dashboard.ReviewResponseData;
-import com.app.warantywise.network.response.dashboard.StoreImages;
 import com.app.warantywise.ui.adapter.DetailsAdapter;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
-import com.app.warantywise.ui.dashboard.DashboardInsidePresenter;
 import com.app.warantywise.ui.dashboard.adapter.ImageAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.ReviewAdapter;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
@@ -40,11 +39,6 @@ public class DetailsFragment extends DashboardFragment implements
     private FragmentDetailsBinding mBinding;
     private ReviewAdapter mReviewAdapter;
     private ArrayList<ReviewResponse> reviewList;
-
-    private ProductResponse merchantResponse;
-    @Inject
-    DashboardInsidePresenter presenter;
-
     private DetailsAdapter detailsAdapter;
     private List<Product> productList = new ArrayList<>();
 
@@ -68,8 +62,7 @@ public class DetailsFragment extends DashboardFragment implements
 
     @Override
     public void attachView() {
-        getActivityComponent().inject(this);
-        presenter.attachView(this);
+        getPresenter().attachView(this);
     }
 
     public void setListener() {
@@ -82,19 +75,12 @@ public class DetailsFragment extends DashboardFragment implements
     }
 
     public void initializeData() {
-        Bundle bundle = getArguments();
-        if (CommonUtility.isNotNull(bundle)) {
-            merchantResponse = bundle.getParcelable(AppConstants.RESPONSE);
-        }
         reviewList = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvReview.setLayoutManager(layoutManager);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
-        if (CommonUtility.isNotNull(merchantResponse)) {
-            presenter.getMerchantDetails(getDashboardActivity(), new MerchantRequest(Integer.parseInt(merchantResponse.getId())));
-            presenter.getMerchantReviews(getDashboardActivity(), new MerchantRequest(Integer.parseInt("8")));
-        }
+        getPresenter().getProductDetails(getDashboardActivity(),new ProductDetailsRequest(1));
 
     }
 

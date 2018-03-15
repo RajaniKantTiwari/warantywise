@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentSystemServiceBinding;
-import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
@@ -25,7 +24,6 @@ import com.app.warantywise.network.response.dashboard.ReviewResponseData;
 import com.app.warantywise.network.response.dashboard.StoreImages;
 import com.app.warantywise.ui.activity.ZoomAnimationImageActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
-import com.app.warantywise.ui.dashboard.DashboardInsidePresenter;
 import com.app.warantywise.ui.dashboard.adapter.ImageAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.ReviewAdapter;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
@@ -33,7 +31,6 @@ import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
-import com.app.warantywise.utility.GlideUtils;
 import com.app.warantywise.utility.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -41,7 +38,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import static android.content.ContentValues.TAG;
-import static com.app.warantywise.utility.AppConstants.PERMISSIONS_REQUEST_LOCATION;
 import static com.app.warantywise.utility.AppConstants.REQUEST_CALL;
 
 public class SystemServiceFragment extends DashboardFragment implements FeedbackDialogFragment.FeedbackDialogListener,ImageAdapter.ImageListener {
@@ -52,8 +48,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
     private ArrayList<ReviewResponse> reviewList;
 
     private ProductResponse merchantResponse;
-    @Inject
-    DashboardInsidePresenter presenter;
+
     private ArrayList<StoreImages> imageList;
     private Intent callIntent;
 
@@ -76,8 +71,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
 
     @Override
     public void attachView() {
-        getActivityComponent().inject(this);
-        presenter.attachView(this);
+
     }
 
     public void setListener() {
@@ -102,10 +96,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
         mBinding.photoRecycler.setAdapter(mImageAdapter);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
-        if (CommonUtility.isNotNull(merchantResponse)) {
-            presenter.getMerchantDetails(getDashboardActivity(), new MerchantRequest(Integer.parseInt(merchantResponse.getId())));
-            presenter.getMerchantReviews(getDashboardActivity(), new MerchantRequest(Integer.parseInt("8")));
-        }
+
 
     }
 

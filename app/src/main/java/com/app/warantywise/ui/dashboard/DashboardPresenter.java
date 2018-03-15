@@ -6,6 +6,7 @@ import android.app.Activity;
 import com.app.warantywise.network.DefaultApiObserver;
 import com.app.warantywise.network.Repository;
 import com.app.warantywise.network.request.DeviceTokenRequest;
+import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.ui.base.MvpView;
@@ -56,4 +57,40 @@ public class DashboardPresenter implements Presenter<MvpView> {
     }
 
 
+    public void yourProduct(DashBoardActivity activity) {
+        mView.showProgress();
+        mRepository.yourProduct().
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+            @Override
+            public void onResponse(BaseResponse response) {
+                mView.hideProgress();
+                mView.onSuccess(response, AppConstants.LOGOUT);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(baseResponse.getMsg(), AppConstants.LOGOUT);
+            }
+        });
+    }
+
+    public void getProductDetails(DashBoardActivity activity, ProductDetailsRequest request) {
+        mRepository.getProductDetails(request).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+            @Override
+            public void onResponse(BaseResponse response) {
+                mView.hideProgress();
+                mView.onSuccess(response, AppConstants.LOGOUT);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(baseResponse.getMsg(), AppConstants.LOGOUT);
+            }
+        });
+    }
 }

@@ -20,7 +20,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.app.warantywise.injector.scope.PerActivity;
 import com.app.warantywise.network.Repository;
-import com.app.warantywise.ui.dashboard.DashboardInsidePresenter;
 import com.app.warantywise.ui.dashboard.DashboardPresenter;
 
 import dagger.Module;
@@ -42,11 +41,6 @@ public class DashboardModule {
     DashboardPresenter provideDashboardPresenter(Repository repository) {
         return new DashboardPresenter(repository);
     }
-    //to get DashboardPresenter Object
-    @Provides
-    @PerActivity
-    DashboardInsidePresenter provideDashboardInsidePresenter(Repository repository) {
-        return new DashboardInsidePresenter(repository);
-    }
+
 
 }

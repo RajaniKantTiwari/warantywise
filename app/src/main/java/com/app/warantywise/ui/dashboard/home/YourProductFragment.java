@@ -47,7 +47,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
 
     @Override
     public void attachView() {
-
+      getPresenter().attachView(this);
     }
 
     @Override
@@ -82,6 +82,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
         mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
         mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
         //end
+        getPresenter().yourProduct(getDashboardActivity());
     }
 
     @Override
