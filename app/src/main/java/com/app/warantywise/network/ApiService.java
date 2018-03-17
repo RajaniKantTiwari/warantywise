@@ -3,15 +3,16 @@ package com.app.warantywise.network;
 
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.AddProductRequest;
+import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
-import com.app.warantywise.network.request.dashboard.MerchantRequest;
+import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
-import com.app.warantywise.network.response.dashboard.GetProductDetailData;
-import com.app.warantywise.network.response.dashboard.MerchantResponseData;
-import com.app.warantywise.network.response.dashboard.ReviewResponseData;
+import com.app.warantywise.network.response.dashboard.AllProductData;
+import com.app.warantywise.network.response.dashboard.ProductDetailData;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -26,11 +27,8 @@ public interface ApiService {
     @POST("register/verifyotp")
     Observable<VerifyMobileResponse> verifyMobileNumber(@Body VerifyMobileRequest request);
 
-    @POST("merchant/getmerchantreviews")
-    Observable<ReviewResponseData> getMerchantReviews(@Body MerchantRequest merchantRequest);
-
-    @POST("merchant/getmerchantdetails")
-    Observable<MerchantResponseData> getMerchantDetails(@Body MerchantRequest request);
+    @POST("register/updateprofile")
+    Observable<BaseResponse> updateProfile(@Body UpdateProfileRequest request);
 
     @GET("register/logout")
     Observable<BaseResponse> logout();
@@ -38,11 +36,17 @@ public interface ApiService {
     @POST("product/insertproductdetails")
     Observable<BaseResponse> addProduct(@Body AddProductRequest request);
 
+    @POST("product/getallmasterproducts")
+    Observable<AllProductData> getAllProductList();
+
+    @POST("product/getmasterproducts")
+    Observable<ProductDetailData> getProductDetails(@Body ProductDetailsRequest request);
+
     @POST("product/getmyproducts")
     Observable<BaseResponse> yourProduct();
 
-    @POST("product/getproductdetails")
-    Observable<GetProductDetailData> getProductDetails(@Body ProductDetailsRequest request);
+    @POST("product/get_warrantee_card_image")
+    Observable<WarrantyCardImageData> warranteeCardImage(@Body WarrantyCardImageRequest request);
 
 
 

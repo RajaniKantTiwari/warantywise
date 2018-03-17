@@ -4,18 +4,24 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ActivityAddProductBinding;
 import com.app.warantywise.event.EncodedBitmap;
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.Product;
+import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.AllProduct;
+import com.app.warantywise.network.response.dashboard.AllProductData;
 import com.app.warantywise.presenter.CommonPresenter;
+import com.app.warantywise.ui.adapter.AsignAdapter;
 import com.app.warantywise.ui.adapter.ProductAdapter;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
 import com.app.warantywise.ui.uploadfile.UploadImage;
@@ -60,6 +66,9 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private String warrantyPeriod;
     private int docNumber;
     private AddProductRequest request;
+    private ArrayList<AllProduct> arrayList;
+    private AsignAdapter adapter;
+    private ArrayList productNameList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +85,10 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.tvPurchaseDate.setOnClickListener(this);
         mBinding.layoutYes.setOnClickListener(this);
         mBinding.layoutNo.setOnClickListener(this);
-
     }
 
     private void initializeData() {
-       request = new AddProductRequest();
+        request = new AddProductRequest();
         setList();
         mBinding.headerLayout.ivDrawer.setVisibility(View.GONE);
         mBinding.headerLayout.tvHeading.setText(getResources().getString(R.string.add_product));
@@ -89,6 +97,43 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.rvDocument.setLayoutManager(layoutManager);
         productAdapter = new ProductAdapter(this, productList, this);
         mBinding.rvDocument.setAdapter(productAdapter);
+        presenter.getAllProductList(this);
+        arrayList=new ArrayList<>();
+        setTitleList();
+        productNameList = new ArrayList<>();
+        for (int i = 0; i < arrayList.size(); i++) {
+            productNameList.add(arrayList.get(i).getName());
+        }
+        adapter = new AsignAdapter(this, productNameList);
+        adapter.setDropDownViewResource(R.layout.spinner_row);
+        mBinding.selectedSpiner.setAdapter(adapter);
+        mBinding.selectedSpiner.setSelection(adapter.getCount());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                arrayList.clear();
+                for (int i=0;i<10;i++){
+                  setInList(i);
+                }
+                setSpinnerData(arrayList);
+            }
+        },1000);
+
+    }
+
+    private void setInList(int i) {
+        AllProduct allProduct = new AllProduct();
+        allProduct.setId(i);
+        allProduct.setName("Name "+i);
+        arrayList.add(allProduct);
+    }
+
+    private void setTitleList() {
+        AllProduct allProduct = new AllProduct();
+        allProduct.setId(-1);
+        allProduct.setName(getResources().getString(R.string.product_name));
+        arrayList.add(allProduct);
     }
 
     private void setList() {
@@ -122,7 +167,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             if (isValid()) {
                 setData(request);
                 presenter.addProduct(this, request);
-                //ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
             }
         } else if (mBinding.tvPurchaseDate == view) {
             CommonUtility.openDatePicker(this);
@@ -153,7 +197,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 docNumber = docNumber + 1;
             }
         }
-        productName = mBinding.tvProductName.getText().toString();
+        productName = mBinding.selectedSpiner.getSelectedItem().toString();
         companyName = mBinding.tvCompanyName.getText().toString();
         serialNumber = mBinding.tvSerialNumber.getText().toString();
         purchaseDate = mBinding.tvPurchaseDate.getText().toString();
@@ -189,7 +233,45 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
-         ExplicitIntent.getsInstance().clearPreviousNavigateTo(this,DashBoardActivity.class);
+        if (CommonUtility.isNotNull(response)) {
+            if (requestCode == AppConstants.PRODUCT_LIST) {
+                AllProductData data = (AllProductData) response;
+                if (CommonUtility.isNotNull(data)) {
+                    arrayList = data.getInfo();
+                    if (CommonUtility.isNotNull(arrayList) && arrayList.size() > 0) {
+                        setTitleList();
+                        setSpinnerData(arrayList);
+                    }
+                }
+            }
+        }
+        ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+    }
+
+    private void setSpinnerData(ArrayList<AllProduct> arrayList) {
+        productNameList.clear();
+        for (int i = 0; i < arrayList.size(); i++) {
+            productNameList.add(arrayList.get(i).getName());
+        }
+        adapter.notifyDataSetChanged();
+        mBinding.selectedSpiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != productNameList.size() - 1) {
+                    if (CommonUtility.isNotNull(view)) {
+                        view.setBackgroundResource(0);
+                    }
+                    if (CommonUtility.isNotNull(arrayList) && arrayList.size() > position) {
+                        presenter.getProductDetails(AddProductActivity.this,new ProductDetailsRequest(arrayList.get(position).getName()));
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -218,7 +300,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         profilePicFilePath = filePath;
         if (productList.size() > adapterPosition) {
             Product product = productList.get(adapterPosition);
-            if(CommonUtility.isNotNull(profilePicFilePath)&&profilePicFilePath.length()>0){
+            if (CommonUtility.isNotNull(profilePicFilePath) && profilePicFilePath.length() > 0) {
                 storeImage(adapterPosition, profilePicFilePath);
                 product.setImageUrl(profilePicFilePath);
             }
@@ -227,6 +309,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         }
         //loadImageToServer();
     }
+
     private void storeImage(int type, String imageUrl) {
         try {
             UploadImage postImage = new UploadImage(this, CommonUtility.getBitmap(imageUrl), type);
@@ -235,6 +318,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             LogUtils.LOGE("StoreImage", e.toString());
         }
     }
+
     private void gotoCropper(Uri sourceUri) {
         CropImage.activity(sourceUri).setAspectRatio(1, 1)
                 .setGuidelines(CropImageView.Guidelines.ON)
@@ -314,29 +398,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         profilePicFilePath = "";
     }
 
-    private void loadImageToServer() {
-        try {
-            //int age = Integer.parseInt(mBinding.edtAge.getText().toString().trim());
-            //String name = mBinding.edtName.getText().toString().trim();
-            //String phoneNumber = mBinding.edtPhone.getText().toString().trim();
-            if (TextUtils.isEmpty(profilePicFilePath)) {
-                // presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
-            } else {
-                MultipartBody.Part body = CommonUtility.createMultipart(profilePicFilePath, AppConstants.PROFILE_UPDATE_PARAMETER);
-                if (body != null) {
-                    // presenter.updateProfile(this, name, phoneNumber, age, currentGender, body);
-                } else {
-                    //presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
-                }
 
-            }
-
-        } catch (Exception e) {
-            LogUtils.LOGE("ProfileUpdate", e.toString());
-        }
-
-
-    }
     @Subscribe
     public void onImageEncoded(EncodedBitmap event) {
         int type = event.getType();
@@ -350,6 +412,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             request.setWarrantyCardImage(event.getEncodeImage());
         }
     }
+
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         String month = CommonUtility.getMonth(monthOfYear);

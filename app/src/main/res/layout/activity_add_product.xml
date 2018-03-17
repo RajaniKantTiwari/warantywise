@@ -40,13 +40,17 @@
                 android:text="@string/product_name"
                 app:customFont="@string/font_regular" />
 
-            <com.app.warantywise.widget.CustomEditText
-                android:id="@+id/tvProductName"
-                style="@style/edittext_add_product"
-                android:hint="@string/nokia"
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                app:customFont="@string/font_regular" />
+            <RelativeLayout
+                style="@style/match_wrap"
+                android:layout_margin="@dimen/margin_8"
+                android:background="@drawable/grey_corner_bg">
+
+                <Spinner
+                    android:id="@+id/selectedSpiner"
+                    style="@style/match_wrap"
+                    android:dropDownWidth="@dimen/margin_230"
+                    android:overlapAnchor="false" />
+            </RelativeLayout>
 
             <com.app.warantywise.widget.CustomTextView
                 style="@style/textview_product"

@@ -80,7 +80,7 @@ public class DetailsFragment extends DashboardFragment implements
         mBinding.rvReview.setLayoutManager(layoutManager);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
-        getPresenter().getProductDetails(getDashboardActivity(),new ProductDetailsRequest(1));
+
 
     }
 

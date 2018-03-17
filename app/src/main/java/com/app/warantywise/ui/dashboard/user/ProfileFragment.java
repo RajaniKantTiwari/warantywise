@@ -17,6 +17,7 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentEdProfileBinding;
 import com.app.warantywise.network.request.PaymentOption;
 import com.app.warantywise.network.request.Profile;
+import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.authentication.adapter.ProfileSettingsAdapter;
@@ -58,7 +59,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     private ProfileSettingsAdapter settingAdapter;
     private String profilePicFilePath;
     private int numberOfPaymentMethod;
-
+    private UpdateProfileRequest updateProfileRequest;
 
     @Nullable
     @Override
@@ -76,6 +77,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
         mBinding.layoutProfile.setOnClickListener(this);
         mBinding.layoutEmail.setOnClickListener(this);
         mBinding.layoutPassword.setOnClickListener(this);
+        mBinding.tvUpdate.setOnClickListener(this);
 
     }
 
@@ -85,6 +87,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     }
 
     public void initializeData() {
+        updateProfileRequest=new UpdateProfileRequest();
         GlideUtils.loadImageProfilePic(getDashboardActivity(), PreferenceUtils.getImage(), mBinding.ivProfile, null, R.drawable.shubh);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
        /* mBinding.rvUpdate.setLayoutManager(layoutManager);
@@ -120,6 +123,8 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             addChildView(numberOfPaymentMethod);
         } else if (mBinding.layoutPassword == view || mBinding.layoutProfile == view || mBinding.layoutEmail == view) {
             showProfileDialog();
+        }else if(mBinding.tvUpdate==view){
+            getPresenter().updateProfile(getDashboardActivity(),updateProfileRequest);
         }
     }
 

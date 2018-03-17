@@ -56,6 +56,7 @@ public interface AppConstants {
     int BILL_IMAGE=1;
     int BARCODE_IMAGE = 2;
     int WARRANTY_CARD_IMAGE = 3;
+    int PRODUCT_LIST = 3;
 
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT,MERCHANT_MAP_FRAGMENT,

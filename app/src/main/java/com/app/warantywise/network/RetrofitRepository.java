@@ -2,12 +2,14 @@ package com.app.warantywise.network;
 
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.LoginRequest;
+import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
-import com.app.warantywise.network.response.dashboard.GetProductDetailData;
+import com.app.warantywise.network.response.dashboard.AllProductData;
+import com.app.warantywise.network.response.dashboard.ProductDetailData;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -46,8 +48,18 @@ public class RetrofitRepository implements Repository {
     }
 
     @Override
-    public Observable<GetProductDetailData> getProductDetails(ProductDetailsRequest request) {
+    public Observable<ProductDetailData> getProductDetails(ProductDetailsRequest request) {
         return apiService.getProductDetails(request);
+    }
+
+    @Override
+    public Observable<AllProductData> getAllProductList() {
+        return apiService.getAllProductList();
+    }
+
+    @Override
+    public Observable<BaseResponse> updateProfile(UpdateProfileRequest updateProfileRequest) {
+        return apiService.updateProfile(updateProfileRequest);
     }
 
 

@@ -254,6 +254,22 @@
                         style="@style/match_wrap"
                         android:layout_marginTop="@dimen/margin_10"
                         android:orientation="vertical" />
+                    <com.app.warantywise.widget.CustomTextView
+                        android:id="@+id/tvUpdate"
+                        android:layout_width="@dimen/margin_200"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_20"
+                        android:background="@drawable/blue_round_btn_bg"
+                        android:elevation="@dimen/margin_5"
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/margin_12"
+                        android:text="@string/update"
+                        android:layout_marginBottom="@dimen/margin_50"
+                        android:textAllCaps="true"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/button_large"
+                        app:customFont="@string/font_bold" />
                 </LinearLayout>
 
 

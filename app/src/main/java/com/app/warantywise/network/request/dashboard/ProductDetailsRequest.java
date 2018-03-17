@@ -5,14 +5,14 @@ package com.app.warantywise.network.request.dashboard;
  */
 
 public class ProductDetailsRequest {
-    private int product_id;
+    private String product_name;
 
-    public ProductDetailsRequest(int product_id) {
-        this.product_id = product_id;
+    public ProductDetailsRequest(String product_name) {
+        this.product_name = product_name;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public String getProduct_name() {
+        return product_name;
     }
 
 

@@ -2,12 +2,14 @@ package com.app.warantywise.network;
 
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.LoginRequest;
+import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
-import com.app.warantywise.network.response.dashboard.GetProductDetailData;
+import com.app.warantywise.network.response.dashboard.AllProductData;
+import com.app.warantywise.network.response.dashboard.ProductDetailData;
 
 import io.reactivex.Observable;
 
@@ -23,5 +25,9 @@ public interface Repository {
 
     Observable<BaseResponse> yourProduct();
 
-    Observable<GetProductDetailData> getProductDetails(ProductDetailsRequest request);
+    Observable<ProductDetailData> getProductDetails(ProductDetailsRequest request);
+
+    Observable<AllProductData> getAllProductList();
+
+    Observable<BaseResponse> updateProfile(UpdateProfileRequest updateProfileRequest);
 }

@@ -6,6 +6,7 @@ import android.app.Activity;
 import com.app.warantywise.network.DefaultApiObserver;
 import com.app.warantywise.network.Repository;
 import com.app.warantywise.network.request.DeviceTokenRequest;
+import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
@@ -90,6 +91,24 @@ public class DashboardPresenter implements Presenter<MvpView> {
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
                 mView.onError(baseResponse.getMsg(), AppConstants.LOGOUT);
+            }
+        });
+    }
+
+    public void updateProfile(DashBoardActivity activity, UpdateProfileRequest updateProfileRequest) {
+        mRepository.updateProfile(updateProfileRequest).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+            @Override
+            public void onResponse(BaseResponse response) {
+                mView.hideProgress();
+                mView.onSuccess(response, 1);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(baseResponse.getMsg(), 1);
             }
         });
     }

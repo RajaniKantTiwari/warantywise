@@ -1,6 +1,7 @@
 package com.app.warantywise.presenter;
 
 import android.app.Activity;
+import android.widget.AdapterView;
 
 
 import com.app.warantywise.network.DefaultApiObserver;
@@ -8,12 +9,14 @@ import com.app.warantywise.network.Repository;
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
+import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.base.MvpView;
 import com.app.warantywise.ui.base.Presenter;
+import com.app.warantywise.utility.AppConstants;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -110,6 +113,44 @@ public class CommonPresenter implements Presenter<MvpView> {
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
                 mView.onError(baseResponse.getMsg(), 1);
+            }
+        });
+    }
+
+    public void getAllProductList(Activity activity) {
+        mView.showProgress();
+        mRepository.getAllProductList().
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+            @Override
+            public void onResponse(BaseResponse response) {
+                mView.hideProgress();
+                mView.onSuccess(response, AppConstants.PRODUCT_LIST);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(baseResponse.getMsg(), AppConstants.PRODUCT_LIST);
+            }
+        });
+    }
+
+    public void getProductDetails(AddProductActivity activity, ProductDetailsRequest request) {
+        mView.showProgress();
+        mRepository.getProductDetails(request).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+            @Override
+            public void onResponse(BaseResponse response) {
+                mView.hideProgress();
+                mView.onSuccess(response, 7);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(baseResponse.getMsg(), 7);
             }
         });
     }
