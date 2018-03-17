@@ -4,12 +4,14 @@ import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
+import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -60,6 +62,11 @@ public class RetrofitRepository implements Repository {
     @Override
     public Observable<BaseResponse> updateProfile(UpdateProfileRequest updateProfileRequest) {
         return apiService.updateProfile(updateProfileRequest);
+    }
+
+    @Override
+    public Observable<WarrantyCardImageData> getWarrantyCardImage(WarrantyCardImageRequest request) {
+        return apiService.getWarrantyCardImage(request);
     }
 
 

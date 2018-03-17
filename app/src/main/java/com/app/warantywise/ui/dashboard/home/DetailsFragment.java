@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentDetailsBinding;
 import com.app.warantywise.network.request.Product;
+import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
@@ -80,7 +81,7 @@ public class DetailsFragment extends DashboardFragment implements
         mBinding.rvReview.setLayoutManager(layoutManager);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
-
+        getPresenter().getWarrantyCardImage(getDashboardActivity(),new WarrantyCardImageRequest("1"));
 
     }
 

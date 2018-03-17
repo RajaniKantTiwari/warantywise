@@ -4,13 +4,17 @@ import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
+import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImage;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 
@@ -30,4 +34,6 @@ public interface Repository {
     Observable<AllProductData> getAllProductList();
 
     Observable<BaseResponse> updateProfile(UpdateProfileRequest updateProfileRequest);
+
+    Observable<WarrantyCardImageData> getWarrantyCardImage(WarrantyCardImageRequest request);
 }

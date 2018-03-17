@@ -46,7 +46,7 @@ public interface ApiService {
     Observable<BaseResponse> yourProduct();
 
     @POST("product/get_warrantee_card_image")
-    Observable<WarrantyCardImageData> warranteeCardImage(@Body WarrantyCardImageRequest request);
+    Observable<WarrantyCardImageData> getWarrantyCardImage(@Body WarrantyCardImageRequest request);
 
 
 

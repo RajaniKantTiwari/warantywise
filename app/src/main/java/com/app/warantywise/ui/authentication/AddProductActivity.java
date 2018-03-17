@@ -29,6 +29,7 @@ import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.LogUtils;
+import com.app.warantywise.utility.PreferenceUtils;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -98,7 +99,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         productAdapter = new ProductAdapter(this, productList, this);
         mBinding.rvDocument.setAdapter(productAdapter);
         presenter.getAllProductList(this);
-        arrayList=new ArrayList<>();
+        arrayList = new ArrayList<>();
         setTitleList();
         productNameList = new ArrayList<>();
         for (int i = 0; i < arrayList.size(); i++) {
@@ -113,19 +114,19 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             @Override
             public void run() {
                 arrayList.clear();
-                for (int i=0;i<10;i++){
-                  setInList(i);
+                for (int i = 0; i < 10; i++) {
+                    setInList(i);
                 }
                 setSpinnerData(arrayList);
             }
-        },1000);
+        }, 1000);
 
     }
 
     private void setInList(int i) {
         AllProduct allProduct = new AllProduct();
         allProduct.setId(i);
-        allProduct.setName("Name "+i);
+        allProduct.setName("Name " + i);
         arrayList.add(allProduct);
     }
 
@@ -243,9 +244,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                         setSpinnerData(arrayList);
                     }
                 }
+            } else if (requestCode == AppConstants.SUBMIT && response.getStatus().equalsIgnoreCase(AppConstants.SUCCESS)) {
+                PreferenceUtils.setLogin(true);
+                ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
             }
         }
-        ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+
     }
 
     private void setSpinnerData(ArrayList<AllProduct> arrayList) {
@@ -262,7 +266,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                         view.setBackgroundResource(0);
                     }
                     if (CommonUtility.isNotNull(arrayList) && arrayList.size() > position) {
-                        presenter.getProductDetails(AddProductActivity.this,new ProductDetailsRequest(arrayList.get(position).getName()));
+                        presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(arrayList.get(position).getName()));
                     }
                 }
             }
