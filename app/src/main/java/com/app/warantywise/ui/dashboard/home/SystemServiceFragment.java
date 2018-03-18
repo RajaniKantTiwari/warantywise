@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentSystemServiceBinding;
+import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
@@ -34,8 +35,6 @@ import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.SimpleDividerItemDecoration;
 
 import java.util.ArrayList;
-
-import javax.inject.Inject;
 
 import static android.content.ContentValues.TAG;
 import static com.app.warantywise.utility.AppConstants.REQUEST_CALL;
@@ -71,7 +70,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
 
     @Override
     public void attachView() {
-
+     getPresenter().attachView(this);
     }
 
     public void setListener() {
@@ -96,7 +95,9 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
         mBinding.photoRecycler.setAdapter(mImageAdapter);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
-
+        getPresenter().getManufactorServiceCenterDetail(getDashboardActivity(),new ServiceCenterRequest("1"));
+        getPresenter().getManufactorServiceCenterImages(getDashboardActivity(),new ServiceCenterRequest("1"));
+        getPresenter().getManufactorServiceCenterReviews(getDashboardActivity(),new ServiceCenterRequest("1"));
 
     }
 

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentYourProductBinding;
+import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.BaseResponse;
@@ -82,7 +83,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
         mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
         mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
         //end
-        getPresenter().yourProduct(getDashboardActivity());
+        getPresenter().getExtendedWarranty(getDashboardActivity(),new ExtendeWarrantyRequest("1"));
     }
 
     @Override

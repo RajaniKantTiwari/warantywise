@@ -15,6 +15,7 @@ import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
+import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
@@ -82,7 +83,8 @@ public class DetailsFragment extends DashboardFragment implements
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
         getPresenter().getWarrantyCardImage(getDashboardActivity(),new WarrantyCardImageRequest("1"));
-
+        getPresenter().getMyProductDetails(getDashboardActivity(),new ProductsRequest("1"));
+        getPresenter().getMyProductFeedback(getDashboardActivity(),new ProductsRequest("1"));
     }
 
     private void setProductList() {

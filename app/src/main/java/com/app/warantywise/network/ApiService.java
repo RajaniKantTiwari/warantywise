@@ -6,12 +6,21 @@ import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
+import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
+import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
+import com.app.warantywise.network.request.dashboard.ProductOfferRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
+import com.app.warantywise.network.request.dashboard.ProductsRequest;
+import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
+import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
+import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
+import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
+import com.app.warantywise.network.response.dashboard.ProductOfferResponseData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 
 import io.reactivex.Observable;
@@ -48,7 +57,31 @@ public interface ApiService {
     @POST("product/get_warrantee_card_image")
     Observable<WarrantyCardImageData> getWarrantyCardImage(@Body WarrantyCardImageRequest request);
 
+    @POST("product/get_extend_warrentees")
+    Observable<ExtendedWarrantyCardData> getExtendedWarranty(@Body ExtendeWarrantyRequest request);
 
+    @POST("product/get_product_offers")
+    Observable<ProductOfferResponseData> getProductOffers(@Body ProductOfferRequest request);
 
+    @POST("product/get_product_insurance")
+    Observable<ProductInsuranceResponseData> getProductInsurance(@Body ProductInsuranceRequest request);
+
+    @POST("product/get_manufacturer_service_centers")
+    Observable<ManufactorServiceCentorResponseData> getManufactorServiceCenter();
+
+    @POST("product/get_manufacturer_service_center_detail")
+    Observable<BaseResponse> getManufactorServiceCenterDetail(@Body ServiceCenterRequest request);
+
+    @POST("product/get_manufacturer_service_center_images")
+    Observable<BaseResponse> getManufactorServiceCenterImages(@Body ServiceCenterRequest request);
+
+    @POST("product/get_manufacturer_service_center_reviews")
+    Observable<BaseResponse> getManufactorServiceCenterReviews(@Body ServiceCenterRequest request);
+
+    @POST("product/get_my_product_details")
+    Observable<BaseResponse> getMyProductDetails(@Body ProductsRequest request);
+
+    @POST("product/get_my_product_feedback")
+    Observable<BaseResponse> getMyProductFeedback(@Body ProductsRequest request);
 
 }

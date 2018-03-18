@@ -83,6 +83,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         getCurrentLocation();
+        getPresenter().getManufactorServiceCenter(getDashboardActivity());
 
     }
 
@@ -299,7 +300,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
 
     @Override
     public void attachView() {
-
+      getPresenter().attachView(this);
     }
 
     @Override

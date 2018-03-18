@@ -12,6 +12,7 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentInsuranceBinding;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
 import com.app.warantywise.network.request.dashboard.Plans;
+import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.InsurancePlansAdapter;
@@ -47,7 +48,7 @@ public class InsuranceChoiceFragment extends DashboardFragment implements Insura
 
     @Override
     public void attachView() {
-
+      getPresenter().attachView(this);
     }
 
     @Override
@@ -81,6 +82,7 @@ public class InsuranceChoiceFragment extends DashboardFragment implements Insura
         mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
         mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
         //end
+        getPresenter().getProductInsurance(getDashboardActivity(),new ProductInsuranceRequest("1"));
     }
 
     @Override
