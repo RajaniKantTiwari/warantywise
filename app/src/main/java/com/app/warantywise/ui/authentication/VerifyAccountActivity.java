@@ -260,7 +260,6 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
     @Override
     public void afterTextChanged(Editable s) {
         if (otpNumber.length() == 4) {
-            PreferenceUtils.setLogin(true);
             presenter.verifyMobileNumber(this, new VerifyMobileRequest(PreferenceUtils.getUserMono(), Integer.parseInt(otpNumber.toString())));
         }
     }

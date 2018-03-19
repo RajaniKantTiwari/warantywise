@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -43,8 +42,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import okhttp3.MultipartBody;
-
 /**
  * Created by rajnikant on 11/02/18.
  */
@@ -70,6 +67,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private ArrayList<AllProduct> arrayList;
     private AsignAdapter adapter;
     private ArrayList productNameList;
+    private String productId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,38 +99,20 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         presenter.getAllProductList(this);
         arrayList = new ArrayList<>();
         setTitleList();
-        productNameList = new ArrayList<>();
+        /*productNameList = new ArrayList<>();
         for (int i = 0; i < arrayList.size(); i++) {
             productNameList.add(arrayList.get(i).getName());
         }
         adapter = new AsignAdapter(this, productNameList);
         adapter.setDropDownViewResource(R.layout.spinner_row);
         mBinding.selectedSpiner.setAdapter(adapter);
-        mBinding.selectedSpiner.setSelection(adapter.getCount());
+        mBinding.selectedSpiner.setSelection(adapter.getCount());*/
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                arrayList.clear();
-                for (int i = 0; i < 10; i++) {
-                    setInList(i);
-                }
-                setSpinnerData(arrayList);
-            }
-        }, 1000);
-
-    }
-
-    private void setInList(int i) {
-        AllProduct allProduct = new AllProduct();
-        allProduct.setId(i);
-        allProduct.setName("Name " + i);
-        arrayList.add(allProduct);
     }
 
     private void setTitleList() {
         AllProduct allProduct = new AllProduct();
-        allProduct.setId(-1);
+        allProduct.setId(null);
         allProduct.setName(getResources().getString(R.string.product_name));
         arrayList.add(allProduct);
     }
@@ -184,11 +164,11 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     }
 
     private void setData(AddProductRequest request) {
-        request.setProduct_name(productName);
-        request.setCompany_id(companyName);
-        request.setSerial_no(serialNumber);
-        request.setPurchase_date(purchaseDate);
-        request.setExtended_warranty(mBinding.radioYes.isChecked() ? "yes" : "no");
+        request.setProduct_id(productId);
+        request.setCompanyid(companyName);
+        request.setSerialno(serialNumber);
+        request.setPurchasedate(purchaseDate);
+        request.setExtendedwarranty(mBinding.radioYes.isChecked() ? "yes" : "no");
     }
 
     private boolean isValid() {
@@ -210,7 +190,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 && (isNotNull(warrantyPeriod) && warrantyPeriod.trim().length() > 0)
                 && docNumber >= 2) {
             return true;
-        } else if (isNull(productName) || productName.trim().length() == 0) {
+        } else if (isNull(productId) || productId.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_product_name));
             return false;
         } else if (isNull(companyName) || companyName.trim().length() == 0) {
@@ -253,11 +233,20 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     }
 
     private void setSpinnerData(ArrayList<AllProduct> arrayList) {
-        productNameList.clear();
+
+        /*productNameList.clear();
+        for (int i = 0; i < arrayList.size(); i++) {
+            productNameList.add(arrayList.get(i).getName());
+        }*/
+        productNameList = new ArrayList<>();
         for (int i = 0; i < arrayList.size(); i++) {
             productNameList.add(arrayList.get(i).getName());
         }
-        adapter.notifyDataSetChanged();
+        adapter = new AsignAdapter(this, productNameList);
+        adapter.setDropDownViewResource(R.layout.spinner_row);
+        mBinding.selectedSpiner.setAdapter(adapter);
+        mBinding.selectedSpiner.setSelection(adapter.getCount());
+        //adapter.notifyDataSetChanged();
         mBinding.selectedSpiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -266,6 +255,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                         view.setBackgroundResource(0);
                     }
                     if (CommonUtility.isNotNull(arrayList) && arrayList.size() > position) {
+                        productId=arrayList.get(position).getId();
                         presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(arrayList.get(position).getName()));
                     }
                 }
@@ -407,13 +397,13 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     public void onImageEncoded(EncodedBitmap event) {
         int type = event.getType();
         if (type == AppConstants.PRODUCT_IMAGE) {
-            request.setProduct_image(event.getEncodeImage());
+            request.setProductimage(event.getEncodeImage());
         } else if (type == AppConstants.BILL_IMAGE) {
-            request.setBillImage(event.getEncodeImage());
+            request.setBillimage(event.getEncodeImage());
         } else if (type == AppConstants.BARCODE_IMAGE) {
-            request.setBarcode_image(event.getEncodeImage());
+            request.setBarcodeimage(event.getEncodeImage());
         } else if (type == AppConstants.WARRANTY_CARD_IMAGE) {
-            request.setWarrantyCardImage(event.getEncodeImage());
+            request.setWcimage(event.getEncodeImage());
         }
     }
 
