@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentProductListBinding;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.OfferResponse;
+import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
@@ -36,6 +38,7 @@ public class YourProductListFragment extends DashboardFragment implements
     private FragmentProductListBinding mBinding;
     private ProductListAdapter mProductAdapter;
     private ArrayList<ProductResponse> productList;
+    private ArrayList<OfferResponse> offerList;
 
     @Nullable
     @Override
@@ -68,6 +71,8 @@ public class YourProductListFragment extends DashboardFragment implements
         mBinding.rvProductList.setLayoutManager(layoutManager);
         mProductAdapter = new ProductListAdapter(getDashboardActivity(), this);
         mBinding.rvProductList.setAdapter(mProductAdapter);
+        offerList=new ArrayList<>();
+        getPresenter().get
     }
 
     @Override
@@ -101,7 +106,8 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onOfferClicked(int position) {
-       CommonUtility.showOfferDialog(getDashboardActivity(),null,this);
+        Bundle bundle=new Bundle();
+       CommonUtility.showOfferDialog(getDashboardActivity(),bundle,this);
     }
 
     @Override

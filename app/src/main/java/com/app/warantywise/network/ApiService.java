@@ -8,7 +8,7 @@ import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
-import com.app.warantywise.network.request.dashboard.ProductOfferRequest;
+import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
@@ -20,7 +20,7 @@ import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
-import com.app.warantywise.network.response.dashboard.ProductOfferResponseData;
+import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 
 import io.reactivex.Observable;
@@ -61,7 +61,7 @@ public interface ApiService {
     Observable<ExtendedWarrantyCardData> getExtendedWarranty(@Body ExtendeWarrantyRequest request);
 
     @POST("product/get_product_offers")
-    Observable<ProductOfferResponseData> getProductOffers(@Body ProductOfferRequest request);
+    Observable<OfferResponseData> getProductOffers(@Body OfferRequest request);
 
     @POST("product/get_product_insurance")
     Observable<ProductInsuranceResponseData> getProductInsurance(@Body ProductInsuranceRequest request);

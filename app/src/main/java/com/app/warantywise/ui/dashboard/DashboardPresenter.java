@@ -11,6 +11,7 @@ import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
@@ -141,9 +142,9 @@ public class DashboardPresenter implements Presenter<MvpView> {
         mView.showProgress();
         mRepository.getExtendedWarranty(request).
                 subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<ExtendedWarrantyCardData>(activity) {
             @Override
-            public void onResponse(BaseResponse response) {
+            public void onResponse(ExtendedWarrantyCardData response) {
                 mView.hideProgress();
                 mView.onSuccess(response, 1);
             }

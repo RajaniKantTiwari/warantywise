@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.app.warantywise.R;
+import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
 import com.app.warantywise.utility.AppConstants;
@@ -23,8 +24,8 @@ public class SplashActivity extends AppCompatActivity {
                 if (PreferenceUtils.isLogin()) {
                     ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, DashBoardActivity.class);
                 } else {
-                    ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
-
+                    //ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
+                    ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, AddProductActivity.class);
                 }
                 finish();
             }

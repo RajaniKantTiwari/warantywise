@@ -256,7 +256,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                     }
                     if (CommonUtility.isNotNull(arrayList) && arrayList.size() > position) {
                         productId=arrayList.get(position).getId();
-                        presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(arrayList.get(position).getName()));
+                        presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(arrayList.get(position).getProduct_name()));
                     }
                 }
             }
