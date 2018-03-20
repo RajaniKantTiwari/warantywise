@@ -117,7 +117,7 @@
                 android:id="@+id/tvWarrantyPeriod"
                 style="@style/edittext_add_product"
                 android:hint="@string/thirty_days"
-                android:inputType="text"
+                android:inputType="number"
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView

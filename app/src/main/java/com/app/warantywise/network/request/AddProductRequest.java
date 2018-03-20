@@ -5,7 +5,7 @@ package com.app.warantywise.network.request;
  */
 
 public class AddProductRequest {
-    private String product_id;
+    private String product_id="";
     private String product_name;
     private String modelno;
     private String serialno;
@@ -13,13 +13,12 @@ public class AddProductRequest {
     private String extendedwarranty;
     private String warrantyfrom;
     private String productownerid;
-    private String manufacturer_id;
+    private String manufacturer_id="";
     private String manufacturer_name;
-    private String companyid;
-    private String productimage;
-    private String billimage;
-    private String barcodeimage;
-    private String wcimage;
+    private String productimage="";
+    private String billimage="";
+    private String barcodeimage="";
+    private String wcimage="";
 
     public String getProduct_name() {
         return product_name;
@@ -91,14 +90,6 @@ public class AddProductRequest {
 
     public void setProductownerid(String productownerid) {
         this.productownerid = productownerid;
-    }
-
-    public String getCompanyid() {
-        return companyid;
-    }
-
-    public void setCompanyid(String companyid) {
-        this.companyid = companyid;
     }
 
     public String getProductimage() {

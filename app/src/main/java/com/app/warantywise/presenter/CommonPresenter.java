@@ -107,13 +107,13 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onResponse(BaseResponse response) {
                 mView.hideProgress();
-                mView.onSuccess(response, AppConstants.SUBMIT);
+                mView.onSuccess(response, 2);
             }
 
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), AppConstants.SUBMIT);
+                mView.onError(baseResponse.getMsg(), 2);
             }
         });
     }

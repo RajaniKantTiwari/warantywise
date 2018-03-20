@@ -28,6 +28,7 @@ import com.app.warantywise.ui.dashboard.DashBoardActivity;
 import com.app.warantywise.ui.dashboard.home.adapter.ProductNameCustomArrayAdapter;
 import com.app.warantywise.ui.uploadfile.UploadImage;
 import com.app.warantywise.utility.AppConstants;
+import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.LogUtils;
@@ -70,9 +71,10 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     // adapter for auto-complete
     private ArrayAdapter<ProductDetail> productNameAdapter;
     private ArrayList<ProductDetail> productDetailList;
-    private String productId = "";
-    private String manufacturer_id = "";
+    private String productId;
+    private String manufacturerId;
     private String modelNumber;
+    private boolean isChange = true;
 
 
     @Override
@@ -90,13 +92,13 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.tvPurchaseDate.setOnClickListener(this);
         mBinding.layoutYes.setOnClickListener(this);
         mBinding.layoutNo.setOnClickListener(this);
+        mBinding.headerLayout.ivDrawer.setOnClickListener(this);
         mBinding.edProductName.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence searchText, int start, int before, int count) {
-                productId = "";
-                manufacturer_id = "";
+
                 String searchProductName = searchText.toString();
-                if (searchText.toString().length() >= 3) {
+                if (searchText.toString().length() >= 2) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -104,6 +106,15 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                         }
                     }, AppConstants.API_SERVICE);
                 }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isChange) {
+                            productId=null;
+                            manufacturerId=null;
+                        }
+                    }
+                }, AppConstants.API_SERVICE);
             }
 
             @Override
@@ -121,19 +132,35 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             public void onItemClick(AdapterView<?> parent, View layout, int pos, long id) {
                 ProductDetail detail = productDetailList.get(pos);
                 productId = String.valueOf(detail.getId());
-                manufacturer_id = detail.getManufacturer_id();
+                manufacturerId = detail.getManufacturer_id();
                 mBinding.edProductName.setText(detail.getProduct_name());
                 mBinding.edCompanyName.setText(detail.getName());
+                isChange = false;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        isChange = true;
+                    }
+                }, 1500);
             }
 
         });
     }
 
     private void initializeData() {
+
         request = new AddProductRequest();
         setList();
         mBinding.headerLayout.ivDrawer.setVisibility(View.GONE);
         mBinding.headerLayout.tvHeading.setText(getResources().getString(R.string.add_product));
+        Intent intent = getIntent();
+        if (CommonUtility.isNotNull(intent)) {
+            Bundle bundle = intent.getExtras();
+            if (CommonUtility.isNotNull(bundle) && bundle.getBoolean(BundleConstants.IS_FROMDASHBOARD)) {
+                mBinding.headerLayout.ivDrawer.setVisibility(View.VISIBLE);
+                mBinding.headerLayout.ivDrawer.setImageResource(R.drawable.ic_back_white);
+            }
+        }
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mBinding.rvDocument.setLayoutManager(layoutManager);
@@ -190,7 +217,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     }
 
     private void setData(AddProductRequest request) {
-        request.setProduct_id(productId);
+        request.setProduct_id(productId != null ? productId : "");
         request.setProduct_name(productName);
         request.setModelno(modelNumber);
         request.setSerialno(serialNumber);
@@ -198,7 +225,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         request.setExtendedwarranty(mBinding.radioYes.isChecked() ? "yes" : "no");
         request.setWarrantyfrom(warrantyPeriod);
         request.setProductownerid(PreferenceUtils.getAuthToken());
-        request.setManufacturer_id(manufacturer_id);
+        request.setManufacturer_id(manufacturerId != null ? manufacturerId : "");
         request.setManufacturer_name(companyName);
     }
 
@@ -257,12 +284,11 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 productDetailList.addAll(data.getInfo());
                 productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
                 mBinding.edProductName.setAdapter(productNameAdapter);
-            } else if (requestCode == AppConstants.SUBMIT && response.getStatus().equalsIgnoreCase(AppConstants.SUCCESS)) {
+            } else if (requestCode == 2 && response.getStatus().equalsIgnoreCase(AppConstants.SUCCESS)) {
                 PreferenceUtils.setLogin(true);
                 ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
             }
         }
-
     }
 
     @Override
@@ -277,7 +303,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
                 LogUtils.LOGD(TAG, "CROP");
                 //handleCropResult(data);
-
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
                 Uri imageUri = result.getUri();
                 String path = imageUri.getPath();
@@ -412,5 +437,11 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     protected void onDestroy() {
         CommonUtility.unregister(this);
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

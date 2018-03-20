@@ -14,4 +14,5 @@ public interface BundleConstants {
     long ANIMATION_TIME = 500;
 
     String PRODUCT_RESPONSE = "product_response";
+    String IS_FROMDASHBOARD = "is_from_dashboard";
 }
