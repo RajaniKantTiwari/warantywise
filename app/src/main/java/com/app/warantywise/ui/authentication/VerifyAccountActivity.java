@@ -66,8 +66,6 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
         mBinding.edSecond.setOnKeyListener(this);
         mBinding.edThird.setOnKeyListener(this);
         mBinding.edFourth.setOnKeyListener(this);
-
-
         mBinding.butLayout.tvOne.setOnClickListener(this);
         mBinding.butLayout.tvTwo.setOnClickListener(this);
         mBinding.butLayout.tvthree.setOnClickListener(this);
@@ -197,7 +195,6 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
                             hideKeyboard();
                             PreferenceUtils.setUserId(verifyMobileResponse.getId());
                             PreferenceUtils.setAuthToken(verifyMobileResponse.getAuthkey());
-                            //setToken();
                             ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, AddProductActivity.class);
                             finish();
                         } else {
@@ -211,18 +208,6 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
             e.printStackTrace();
         }
     }
-
-    /*private void setToken() {
-        DeviceTokenRequest request=new DeviceTokenRequest();
-        request.setUserid(PreferenceUtils.getUserId());
-        DeviceToken token=new DeviceToken();
-        token.setDeveiceUniqId(CommonUtils.getDeviceUniqueId(this));
-        token.setDeviceTokenId(PreferenceUtils.getDeviceToken());
-        token.setDeviceType(GeneralConstant.DEVICETYPE);
-        request.setInfo(token);
-        presenter.setDeviceToken(this,request);
-    }*/
-
     @Override
     public void onError(String message, int requestCode) {
         showToast("Error");

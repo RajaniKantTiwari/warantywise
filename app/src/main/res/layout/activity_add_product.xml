@@ -70,6 +70,18 @@
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 app:customFont="@string/font_regular" />
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_product"
+                android:text="@string/model_no"
+                app:customFont="@string/font_regular" />
+
+            <com.app.warantywise.widget.CustomEditText
+                android:id="@+id/tvModelNumber"
+                style="@style/edittext_add_product"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:hint="@string/model_no"
+                app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView
                 style="@style/textview_product"
@@ -104,7 +116,7 @@
             <com.app.warantywise.widget.CustomEditText
                 android:id="@+id/tvWarrantyPeriod"
                 style="@style/edittext_add_product"
-                android:hint="@string/one_year"
+                android:hint="@string/thirty_days"
                 android:inputType="text"
                 app:customFont="@string/font_regular" />
 

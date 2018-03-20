@@ -196,7 +196,9 @@
     <string name="details">Details</string>
     <string name="system_service">System Service</string>
     <string name="cap_small_letter_with_space">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz</string>
-
+    <string name="model_no">Model Number</string>
+    <string name="please_enter_model_number">Please Enter Model Number</string>
+    <string name="thirty_days">30 days</string>
 
     <string-array name="left_drawer">
         <item>@string/home</item>

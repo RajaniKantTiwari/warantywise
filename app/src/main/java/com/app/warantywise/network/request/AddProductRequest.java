@@ -6,17 +6,44 @@ package com.app.warantywise.network.request;
 
 public class AddProductRequest {
     private String product_id;
+    private String product_name;
     private String modelno;
     private String serialno;
     private String purchasedate;
     private String extendedwarranty;
     private String warrantyfrom;
     private String productownerid;
+    private String manufacturer_id;
+    private String manufacturer_name;
     private String companyid;
     private String productimage;
     private String billimage;
     private String barcodeimage;
     private String wcimage;
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public String getManufacturer_id() {
+        return manufacturer_id;
+    }
+
+    public void setManufacturer_id(String manufacturer_id) {
+        this.manufacturer_id = manufacturer_id;
+    }
+
+    public String getManufacturer_name() {
+        return manufacturer_name;
+    }
+
+    public void setManufacturer_name(String manufacturer_name) {
+        this.manufacturer_name = manufacturer_name;
+    }
 
     public String getModelno() {
         return modelno;

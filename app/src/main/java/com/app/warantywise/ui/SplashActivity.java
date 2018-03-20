@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
                     ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, DashBoardActivity.class);
                 } else {
                     //ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
-                    ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, AddProductActivity.class);
+                    ExplicitIntent.getsInstance().navigateTo(SplashActivity.this, LoginActivity.class);
                 }
                 finish();
             }

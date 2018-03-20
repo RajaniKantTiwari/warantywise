@@ -70,8 +70,9 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     // adapter for auto-complete
     private ArrayAdapter<ProductDetail> productNameAdapter;
     private ArrayList<ProductDetail> productDetailList;
-    private String productId;
-    private String manufacturer_id;
+    private String productId = "";
+    private String manufacturer_id = "";
+    private String modelNumber;
 
 
     @Override
@@ -92,6 +93,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.edProductName.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence searchText, int start, int before, int count) {
+                productId = "";
+                manufacturer_id = "";
                 String searchProductName = searchText.toString();
                 if (searchText.toString().length() >= 3) {
                     new Handler().postDelayed(new Runnable() {
@@ -188,14 +191,15 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     private void setData(AddProductRequest request) {
         request.setProduct_id(productId);
-        request.setModelno(null);
+        request.setProduct_name(productName);
+        request.setModelno(modelNumber);
         request.setSerialno(serialNumber);
         request.setPurchasedate(purchaseDate);
         request.setExtendedwarranty(mBinding.radioYes.isChecked() ? "yes" : "no");
-        request.setWarrantyfrom(null);
-        request.setProductownerid(null);
-        request.setCompanyid(manufacturer_id);
-        request.setCompanyid(companyName);
+        request.setWarrantyfrom(warrantyPeriod);
+        request.setProductownerid(PreferenceUtils.getAuthToken());
+        request.setManufacturer_id(manufacturer_id);
+        request.setManufacturer_name(companyName);
     }
 
     private boolean isValid() {
@@ -210,11 +214,13 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         serialNumber = mBinding.tvSerialNumber.getText().toString();
         purchaseDate = mBinding.tvPurchaseDate.getText().toString();
         warrantyPeriod = mBinding.tvWarrantyPeriod.getText().toString();
+        modelNumber = mBinding.tvModelNumber.getText().toString();
         if ((isNotNull(productName) && productName.trim().length() > 0)
                 && (isNotNull(companyName) && companyName.trim().length() > 0)
                 && (isNotNull(serialNumber) && serialNumber.trim().length() > 0)
                 && (isNotNull(purchaseDate) && purchaseDate.trim().length() > 0)
                 && (isNotNull(warrantyPeriod) && warrantyPeriod.trim().length() > 0)
+                && (isNotNull(modelNumber) && modelNumber.trim().length() > 0)
                 && docNumber >= 2) {
             return true;
         } else if (isNull(productId) || productId.trim().length() == 0) {
@@ -225,6 +231,9 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             return false;
         } else if (isNull(serialNumber) || serialNumber.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_serial_number));
+            return false;
+        } else if (isNull(modelNumber) || modelNumber.trim().length() == 0) {
+            showToast(getResources().getString(R.string.please_enter_model_number));
             return false;
         } else if (isNull(purchaseDate) || purchaseDate.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_purchase_date));
