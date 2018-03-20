@@ -12,8 +12,7 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentProductListBinding;
 import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.network.response.dashboard.OfferResponse;
-import com.app.warantywise.network.response.dashboard.OfferResponseData;
+import com.app.warantywise.network.response.dashboard.ResponseData;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
@@ -39,7 +38,7 @@ public class YourProductListFragment extends DashboardFragment implements
     private FragmentProductListBinding mBinding;
     private ProductListAdapter mProductAdapter;
     private ArrayList<ProductResponse> productList;
-    private ArrayList<OfferResponse> offerList;
+    private ArrayList<ResponseData> offerList;
 
     @Nullable
     @Override

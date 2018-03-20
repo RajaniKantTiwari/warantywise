@@ -19,7 +19,11 @@ import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
+import com.app.warantywise.network.response.dashboard.ProductDetailsData;
+import com.app.warantywise.network.response.dashboard.ProductFeedBackData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
+import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
+import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 
 import io.reactivex.Completable;
@@ -51,15 +55,15 @@ public interface Repository {
 
     Observable<ManufactorServiceCentorResponseData> getManufactorServiceCenter();
 
-    Observable<BaseResponse> getManufactorServiceCenterDetail(ServiceCenterRequest request);
+    Observable<ServiceCenterDetailData> getManufactorServiceCenterDetail(ServiceCenterRequest request);
 
-    Observable<BaseResponse> getManufactorServiceCenterImages(ServiceCenterRequest request);
+    Observable<ServiceCenterImageData> getManufactorServiceCenterImages(ServiceCenterRequest request);
 
     Observable<BaseResponse> getManufactorServiceCenterReviews(ServiceCenterRequest request);
 
-    Observable<BaseResponse> getMyProductDetails(ProductsRequest request);
+    Observable<ProductDetailsData> getMyProductDetails(ProductsRequest request);
 
-    Observable<BaseResponse> getMyProductFeedback(ProductsRequest request);
+    Observable<ProductFeedBackData> getMyProductFeedback(ProductsRequest request);
 
     Observable<OfferResponseData> getProductOffers(OfferRequest request);
 }

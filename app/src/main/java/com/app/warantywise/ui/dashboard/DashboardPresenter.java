@@ -15,7 +15,11 @@ import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
+import com.app.warantywise.network.response.dashboard.ProductDetailsData;
+import com.app.warantywise.network.response.dashboard.ProductFeedBackData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
+import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
+import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 import com.app.warantywise.ui.base.MvpView;
 import com.app.warantywise.ui.base.Presenter;
@@ -201,9 +205,9 @@ public class DashboardPresenter implements Presenter<MvpView> {
         mView.showProgress();
         mRepository.getManufactorServiceCenterDetail(request).
                 subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<ServiceCenterDetailData>(activity) {
             @Override
-            public void onResponse(BaseResponse response) {
+            public void onResponse(ServiceCenterDetailData response) {
                 mView.hideProgress();
                 mView.onSuccess(response, 1);
             }
@@ -220,9 +224,9 @@ public class DashboardPresenter implements Presenter<MvpView> {
         mView.showProgress();
         mRepository.getManufactorServiceCenterImages(request).
                 subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<ServiceCenterImageData>(activity) {
             @Override
-            public void onResponse(BaseResponse response) {
+            public void onResponse(ServiceCenterImageData response) {
                 mView.hideProgress();
                 mView.onSuccess(response, 1);
             }
@@ -258,9 +262,9 @@ public class DashboardPresenter implements Presenter<MvpView> {
         mView.showProgress();
         mRepository.getMyProductDetails(request).
                 subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<ProductDetailsData>(activity) {
             @Override
-            public void onResponse(BaseResponse response) {
+            public void onResponse(ProductDetailsData response) {
                 mView.hideProgress();
                 mView.onSuccess(response, 1);
             }
@@ -276,9 +280,9 @@ public class DashboardPresenter implements Presenter<MvpView> {
     public void getMyProductFeedback(DashBoardActivity activity, ProductsRequest request) {
         mRepository.getMyProductFeedback(request).
                 subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<ProductFeedBackData>(activity) {
             @Override
-            public void onResponse(BaseResponse response) {
+            public void onResponse(ProductFeedBackData response) {
                 mView.hideProgress();
                 mView.onSuccess(response, 1);
             }

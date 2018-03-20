@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.warantywise.R;
-import com.app.warantywise.databinding.FragmentSystemServiceBinding;
+import com.app.warantywise.databinding.FragmentServiceDetailsBinding;
 import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
@@ -39,9 +39,9 @@ import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
 import static com.app.warantywise.utility.AppConstants.REQUEST_CALL;
 
-public class SystemServiceFragment extends DashboardFragment implements FeedbackDialogFragment.FeedbackDialogListener,ImageAdapter.ImageListener {
+public class ServiceCenterDetailsFragment extends DashboardFragment implements FeedbackDialogFragment.FeedbackDialogListener,ImageAdapter.ImageListener {
 
-    private FragmentSystemServiceBinding mBinding;
+    private FragmentServiceDetailsBinding mBinding;
     private ImageAdapter mImageAdapter;
     private ReviewAdapter mReviewAdapter;
     private ArrayList<ReviewResponse> reviewList;
@@ -54,7 +54,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_system_service, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_service_details, container, false);
         initializeView();
         return mBinding.getRoot();
     }
@@ -79,7 +79,7 @@ public class SystemServiceFragment extends DashboardFragment implements Feedback
 
     @Override
     public String getFragmentName() {
-        return SystemServiceFragment.class.getSimpleName();
+        return ServiceCenterDetailsFragment.class.getSimpleName();
     }
 
     public void initializeData() {

@@ -14,8 +14,8 @@ public class AddProductRequest {
     private String productownerid;
     private String companyid;
     private String productimage;
-    private String barcodeimage;
     private String billimage;
+    private String barcodeimage;
     private String wcimage;
 
     public String getModelno() {

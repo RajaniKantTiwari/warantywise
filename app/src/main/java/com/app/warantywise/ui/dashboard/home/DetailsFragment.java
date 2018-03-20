@@ -13,8 +13,6 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentDetailsBinding;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
-import com.app.warantywise.network.request.dashboard.MerchantRequest;
-import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
@@ -27,13 +25,10 @@ import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.adapter.ImageAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.ReviewAdapter;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
-import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 public class DetailsFragment extends DashboardFragment implements
         FeedbackDialogFragment.FeedbackDialogListener, ImageAdapter.ImageListener, DetailsAdapter.DetailsListener {
@@ -110,7 +105,7 @@ public class DetailsFragment extends DashboardFragment implements
     public void onClick(View view) {
         if (view == mBinding.tvUnderWarranty) {
             CommonUtility.clicked(mBinding.tvUnderWarranty);
-            getDashboardActivity().addFragmentInContainer(new SystemServiceFragment(),null,true
+            getDashboardActivity().addFragmentInContainer(new ServiceCenterDetailsFragment(),null,true
                     ,true, BaseActivity.AnimationType.NONE,false);
         }
     }

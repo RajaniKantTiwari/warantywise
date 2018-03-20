@@ -5,10 +5,10 @@ import com.app.warantywise.network.response.BaseResponse;
 import java.util.ArrayList;
 
 /**
- * Created by rajnikant on 18/03/18.
+ * Created by rajnikant on 20/03/18.
  */
 
-public class ManufactorServiceCentorResponseData extends BaseResponse{
+public class ServiceCenterDetailData extends BaseResponse {
     private ArrayList<ServiceCentorResponse> info;
 
     public ArrayList<ServiceCentorResponse> getInfo() {

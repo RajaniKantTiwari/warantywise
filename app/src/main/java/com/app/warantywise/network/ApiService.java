@@ -19,8 +19,12 @@ import com.app.warantywise.network.response.dashboard.AllProductData;
 import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
+import com.app.warantywise.network.response.dashboard.ProductDetailsData;
+import com.app.warantywise.network.response.dashboard.ProductFeedBackData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
+import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
+import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 
 import io.reactivex.Observable;
@@ -70,18 +74,18 @@ public interface ApiService {
     Observable<ManufactorServiceCentorResponseData> getManufactorServiceCenter();
 
     @POST("product/get_manufacturer_service_center_detail")
-    Observable<BaseResponse> getManufactorServiceCenterDetail(@Body ServiceCenterRequest request);
+    Observable<ServiceCenterDetailData> getManufactorServiceCenterDetail(@Body ServiceCenterRequest request);
 
     @POST("product/get_manufacturer_service_center_images")
-    Observable<BaseResponse> getManufactorServiceCenterImages(@Body ServiceCenterRequest request);
+    Observable<ServiceCenterImageData> getManufactorServiceCenterImages(@Body ServiceCenterRequest request);
 
     @POST("product/get_manufacturer_service_center_reviews")
     Observable<BaseResponse> getManufactorServiceCenterReviews(@Body ServiceCenterRequest request);
 
     @POST("product/get_my_product_details")
-    Observable<BaseResponse> getMyProductDetails(@Body ProductsRequest request);
+    Observable<ProductDetailsData> getMyProductDetails(@Body ProductsRequest request);
 
     @POST("product/get_my_product_feedback")
-    Observable<BaseResponse> getMyProductFeedback(@Body ProductsRequest request);
+    Observable<ProductFeedBackData> getMyProductFeedback(@Body ProductsRequest request);
 
 }

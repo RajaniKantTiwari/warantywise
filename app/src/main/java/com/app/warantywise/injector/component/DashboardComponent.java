@@ -7,7 +7,7 @@ import com.app.warantywise.injector.module.DashboardModule;
 import com.app.warantywise.injector.scope.PerActivity;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
 import com.app.warantywise.ui.dashboard.home.DetailsFragment;
-import com.app.warantywise.ui.dashboard.home.SystemServiceFragment;
+import com.app.warantywise.ui.dashboard.home.ServiceCenterDetailsFragment;
 
 import dagger.Component;
 
@@ -16,7 +16,7 @@ import dagger.Component;
 public interface DashboardComponent {
 
     void inject(DashBoardActivity dashBoardActivity);
-    void inject(SystemServiceFragment systemServiceFragment);
+    void inject(ServiceCenterDetailsFragment systemServiceFragment);
     void inject(DetailsFragment detailsFragment);
 
 

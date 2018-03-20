@@ -9,13 +9,13 @@ import java.util.ArrayList;
  */
 
 public class OfferResponseData extends BaseResponse{
-private ArrayList<OfferResponse> info;
+private ArrayList<ResponseData> info;
 
-    public ArrayList<OfferResponse> getInfo() {
+    public ArrayList<ResponseData> getInfo() {
         return info;
     }
 
-    public void setInfo(ArrayList<OfferResponse> info) {
+    public void setInfo(ArrayList<ResponseData> info) {
         this.info = info;
     }
 }

@@ -71,6 +71,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private ArrayAdapter<ProductDetail> productNameAdapter;
     private ArrayList<ProductDetail> productDetailList;
     private String productId;
+    private String manufacturer_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +116,9 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.edProductName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View layout, int pos, long id) {
-                ProductDetail detail=productDetailList.get(pos);
+                ProductDetail detail = productDetailList.get(pos);
+                productId = String.valueOf(detail.getId());
+                manufacturer_id = detail.getManufacturer_id();
                 mBinding.edProductName.setText(detail.getProduct_name());
                 mBinding.edCompanyName.setText(detail.getName());
             }
@@ -133,7 +137,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         productAdapter = new ProductAdapter(this, productList, this);
         mBinding.rvDocument.setAdapter(productAdapter);
         presenter.getAllProductList(this);
-        productDetailList=new ArrayList<>();
+        productDetailList = new ArrayList<>();
     }
 
     private void setList() {
@@ -184,10 +188,14 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     private void setData(AddProductRequest request) {
         request.setProduct_id(productId);
-        request.setCompanyid(companyName);
+        request.setModelno(null);
         request.setSerialno(serialNumber);
         request.setPurchasedate(purchaseDate);
         request.setExtendedwarranty(mBinding.radioYes.isChecked() ? "yes" : "no");
+        request.setWarrantyfrom(null);
+        request.setProductownerid(null);
+        request.setCompanyid(manufacturer_id);
+        request.setCompanyid(companyName);
     }
 
     private boolean isValid() {
@@ -235,7 +243,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     public void onSuccess(BaseResponse response, int requestCode) {
         if (CommonUtility.isNotNull(response)) {
             if (requestCode == 1) {
-                ProductDetailData data=(ProductDetailData)response;
+                ProductDetailData data = (ProductDetailData) response;
                 productDetailList.clear();
                 productDetailList.addAll(data.getInfo());
                 productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);

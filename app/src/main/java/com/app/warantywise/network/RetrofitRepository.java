@@ -19,7 +19,11 @@ import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
+import com.app.warantywise.network.response.dashboard.ProductDetailsData;
+import com.app.warantywise.network.response.dashboard.ProductFeedBackData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
+import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
+import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 
 import io.reactivex.Observable;
@@ -94,12 +98,12 @@ public class RetrofitRepository implements Repository {
     }
 
     @Override
-    public Observable<BaseResponse> getManufactorServiceCenterDetail(ServiceCenterRequest request) {
+    public Observable<ServiceCenterDetailData> getManufactorServiceCenterDetail(ServiceCenterRequest request) {
         return apiService.getManufactorServiceCenterDetail(request);
     }
 
     @Override
-    public Observable<BaseResponse> getManufactorServiceCenterImages(ServiceCenterRequest request) {
+    public Observable<ServiceCenterImageData> getManufactorServiceCenterImages(ServiceCenterRequest request) {
         return apiService.getManufactorServiceCenterImages(request);
     }
 
@@ -109,12 +113,12 @@ public class RetrofitRepository implements Repository {
     }
 
     @Override
-    public Observable<BaseResponse> getMyProductDetails(ProductsRequest request) {
+    public Observable<ProductDetailsData> getMyProductDetails(ProductsRequest request) {
         return apiService.getMyProductDetails(request);
     }
 
     @Override
-    public Observable<BaseResponse> getMyProductFeedback(ProductsRequest request) {
+    public Observable<ProductFeedBackData> getMyProductFeedback(ProductsRequest request) {
         return apiService.getMyProductFeedback(request);
     }
 
