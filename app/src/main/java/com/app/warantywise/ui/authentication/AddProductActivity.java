@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ActivityAddProductBinding;
@@ -17,12 +20,12 @@ import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.network.response.dashboard.AllProduct;
-import com.app.warantywise.network.response.dashboard.AllProductData;
+import com.app.warantywise.network.response.dashboard.ProductDetail;
+import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.presenter.CommonPresenter;
-import com.app.warantywise.ui.adapter.AsignAdapter;
 import com.app.warantywise.ui.adapter.ProductAdapter;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
+import com.app.warantywise.ui.dashboard.home.adapter.ProductNameCustomArrayAdapter;
 import com.app.warantywise.ui.uploadfile.UploadImage;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
@@ -64,9 +67,9 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private String warrantyPeriod;
     private int docNumber;
     private AddProductRequest request;
-    private ArrayList<AllProduct> arrayList;
-    private AsignAdapter adapter;
-    private ArrayList productNameList;
+    // adapter for auto-complete
+    private ArrayAdapter<ProductDetail> productNameAdapter;
+    private ArrayList<ProductDetail> productDetailList;
     private String productId;
 
     @Override
@@ -84,6 +87,39 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.tvPurchaseDate.setOnClickListener(this);
         mBinding.layoutYes.setOnClickListener(this);
         mBinding.layoutNo.setOnClickListener(this);
+        mBinding.edProductName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence searchText, int start, int before, int count) {
+                String searchProductName = searchText.toString();
+                if (searchText.toString().length() >= 3) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(searchProductName.toLowerCase()));
+                        }
+                    }, AppConstants.API_SERVICE);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        mBinding.edProductName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View layout, int pos, long id) {
+                ProductDetail detail=productDetailList.get(pos);
+                mBinding.edProductName.setText(detail.getProduct_name());
+                mBinding.edCompanyName.setText(detail.getName());
+            }
+
+        });
     }
 
     private void initializeData() {
@@ -97,24 +133,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         productAdapter = new ProductAdapter(this, productList, this);
         mBinding.rvDocument.setAdapter(productAdapter);
         presenter.getAllProductList(this);
-        arrayList = new ArrayList<>();
-        setTitleList();
-        /*productNameList = new ArrayList<>();
-        for (int i = 0; i < arrayList.size(); i++) {
-            productNameList.add(arrayList.get(i).getName());
-        }
-        adapter = new AsignAdapter(this, productNameList);
-        adapter.setDropDownViewResource(R.layout.spinner_row);
-        mBinding.selectedSpiner.setAdapter(adapter);
-        mBinding.selectedSpiner.setSelection(adapter.getCount());*/
-
-    }
-
-    private void setTitleList() {
-        AllProduct allProduct = new AllProduct();
-        allProduct.setId(null);
-        allProduct.setName(getResources().getString(R.string.product_name));
-        arrayList.add(allProduct);
+        productDetailList=new ArrayList<>();
     }
 
     private void setList() {
@@ -178,8 +197,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 docNumber = docNumber + 1;
             }
         }
-        productName = mBinding.selectedSpiner.getSelectedItem().toString();
-        companyName = mBinding.tvCompanyName.getText().toString();
+        productName = mBinding.edProductName.toString();
+        companyName = mBinding.edCompanyName.getText().toString();
         serialNumber = mBinding.tvSerialNumber.getText().toString();
         purchaseDate = mBinding.tvPurchaseDate.getText().toString();
         warrantyPeriod = mBinding.tvWarrantyPeriod.getText().toString();
@@ -215,57 +234,18 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
         if (CommonUtility.isNotNull(response)) {
-            if (requestCode == AppConstants.PRODUCT_LIST) {
-                AllProductData data = (AllProductData) response;
-                if (CommonUtility.isNotNull(data)) {
-                    arrayList = data.getInfo();
-                    if (CommonUtility.isNotNull(arrayList) && arrayList.size() > 0) {
-                        setTitleList();
-                        setSpinnerData(arrayList);
-                    }
-                }
+            if (requestCode == 1) {
+                ProductDetailData data=(ProductDetailData)response;
+                productDetailList.clear();
+                productDetailList.addAll(data.getInfo());
+                productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
+                mBinding.edProductName.setAdapter(productNameAdapter);
             } else if (requestCode == AppConstants.SUBMIT && response.getStatus().equalsIgnoreCase(AppConstants.SUCCESS)) {
                 PreferenceUtils.setLogin(true);
                 ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
             }
         }
 
-    }
-
-    private void setSpinnerData(ArrayList<AllProduct> arrayList) {
-
-        /*productNameList.clear();
-        for (int i = 0; i < arrayList.size(); i++) {
-            productNameList.add(arrayList.get(i).getName());
-        }*/
-        productNameList = new ArrayList<>();
-        for (int i = 0; i < arrayList.size(); i++) {
-            productNameList.add(arrayList.get(i).getName());
-        }
-        adapter = new AsignAdapter(this, productNameList);
-        adapter.setDropDownViewResource(R.layout.spinner_row);
-        mBinding.selectedSpiner.setAdapter(adapter);
-        mBinding.selectedSpiner.setSelection(adapter.getCount());
-        //adapter.notifyDataSetChanged();
-        mBinding.selectedSpiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != productNameList.size() - 1) {
-                    if (CommonUtility.isNotNull(view)) {
-                        view.setBackgroundResource(0);
-                    }
-                    if (CommonUtility.isNotNull(arrayList) && arrayList.size() > position) {
-                        productId=arrayList.get(position).getId();
-                        presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(arrayList.get(position).getProduct_name()));
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     @Override
@@ -301,7 +281,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             productList.set(adapterPosition, product);
             productAdapter.notifyDataSetChanged();
         }
-        //loadImageToServer();
     }
 
     private void storeImage(int type, String imageUrl) {
@@ -326,8 +305,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     }
 
     private void showImageChooserDialog() {
-        //ImagePickerUtils.add(getSupportFragmentManager(), this);
-
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(R.layout.profile_dialog_layout);
         View layoutCamera = dialog.findViewById(R.id.layoutCamera);

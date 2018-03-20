@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentProductListBinding;
+import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.OfferResponse;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
@@ -72,7 +73,7 @@ public class YourProductListFragment extends DashboardFragment implements
         mProductAdapter = new ProductListAdapter(getDashboardActivity(), this);
         mBinding.rvProductList.setAdapter(mProductAdapter);
         offerList=new ArrayList<>();
-        getPresenter().get
+        getPresenter().getProductOffers(getDashboardActivity(),new OfferRequest("1"));
     }
 
     @Override

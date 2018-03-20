@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/match_match"
+    android:orientation="vertical">
+
+    <com.app.warantywise.widget.CustomTextView
+        android:id="@+id/textViewItem"
+        style="@style/textview_description_large_match"
+        android:padding="@dimen/margin_5"
+         />
+    <ImageView
+        style="@style/view_layout"/>
+</LinearLayout>

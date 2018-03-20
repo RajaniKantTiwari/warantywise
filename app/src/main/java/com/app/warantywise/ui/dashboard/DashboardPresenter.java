@@ -6,6 +6,7 @@ import com.app.warantywise.network.Repository;
 import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
+import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
@@ -13,6 +14,7 @@ import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
+import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 import com.app.warantywise.ui.base.MvpView;
@@ -277,6 +279,24 @@ public class DashboardPresenter implements Presenter<MvpView> {
                 observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
             @Override
             public void onResponse(BaseResponse response) {
+                mView.hideProgress();
+                mView.onSuccess(response, 1);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(baseResponse.getMsg(), 1);
+            }
+        });
+    }
+
+    public void getProductOffers(DashBoardActivity activity, OfferRequest request) {
+        mRepository.getProductOffers(request).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<OfferResponseData>(activity) {
+            @Override
+            public void onResponse(OfferResponseData response) {
                 mView.hideProgress();
                 mView.onSuccess(response, 1);
             }

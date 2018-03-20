@@ -6,6 +6,7 @@ import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
+import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
@@ -16,6 +17,7 @@ import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
 import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
+import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
@@ -114,6 +116,11 @@ public class RetrofitRepository implements Repository {
     @Override
     public Observable<BaseResponse> getMyProductFeedback(ProductsRequest request) {
         return apiService.getMyProductFeedback(request);
+    }
+
+    @Override
+    public Observable<OfferResponseData> getProductOffers(OfferRequest request) {
+        return apiService.getProductOffers(request);
     }
 
 
