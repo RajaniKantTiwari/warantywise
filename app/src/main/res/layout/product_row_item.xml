@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<data>
+    <import type="com.app.warantywise.utility.CommonUtility"/>
+    <variable
+        name="productData"
+        type="com.app.warantywise.network.response.dashboard.YourProduct"/>
+</data>
     <android.support.v7.widget.CardView
         style="@style/match_wrap"
         android:layout_margin="@dimen/margin_5"
@@ -39,7 +44,7 @@
                 <com.app.warantywise.widget.CustomTextView
                     style="@style/textview_description_smaller_wrap"
                     android:maxLines="1"
-                    android:text="Under Warranty"
+                    android:text="@={productData.model_no}"
                     app:customFont="@string/font_bold" />
 
                 <com.app.warantywise.widget.CustomTextView
@@ -48,7 +53,7 @@
                     android:maxLines="1"
                     android:padding="@dimen/margin_4"
                     android:drawablePadding="@dimen/margin_4"
-                    android:text="27 may 2017"
+                    android:text="@{CommonUtility.warrantyFrom(productData.purchase_date)}"
                     app:customFont="@string/font_bold" />
             </LinearLayout>
 
@@ -79,7 +84,7 @@
                 <com.app.warantywise.widget.CustomTextView
                     style="@style/textview_description_large_wrap"
                     android:maxLines="1"
-                    android:text="27 may 2009"
+                    android:text="@{CommonUtility.warrantyFrom(productData.warranty_from)}"
                     android:textColor="@color/button_text_color"
                     app:customFont="@string/font_bold" />
             </LinearLayout>

@@ -635,4 +635,20 @@ public class CommonUtility {
         return BitmapFactory.decodeFile(profilePicFilePath);
 
     }
+
+
+    public static String warrantyFrom(String date) {
+        String createdDate=null;
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            dateFormat.setTimeZone(TimeZone.getTimeZone(AppConstants.TIME_ZONE));
+            Date cDate=dateFormat.parse(date);
+            DateFormat newDateFormat = new SimpleDateFormat("dd MMM yyyy");
+            newDateFormat.setTimeZone(TimeZone.getTimeZone(AppConstants.TIME_ZONE));
+            return newDateFormat.format(cDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return createdDate;
+    }
 }

@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductViewHolder> {
     private final LayoutInflater mInflater;
-    private final AppCompatActivity activity;
     private ProductListListener listener;
     private ArrayList<YourProduct> productList;
 
@@ -39,7 +38,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public ProductListAdapter(AppCompatActivity activity, ArrayList<YourProduct> productList, ProductListListener listener) {
         mInflater = LayoutInflater.from(activity);
-        this.activity = activity;
         this.productList = productList;
         this.listener = listener;
     }
@@ -53,7 +51,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-
+        if (CommonUtility.isNotNull(productList) && productList.size() > position) {
+            holder.setData(productList.get(position));
+        }
     }
 
     @Override
@@ -63,7 +63,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ProductRowItemBinding mBinding;
-        private ImageView productImage;
 
         public ProductViewHolder(ProductRowItemBinding itemView) {
             super(itemView.getRoot());
@@ -75,8 +74,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         }
 
-        public void setData(Product product) {
-            //mBinding.setPayment(product);
+        public void setData(YourProduct product) {
+            mBinding.setProductData(product);
         }
 
         @Override
