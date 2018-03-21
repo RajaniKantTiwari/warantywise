@@ -25,7 +25,7 @@ import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.dashboard.drawer.HelpSupportFragment;
 import com.app.warantywise.ui.dashboard.home.DetailsFragment;
-import com.app.warantywise.ui.dashboard.home.HomeFragment;
+import com.app.warantywise.ui.dashboard.home.ProductListMapFragment;
 import com.app.warantywise.ui.dashboard.home.InsurancePaymentFragment;
 import com.app.warantywise.ui.dashboard.user.ProfileFragment;
 import com.app.warantywise.ui.base.BaseActivity;
@@ -65,7 +65,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         switch (position) {
             case AppConstants.HOME:
                 closeDrawerLeft();
-                openFragment(new HomeFragment(), null, false, false, NONE, true);
+                openFragment(new ProductListMapFragment(), null, false, false, NONE, true);
                 break;
             case AppConstants.MYWARANTY:
                 closeDrawerLeft();

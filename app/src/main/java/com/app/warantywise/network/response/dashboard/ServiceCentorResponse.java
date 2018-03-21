@@ -39,6 +39,7 @@ public class ServiceCentorResponse implements Parcelable {
     private String preferred_payment_options;
     private String country;
     private String state;
+    
 
     protected ServiceCentorResponse(Parcel in) {
         id = in.readString();

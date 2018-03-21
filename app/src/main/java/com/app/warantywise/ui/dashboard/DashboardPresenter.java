@@ -21,6 +21,7 @@ import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseDa
 import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
+import com.app.warantywise.network.response.dashboard.YourProductData;
 import com.app.warantywise.ui.base.MvpView;
 import com.app.warantywise.ui.base.Presenter;
 import com.app.warantywise.utility.AppConstants;
@@ -72,17 +73,17 @@ public class DashboardPresenter implements Presenter<MvpView> {
         mView.showProgress();
         mRepository.yourProduct().
                 subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<YourProductData>(activity) {
             @Override
-            public void onResponse(BaseResponse response) {
+            public void onResponse(YourProductData response) {
                 mView.hideProgress();
-                mView.onSuccess(response, AppConstants.LOGOUT);
+                mView.onSuccess(response, 1);
             }
 
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), AppConstants.LOGOUT);
+                mView.onError(baseResponse.getMsg(), 1);
             }
         });
     }
@@ -190,13 +191,13 @@ public class DashboardPresenter implements Presenter<MvpView> {
             @Override
             public void onResponse(ManufactorServiceCentorResponseData response) {
                 mView.hideProgress();
-                mView.onSuccess(response, 1);
+                mView.onSuccess(response, 2);
             }
 
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 1);
+                mView.onError(baseResponse.getMsg(), 2);
             }
         });
     }
@@ -302,13 +303,13 @@ public class DashboardPresenter implements Presenter<MvpView> {
             @Override
             public void onResponse(OfferResponseData response) {
                 mView.hideProgress();
-                mView.onSuccess(response, 1);
+                mView.onSuccess(response, 3);
             }
 
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 1);
+                mView.onError(baseResponse.getMsg(), 3);
             }
         });
     }

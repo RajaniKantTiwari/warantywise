@@ -15,4 +15,5 @@ public interface BundleConstants {
 
     String PRODUCT_RESPONSE = "product_response";
     String IS_FROMDASHBOARD = "is_from_dashboard";
+    String OFFER = "offer";
 }

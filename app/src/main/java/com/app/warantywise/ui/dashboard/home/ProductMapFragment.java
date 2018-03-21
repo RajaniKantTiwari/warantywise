@@ -19,11 +19,12 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentLocationMapBinding;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
+import com.app.warantywise.network.response.dashboard.ServiceCentorResponse;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.mapview.InfoWindow;
 import com.app.warantywise.ui.dashboard.home.mapview.InfoWindowManager;
 import com.app.warantywise.ui.dashboard.home.mapview.ShowWindowFragment;
-import com.app.warantywise.ui.event.MerchantEvent;
+import com.app.warantywise.ui.event.ProductEvent;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
@@ -57,6 +58,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     private FragmentLocationMapBinding mBinder;
     private SupportMapFragment mapFragment;
     private InfoWindowManager infoWindowManager;
+    private ArrayList<ServiceCentorResponse> productMapList;
 
     //private HashMap<Marker, ProductResponse> mMarkersHashMap;
     private Intent callIntent;
@@ -83,7 +85,6 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         getCurrentLocation();
-        getPresenter().getManufactorServiceCenter(getDashboardActivity());
 
     }
 
@@ -122,16 +123,16 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     }
 
     @Subscribe
-    public void onEvent(MerchantEvent event) {
+    public void onEvent(ProductEvent event) {
         if (event.getListMap() == AppConstants.LIST_PRODUCT) {
             mBinder.layoutMap.setVisibility(View.GONE);
         } else if (event.getListMap() == AppConstants.MAP_PRODUCT) {
             mBinder.layoutMap.setVisibility(View.VISIBLE);
-            showMarkerList(event.getProductList());
+            showMarkerList(event.getProductMapList());
         }
     }
 
-    private void showMarkerList(ArrayList<ProductResponse> productList) {
+    private void showMarkerList(ArrayList<ServiceCentorResponse> productList) {
        /* if (CommonUtils.isNotNull(meetingEventList)) {
             for (MerchantResponse response : meetingEventList) {*/
         addMarker(productList);
@@ -203,7 +204,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
 
 
 
-    private void addMarker(ArrayList<ProductResponse> responseList) {
+    private void addMarker(ArrayList<ServiceCentorResponse> responseList) {
         if (ActivityCompat.checkSelfPermission(getBaseActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getBaseActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -211,7 +212,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         if (CommonUtility.isNotNull(mMap) && CommonUtility.isNotNull(responseList)) {
             infoWindowList = new ArrayList<>();
             for (int i = 0; i < responseList.size(); i++) {
-                ProductResponse response = responseList.get(i);
+                ServiceCentorResponse response = responseList.get(i);
                 LatLng latLng = new LatLng(Double.parseDouble(response.getLatitude()), Double.parseDouble(response.getLongitude()));
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position(latLng).snippet(String.valueOf(i))
@@ -220,7 +221,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
             }
         }
     }
-    private void showWindow(Marker marker, ProductResponse response, int positio) {
+    private void showWindow(Marker marker, ServiceCentorResponse response, int positio) {
         ShowWindowFragment fragment = new ShowWindowFragment(this);
         Bundle bundle = new Bundle();
         bundle.putParcelable(BundleConstants.PRODUCT_RESPONSE, response);
@@ -300,7 +301,6 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
 
     @Override
     public void attachView() {
-      getPresenter().attachView(this);
     }
 
     @Override
@@ -319,6 +319,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     @Override
     public void onDestroy() {
         super.onDestroy();
+        CommonUtility.unregister(this);
         infoWindowManager.onDestroy();
     }
 

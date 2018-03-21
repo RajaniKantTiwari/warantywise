@@ -30,8 +30,8 @@ import static com.app.warantywise.ui.base.BaseActivity.AnimationType.FADE;
 import static com.app.warantywise.ui.base.BaseActivity.AnimationType.NONE;
 import static com.app.warantywise.ui.base.BaseActivity.AnimationType.SLIDE;
 import static com.app.warantywise.ui.base.BaseActivity.AnimationType.ZOOM;
-import static com.app.warantywise.utility.AppConstants.FRAGMENTS.MERCHANT_LIST_FRAGMENT;
-import static com.app.warantywise.utility.AppConstants.FRAGMENTS.MERCHANT_MAP_FRAGMENT;
+import static com.app.warantywise.utility.AppConstants.FRAGMENTS.PRODUCT_LIST_FRAGMENT;
+import static com.app.warantywise.utility.AppConstants.FRAGMENTS.PRODUCT_MAP_FRAGMENT;
 
 /**
  * Created by ashok on 01/11/17.
@@ -206,10 +206,10 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     private static Fragment getFragment(int fragmentId) {
         Fragment fragment = null;
         switch (fragmentId) {
-            case MERCHANT_MAP_FRAGMENT:
+            case PRODUCT_MAP_FRAGMENT:
                 fragment = new ProductMapFragment();
                 break;
-            case MERCHANT_LIST_FRAGMENT:
+            case PRODUCT_LIST_FRAGMENT:
                 fragment = new YourProductListFragment();
                 break;
 

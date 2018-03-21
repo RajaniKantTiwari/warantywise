@@ -12,6 +12,7 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.ProductRowItemBinding;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
+import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.utility.CommonUtility;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private final LayoutInflater mInflater;
     private final AppCompatActivity activity;
     private ProductListListener listener;
-    private ArrayList<ProductResponse> productList;
+    private ArrayList<YourProduct> productList;
 
     public interface ProductListListener {
         void onOfferClicked(int position);
@@ -36,9 +37,10 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         void onWarrantyClicked(int position);
     }
 
-    public ProductListAdapter(AppCompatActivity activity, ProductListListener listener) {
+    public ProductListAdapter(AppCompatActivity activity, ArrayList<YourProduct> productList, ProductListListener listener) {
         mInflater = LayoutInflater.from(activity);
         this.activity = activity;
+        this.productList = productList;
         this.listener = listener;
     }
 
@@ -48,10 +50,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return new ProductViewHolder(mBinding);
     }
 
-    public void setLocationList(ArrayList<ProductResponse> productList) {
-        this.productList = productList;
-        notifyDataSetChanged();
-    }
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
@@ -60,7 +58,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public int getItemCount() {
-        return 5;
+        return CommonUtility.isNotNull(productList) ? productList.size() : 0;
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

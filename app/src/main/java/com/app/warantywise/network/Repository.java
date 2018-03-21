@@ -25,6 +25,7 @@ import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseDa
 import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
+import com.app.warantywise.network.response.dashboard.YourProductData;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -39,7 +40,7 @@ public interface Repository {
 
     Observable<BaseResponse> addProduct(AddProductRequest request);
 
-    Observable<BaseResponse> yourProduct();
+    Observable<YourProductData> yourProduct();
 
     Observable<ProductDetailData> getProductDetails(ProductDetailsRequest request);
 

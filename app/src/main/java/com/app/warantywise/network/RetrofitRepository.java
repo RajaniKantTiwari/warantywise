@@ -25,6 +25,7 @@ import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseDa
 import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
+import com.app.warantywise.network.response.dashboard.YourProductData;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -58,7 +59,7 @@ public class RetrofitRepository implements Repository {
     }
 
     @Override
-    public Observable<BaseResponse> yourProduct() {
+    public Observable<YourProductData> yourProduct() {
         return apiService.yourProduct();
     }
 

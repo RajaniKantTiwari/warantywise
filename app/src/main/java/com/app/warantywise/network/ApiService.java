@@ -26,6 +26,7 @@ import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
+import com.app.warantywise.network.response.dashboard.YourProductData;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -56,7 +57,7 @@ public interface ApiService {
     Observable<ProductDetailData> getProductDetails(@Body ProductDetailsRequest request);
 
     @POST("product/getmyproducts")
-    Observable<BaseResponse> yourProduct();
+    Observable<YourProductData> yourProduct();
 
     @POST("product/get_warrantee_card_image")
     Observable<WarrantyCardImageData> getWarrantyCardImage(@Body WarrantyCardImageRequest request);

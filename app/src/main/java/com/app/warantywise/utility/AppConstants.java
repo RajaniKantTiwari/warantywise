@@ -5,8 +5,8 @@ import android.support.annotation.IntDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static com.app.warantywise.utility.AppConstants.FRAGMENTS.MERCHANT_LIST_FRAGMENT;
-import static com.app.warantywise.utility.AppConstants.FRAGMENTS.MERCHANT_MAP_FRAGMENT;
+import static com.app.warantywise.utility.AppConstants.FRAGMENTS.PRODUCT_LIST_FRAGMENT;
+import static com.app.warantywise.utility.AppConstants.FRAGMENTS.PRODUCT_MAP_FRAGMENT;
 import static com.app.warantywise.utility.AppConstants.FRAGMENTS.NOTIFICATION_FRAGMENT;
 import static com.app.warantywise.utility.AppConstants.FRAGMENTS.USER_FRAGMENT;
 
@@ -61,13 +61,13 @@ public interface AppConstants {
     long API_SERVICE = 500;
 
 
-    @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT,MERCHANT_MAP_FRAGMENT,
-            MERCHANT_LIST_FRAGMENT})
+    @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT, PRODUCT_MAP_FRAGMENT,
+            PRODUCT_LIST_FRAGMENT})
     @Retention(RetentionPolicy.SOURCE)
     @interface FRAGMENTS {
         int NOTIFICATION_FRAGMENT=0;
         int USER_FRAGMENT=1;
-        int MERCHANT_MAP_FRAGMENT = 3;
-        int MERCHANT_LIST_FRAGMENT = 4;
+        int PRODUCT_MAP_FRAGMENT = 3;
+        int PRODUCT_LIST_FRAGMENT = 4;
     }
 }
