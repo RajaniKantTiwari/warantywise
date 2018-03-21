@@ -199,6 +199,7 @@
     <string name="model_no">Model Number</string>
     <string name="please_enter_model_number">Please Enter Model Number</string>
     <string name="thirty_days">30 days</string>
+    <string name="please_enter_ten_digit_valid_mobile_nubmer">Please Enter 10 digit Valid Mobile Number</string>
 
     <string-array name="left_drawer">
         <item>@string/home</item>

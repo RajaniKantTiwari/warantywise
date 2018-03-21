@@ -5,6 +5,7 @@ import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
+import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
@@ -126,6 +127,11 @@ public class RetrofitRepository implements Repository {
     @Override
     public Observable<OfferResponseData> getProductOffers(OfferRequest request) {
         return apiService.getProductOffers(request);
+    }
+
+    @Override
+    public Observable<ProductDetailData> getCompanyDetails(CompanyDetailsRequest request) {
+        return apiService.getCompanyDetails(request);
     }
 
 

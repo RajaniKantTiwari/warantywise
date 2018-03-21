@@ -1,7 +1,6 @@
 package com.app.warantywise.ui.dashboard.home.adapter;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,13 @@ import com.app.warantywise.network.response.dashboard.ProductDetail;
 
 import java.util.ArrayList;
 
-public class ProductNameCustomArrayAdapter extends ArrayAdapter<ProductDetail> {
+public class CompanyNameCustomArrayAdapter extends ArrayAdapter<ProductDetail> {
 
     LayoutInflater mInflator=null;
     int layoutResourceId;
     ArrayList<ProductDetail> productList = null;
- 
-    public ProductNameCustomArrayAdapter(Activity activity, int layoutResourceId, ArrayList<ProductDetail> productList) {
+
+    public CompanyNameCustomArrayAdapter(Activity activity, int layoutResourceId, ArrayList<ProductDetail> productList) {
         super(activity, layoutResourceId, productList);
         mInflator=LayoutInflater.from(activity);
         this.layoutResourceId = layoutResourceId;
@@ -45,7 +44,7 @@ public class ProductNameCustomArrayAdapter extends ArrayAdapter<ProductDetail> {
  
             // get the TextView and then set the text (item name) and tag (item ID) values
             TextView textViewItem =convertView.findViewById(R.id.textViewItem);
-            textViewItem.setText(productDetail.getProduct_name());
+            textViewItem.setText(productDetail.getName());
              
         } catch (NullPointerException e) {
             e.printStackTrace();

@@ -1,7 +1,6 @@
 package com.app.warantywise.ui.event;
 
 
-import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.ResponseData;
 import com.app.warantywise.network.response.dashboard.ServiceCentorResponse;
 import com.app.warantywise.network.response.dashboard.YourProduct;

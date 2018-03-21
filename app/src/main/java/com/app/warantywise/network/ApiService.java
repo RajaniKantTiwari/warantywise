@@ -6,6 +6,7 @@ import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
+import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
 import com.app.warantywise.network.request.dashboard.OfferRequest;
@@ -56,6 +57,9 @@ public interface ApiService {
     @POST("product/getmasterproducts")
     Observable<ProductDetailData> getProductDetails(@Body ProductDetailsRequest request);
 
+    @POST("product/getcompanyname")
+    Observable<ProductDetailData> getCompanyDetails(@Body CompanyDetailsRequest request);
+
     @POST("product/getmyproducts")
     Observable<YourProductData> yourProduct();
 
@@ -88,5 +92,7 @@ public interface ApiService {
 
     @POST("product/get_my_product_feedback")
     Observable<ProductFeedBackData> getMyProductFeedback(@Body ProductsRequest request);
+
+
 
 }

@@ -63,13 +63,23 @@
                 android:text="@string/company_name"
                 app:customFont="@string/font_regular" />
 
-            <com.app.warantywise.widget.CustomEditText
-                android:id="@+id/edCompanyName"
-                style="@style/edittext_add_product"
-                android:hint="@string/type_name_mention_on_bill"
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                app:customFont="@string/font_regular" />
+            <RelativeLayout
+                style="@style/match_wrap"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:background="@drawable/grey_corner_bg">
+
+                <com.app.warantywise.utility.ProductNameCompleteView
+                    android:id="@+id/edCompanyName"
+                    style="@style/match_wrap"
+                    android:imeOptions="flagNoExtractUi|actionSearch"
+                    android:background="@null"
+                    android:padding="@dimen/margin_6"
+                    android:hint="@string/type_name_mention_on_bill"
+                    android:inputType="textCapSentences"
+                    android:textSize="@dimen/textSize_description_large"
+                    android:paddingRight="8dp"/>
+            </RelativeLayout>
             <com.app.warantywise.widget.CustomTextView
                 style="@style/textview_product"
                 android:text="@string/model_no"

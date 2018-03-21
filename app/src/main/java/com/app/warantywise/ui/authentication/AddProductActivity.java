@@ -18,6 +18,7 @@ import com.app.warantywise.databinding.ActivityAddProductBinding;
 import com.app.warantywise.event.EncodedBitmap;
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.Product;
+import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductDetail;
@@ -25,6 +26,7 @@ import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.presenter.CommonPresenter;
 import com.app.warantywise.ui.adapter.ProductAdapter;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
+import com.app.warantywise.ui.dashboard.home.adapter.CompanyNameCustomArrayAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.ProductNameCustomArrayAdapter;
 import com.app.warantywise.ui.uploadfile.UploadImage;
 import com.app.warantywise.utility.AppConstants;
@@ -70,7 +72,10 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private AddProductRequest request;
     // adapter for auto-complete
     private ArrayAdapter<ProductDetail> productNameAdapter;
+    private ArrayAdapter<ProductDetail> companyNameNameAdapter;
     private ArrayList<ProductDetail> productDetailList;
+    private ArrayList<ProductDetail> companyDetailList;
+
     private String productId;
     private String manufacturerId;
     private String modelNumber;
@@ -96,7 +101,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.edProductName.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence searchText, int start, int before, int count) {
-
                 String searchProductName = searchText.toString();
                 if (searchText.toString().length() >= 2) {
                     new Handler().postDelayed(new Runnable() {
@@ -110,8 +114,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                     @Override
                     public void run() {
                         if (isChange) {
-                            productId=null;
-                            manufacturerId=null;
+                            productId = null;
+                            manufacturerId = null;
                         }
                     }
                 }, AppConstants.API_SERVICE);
@@ -145,6 +149,61 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             }
 
         });
+
+
+        mBinding.edCompanyName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence searchText, int start, int before, int count) {
+
+                String searchCompanyName = searchText.toString();
+                if (searchText.toString().length() >= 2) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            presenter.getCompanyDetails(AddProductActivity.this, new CompanyDetailsRequest(searchCompanyName.toLowerCase()));
+                        }
+                    }, AppConstants.API_SERVICE);
+                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isChange) {
+                            manufacturerId = null;
+                        }
+                    }
+                }, AppConstants.API_SERVICE);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        mBinding.edCompanyName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View layout, int pos, long id) {
+                ProductDetail detail = companyDetailList.get(pos);
+                productId = String.valueOf(detail.getId());
+                manufacturerId = detail.getManufacturer_id();
+                mBinding.edProductName.setText(detail.getProduct_name());
+                mBinding.edCompanyName.setText(detail.getName());
+                isChange = false;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        isChange = true;
+                    }
+                }, 1500);
+            }
+
+        });
+
+
     }
 
     private void initializeData() {
@@ -166,8 +225,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.rvDocument.setLayoutManager(layoutManager);
         productAdapter = new ProductAdapter(this, productList, this);
         mBinding.rvDocument.setAdapter(productAdapter);
-        presenter.getAllProductList(this);
         productDetailList = new ArrayList<>();
+        companyDetailList=new ArrayList<>();
     }
 
     private void setList() {
@@ -287,6 +346,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             } else if (requestCode == 2 && response.getStatus().equalsIgnoreCase(AppConstants.SUCCESS)) {
                 PreferenceUtils.setLogin(true);
                 ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+            } else if (requestCode == 3) {
+                ProductDetailData data = (ProductDetailData) response;
+                companyDetailList.clear();
+                companyDetailList.addAll(data.getInfo());
+                companyNameNameAdapter = new CompanyNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
+                mBinding.edCompanyName.setAdapter(companyNameNameAdapter);
             }
         }
     }

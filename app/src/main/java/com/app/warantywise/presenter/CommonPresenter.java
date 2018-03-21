@@ -9,6 +9,7 @@ import com.app.warantywise.network.Repository;
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
+import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
@@ -126,13 +127,13 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onResponse(BaseResponse response) {
                 mView.hideProgress();
-                mView.onSuccess(response, AppConstants.PRODUCT_LIST);
+                mView.onSuccess(response, 4);
             }
 
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), AppConstants.PRODUCT_LIST);
+                mView.onError(baseResponse.getMsg(), 4);
             }
         });
     }
@@ -152,6 +153,24 @@ public class CommonPresenter implements Presenter<MvpView> {
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
                 mView.onError(baseResponse.getMsg(), 1);
+            }
+        });
+    }
+
+    public void getCompanyDetails(AddProductActivity activity, CompanyDetailsRequest request) {
+        mRepository.getCompanyDetails(request).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<ProductDetailData>(activity) {
+            @Override
+            public void onResponse(ProductDetailData response) {
+                mView.hideProgress();
+                mView.onSuccess(response, 3);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(baseResponse.getMsg(), 3);
             }
         });
     }

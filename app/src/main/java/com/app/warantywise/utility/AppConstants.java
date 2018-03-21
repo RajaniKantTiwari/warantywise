@@ -58,7 +58,7 @@ public interface AppConstants {
     int WARRANTY_CARD_IMAGE = 3;
     int PRODUCT_LIST = 3;
     int SUBMIT=1;
-    long API_SERVICE = 500;
+    long API_SERVICE = 300;
 
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT, PRODUCT_MAP_FRAGMENT,

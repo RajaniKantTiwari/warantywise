@@ -59,15 +59,15 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
-        if(isNotNull(response)){
-            if(response instanceof LoginResponse){
-                LoginResponse loginResponse=(LoginResponse)response;
-                if(isNotNull(loginResponse)){
-                    String type=loginResponse.getType();
-                    if(type.equals(AppConstants.SUCCESS)){
+        if (isNotNull(response)) {
+            if (response instanceof LoginResponse) {
+                LoginResponse loginResponse = (LoginResponse) response;
+                if (isNotNull(loginResponse)) {
+                    String type = loginResponse.getType();
+                    if (type.equals(AppConstants.SUCCESS)) {
                         PreferenceUtils.setUserName(userName);
                         PreferenceUtils.setUserMono(mobileNumber);
-                        ExplicitIntent.getsInstance().navigateTo(this,VerifyAccountActivity.class);
+                        ExplicitIntent.getsInstance().navigateTo(this, VerifyAccountActivity.class);
                     }
                 }
             }
@@ -77,32 +77,34 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
 
     @Override
     public void onClick(View view) {
-        if(view==mBinding.tvSubmit){
+        if (view == mBinding.tvSubmit) {
             CommonUtility.clicked(mBinding.tvSubmit);
-            if(isValid()){
-                Bundle bundle=new Bundle();
-                bundle.putString(BundleConstants.USER_NAME,userName);
-                bundle.putString(BundleConstants.MOBILE_NUMBER,mobileNumber);
-               if(isNetworkConnected()){
-                   presenter.getLoginDetail(this,new LoginRequest(userName,mobileNumber,
-                           PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
-               }
-           }
+            if (isValid()) {
+                Bundle bundle = new Bundle();
+                bundle.putString(BundleConstants.USER_NAME, userName);
+                bundle.putString(BundleConstants.MOBILE_NUMBER, mobileNumber);
+                if (isNetworkConnected()) {
+                    presenter.getLoginDetail(this, new LoginRequest(userName, mobileNumber,
+                            PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
+                }
+            }
         }
     }
 
     private boolean isValid() {
-        mobileNumber=mBinding.edMobileNumber.getText().toString();
-        userName=mBinding.edName.getText().toString();
-        if((isNotNull(mobileNumber)&&mobileNumber.trim().length()>0)&&(isNotNull(userName)&&userName.trim().length()>0)){
-            return true;
-        }else if(isNull(userName)||userName.trim().length()==0){
+        mobileNumber = mBinding.edMobileNumber.getText().toString();
+        userName = mBinding.edName.getText().toString();
+        if (isNull(userName) || userName.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_name));
             return false;
-        }else{
+        } else if (isNull(mobileNumber) || mobileNumber.trim().length() == 0) {
             showToast(getResources().getString(R.string.please_enter_mobile_number));
             return false;
+        } else if (mobileNumber.trim().length() < 10) {
+            showToast(getResources().getString(R.string.please_enter_ten_digit_valid_mobile_nubmer));
+            return false;
         }
+        return true;
     }
 
 
