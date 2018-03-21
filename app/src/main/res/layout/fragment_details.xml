@@ -2,15 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <import type="com.app.warantywise.utility.CommonUtility" />
-
-        <variable
-            name="merchantResponse"
-            type="com.app.warantywise.network.response.dashboard.ProductResponse" />
-    </data>
-
     <FrameLayout style="@style/match_match"
         android:background="@color/white"
         >
@@ -35,7 +26,6 @@
                             android:id="@+id/storeImage"
                             style="@style/match_wrap"
                             android:layout_height="@dimen/margin_180"
-                            android:background="@drawable/shubh"
                             android:scaleType="fitXY" />
 
                         <ImageView
@@ -47,15 +37,14 @@
 
                         <LinearLayout
                             style="@style/wrap_wrap"
-                            android:paddingBottom="@dimen/margin_15">
+                            android:layout_marginTop="@dimen/margin_150"
+                            android:layout_marginStart="@dimen/margin_8">
 
                             <com.app.warantywise.widget.CustomTextView
-                                style="@style/textview_description_wrap"
-                                android:layout_marginBottom="@dimen/margin_5"
-                                android:layout_marginTop="@dimen/margin_5"
-                                android:text="@{CommonUtility.oneDecimalPlaceString(merchantResponse.rating)}"
-                                android:textColor="@color/rating_text_color"
-                                app:customFont="@string/font_bold" />
+                                android:id="@+id/tvTotalRating"
+                                style="@style/textview_title_wrap"
+                                android:text="42"
+                                android:textColor="@color/rating_text_color"/>
 
                             <RatingBar
                                 android:id="@+id/ratingBar"
@@ -64,7 +53,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:max="5"
-                                android:layout_marginTop="@dimen/margin_150"
                                 android:progressTint="@color/rating_text_color"
                                 android:rating="4" />
                         </LinearLayout>
@@ -116,25 +104,26 @@
                             android:layout_marginTop="@dimen/margin_2"
                             android:text="bhes45"
                             app:customFont="@string/font_regular" />
-                        <LinearLayout
-                            android:layout_alignParentEnd="true"
-                            android:layout_toEndOf="@+id/productName"
-                            android:layout_marginStart="@dimen/margin_100"
-                            android:orientation="vertical"
-                            style="@style/match_wrap">
+
 
                             <com.app.warantywise.widget.CustomTextView
-                                android:layout_below="@+id/productName"
+                                android:id="@+id/tvExpire"
                                 style="@style/textview_description_wrap"
+                                android:layout_width="@dimen/margin_165"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginTop="@dimen/margin_2"
                                 android:text="@string/expire_on"
                                 app:customFont="@string/font_regular" />
                             <com.app.warantywise.widget.CustomTextView
+                                android:id="@+id/tvDate"
                                 style="@style/textview_title_wrap"
+                                android:layout_width="@dimen/margin_165"
+                                android:layout_below="@+id/tvExpire"
+                                android:layout_alignParentEnd="true"
                                 android:text="21 may 2018"
                                 android:textColor="@color/button_text_color"
                                 app:customFont="@string/font_regular"/>
-                        </LinearLayout>
+
                     </RelativeLayout>
 
                     <View
@@ -168,18 +157,18 @@
                             android:layout_marginTop="@dimen/margin_10"
                             android:textColor="@color/button_text_color"/>
                         <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvCompanyName"
                             style="@style/textview_description_match"
-                            android:layout_marginTop="@dimen/margin_5"
-                            android:text="Nokia"/>
+                            android:layout_marginTop="@dimen/margin_5" />
                         <com.app.warantywise.widget.CustomTextView
                             style="@style/textview_description_match"
                             android:text="@string/customer_name"
                             android:layout_marginTop="@dimen/margin_10"
                             android:textColor="@color/button_text_color"/>
                         <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvCustomerName"
                             style="@style/textview_description_match"
-                            android:layout_marginTop="@dimen/margin_5"
-                            android:text="John Doe"/>
+                            android:layout_marginTop="@dimen/margin_5" />
 
                         <com.app.warantywise.widget.CustomTextView
                             style="@style/textview_description_match"
@@ -187,34 +176,29 @@
                             android:layout_marginTop="@dimen/margin_10"
                             android:textColor="@color/button_text_color"/>
                         <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvPurchaseDate"
                             style="@style/textview_description_match"
-                            android:layout_marginTop="@dimen/margin_5"
-                            android:text="21 may 2016"/>
+                            android:layout_marginTop="@dimen/margin_5" />
                         <com.app.warantywise.widget.CustomTextView
                             style="@style/textview_description_match"
                             android:text="@string/warranty_period"
                             android:layout_marginTop="@dimen/margin_10"
                             android:textColor="@color/button_text_color"/>
                         <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvWarrantyPeriod"
                             style="@style/textview_description_match"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:layout_marginBottom="@dimen/margin_10"
-                            android:text="1 year"/>
+                            android:layout_marginBottom="@dimen/margin_10"/>
                     </LinearLayout>
 
                     <View
                         android:id="@+id/div_c"
                         style="@style/view_layout"
                         android:layout_below="@+id/layou" />
-
-
-
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rvDocument"
                             style="@style/match_wrap"
                             android:layout_below="@+id/div_c"/>
-
-
                     <View
                         android:id="@+id/div_d"
                         style="@style/view_layout"

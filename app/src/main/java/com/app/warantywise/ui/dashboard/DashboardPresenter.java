@@ -267,13 +267,13 @@ public class DashboardPresenter implements Presenter<MvpView> {
             @Override
             public void onResponse(ProductDetailsData response) {
                 mView.hideProgress();
-                mView.onSuccess(response, 1);
+                mView.onSuccess(response, 2);
             }
 
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 1);
+                mView.onError(baseResponse.getMsg(), 2);
             }
         });
     }
@@ -285,13 +285,13 @@ public class DashboardPresenter implements Presenter<MvpView> {
             @Override
             public void onResponse(ProductFeedBackData response) {
                 mView.hideProgress();
-                mView.onSuccess(response, 1);
+                mView.onSuccess(response, 3);
             }
 
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 1);
+                mView.onError(baseResponse.getMsg(), 3);
             }
         });
     }

@@ -15,23 +15,20 @@ import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.network.response.dashboard.MerchantResponseData;
-import com.app.warantywise.network.response.dashboard.ProductResponse;
+import com.app.warantywise.network.response.dashboard.ProductDetails;
+import com.app.warantywise.network.response.dashboard.ProductDetailsData;
 import com.app.warantywise.network.response.dashboard.ReviewResponse;
-import com.app.warantywise.network.response.dashboard.ReviewResponseData;
 import com.app.warantywise.ui.adapter.DetailsAdapter;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
-import com.app.warantywise.ui.dashboard.adapter.ImageAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.ReviewAdapter;
-import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
 import com.app.warantywise.utility.CommonUtility;
+import com.app.warantywise.utility.GlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailsFragment extends DashboardFragment implements
-        FeedbackDialogFragment.FeedbackDialogListener, ImageAdapter.ImageListener, DetailsAdapter.DetailsListener {
+public class DetailsFragment extends DashboardFragment implements DetailsAdapter.DetailsListener {
 
     private FragmentDetailsBinding mBinding;
     private ReviewAdapter mReviewAdapter;
@@ -49,7 +46,7 @@ public class DetailsFragment extends DashboardFragment implements
 
     private void initializeView() {
         getDashboardActivity().setHeaderTitle(getResources().getString(R.string.details));
-//for setting product Image
+        //for setting product Image
         setProductList();
         GridLayoutManager layoutManager = new GridLayoutManager(getDashboardActivity(), 3);
         mBinding.rvDocument.setLayoutManager(layoutManager);
@@ -77,9 +74,9 @@ public class DetailsFragment extends DashboardFragment implements
         mBinding.rvReview.setLayoutManager(layoutManager);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
-        getPresenter().getWarrantyCardImage(getDashboardActivity(),new WarrantyCardImageRequest("1"));
-        getPresenter().getMyProductDetails(getDashboardActivity(),new ProductsRequest("1"));
-        getPresenter().getMyProductFeedback(getDashboardActivity(),new ProductsRequest("1"));
+        getPresenter().getWarrantyCardImage(getDashboardActivity(), new WarrantyCardImageRequest("1"));
+        getPresenter().getMyProductDetails(getDashboardActivity(), new ProductsRequest("1"));
+        getPresenter().getMyProductFeedback(getDashboardActivity(), new ProductsRequest("1"));
     }
 
     private void setProductList() {
@@ -105,152 +102,53 @@ public class DetailsFragment extends DashboardFragment implements
     public void onClick(View view) {
         if (view == mBinding.tvUnderWarranty) {
             CommonUtility.clicked(mBinding.tvUnderWarranty);
-            getDashboardActivity().addFragmentInContainer(new ServiceCenterDetailsFragment(),null,true
-                    ,true, BaseActivity.AnimationType.NONE,false);
+            getDashboardActivity().addFragmentInContainer(new ServiceCenterDetailsFragment(), null, true
+                    , true, BaseActivity.AnimationType.NONE, false);
         }
     }
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
-        if (requestCode == 1) {
-            if (CommonUtility.isNotNull(response) && response instanceof MerchantResponseData) {
-                MerchantResponseData data = (MerchantResponseData) response;
-                if (CommonUtility.isNotNull(data)) {
-                    ArrayList<ProductResponse> infoList = data.getInfo();
-                    if (CommonUtility.isNotNull(infoList) && infoList.size() > 0) {
-                        ProductResponse merchantResponse = infoList.get(0);
-                        CommonUtility.setVisibility(mBinding.layoutMain, mBinding.layoutNoData.layoutNoData, true);
-                        if (CommonUtility.isNotNull(merchantResponse)) {
-                            mBinding.setMerchantResponse(merchantResponse);
-                            setImage(merchantResponse);
-                        } else {
-                            CommonUtility.setVisibility(mBinding.layoutMain, mBinding.layoutNoData.layoutNoData, false);
-                        }
-                    }
-                } else {
-                    CommonUtility.setVisibility(mBinding.layoutMain, mBinding.layoutNoData.layoutNoData, false);
-                }
-            } else {
-                CommonUtility.setVisibility(mBinding.layoutMain, mBinding.layoutNoData.layoutNoData, false);
-            }
-        } else if (requestCode == 2) {
-            reviewList.clear();
-            if (CommonUtility.isNotNull(response) && response instanceof ReviewResponseData) {
-                ReviewResponseData data = (ReviewResponseData) response;
-                ArrayList<ReviewResponse> responseArrayList = data.getInfo();
-                if (CommonUtility.isNotNull(responseArrayList)) {
-                    reviewList.addAll(responseArrayList);
-                    mReviewAdapter.notifyDataSetChanged();
-                }
+        if (CommonUtility.isNotNull(response)) {
+            if (requestCode == 2) {
+                setProductData(response);
+            } else if (requestCode == 3) {
+                setReviewsData(response);
             }
         }
+    }
 
+    private void setReviewsData(BaseResponse response) {
 
     }
 
-    private void setImage(ProductResponse merchantResponse) {
-        if (CommonUtility.isNotNull(merchantResponse.getRating())) {
-            //mBinding.ratingBar.setRating(CommonUtility.setRating(merchantResponse.getRating()));
+    private void setProductData(BaseResponse response) {
+        ProductDetailsData data = (ProductDetailsData) response;
+        if (CommonUtility.isNotNull(data) && CommonUtility.isNotNull(data.getInfo()) && data.getInfo().size() > 0) {
+            ProductDetails details = data.getInfo().get(0);
+            if (CommonUtility.isNotNull(details)) {
+                GlideUtils.loadImage(getContext(), details.getProduct_image(), mBinding.storeImage, null, R.drawable.icon_placeholder);
+                mBinding.tvTotalRating.setText(null);
+                mBinding.ratingBar.setRating(0);
+                mBinding.productName.setText(null);
+                mBinding.tvDetails.setText(details.getModel_no());
+                mBinding.tvDate.setText(CommonUtility.warrantyFrom(details.getWarranty_from()));
+                mBinding.tvCompanyName.setText(null);
+                mBinding.tvCustomerName.setText(null);
+                mBinding.tvPurchaseDate.setText(CommonUtility.warrantyFrom(details.getPurchase_date()));
+                mBinding.tvWarrantyPeriod.setText(CommonUtility.warrantyFrom(details.getWarranty_period()));
+                productList.get(0).setImageUrl(details.getProduct_image());
+                productList.get(1).setImageUrl(details.getBill_image());
+                productList.get(2).setImageUrl(details.getBarcode_image());
+                productList.get(3).setImageUrl(details.getWc_image());
+                detailsAdapter.notifyDataSetChanged();
+            }
         }
-
-    }
-
-
-    @Override
-    public void submit(String submit) {
-        getDashboardActivity().showToast("" + submit);
     }
 
     @Override
     public void onItemClick(int position) {
-        // showImageChooserDialog();
-    }
-   /* private void showImageChooserDialog() {
-        //ImagePickerUtils.add(getSupportFragmentManager(), this);
-
-        BottomSheetDialog dialog = new BottomSheetDialog(getDashboardActivity());
-        dialog.setContentView(R.layout.profile_dialog_layout);
-        View layoutCamera = dialog.findViewById(R.id.layoutCamera);
-        View layoutGallery = dialog.findViewById(R.id.layoutGallery);
-        View layoutCancel = dialog.findViewById(R.id.layoutCancel);
-        layoutCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                openImageCamera();
-            }
-        });
-        layoutGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                openImageGallery();
-            }
-        });
-        layoutCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                clearImage();
-            }
-        });
-        dialog.show();
 
     }
-    *//**
-     * Open camera to capture image
-     *//*
-    private void openImageCamera() {
-        new ImagePicker.Builder(getDashboardActivity())
-                .mode(ImagePicker.Mode.CAMERA)
-                .compressLevel(ImagePicker.ComperesLevel.HARD)
-                .directory(ImagePicker.Directory.DEFAULT)
-                .extension(ImagePicker.Extension.JPG)
-                .scale(512, 512)
-                .allowMultipleImages(false)
-                .enableDebuggingMode(true)
-                .build();
-    }
 
-    *//**
-     * Open camera to capture image
-     *//*
-    private void openImageGallery() {
-        new ImagePicker.Builder(getDashboardActivity())
-                .mode(ImagePicker.Mode.GALLERY)
-                .compressLevel(ImagePicker.ComperesLevel.HARD)
-                .directory(ImagePicker.Directory.DEFAULT)
-                .extension(ImagePicker.Extension.JPG)
-                .scale(512, 512)
-                .allowMultipleImages(false)
-                .enableDebuggingMode(true)
-                .build();
-    }
-
-    private void clearImage() {
-        profilePicFilePath = "";
-    }
-    private void loadImageToServer() {
-        try {
-            //int age = Integer.parseInt(mBinding.edtAge.getText().toString().trim());
-            //String name = mBinding.edtName.getText().toString().trim();
-            //String phoneNumber = mBinding.edtPhone.getText().toString().trim();
-            if (TextUtils.isEmpty(profilePicFilePath)) {
-                // presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
-            } else {
-                MultipartBody.Part body = CommonUtility.createMultipart(profilePicFilePath, AppConstants.PROFILE_UPDATE_PARAMETER);
-                if (body != null) {
-                    // presenter.updateProfile(this, name, phoneNumber, age, currentGender, body);
-                } else {
-                    //presenter.updateProfile(this, name, phoneNumber, age, currentGender, null);
-                }
-
-            }
-
-        } catch (Exception e) {
-            LogUtils.LOGE("ProfileUpdate", e.toString());
-        }
-
-
-    }*/
 }
