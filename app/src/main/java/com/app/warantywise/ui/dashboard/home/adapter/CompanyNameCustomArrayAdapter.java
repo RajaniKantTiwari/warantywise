@@ -8,17 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.app.warantywise.R;
-import com.app.warantywise.network.response.dashboard.ProductDetail;
+import com.app.warantywise.network.response.dashboard.CompanyDetail;
 
 import java.util.ArrayList;
 
-public class CompanyNameCustomArrayAdapter extends ArrayAdapter<ProductDetail> {
+public class CompanyNameCustomArrayAdapter extends ArrayAdapter<CompanyDetail> {
 
     LayoutInflater mInflator=null;
     int layoutResourceId;
-    ArrayList<ProductDetail> productList = null;
+    ArrayList<CompanyDetail> productList = null;
 
-    public CompanyNameCustomArrayAdapter(Activity activity, int layoutResourceId, ArrayList<ProductDetail> productList) {
+    public CompanyNameCustomArrayAdapter(Activity activity, int layoutResourceId, ArrayList<CompanyDetail> productList) {
         super(activity, layoutResourceId, productList);
         mInflator=LayoutInflater.from(activity);
         this.layoutResourceId = layoutResourceId;
@@ -40,11 +40,11 @@ public class CompanyNameCustomArrayAdapter extends ArrayAdapter<ProductDetail> {
             }
              
             // object item based on the position
-            ProductDetail productDetail = productList.get(position);
+            CompanyDetail companyDetail = productList.get(position);
  
             // get the TextView and then set the text (item name) and tag (item ID) values
             TextView textViewItem =convertView.findViewById(R.id.textViewItem);
-            textViewItem.setText(productDetail.getName());
+            textViewItem.setText(companyDetail.getName());
              
         } catch (NullPointerException e) {
             e.printStackTrace();

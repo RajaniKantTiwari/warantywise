@@ -16,6 +16,7 @@ import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
+import com.app.warantywise.network.response.dashboard.CompanyDetailData;
 import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
@@ -130,7 +131,7 @@ public class RetrofitRepository implements Repository {
     }
 
     @Override
-    public Observable<ProductDetailData> getCompanyDetails(CompanyDetailsRequest request) {
+    public Observable<CompanyDetailData> getCompanyDetails(CompanyDetailsRequest request) {
         return apiService.getCompanyDetails(request);
     }
 

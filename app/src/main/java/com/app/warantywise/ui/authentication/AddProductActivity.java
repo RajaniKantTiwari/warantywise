@@ -21,6 +21,8 @@ import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.CompanyDetail;
+import com.app.warantywise.network.response.dashboard.CompanyDetailData;
 import com.app.warantywise.network.response.dashboard.ProductDetail;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.presenter.CommonPresenter;
@@ -71,10 +73,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private int docNumber;
     private AddProductRequest request;
     // adapter for auto-complete
-    private ArrayAdapter<ProductDetail> productNameAdapter;
-    private ArrayAdapter<ProductDetail> companyNameNameAdapter;
     private ArrayList<ProductDetail> productDetailList;
-    private ArrayList<ProductDetail> companyDetailList;
+    private ArrayList<CompanyDetail> companyDetailList;
 
     private String productId;
     private String manufacturerId;
@@ -102,14 +102,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             @Override
             public void onTextChanged(CharSequence searchText, int start, int before, int count) {
                 String searchProductName = searchText.toString();
-                if (searchText.toString().length() >= 2) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(searchProductName.toLowerCase()));
                         }
                     }, AppConstants.API_SERVICE);
-                }
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -138,7 +136,9 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 productId = String.valueOf(detail.getId());
                 manufacturerId = detail.getManufacturer_id();
                 mBinding.edProductName.setText(detail.getProduct_name());
+                mBinding.edProductName.setSelection(mBinding.edProductName.getText().length());
                 mBinding.edCompanyName.setText(detail.getName());
+                mBinding.edCompanyName.setSelection(mBinding.edCompanyName.getText().length());
                 isChange = false;
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -156,14 +156,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             public void onTextChanged(CharSequence searchText, int start, int before, int count) {
 
                 String searchCompanyName = searchText.toString();
-                if (searchText.toString().length() >= 2) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             presenter.getCompanyDetails(AddProductActivity.this, new CompanyDetailsRequest(searchCompanyName.toLowerCase()));
                         }
                     }, AppConstants.API_SERVICE);
-                }
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -187,18 +185,20 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.edCompanyName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View layout, int pos, long id) {
-                ProductDetail detail = companyDetailList.get(pos);
-                productId = String.valueOf(detail.getId());
-                manufacturerId = detail.getManufacturer_id();
-                mBinding.edProductName.setText(detail.getProduct_name());
-                mBinding.edCompanyName.setText(detail.getName());
-                isChange = false;
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        isChange = true;
-                    }
-                }, 1500);
+                if (CommonUtility.isNotNull(companyDetailList) && companyDetailList.size() > pos) {
+                    CompanyDetail detail = companyDetailList.get(pos);
+                    manufacturerId = detail.getId();
+                    mBinding.edCompanyName.setText(detail.getName());
+                    mBinding.edCompanyName.setSelection(mBinding.edCompanyName.getText().length());
+                    isChange = false;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            isChange = true;
+                        }
+                    }, 1500);
+                }
+
             }
 
         });
@@ -226,7 +226,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         productAdapter = new ProductAdapter(this, productList, this);
         mBinding.rvDocument.setAdapter(productAdapter);
         productDetailList = new ArrayList<>();
-        companyDetailList=new ArrayList<>();
+        companyDetailList = new ArrayList<>();
     }
 
     private void setList() {
@@ -341,16 +341,16 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 ProductDetailData data = (ProductDetailData) response;
                 productDetailList.clear();
                 productDetailList.addAll(data.getInfo());
-                productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
+                ArrayAdapter<ProductDetail> productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
                 mBinding.edProductName.setAdapter(productNameAdapter);
             } else if (requestCode == 2 && response.getStatus().equalsIgnoreCase(AppConstants.SUCCESS)) {
                 PreferenceUtils.setLogin(true);
                 ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
             } else if (requestCode == 3) {
-                ProductDetailData data = (ProductDetailData) response;
+                CompanyDetailData data = (CompanyDetailData) response;
                 companyDetailList.clear();
                 companyDetailList.addAll(data.getInfo());
-                companyNameNameAdapter = new CompanyNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
+                ArrayAdapter<CompanyDetail> companyNameNameAdapter = new CompanyNameCustomArrayAdapter(this, R.layout.product_name_row, companyDetailList);
                 mBinding.edCompanyName.setAdapter(companyNameNameAdapter);
             }
         }

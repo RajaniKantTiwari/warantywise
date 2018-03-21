@@ -14,6 +14,7 @@ import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
+import com.app.warantywise.network.response.dashboard.CompanyDetailData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.base.MvpView;
@@ -160,9 +161,9 @@ public class CommonPresenter implements Presenter<MvpView> {
     public void getCompanyDetails(AddProductActivity activity, CompanyDetailsRequest request) {
         mRepository.getCompanyDetails(request).
                 subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<ProductDetailData>(activity) {
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<CompanyDetailData>(activity) {
             @Override
-            public void onResponse(ProductDetailData response) {
+            public void onResponse(CompanyDetailData response) {
                 mView.hideProgress();
                 mView.onSuccess(response, 3);
             }

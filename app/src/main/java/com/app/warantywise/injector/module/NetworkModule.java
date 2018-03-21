@@ -22,6 +22,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.app.warantywise.utility.AppConstants.API_TIMEOUT_IN_SECOND;
+
 
 /**
  *
@@ -49,9 +51,9 @@ public class NetworkModule {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.connectTimeout(1200, TimeUnit.SECONDS);
-        httpClient.readTimeout(1200, TimeUnit.SECONDS);
-        httpClient.writeTimeout(1200, TimeUnit.SECONDS);
+        httpClient.connectTimeout(API_TIMEOUT_IN_SECOND, TimeUnit.SECONDS);
+        httpClient.readTimeout(API_TIMEOUT_IN_SECOND, TimeUnit.SECONDS);
+        httpClient.writeTimeout(API_TIMEOUT_IN_SECOND, TimeUnit.SECONDS);
         httpClient.addInterceptor(chain -> {
             Request original = chain.request();
             //String accessToken = PreferenceUtils.getAuthToken();

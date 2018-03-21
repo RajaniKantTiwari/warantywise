@@ -31,8 +31,6 @@ public interface AppConstants {
     int HELP = 4;
     int SENIOR_CITIZEN = 5;
     int TERM_CONDITION = 6;
-    int PAYMENT_HEIGHT = 48;
-    int SETTING_HEIGHT = 44;
     int REQUEST_CALL = 1;
 
     long SPLASH_TIME = 3000;
@@ -48,7 +46,6 @@ public interface AppConstants {
     int PLANHEIGHT = 48;
     int INSURANCE_PLANHEIGHT = 54;
     int COVER_HEIGHT = 38;
-    String MOBILE_NUMBER = "mobile_number";
     int DATE_OF_BIRTH=1;
     int ANIVERSARY=2;
     int PADDING = 17;
@@ -56,9 +53,8 @@ public interface AppConstants {
     int BILL_IMAGE=1;
     int BARCODE_IMAGE = 2;
     int WARRANTY_CARD_IMAGE = 3;
-    int PRODUCT_LIST = 3;
-    int SUBMIT=1;
     long API_SERVICE = 300;
+    int API_TIMEOUT_IN_SECOND=200;
 
 
     @IntDef({NOTIFICATION_FRAGMENT,USER_FRAGMENT, PRODUCT_MAP_FRAGMENT,

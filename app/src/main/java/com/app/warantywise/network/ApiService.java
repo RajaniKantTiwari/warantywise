@@ -17,6 +17,7 @@ import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
+import com.app.warantywise.network.response.dashboard.CompanyDetailData;
 import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
@@ -58,7 +59,7 @@ public interface ApiService {
     Observable<ProductDetailData> getProductDetails(@Body ProductDetailsRequest request);
 
     @POST("product/getcompanyname")
-    Observable<ProductDetailData> getCompanyDetails(@Body CompanyDetailsRequest request);
+    Observable<CompanyDetailData> getCompanyDetails(@Body CompanyDetailsRequest request);
 
     @POST("product/getmyproducts")
     Observable<YourProductData> yourProduct();
