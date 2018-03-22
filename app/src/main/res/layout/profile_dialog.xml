@@ -35,11 +35,9 @@
                 android:text="@string/phone_number"
                 app:customFont="@string/font_regular" />
 
-            <com.app.warantywise.widget.CustomEditText
-                android:id="@+id/edMobileNumber"
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvMobileNumber"
                 style="@style/edittext_add_product"
-                android:inputType="number"
-                android:hint="999-999-999"
                 app:customFont="@string/font_regular" />
 
 

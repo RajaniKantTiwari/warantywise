@@ -637,7 +637,7 @@ public class CommonUtility {
     }
 
 
-    public static String warrantyFrom(String date) {
+    public static String dateYYYYMMDD(String date) {
         String createdDate=null;
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");

@@ -53,7 +53,7 @@
                     android:maxLines="1"
                     android:padding="@dimen/margin_4"
                     android:drawablePadding="@dimen/margin_4"
-                    android:text="@{CommonUtility.warrantyFrom(productData.purchase_date)}"
+                    android:text="@{CommonUtility.dateYYYYMMDD(productData.purchase_date)}"
                     app:customFont="@string/font_bold" />
             </LinearLayout>
 
@@ -84,7 +84,7 @@
                 <com.app.warantywise.widget.CustomTextView
                     style="@style/textview_description_large_wrap"
                     android:maxLines="1"
-                    android:text="@{CommonUtility.warrantyFrom(productData.warranty_from)}"
+                    android:text="@{CommonUtility.dateYYYYMMDD(productData.warranty_from)}"
                     android:textColor="@color/button_text_color"
                     app:customFont="@string/font_bold" />
             </LinearLayout>

@@ -45,26 +45,31 @@
                     android:orientation="vertical">
 
                     <com.app.warantywise.widget.CustomTextView
-                        style="@style/textview_header_large_wrap"
-                        android:text="John Doe" />
-
-                    <com.app.warantywise.widget.CustomTextView
                         android:id="@+id/tvName"
-                        style="@style/textview_description_wrap"
-                        android:text="Anniversary : 12 tay 1980"
-                        android:textColor="@color/profile_button_color"
-                        app:customFont="@string/font_regular" />
+                        style="@style/textview_header_large_wrap" />
+
+                    <LinearLayout style="@style/match_wrap">
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_wrap"
+                            android:text="@string/anniversary_date"
+                            android:textColor="@color/profile_button_color"
+                            app:customFont="@string/font_regular" />
+                        <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvAniversaryDate"
+                            style="@style/textview_description_wrap"
+                            android:textColor="@color/profile_button_color"
+                            app:customFont="@string/font_regular" />
+                    </LinearLayout>
 
                     <com.app.warantywise.widget.CustomTextView
+                        android:id="@+id/tvEmail"
                         style="@style/textview_description_wrap"
-                        android:text="abc@gmail.com"
                         app:customFont="@string/font_regular" />
 
 
                     <com.app.warantywise.widget.CustomTextView
                         android:id="@+id/tvMobile"
-                        style="@style/textview_description_small_wrap"
-                        android:text="999-999-999" />
+                        style="@style/textview_description_small_wrap"/>
 
                 </LinearLayout>
 
@@ -91,8 +96,7 @@
 
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/tvProductNumber"
-                            style="@style/textview_description_wrap"
-                            android:text="06" />
+                            style="@style/textview_description_wrap" />
 
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/tvProductName"
@@ -108,8 +112,7 @@
 
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/tvClaimNumber"
-                            style="@style/textview_description_wrap"
-                            android:text="06" />
+                            style="@style/textview_description_wrap" />
 
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/tvClaim"
@@ -124,8 +127,7 @@
 
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/tvInsuranceNumber"
-                            style="@style/textview_description_wrap"
-                            android:text="06" />
+                            style="@style/textview_description_wrap"/>
 
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/tvInsurance"
@@ -160,10 +162,11 @@
 
                     <com.app.warantywise.widget.CustomTextView
                         style="@style/textview_description_wrap"
-                        android:layout_marginTop="@dimen/margin_8"
                         android:layout_marginBottom="@dimen/margin_8"
+                        android:layout_marginTop="@dimen/margin_8"
                         android:text="@string/account_setting"
                         app:customFont="@string/font_regular" />
+
                     <LinearLayout
                         android:id="@+id/layoutProfile"
                         style="@style/match_wrap"
@@ -254,19 +257,20 @@
                         style="@style/match_wrap"
                         android:layout_marginTop="@dimen/margin_10"
                         android:orientation="vertical" />
+
                     <com.app.warantywise.widget.CustomTextView
                         android:id="@+id/tvUpdate"
                         android:layout_width="@dimen/margin_200"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/margin_50"
                         android:layout_marginTop="@dimen/margin_20"
                         android:background="@drawable/blue_round_btn_bg"
                         android:elevation="@dimen/margin_5"
                         android:gravity="center_horizontal"
                         android:padding="@dimen/margin_12"
                         android:text="@string/update"
-                        android:layout_marginBottom="@dimen/margin_50"
                         android:textAllCaps="true"
-                        android:layout_gravity="center_horizontal"
                         android:textColor="@color/white"
                         android:textSize="@dimen/button_large"
                         app:customFont="@string/font_bold" />

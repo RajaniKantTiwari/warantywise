@@ -24,6 +24,7 @@ import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.network.response.dashboard.ProductDetailsData;
 import com.app.warantywise.network.response.dashboard.ProductFeedBackData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
+import com.app.warantywise.network.response.dashboard.ProfileData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
@@ -71,4 +72,6 @@ public interface Repository {
     Observable<OfferResponseData> getProductOffers(OfferRequest request);
 
     Observable<CompanyDetailData> getCompanyDetails(CompanyDetailsRequest request);
+
+    Observable<ProfileData> viewProfile();
 }

@@ -25,6 +25,7 @@ import com.app.warantywise.network.response.dashboard.ProductDetailsData;
 import com.app.warantywise.network.response.dashboard.ProductFeedBackData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
+import com.app.warantywise.network.response.dashboard.ProfileData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
@@ -94,6 +95,7 @@ public interface ApiService {
     @POST("product/get_my_product_feedback")
     Observable<ProductFeedBackData> getMyProductFeedback(@Body ProductsRequest request);
 
-
+    @POST("register/viewprofile")
+    Observable<ProfileData> viewProfile();
 
 }

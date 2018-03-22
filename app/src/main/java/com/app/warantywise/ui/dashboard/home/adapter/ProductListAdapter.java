@@ -6,12 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ProductRowItemBinding;
-import com.app.warantywise.network.request.Product;
-import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.utility.CommonUtility;
 

@@ -12,6 +12,8 @@ public class UpdateProfileRequest {
     private int pincode;
     private String landmark;
     private String email;
+    private String anniversary_date;
+    private String dob;
 
     public int getUserid() {
         return userid;
@@ -67,5 +69,21 @@ public class UpdateProfileRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAnniversary_date() {
+        return anniversary_date;
+    }
+
+    public void setAnniversary_date(String anniversary_date) {
+        this.anniversary_date = anniversary_date;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 }

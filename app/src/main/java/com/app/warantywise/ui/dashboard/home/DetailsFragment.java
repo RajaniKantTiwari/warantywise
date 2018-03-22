@@ -132,11 +132,11 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
                 mBinding.ratingBar.setRating(0);
                 mBinding.productName.setText(null);
                 mBinding.tvDetails.setText(details.getModel_no());
-                mBinding.tvDate.setText(CommonUtility.warrantyFrom(details.getWarranty_from()));
+                mBinding.tvDate.setText(CommonUtility.dateYYYYMMDD(details.getWarranty_from()));
                 mBinding.tvCompanyName.setText(null);
                 mBinding.tvCustomerName.setText(null);
-                mBinding.tvPurchaseDate.setText(CommonUtility.warrantyFrom(details.getPurchase_date()));
-                mBinding.tvWarrantyPeriod.setText(CommonUtility.warrantyFrom(details.getWarranty_period()));
+                mBinding.tvPurchaseDate.setText(CommonUtility.dateYYYYMMDD(details.getPurchase_date()));
+                mBinding.tvWarrantyPeriod.setText(CommonUtility.dateYYYYMMDD(details.getWarranty_period()));
                 productList.get(0).setImageUrl(details.getProduct_image());
                 productList.get(1).setImageUrl(details.getBill_image());
                 productList.get(2).setImageUrl(details.getBarcode_image());

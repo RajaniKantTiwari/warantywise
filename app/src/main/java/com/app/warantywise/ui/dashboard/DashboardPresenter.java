@@ -18,6 +18,7 @@ import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailsData;
 import com.app.warantywise.network.response.dashboard.ProductFeedBackData;
 import com.app.warantywise.network.response.dashboard.ProductInsuranceResponseData;
+import com.app.warantywise.network.response.dashboard.ProfileData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterDetailData;
 import com.app.warantywise.network.response.dashboard.ServiceCenterImageData;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
@@ -310,6 +311,24 @@ public class DashboardPresenter implements Presenter<MvpView> {
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
                 mView.onError(baseResponse.getMsg(), 3);
+            }
+        });
+    }
+
+    public void viewProfile(DashBoardActivity activity) {
+        mRepository.viewProfile().
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<ProfileData>(activity) {
+            @Override
+            public void onResponse(ProfileData response) {
+                mView.hideProgress();
+                mView.onSuccess(response, 1);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(baseResponse.getMsg(), 1);
             }
         });
     }

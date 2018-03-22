@@ -19,12 +19,15 @@ import com.app.warantywise.network.request.PaymentOption;
 import com.app.warantywise.network.request.Profile;
 import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.ProfileData;
+import com.app.warantywise.network.response.dashboard.ProfileDetail;
 import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.authentication.adapter.ProfileSettingsAdapter;
 import com.app.warantywise.ui.base.MvpView;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dialogfrag.ProfileDialogFragment;
 import com.app.warantywise.utility.AppConstants;
+import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.GlideUtils;
@@ -60,6 +63,7 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     private String profilePicFilePath;
     private int numberOfPaymentMethod;
     private UpdateProfileRequest updateProfileRequest;
+    private ProfileDetail profileDetail;
 
     @Nullable
     @Override
@@ -87,13 +91,14 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     }
 
     public void initializeData() {
-        updateProfileRequest=new UpdateProfileRequest();
+        updateProfileRequest = new UpdateProfileRequest();
         GlideUtils.loadImageProfilePic(getDashboardActivity(), PreferenceUtils.getImage(), mBinding.ivProfile, null, R.drawable.shubh);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
        /* mBinding.rvUpdate.setLayoutManager(layoutManager);
         settingAdapter = new ProfileSettingsAdapter(getDashboardActivity(), this);
         mBinding.rvUpdate.setAdapter(settingAdapter);
         CommonUtility.setRecyclerViewHeight(mBinding.rvUpdate, Arrays.asList(getResources().getStringArray(R.array.update)), AppConstants.SETTING_HEIGHT);*/
+        getPresenter().viewProfile(getDashboardActivity());
 
     }
 
@@ -101,11 +106,30 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
         if (CommonUtility.isNotNull(response)) {
-            if (requestCode == AppConstants.LOGOUT) {
+            if (requestCode == 1) {
+                try {
+                    ProfileData data = (ProfileData) response;
+                    profileDetail=data.getPrifiledata().get(0);
+                    setProfileResponse(profileDetail);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (requestCode == AppConstants.LOGOUT) {
                 PreferenceUtils.setLogin(false);
                 ExplicitIntent.getsInstance().clearPreviousNavigateTo(getDashboardActivity(), LoginActivity.class);
             }
         }
+    }
+
+    private void setProfileResponse(ProfileDetail profileDetail) {
+        mBinding.tvName.setText(profileDetail.getUsername());
+        mBinding.tvAniversaryDate.setText(CommonUtility.dateYYYYMMDD(profileDetail.getAnniversary_date()));
+        mBinding.tvEmail.setText(profileDetail.getEmail());
+        mBinding.tvMobile.setText(profileDetail.getMobile());
+        mBinding.tvProductNumber.setText(null);
+        mBinding.tvProductNumber.setText(null);
+        mBinding.tvClaimNumber.setText(null);
+        mBinding.tvInsuranceNumber.setText(null);
     }
 
     @Override
@@ -123,13 +147,21 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
             addChildView(numberOfPaymentMethod);
         } else if (mBinding.layoutPassword == view || mBinding.layoutProfile == view || mBinding.layoutEmail == view) {
             showProfileDialog();
-        }else if(mBinding.tvUpdate==view){
-            getPresenter().updateProfile(getDashboardActivity(),updateProfileRequest);
+        } else if (mBinding.tvUpdate == view) {
+            setData(updateProfileRequest);
+            getPresenter().updateProfile(getDashboardActivity(), updateProfileRequest);
         }
+    }
+
+    private void setData(UpdateProfileRequest updateProfileRequest) {
+        updateProfileRequest.setName(mBinding.tvName.getText().toString().trim());
+        updateProfileRequest.setAnniversary_date(mBinding.tvAniversaryDate.getText().toString().trim());
+        updateProfileRequest.setEmail(mBinding.tvEmail.getText().toString().trim());
     }
 
     private void showProfileDialog() {
         Bundle bundle = new Bundle();
+        bundle.putParcelable(BundleConstants.PROFILE_DATA,profileDetail);
         CommonUtility.showUpdateDialog(getDashboardActivity(), bundle, this);
     }
 
