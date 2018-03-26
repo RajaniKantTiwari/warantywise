@@ -282,7 +282,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         request.setSerialno(serialNumber);
         request.setPurchasedate(purchaseDate);
         request.setExtendedwarranty(mBinding.radioYes.isChecked() ? "yes" : "no");
-        request.setWarrantyfrom(warrantyPeriod);
+        request.setWarrantyperiod(warrantyPeriod);
         request.setProductownerid(PreferenceUtils.getAuthToken());
         request.setManufacturer_id(manufacturerId != null ? manufacturerId : "");
         request.setManufacturer_name(companyName);

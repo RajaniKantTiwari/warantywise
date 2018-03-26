@@ -10,12 +10,17 @@ import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentHomeBinding;
+import com.app.warantywise.event.OfferEvent;
+import com.app.warantywise.event.WarrantyEvent;
+import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ResponseData;
 import com.app.warantywise.network.response.dashboard.ServiceCentorResponse;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImage;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.network.response.dashboard.YourProductData;
 import com.app.warantywise.ui.base.BaseActivity;
@@ -26,6 +31,7 @@ import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.CommonUtility;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -42,12 +48,12 @@ public class ProductListMapFragment extends DashboardFragment {
     FragmentHomeBinding mBinding;
     private ArrayList<YourProduct> productList;
     private ArrayList<ServiceCentorResponse> productMapList;
-    private ArrayList<ResponseData> offerList;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        CommonUtility.register(this);
         return mBinding.getRoot();
     }
 
@@ -68,10 +74,8 @@ public class ProductListMapFragment extends DashboardFragment {
         addFragment();
         productList = new ArrayList<>();
         productMapList = new ArrayList<>();
-        offerList=new ArrayList<>();
         getPresenter().yourProduct(getDashboardActivity());
         getPresenter().getManufactorServiceCenter(getDashboardActivity());
-        getPresenter().getProductOffers(getDashboardActivity(), new OfferRequest("1"));
 
     }
 
@@ -93,6 +97,7 @@ public class ProductListMapFragment extends DashboardFragment {
 
     @Override
     public void onDestroy() {
+        CommonUtility.unregister(this);
         super.onDestroy();
     }
 
@@ -135,13 +140,22 @@ public class ProductListMapFragment extends DashboardFragment {
             }else if (requestCode == 3) {
                 OfferResponseData data = (OfferResponseData) response;
                 setOfferData(data);
+            }else if (requestCode == 4) {
+                WarrantyCardImageData data = (WarrantyCardImageData) response;
+                setWarrantyCardData(data);
             }
         }
     }
+
+    private void setWarrantyCardData(WarrantyCardImageData data) {
+        event.setOfferWarrantyImage(2);
+        event.setWarrantyImageList(data.getInfo());
+        EventBus.getDefault().post(event);
+    }
+
     private void setOfferData(OfferResponseData data) {
-        offerList.clear();
-        offerList.addAll(data.getInfo());
-        event.setOfferList(offerList);
+        event.setOfferWarrantyImage(1);
+        event.setOfferList(data.getInfo());
         EventBus.getDefault().post(event);
     }
     private void setMapData(ManufactorServiceCentorResponseData serviceCentorResponseData) {
@@ -160,6 +174,17 @@ public class ProductListMapFragment extends DashboardFragment {
             event.setProductList(productList);
             EventBus.getDefault().post(event);
         }
+    }
+
+    @Subscribe
+    public void onOfferEvent(OfferEvent event) {
+        getPresenter().getProductOffers(getDashboardActivity(), new OfferRequest("1"));
+    }
+
+    @Subscribe
+    public void onWarrantyEvent(WarrantyEvent event) {
+        getPresenter().getWarrantyCardImage(getDashboardActivity(), new WarrantyCardImageRequest(productList.get(event.getPosition()).getProduct_id()));
+
     }
 
 }

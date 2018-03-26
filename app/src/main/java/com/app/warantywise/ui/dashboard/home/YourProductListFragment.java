@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentProductListBinding;
+import com.app.warantywise.event.OfferEvent;
+import com.app.warantywise.event.WarrantyEvent;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ResponseData;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImage;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
@@ -23,6 +26,7 @@ import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -38,8 +42,8 @@ public class YourProductListFragment extends DashboardFragment implements
 
     private FragmentProductListBinding mBinding;
     private ProductListAdapter mProductAdapter;
-    private ArrayList<ResponseData> offerList;
     private ArrayList<YourProduct> productList;
+
 
     @Nullable
     @Override
@@ -72,7 +76,6 @@ public class YourProductListFragment extends DashboardFragment implements
         mBinding.rvProductList.setLayoutManager(layoutManager);
         mProductAdapter = new ProductListAdapter(getDashboardActivity(), productList, this);
         mBinding.rvProductList.setAdapter(mProductAdapter);
-        offerList = new ArrayList<>();
     }
 
     @Override
@@ -99,10 +102,18 @@ public class YourProductListFragment extends DashboardFragment implements
         if (event.getListMap() == AppConstants.LIST_PRODUCT) {
             mBinding.layoutList.setVisibility(View.VISIBLE);
             productList.clear();
-            offerList.clear();
             productList.addAll(event.getProductList());
             mProductAdapter.notifyDataSetChanged();
-            offerList.addAll(event.getOfferList());
+            if (event.getOfferWarrantyImage() == 1) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(BundleConstants.OFFER, event.getOfferList().size() > 0 ? event.getOfferList().get(0) : null);
+                CommonUtility.showOfferDialog(getDashboardActivity(), bundle, this);
+            } else if (event.getOfferWarrantyImage() == 2) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(BundleConstants.WARRANTY_IMAGE, event.getWarrantyImageList().size() > 0 ? event.getWarrantyImageList().get(0) : null);
+                CommonUtility.showWarrantyImageDialog(getDashboardActivity(), bundle);
+            }
+
         } else if (event.getListMap() == AppConstants.MAP_PRODUCT) {
             mBinding.layoutList.setVisibility(View.GONE);
         }
@@ -110,9 +121,8 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onOfferClicked(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(BundleConstants.OFFER, offerList.size() > 0 ? offerList.get(0) : null);
-        CommonUtility.showOfferDialog(getDashboardActivity(), bundle, this);
+        EventBus.getDefault().post(new OfferEvent(position));
+
     }
 
     @Override
@@ -129,7 +139,8 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onWarrantyClicked(int position) {
-        getDashboardActivity().addFragmentInContainer(new DetailsFragment(), null, true
-                , true, BaseActivity.AnimationType.NONE, false);
+        EventBus.getDefault().post(new WarrantyEvent(position));
+        /*getDashboardActivity().addFragmentInContainer(new DetailsFragment(), null, true
+                , true, BaseActivity.AnimationType.NONE, false);*/
     }
 }

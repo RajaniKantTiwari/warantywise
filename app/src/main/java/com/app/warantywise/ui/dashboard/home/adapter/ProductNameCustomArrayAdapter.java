@@ -45,7 +45,7 @@ public class ProductNameCustomArrayAdapter extends ArrayAdapter<ProductDetail> {
  
             // get the TextView and then set the text (item name) and tag (item ID) values
             TextView textViewItem =convertView.findViewById(R.id.textViewItem);
-            textViewItem.setText(productDetail.getProduct_name());
+            textViewItem.setText(productDetail.getProduct_name()+"("+productDetail.getName()+")");
              
         } catch (NullPointerException e) {
             e.printStackTrace();

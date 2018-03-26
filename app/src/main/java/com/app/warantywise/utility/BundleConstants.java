@@ -17,4 +17,5 @@ public interface BundleConstants {
     String IS_FROMDASHBOARD = "is_from_dashboard";
     String OFFER = "offer";
     String PROFILE_DATA = "profile_data";
+    String WARRANTY_IMAGE = "warranty_image";
 }

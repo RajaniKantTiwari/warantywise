@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.app.warantywise.BuildConfig;
 import com.app.warantywise.R;
+import com.app.warantywise.databinding.WarrantyImageDialogBinding;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.ui.authentication.AddProductActivity;
@@ -40,6 +41,7 @@ import com.app.warantywise.ui.dialogfrag.CustomDialogFragment;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
 import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
 import com.app.warantywise.ui.dialogfrag.ProfileDialogFragment;
+import com.app.warantywise.ui.dialogfrag.WarrantyImageDialogFragment;
 import com.app.warantywise.widget.CustomEditText;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -127,6 +129,15 @@ public class CommonUtility {
         FragmentManager fm = activity.getSupportFragmentManager();
         OfferDialogFragment alertdFragment = new OfferDialogFragment();
         alertdFragment.addListener(listener);
+        alertdFragment.setArguments(bundle);
+        // Show Alert CustomDialogFragment
+        alertdFragment.show(fm, "");
+    }
+
+
+    public static void showWarrantyImageDialog(AppCompatActivity activity, Bundle bundle) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        WarrantyImageDialogFragment alertdFragment = new WarrantyImageDialogFragment();
         alertdFragment.setArguments(bundle);
         // Show Alert CustomDialogFragment
         alertdFragment.show(fm, "");

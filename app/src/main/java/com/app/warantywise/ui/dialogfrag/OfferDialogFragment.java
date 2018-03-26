@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.OfferDialogBinding;
+import com.app.warantywise.network.response.dashboard.ResponseData;
+import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.widget.CustomTextView;
 
@@ -22,6 +24,7 @@ public class OfferDialogFragment extends DialogFragment implements View.OnClickL
     private Dialog dialog;
     private OfferDialogBinding mBinding;
     private OfferDialogListener listener;
+    private ResponseData responseData;
 
     public interface OfferDialogListener {
     }
@@ -49,9 +52,12 @@ public class OfferDialogFragment extends DialogFragment implements View.OnClickL
     private void initializeData() {
         Bundle bundle = getArguments();
         if (CommonUtility.isNotNull(bundle)) {
-
+            responseData=bundle.getParcelable(BundleConstants.OFFER);
+            if(CommonUtility.isNotNull(responseData)){
+                mBinding.tvOffer.setText(responseData.getOffer_descr());
+            }
         }
-        setMessage(mBinding.tvOffer,"Get Offer 50 rs");
+        //setMessage(mBinding.tvOffer,"Get Offer 50 rs");
     }
     private void setMessage(CustomTextView tvOffer, String message) {
         SpannableStringBuilder builder = new SpannableStringBuilder();

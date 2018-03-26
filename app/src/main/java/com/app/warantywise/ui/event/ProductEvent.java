@@ -3,6 +3,7 @@ package com.app.warantywise.ui.event;
 
 import com.app.warantywise.network.response.dashboard.ResponseData;
 import com.app.warantywise.network.response.dashboard.ServiceCentorResponse;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImage;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 
 import java.util.ArrayList;
@@ -14,10 +15,20 @@ import java.util.ArrayList;
 public class ProductEvent {
     //use 1 for list 2 for map
     private int listMap;
-
+    //1 for offer 2 for warranty
+    private int offerWarrantyImage;
     private ArrayList<YourProduct> productList;
     private ArrayList<ServiceCentorResponse> productMapList;
     private ArrayList<ResponseData> offerList;
+    private ArrayList<WarrantyCardImage> warrantyImageList;
+
+    public int getOfferWarrantyImage() {
+        return offerWarrantyImage;
+    }
+
+    public void setOfferWarrantyImage(int offerWarrantyImage) {
+        this.offerWarrantyImage = offerWarrantyImage;
+    }
 
     public ArrayList<ServiceCentorResponse> getProductMapList() {
         return productMapList;
@@ -49,5 +60,13 @@ public class ProductEvent {
 
     public ArrayList<ResponseData> getOfferList() {
         return offerList;
+    }
+
+    public void setWarrantyImageList(ArrayList<WarrantyCardImage> warrantyImageList) {
+        this.warrantyImageList=warrantyImageList;
+    }
+
+    public ArrayList<WarrantyCardImage> getWarrantyImageList() {
+        return warrantyImageList;
     }
 }

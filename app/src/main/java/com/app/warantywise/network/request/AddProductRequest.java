@@ -11,7 +11,7 @@ public class AddProductRequest {
     private String serialno;
     private String purchasedate;
     private String extendedwarranty;
-    private String warrantyfrom;
+    private String warrantyperiod;
     private String productownerid;
     private String manufacturer_id="";
     private String manufacturer_name;
@@ -76,13 +76,7 @@ public class AddProductRequest {
         this.extendedwarranty = extendedwarranty;
     }
 
-    public String getWarrantyfrom() {
-        return warrantyfrom;
-    }
 
-    public void setWarrantyfrom(String warrantyfrom) {
-        this.warrantyfrom = warrantyfrom;
-    }
 
     public String getProductownerid() {
         return productownerid;
@@ -130,5 +124,13 @@ public class AddProductRequest {
 
     public void setProduct_id(String product_id) {
         this.product_id = product_id;
+    }
+
+    public String getWarrantyperiod() {
+        return warrantyperiod;
+    }
+
+    public void setWarrantyperiod(String warrantyperiod) {
+        this.warrantyperiod = warrantyperiod;
     }
 }
