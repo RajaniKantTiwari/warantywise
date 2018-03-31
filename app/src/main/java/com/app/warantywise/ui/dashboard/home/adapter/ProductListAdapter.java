@@ -31,6 +31,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         void onExtendClicked(int position);
 
         void onWarrantyClicked(int position);
+
+        void onLocationClicked(int position);
     }
 
     public ProductListAdapter(AppCompatActivity activity, ArrayList<YourProduct> productList, ProductListListener listener) {
@@ -64,6 +66,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         public ProductViewHolder(ProductRowItemBinding itemView) {
             super(itemView.getRoot());
             mBinding = itemView;
+            mBinding.tvLocation.setOnClickListener(this);
             mBinding.tvWarranty.setOnClickListener(this);
             mBinding.tvExtend.setOnClickListener(this);
             mBinding.tvBuyInsurance.setOnClickListener(this);
@@ -86,12 +89,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             } else if (mBinding.tvBuyInsurance == view) {
                 CommonUtility.clicked(mBinding.tvBuyInsurance);
                 listener.onBuyInsuranceClicked(getAdapterPosition());
-
             } else if (mBinding.tvOffer == view) {
                 CommonUtility.clicked(mBinding.tvOffer);
-
                 listener.onOfferClicked(getAdapterPosition());
-
+            } else if (mBinding.tvLocation == view) {
+                listener.onLocationClicked(getAdapterPosition());
             }
         }
     }

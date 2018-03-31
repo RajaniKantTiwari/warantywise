@@ -30,6 +30,7 @@ import com.app.warantywise.ui.adapter.ProductAdapter;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
 import com.app.warantywise.ui.dashboard.home.adapter.CompanyNameCustomArrayAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.ProductNameCustomArrayAdapter;
+import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
 import com.app.warantywise.ui.uploadfile.UploadImage;
 import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.BundleConstants;
@@ -55,7 +56,7 @@ import javax.inject.Inject;
  */
 
 public class AddProductActivity extends CommonActivity implements ProductAdapter.ProductListener,
-        DatePickerDialog.OnDateSetListener {
+        DatePickerDialog.OnDateSetListener,OfferDialogFragment.OfferDialogListener {
     @Inject
     CommonPresenter presenter;
     private ActivityAddProductBinding mBinding;
@@ -102,12 +103,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             @Override
             public void onTextChanged(CharSequence searchText, int start, int before, int count) {
                 String searchProductName = searchText.toString();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(searchProductName.toLowerCase()));
-                        }
-                    }, AppConstants.API_SERVICE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        presenter.getProductDetails(AddProductActivity.this, new ProductDetailsRequest(searchProductName.toLowerCase()));
+                    }
+                }, AppConstants.API_SERVICE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -156,12 +157,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             public void onTextChanged(CharSequence searchText, int start, int before, int count) {
 
                 String searchCompanyName = searchText.toString();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            presenter.getCompanyDetails(AddProductActivity.this, new CompanyDetailsRequest(searchCompanyName.toLowerCase()));
-                        }
-                    }, AppConstants.API_SERVICE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        presenter.getCompanyDetails(AddProductActivity.this, new CompanyDetailsRequest(searchCompanyName.toLowerCase()));
+                    }
+                }, AppConstants.API_SERVICE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -215,9 +216,13 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         Intent intent = getIntent();
         if (CommonUtility.isNotNull(intent)) {
             Bundle bundle = intent.getExtras();
-            if (CommonUtility.isNotNull(bundle) && bundle.getBoolean(BundleConstants.IS_FROMDASHBOARD)) {
-                mBinding.headerLayout.ivDrawer.setVisibility(View.VISIBLE);
-                mBinding.headerLayout.ivDrawer.setImageResource(R.drawable.ic_back_white);
+            if (CommonUtility.isNotNull(bundle)) {
+                if (bundle.getBoolean(BundleConstants.IS_FROMDASHBOARD)) {
+                    mBinding.headerLayout.ivDrawer.setVisibility(View.VISIBLE);
+                    mBinding.headerLayout.ivDrawer.setImageResource(R.drawable.ic_back_white);
+                } else if (bundle.getBoolean(BundleConstants.IS_FIRST_TIME)) {
+                   showOffer();
+                }
             }
         }
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -227,6 +232,10 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.rvDocument.setAdapter(productAdapter);
         productDetailList = new ArrayList<>();
         companyDetailList = new ArrayList<>();
+    }
+
+    private void showOffer() {
+        CommonUtility.showOfferDialog(this, null, this);
     }
 
     private void setList() {

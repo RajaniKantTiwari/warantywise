@@ -12,22 +12,19 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentProductListBinding;
 import com.app.warantywise.event.OfferEvent;
 import com.app.warantywise.event.WarrantyEvent;
+import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.response.BaseResponse;
-import com.app.warantywise.network.response.dashboard.OfferResponseData;
-import com.app.warantywise.network.response.dashboard.ResponseData;
-import com.app.warantywise.network.response.dashboard.WarrantyCardImage;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 import com.app.warantywise.network.response.dashboard.YourProduct;
+import com.app.warantywise.network.response.dashboard.YourProductData;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.ProductListAdapter;
 import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
-import com.app.warantywise.ui.event.ProductEvent;
-import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -49,12 +46,12 @@ public class YourProductListFragment extends DashboardFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_list, container, false);
-        CommonUtility.register(this);
         return mBinding.getRoot();
     }
 
     @Override
     public void attachView() {
+        getPresenter().attachView(this);
     }
 
     @Override
@@ -76,6 +73,7 @@ public class YourProductListFragment extends DashboardFragment implements
         mBinding.rvProductList.setLayoutManager(layoutManager);
         mProductAdapter = new ProductListAdapter(getDashboardActivity(), productList, this);
         mBinding.rvProductList.setAdapter(mProductAdapter);
+        getPresenter().yourProduct(getDashboardActivity());
     }
 
     @Override
@@ -83,21 +81,34 @@ public class YourProductListFragment extends DashboardFragment implements
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        CommonUtility.unregister(this);
-
-    }
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
-
+        if (CommonUtility.isNotNull(response)) {
+            if(requestCode==1){
+                YourProductData productData = (YourProductData) response;
+                setProductData(productData);
+            }else if(requestCode==4){
+                WarrantyCardImageData data = (WarrantyCardImageData) response;
+                setWarrantyCardData(data);
+            }
+        }
 
     }
-
-
-    @Subscribe
+    private void setProductData(YourProductData productData) {
+        productList.clear();
+        if (CommonUtility.isNotNull(productData.getInfo())&&productData.getInfo().size()>0) {
+            productList.clear();
+            productList.addAll(productData.getInfo());
+            mProductAdapter.notifyDataSetChanged();
+        }
+    }
+    private void setWarrantyCardData(WarrantyCardImageData data) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(BundleConstants.OFFER, data.getInfo().size() > 0 ? data.getInfo().get(0) : null);
+        CommonUtility.showOfferDialog(getDashboardActivity(), bundle, this);
+    }
+    /*@Subscribe
     public void onMessageEvent(ProductEvent event) {
         if (event.getListMap() == AppConstants.LIST_PRODUCT) {
             mBinding.layoutList.setVisibility(View.VISIBLE);
@@ -117,7 +128,7 @@ public class YourProductListFragment extends DashboardFragment implements
         } else if (event.getListMap() == AppConstants.MAP_PRODUCT) {
             mBinding.layoutList.setVisibility(View.GONE);
         }
-    }
+    }*/
 
     @Override
     public void onOfferClicked(int position) {
@@ -139,8 +150,11 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onWarrantyClicked(int position) {
-        EventBus.getDefault().post(new WarrantyEvent(position));
-        /*getDashboardActivity().addFragmentInContainer(new DetailsFragment(), null, true
-                , true, BaseActivity.AnimationType.NONE, false);*/
+        getPresenter().getWarrantyCardImage(getDashboardActivity(), new WarrantyCardImageRequest(productList.get(position).getProduct_id()));
+    }
+
+    @Override
+    public void onLocationClicked(int position) {
+
     }
 }

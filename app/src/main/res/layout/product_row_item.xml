@@ -33,6 +33,7 @@
                 android:orientation="vertical">
 
                 <com.app.warantywise.widget.CustomTextView
+                    android:id="@+id/tvLocation"
                     style="@style/textview_title_wrap"
                     android:maxLines="1"
                     android:text="Worhlpool"
