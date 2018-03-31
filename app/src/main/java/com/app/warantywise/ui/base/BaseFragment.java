@@ -41,7 +41,7 @@ public abstract class BaseFragment extends Fragment implements MvpView,View.OnCl
     }
 
     @Override
-    public void onError(String message,int requestCode) {
+    public void onError(Throwable message,int requestCode) {
         if (mActivity != null) {
             mActivity.onError(message,requestCode);
         }

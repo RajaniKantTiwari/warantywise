@@ -57,7 +57,7 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 2);
+                mView.onError(call, 2);
             }
         });
     }
@@ -76,7 +76,7 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 1);
+                mView.onError(call, 1);
             }
         });
     }
@@ -96,7 +96,7 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 2);
+                mView.onError(call, 2);
             }
         });
     }
@@ -115,7 +115,7 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 2);
+                mView.onError(call, 2);
             }
         });
     }
@@ -134,7 +134,7 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 4);
+                mView.onError(call, 4);
             }
         });
     }
@@ -153,7 +153,7 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 1);
+                mView.onError(call, 1);
             }
         });
     }
@@ -171,7 +171,7 @@ public class CommonPresenter implements Presenter<MvpView> {
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
-                mView.onError(baseResponse.getMsg(), 3);
+                mView.onError(call, 3);
             }
         });
     }

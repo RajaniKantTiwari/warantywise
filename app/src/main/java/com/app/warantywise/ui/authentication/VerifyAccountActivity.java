@@ -209,8 +209,8 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
         }
     }
     @Override
-    public void onError(String message, int requestCode) {
-        showToast("Error");
+    public void onError(Throwable message, int requestCode) {
+        showToast(message.getMessage());
     }
 
     @Override
