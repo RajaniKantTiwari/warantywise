@@ -25,13 +25,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public interface ProductListListener {
         void onOfferClicked(int position);
-
         void onBuyInsuranceClicked(int position);
-
         void onExtendClicked(int position);
-
         void onWarrantyClicked(int position);
-
         void onLocationClicked(int position);
     }
 
@@ -93,6 +89,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                 CommonUtility.clicked(mBinding.tvOffer);
                 listener.onOfferClicked(getAdapterPosition());
             } else if (mBinding.tvLocation == view) {
+                CommonUtility.clicked(mBinding.tvLocation);
                 listener.onLocationClicked(getAdapterPosition());
             }
         }

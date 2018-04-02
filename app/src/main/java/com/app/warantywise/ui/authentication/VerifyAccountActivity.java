@@ -197,7 +197,7 @@ public class VerifyAccountActivity extends CommonActivity implements TextWatcher
                             PreferenceUtils.setAuthToken(verifyMobileResponse.getAuthkey());
                             Bundle bundle=new Bundle();
                             bundle.putBoolean(BundleConstants.IS_FIRST_TIME,true);
-                            ExplicitIntent.getsInstance().navigateTo(this, AddProductActivity.class);
+                            ExplicitIntent.getsInstance().navigateTo(this, AddProductActivity.class,bundle);
                             finish();
                         } else {
                             hideKeyboard();

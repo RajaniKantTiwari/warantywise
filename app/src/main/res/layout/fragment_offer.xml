@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout style="@style/match_match"
+        android:background="@color/white">
+
+        <ScrollView style="@style/match_match">
+
+            <LinearLayout
+                style="@style/match_wrap"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_100"
+                        android:layout_margin="@dimen/margin_10"
+                        android:layout_toStartOf="@+id/layout"
+                        android:background="@drawable/grey_corner_bg">
+
+                        <ImageView
+                            android:id="@+id/ivProductImage"
+                            style="@style/image_100"
+                            android:padding="@dimen/margin_4"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/shubh" />
+
+                        <LinearLayout
+                            style="@style/match_wrap"
+                            android:layout_toEndOf="@+id/ivProductImage"
+                            android:orientation="vertical">
+
+                            <com.app.warantywise.widget.CustomTextView
+                                style="@style/textview_title_wrap"
+                                android:padding="@dimen/margin_4"
+                                android:text="Worhlpool"
+                                app:customFont="@string/font_bold" />
+
+                            <com.app.warantywise.widget.CustomTextView
+                                style="@style/textview_description_smaller_wrap"
+                                android:text="Under Warranty"
+                                app:customFont="@string/font_bold" />
+
+                            <com.app.warantywise.widget.CustomTextView
+                                style="@style/textview_description_small_wrap"
+                                android:drawableStart="@drawable/calender"
+                                android:padding="@dimen/margin_4"
+                                android:text="27 may 2017"
+                                app:customFont="@string/font_bold" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="@dimen/margin_14"
+
+                        android:layout_marginEnd="@dimen/margin_7"
+                        android:orientation="vertical">
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_large_wrap"
+                            android:background="@drawable/red_round"
+                            android:padding="@dimen/margin_4"
+                            android:text="Warranty Expire"
+                            android:textColor="@color/white"
+                            app:customFont="@string/font_bold" />
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_smaller_wrap"
+                            android:text="Expire on"
+                            app:customFont="@string/font_regular" />
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_large_wrap"
+                            android:text="27 may 2009"
+                            android:textColor="@color/button_text_color"
+                            app:customFont="@string/font_bold" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <ImageView style="@style/view_layout" />
+
+                <LinearLayout
+                    style="@style/match_wrap"
+                    android:layout_margin="@dimen/margin_10"
+                    android:orientation="vertical">
+
+                    <com.app.warantywise.widget.CustomTextView
+                        style="@style/textview_description_wrap"
+                        android:text="@string/choose_plan"
+                        android:textColor="@color/button_text_color"
+                        app:customFont="@string/font_bold" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvPlan"
+                        android:layout_marginTop="@dimen/margin_5"
+                        style="@style/match_wrap" />
+
+                    <com.app.warantywise.widget.CustomTextView
+                        android:layout_marginTop="@dimen/margin_25"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        style="@style/textview_description_wrap"
+                        android:text="@string/choose_insurance_plan_for_product"
+                        android:textColor="@color/button_text_color"
+                        app:customFont="@string/font_bold" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvInsurancePlan"
+                        style="@style/match_wrap"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <include
+            layout="@layout/layout_no_data_found"
+            android:visibility="gone"/>
+    </FrameLayout>
+</layout>

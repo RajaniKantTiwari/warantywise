@@ -18,8 +18,10 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentLocationMapBinding;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
 import com.app.warantywise.network.response.dashboard.ProductResponse;
 import com.app.warantywise.network.response.dashboard.ServiceCentorResponse;
+import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.mapview.InfoWindow;
 import com.app.warantywise.ui.dashboard.home.mapview.InfoWindowManager;
@@ -38,6 +40,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -69,7 +72,6 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinder = DataBindingUtil.inflate(inflater, R.layout.fragment_location_map, container, false);
-        CommonUtility.register(this);
         getDashboardActivity().setHeaderTitle(getResources().getString(R.string.add_product));
         if (CommonUtility.checkService(getBaseActivity())) {
             initMap();
@@ -85,7 +87,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         getCurrentLocation();
-
+        getPresenter().getManufactorServiceCenter(getDashboardActivity());
     }
 
     private void getCurrentLocation() {
@@ -305,9 +307,20 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
-
+       if(CommonUtility.isNotNull(response)){
+           if (requestCode == 2) {
+               ManufactorServiceCentorResponseData serviceCentorResponseData = (ManufactorServiceCentorResponseData) response;
+               setMapData(serviceCentorResponseData);
+           }
+       }
     }
-
+    private void setMapData(ManufactorServiceCentorResponseData serviceCentorResponseData) {
+        productMapList.clear();
+        if (CommonUtility.isNotNull(serviceCentorResponseData.getInfo())) {
+            productMapList.addAll(serviceCentorResponseData.getInfo());
+            showMarkerList(productMapList);
+        }
+    }
     @Override
     public void onLowMemory() {
         super.onLowMemory();
@@ -319,7 +332,6 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
     @Override
     public void onDestroy() {
         super.onDestroy();
-        CommonUtility.unregister(this);
         infoWindowManager.onDestroy();
     }
 
@@ -686,6 +698,7 @@ public class ProductMapFragment extends DashboardFragment implements OnMapReadyC
 
     @Override
     public void view(String view) {
-        getDashboardActivity().showToast("View Clicked");
+        getDashboardActivity().addFragmentInContainer(new ServiceCenterDetailsFragment(), null, true
+                , true, BaseActivity.AnimationType.NONE, false);
     }
 }

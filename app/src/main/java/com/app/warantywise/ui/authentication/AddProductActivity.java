@@ -56,7 +56,7 @@ import javax.inject.Inject;
  */
 
 public class AddProductActivity extends CommonActivity implements ProductAdapter.ProductListener,
-        DatePickerDialog.OnDateSetListener,OfferDialogFragment.OfferDialogListener {
+        DatePickerDialog.OnDateSetListener, OfferDialogFragment.OfferDialogListener {
     @Inject
     CommonPresenter presenter;
     private ActivityAddProductBinding mBinding;
@@ -81,6 +81,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
     private String manufacturerId;
     private String modelNumber;
     private boolean isChange = true;
+    private boolean isfirstTime;
 
 
     @Override
@@ -221,7 +222,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                     mBinding.headerLayout.ivDrawer.setVisibility(View.VISIBLE);
                     mBinding.headerLayout.ivDrawer.setImageResource(R.drawable.ic_back_white);
                 } else if (bundle.getBoolean(BundleConstants.IS_FIRST_TIME)) {
-                   showOffer();
+                    isfirstTime = bundle.getBoolean(BundleConstants.IS_FIRST_TIME);
+                    showOffer();
                 }
             }
         }
@@ -353,8 +355,14 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 ArrayAdapter<ProductDetail> productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
                 mBinding.edProductName.setAdapter(productNameAdapter);
             } else if (requestCode == 2 && response.getStatus().equalsIgnoreCase(AppConstants.SUCCESS)) {
-                PreferenceUtils.setLogin(true);
-                ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+                showToast(response.getMsg());
+                if (isfirstTime) {
+                    PreferenceUtils.setLogin(true);
+                    ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
+                } else {
+                    finish();
+                }
+
             } else if (requestCode == 3) {
                 CompanyDetailData data = (CompanyDetailData) response;
                 companyDetailList.clear();
