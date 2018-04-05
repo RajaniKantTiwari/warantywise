@@ -179,6 +179,14 @@
                         app:customFont="@string/font_regular" />
                 </LinearLayout>
             </LinearLayout>
+            <com.app.warantywise.widget.CustomEditText
+                android:id="@+id/edExtradays"
+                style="@style/edittext_add_product"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:visibility="gone"
+                android:hint="@string/thirty_days"
+                app:customFont="@string/font_regular" />
            <android.support.v7.widget.RecyclerView
                android:id="@+id/rvDocument"
                style="@style/match_wrap"

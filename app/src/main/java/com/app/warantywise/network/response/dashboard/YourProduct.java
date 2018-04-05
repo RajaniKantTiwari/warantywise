@@ -19,6 +19,7 @@ public class YourProduct implements Parcelable {
     private String serial_no;
     private String purchase_date;
     private String product_id;
+    private String productname;
 
     public YourProduct() {
 
@@ -34,6 +35,7 @@ public class YourProduct implements Parcelable {
         serial_no = in.readString();
         purchase_date = in.readString();
         product_id = in.readString();
+        productname=in.readString();
     }
 
     public static final Creator<YourProduct> CREATOR = new Creator<YourProduct>() {
@@ -47,6 +49,14 @@ public class YourProduct implements Parcelable {
             return new YourProduct[size];
         }
     };
+
+    public String getProductname() {
+        return productname;
+    }
+
+    public void setProductname(String productname) {
+        this.productname = productname;
+    }
 
     public int getId() {
         return id;

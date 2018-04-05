@@ -36,7 +36,7 @@
                     android:id="@+id/tvLocation"
                     style="@style/textview_title_wrap"
                     android:maxLines="1"
-                    android:text="Worhlpool"
+                    android:text="@={productData.productname}"
                     android:drawablePadding="@dimen/margin_5"
                     android:layout_marginTop="@dimen/margin_4"
                     android:drawableEnd="@drawable/location"
@@ -85,7 +85,7 @@
                 <com.app.warantywise.widget.CustomTextView
                     style="@style/textview_description_large_wrap"
                     android:maxLines="1"
-                    android:text="@{CommonUtility.dateYYYYMMDD(productData.warranty_from)}"
+                    android:text="@{CommonUtility.dateYYYYMMDD(productData.warranty_to)}"
                     android:textColor="@color/button_text_color"
                     app:customFont="@string/font_bold" />
             </LinearLayout>

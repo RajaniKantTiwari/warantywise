@@ -277,10 +277,13 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         } else if (mBinding.layoutYes == view) {
             mBinding.radioYes.setChecked(true);
             mBinding.radioNo.setChecked(false);
+            mBinding.edExtradays.setVisibility(View.VISIBLE);
+
 
         } else if (mBinding.layoutNo == view) {
             mBinding.radioYes.setChecked(false);
             mBinding.radioNo.setChecked(true);
+            mBinding.edExtradays.setVisibility(View.GONE);
         } else if (mBinding.headerLayout.ivDrawer == view) {
             finish();
         }
@@ -297,6 +300,10 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         request.setProductownerid(PreferenceUtils.getAuthToken());
         request.setManufacturer_id(manufacturerId != null ? manufacturerId : "");
         request.setManufacturer_name(companyName);
+        if (mBinding.edExtradays.getText().toString() != null &&
+                mBinding.edExtradays.getText().toString().length() > 0) {
+            request.setExtended_warranty_days(mBinding.edExtradays.getText().toString());
+        }
     }
 
     private boolean isValid() {

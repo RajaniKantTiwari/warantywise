@@ -18,6 +18,8 @@ public interface AppConstants {
     String AUTHORIZATION = "Authorization";
     String SUCCESS = "success";
     String FORBIDDEN = "403";
+    String UN_AUTHORIZED = "401";
+
     String TIME_ZONE="GMT";
     String PROFILE_UPDATE_PARAMETER = "profileUrl";
     int LOGOUT = 101;

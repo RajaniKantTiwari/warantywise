@@ -19,6 +19,15 @@ public class AddProductRequest {
     private String billimage="";
     private String barcodeimage="";
     private String wcimage="";
+    private String extended_warranty_days="0";
+
+    public String getExtended_warranty_days() {
+        return extended_warranty_days;
+    }
+
+    public void setExtended_warranty_days(String extended_warranty_days) {
+        this.extended_warranty_days = extended_warranty_days;
+    }
 
     public String getProduct_name() {
         return product_name;

@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ProductRowItemBinding;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.utility.CommonUtility;
+import com.app.warantywise.utility.GlideUtils;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductViewHolder> {
     private final LayoutInflater mInflater;
+    private final AppCompatActivity activity;
     private ProductListListener listener;
     private ArrayList<YourProduct> productList;
 
@@ -32,6 +35,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     public ProductListAdapter(AppCompatActivity activity, ArrayList<YourProduct> productList, ProductListListener listener) {
+        this.activity=activity;
         mInflater = LayoutInflater.from(activity);
         this.productList = productList;
         this.listener = listener;
@@ -47,6 +51,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         if (CommonUtility.isNotNull(productList) && productList.size() > position) {
+            GlideUtils.loadImage(activity,productList.get(position).getProduct_image(),holder.ivProductImage,null,R.drawable.icon_placeholder);
             holder.setData(productList.get(position));
         }
     }
@@ -58,10 +63,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ProductRowItemBinding mBinding;
+        private final ImageView ivProductImage;
 
         public ProductViewHolder(ProductRowItemBinding itemView) {
             super(itemView.getRoot());
             mBinding = itemView;
+            ivProductImage=itemView.ivProductImage;
             mBinding.tvLocation.setOnClickListener(this);
             mBinding.tvWarranty.setOnClickListener(this);
             mBinding.tvExtend.setOnClickListener(this);

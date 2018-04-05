@@ -57,7 +57,8 @@ public abstract class DefaultApiObserver<T> extends DefaultObserver<T> {
         } else if (value instanceof BaseResponse) {
             BaseResponse baseResponse = ((BaseResponse) value);
             if (CommonUtility.isNotNull(baseResponse)) {
-                if ( CommonUtility.isNotNull(baseResponse.getStatus())&&baseResponse.getStatus().equalsIgnoreCase(AppConstants.FORBIDDEN)) {
+                if ( CommonUtility.isNotNull(baseResponse.getStatus())&&(baseResponse.getStatus().equalsIgnoreCase(AppConstants.FORBIDDEN)
+                ||baseResponse.getStatus().equalsIgnoreCase(AppConstants.UN_AUTHORIZED))) {
                     ExplicitIntent.getsInstance().navigateTo(activity, LoginActivity.class);
                     activity.finish();
                 } else {
@@ -74,8 +75,10 @@ public abstract class DefaultApiObserver<T> extends DefaultObserver<T> {
 
     @Override
     public void onError(Throwable e) {
+
         LogUtils.LOGE("ApiObserver", e.toString());
         ((BaseActivity) ref.get()).hideProgress();
+
         if (e instanceof ConnectException || e instanceof UnknownHostException) {
             if (ref.get() instanceof BaseActivity) {
                 ((BaseActivity) ref.get()).showToast(ref.get().getString(R.string.no_internet));
