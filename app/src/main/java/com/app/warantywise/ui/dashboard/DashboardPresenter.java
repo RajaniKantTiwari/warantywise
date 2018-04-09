@@ -25,6 +25,7 @@ import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 import com.app.warantywise.network.response.dashboard.YourProductData;
 import com.app.warantywise.ui.base.MvpView;
 import com.app.warantywise.ui.base.Presenter;
+import com.app.warantywise.ui.dashboard.home.YourProductListFragment;
 import com.app.warantywise.utility.AppConstants;
 
 import javax.inject.Inject;
@@ -127,21 +128,21 @@ public class DashboardPresenter implements Presenter<MvpView> {
         });
     }
 
-    public void getWarrantyCardImage(DashBoardActivity activity, WarrantyCardImageRequest request) {
-        mView.showProgress();
+    public void getWarrantyCardImage(YourProductListFragment yourProductListFragment, DashBoardActivity activity, WarrantyCardImageRequest request) {
+        yourProductListFragment.showProgress();
         mRepository.getWarrantyCardImage(request).
                 subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<WarrantyCardImageData>(activity) {
             @Override
             public void onResponse(WarrantyCardImageData response) {
-                mView.hideProgress();
-                mView.onSuccess(response, 4);
+                yourProductListFragment.hideProgress();
+                yourProductListFragment.onSuccess(response, 4);
             }
 
             @Override
             public void onError(Throwable call, BaseResponse baseResponse) {
-                mView.hideProgress();
-                mView.onError(call, 4);
+                yourProductListFragment.hideProgress();
+                yourProductListFragment.onError(call, 4);
             }
         });
     }

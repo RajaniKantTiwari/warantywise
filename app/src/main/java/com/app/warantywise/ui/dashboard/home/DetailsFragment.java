@@ -74,7 +74,6 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
         mBinding.rvReview.setLayoutManager(layoutManager);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
-        getPresenter().getWarrantyCardImage(getDashboardActivity(), new WarrantyCardImageRequest("1"));
         getPresenter().getMyProductDetails(getDashboardActivity(), new ProductsRequest("1"));
         getPresenter().getMyProductFeedback(getDashboardActivity(), new ProductsRequest("1"));
     }

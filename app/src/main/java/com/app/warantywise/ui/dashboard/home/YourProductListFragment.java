@@ -145,7 +145,7 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onWarrantyClicked(int position) {
-        getPresenter().getWarrantyCardImage(getDashboardActivity(), new WarrantyCardImageRequest(productList.get(position).getWw_productid()));
+        getPresenter().getWarrantyCardImage(this,getDashboardActivity(), new WarrantyCardImageRequest(productList.get(position).getWw_productid()));
     }
 
     @Override
