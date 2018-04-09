@@ -86,9 +86,7 @@ public class OfferFragment extends DashboardFragment implements InsurancePlansAd
                     mBinding.tvUnderWarranty.setText(CommonUtility.
                             dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00") ?
                             activity.getResources().getString(R.string.warranty_expire):activity.getResources().getString(R.string.under_warranty));
-                    mBinding.tvWarranty.setText(CommonUtility.
-                            dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00") ?
-                            activity.getResources().getString(R.string.warranty_expire):activity.getResources().getString(R.string.under_warranty));
+                    mBinding.tvWarranty.setText(yourProduct.getModel_no());
                     if (CommonUtility.dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00")) {
                         mBinding.tvUnderWarranty.setBackgroundResource(R.drawable.red_round);
                     } else {
@@ -119,7 +117,6 @@ public class OfferFragment extends DashboardFragment implements InsurancePlansAd
         mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
         mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
         //end
-        getPresenter().getExtendedWarranty(getDashboardActivity(), new ExtendeWarrantyRequest("1"));
     }
 
     @Override

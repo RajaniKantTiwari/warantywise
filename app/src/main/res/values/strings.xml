@@ -204,7 +204,7 @@
     <string name="days">Days</string>
     <string name="year">Year</string>
     <string name="two_year">2 year</string>
-    <string name="warranty_expire">Warranty Expire</string>
+    <string name="warranty_expire">Warranty Expired</string>
 
     <string-array name="left_drawer">
         <item>@string/home</item>

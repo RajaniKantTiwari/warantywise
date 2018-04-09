@@ -59,6 +59,12 @@ public class YourProductListFragment extends DashboardFragment implements
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getPresenter().attachView(this);
+    }
+
+    @Override
     public void setListener() {
 
     }
@@ -114,9 +120,10 @@ public class YourProductListFragment extends DashboardFragment implements
     }
     @Override
     public void onOfferClicked(int position) {
-        //EventBus.getDefault().post(new OfferEvent(position));
+        Bundle bundle=new Bundle();
+        bundle.putParcelable(BundleConstants.PRODUCT,productList.get(position));
         //It would be modifiy
-        getDashboardActivity().addFragmentInContainer(new OfferFragment(), null, true
+        getDashboardActivity().addFragmentInContainer(new OfferFragment(), bundle, true
                 , true, BaseActivity.AnimationType.NONE, false);
     }
 

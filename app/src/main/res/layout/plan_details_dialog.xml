@@ -1,0 +1,26 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<android.support.v7.widget.CardView
+    style="@style/match_wrap"
+    android:background="@drawable/dialog_bg"
+    app:cardCornerRadius="@dimen/dialog_radius"
+    android:elevation="@dimen/margin_5">
+        <LinearLayout
+            style="@style/match_wrap"
+            android:background="@drawable/white_round_btnbg"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_14">
+            <ImageView
+                android:id="@+id/ivWarrantyImage"
+                style="@style/image_150"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:padding="@dimen/margin_1"
+                android:background="@drawable/stroke_dark_grey_bg"/>
+        </LinearLayout>
+</android.support.v7.widget.CardView>
+    </LinearLayout>
+</layout>
