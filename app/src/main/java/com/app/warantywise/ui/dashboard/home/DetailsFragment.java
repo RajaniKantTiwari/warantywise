@@ -18,10 +18,12 @@ import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductDetails;
 import com.app.warantywise.network.response.dashboard.ProductDetailsData;
 import com.app.warantywise.network.response.dashboard.ReviewResponse;
+import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.ui.adapter.DetailsAdapter;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.ReviewAdapter;
+import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.GlideUtils;
 
@@ -35,6 +37,7 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
     private ArrayList<ReviewResponse> reviewList;
     private DetailsAdapter detailsAdapter;
     private List<Product> productList = new ArrayList<>();
+    private YourProduct yourProduct;
 
     @Nullable
     @Override
@@ -69,13 +72,17 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
     }
 
     public void initializeData() {
+        Bundle bundle=getArguments();
+        if(CommonUtility.isNotNull(bundle)){
+            yourProduct = bundle.getParcelable(BundleConstants.PRODUCT);
+            getPresenter().getMyProductDetails(getDashboardActivity(), new ProductsRequest(yourProduct.getWw_productid()));
+            getPresenter().getMyProductFeedback(getDashboardActivity(), new ProductsRequest(yourProduct.getWw_productid()));
+        }
         reviewList = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvReview.setLayoutManager(layoutManager);
         mReviewAdapter = new ReviewAdapter(getDashboardActivity(), reviewList);
         mBinding.rvReview.setAdapter(mReviewAdapter);
-        getPresenter().getMyProductDetails(getDashboardActivity(), new ProductsRequest("1"));
-        getPresenter().getMyProductFeedback(getDashboardActivity(), new ProductsRequest("1"));
     }
 
     private void setProductList() {

@@ -39,6 +39,7 @@ import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dialogfrag.CustomDialogFragment;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
 import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
+import com.app.warantywise.ui.dialogfrag.PlanDetailDialogFragment;
 import com.app.warantywise.ui.dialogfrag.ProfileDialogFragment;
 import com.app.warantywise.ui.dialogfrag.WarrantyImageDialogFragment;
 import com.app.warantywise.widget.CustomEditText;
@@ -138,6 +139,15 @@ public class CommonUtility {
     public static void showWarrantyImageDialog(AppCompatActivity activity, Bundle bundle) {
         FragmentManager fm = activity.getSupportFragmentManager();
         WarrantyImageDialogFragment alertdFragment = new WarrantyImageDialogFragment();
+        alertdFragment.setArguments(bundle);
+        // Show Alert CustomDialogFragment
+        alertdFragment.show(fm, "");
+    }
+
+    public static void showPlanDetailDialogFragment(AppCompatActivity activity, Bundle bundle) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        PlanDetailDialogFragment alertdFragment = new PlanDetailDialogFragment();
+        //alertdFragment.addListener(listener);
         alertdFragment.setArguments(bundle);
         // Show Alert CustomDialogFragment
         alertdFragment.show(fm, "");
@@ -432,26 +442,19 @@ public class CommonUtility {
         plan1.setInsuranceCompanyName("Thomas cook");
         plan1.setInsuranceServiceName("Thomas cook product save insurance");
         plan1.setInsurancePlanRate("765");
-
         insurancePlansList.add(plan1);
-
-
         InsurancePlan plan2 = new InsurancePlan();
         plan2.setImageUrl("");
         plan2.setInsuranceCompanyName("Tata AIG");
         plan2.setInsuranceServiceName("Tata AUI insurance");
         plan2.setInsurancePlanRate("665");
-
         insurancePlansList.add(plan2);
-
         InsurancePlan plan3 = new InsurancePlan();
         plan3.setImageUrl("");
         plan3.setInsuranceCompanyName("Reliance Insurance");
         plan3.setInsurancePlanRate("865");
         plan3.setInsuranceServiceName("Reliance general product");
         insurancePlansList.add(plan3);
-
-
     }
 
     public static String getDeviceUniqueId(Activity activity) {

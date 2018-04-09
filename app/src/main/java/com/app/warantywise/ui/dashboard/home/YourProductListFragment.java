@@ -154,6 +154,14 @@ public class YourProductListFragment extends DashboardFragment implements
                 , true, BaseActivity.AnimationType.NONE, false);
     }
 
+    @Override
+    public void onDetailsClick(int position) {
+        Bundle bundle=new Bundle();
+        bundle.putParcelable(BundleConstants.PRODUCT,productList.get(position));
+        getDashboardActivity().addFragmentInContainer(new DetailsFragment(), bundle, true
+                , true, BaseActivity.AnimationType.NONE, false);
+    }
+
     @Subscribe
     public void onEvent(ProductAdded event) {
         getPresenter().yourProduct(getDashboardActivity());

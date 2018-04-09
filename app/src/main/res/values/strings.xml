@@ -205,10 +205,11 @@
     <string name="year">Year</string>
     <string name="two_year">2 year</string>
     <string name="warranty_expire">Warranty Expired</string>
+    <string name="my_order">My Order</string>
 
     <string-array name="left_drawer">
         <item>@string/home</item>
-        <item>@string/my_waranty</item>
+        <item>@string/my_order</item>
         <item>@string/help</item>
         <item>@string/term_condition</item>
     </string-array>

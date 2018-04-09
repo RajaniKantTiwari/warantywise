@@ -148,11 +148,12 @@ public class OfferFragment extends DashboardFragment implements InsurancePlansAd
     }
 
     @Override
-    public void setOnPlanClicked(int position) {
+    public void onPlanClicked(int position) {
         for (int i = 0; i < planList.size(); i++) {
             Plans plan = planList.get(i);
             if (i == position) {
                 plan.setChecked(true);
+                CommonUtility.showPlanDetailDialogFragment(getBaseActivity(),null);
             } else {
                 plan.setChecked(false);
             }

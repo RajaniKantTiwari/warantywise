@@ -40,13 +40,13 @@ public class PlanDetailDialogFragment extends DialogFragment implements View.OnC
     }
 
     private void initializeData() {
-        Bundle bundle = getArguments();
+       /* Bundle bundle = getArguments();
         if (CommonUtility.isNotNull(bundle)) {
             warrantyCardImage = bundle.getParcelable(BundleConstants.WARRANTY_IMAGE);
             if (CommonUtility.isNotNull(warrantyCardImage)) {
                 GlideUtils.loadImage(getContext(),warrantyCardImage.getWc_image(),mBinding.ivWarrantyImage,null,R.drawable.icon_placeholder);
             }
-        }
+        }*/
 
     }
 

@@ -37,6 +37,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         void onWarrantyClicked(int position);
 
         void onLocationClicked(int position);
+
+        void onDetailsClick(int position);
     }
 
     public ProductListAdapter(AppCompatActivity activity, ArrayList<YourProduct> productList, ProductListListener listener) {
@@ -81,6 +83,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             mBinding.tvExtend.setOnClickListener(this);
             mBinding.tvBuyInsurance.setOnClickListener(this);
             mBinding.tvOffer.setOnClickListener(this);
+            mBinding.ivProductImage.setOnClickListener(this);
 
         }
 
@@ -89,7 +92,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             if (CommonUtility.isNotNull(product) && CommonUtility.isNotNull(product.getWarranty_to())) {
                 tvUnderWarranty.setText(CommonUtility.
                         dateComparision(product.getWarranty_to(), "2018-09-09 00:00:00") ?
-                         activity.getResources().getString(R.string.warranty_expire):activity.getResources().getString(R.string.under_warranty));
+                        activity.getResources().getString(R.string.warranty_expire) : activity.getResources().getString(R.string.under_warranty));
                 if (CommonUtility.dateComparision(product.getWarranty_to(), "2018-09-09 00:00:00")) {
                     tvUnderWarranty.setBackgroundResource(R.drawable.red_round);
                 } else {
@@ -115,6 +118,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             } else if (mBinding.tvLocation == view) {
                 CommonUtility.clicked(mBinding.tvLocation);
                 listener.onLocationClicked(getAdapterPosition());
+            } else if (mBinding.ivProductImage == view) {
+                listener.onDetailsClick(getAdapterPosition());
             }
         }
     }

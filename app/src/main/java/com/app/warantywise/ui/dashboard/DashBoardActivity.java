@@ -69,7 +69,8 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 break;
             case AppConstants.MYWARANTY:
                 closeDrawerLeft();
-                openFragment(new DetailsFragment(), null, false, false, NONE, true);
+                showToast("Show My Order");
+                //openFragment(new DetailsFragment(), null, false, false, NONE, true);
                 break;
             /*case AppConstants.INSURANCE:
                 closeDrawerLeft();

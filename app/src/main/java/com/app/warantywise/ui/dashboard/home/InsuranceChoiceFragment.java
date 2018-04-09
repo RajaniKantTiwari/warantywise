@@ -110,7 +110,7 @@ public class InsuranceChoiceFragment extends DashboardFragment implements Insura
     }
 
     @Override
-    public void setOnPlanClicked(int position) {
+    public void onPlanClicked(int position) {
         //CommonUtility.showOfferDialog(getDashboardActivity(),null,this);
         for (int i = 0; i < planList.size(); i++) {
             Plans plan = planList.get(i);

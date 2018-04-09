@@ -7,13 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.PlanRowsItemBinding;
 import com.app.warantywise.network.request.dashboard.Plans;
-import com.app.warantywise.ui.dashboard.home.YourProductFragment;
 import com.app.warantywise.utility.CommonUtility;
 
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlanHolder> 
     private PlanListener listener;
 
     public interface PlanListener {
-        void setOnPlanClicked(int position);
+        void onPlanClicked(int position);
     }
 
     public PlansAdapter(AppCompatActivity activity, ArrayList<Plans> daysList, PlanListener listener) {
@@ -84,7 +82,7 @@ public class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlanHolder> 
 
         @Override
         public void onClick(View view) {
-            listener.setOnPlanClicked(getAdapterPosition());
+            listener.onPlanClicked(getAdapterPosition());
         }
     }
 }
