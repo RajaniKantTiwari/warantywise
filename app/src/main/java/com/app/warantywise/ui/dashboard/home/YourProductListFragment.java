@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentProductListBinding;
 import com.app.warantywise.event.OfferEvent;
+import com.app.warantywise.event.ProductAdded;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
@@ -20,10 +21,13 @@ import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.ProductListAdapter;
 import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
+import com.app.warantywise.ui.event.ProductEvent;
+import com.app.warantywise.utility.AppConstants;
 import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -45,6 +49,7 @@ public class YourProductListFragment extends DashboardFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_list, container, false);
+        CommonUtility.register(this);
         return mBinding.getRoot();
     }
 
@@ -123,18 +128,31 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onExtendClicked(int position) {
-        getDashboardActivity().addFragmentInContainer(new YourProductFragment(), null, true
+        Bundle bundle=new Bundle();
+        bundle.putParcelable(BundleConstants.PRODUCT,productList.get(position));
+        getDashboardActivity().addFragmentInContainer(new YourProductFragment(), bundle, true
                 , true, BaseActivity.AnimationType.NONE, false);
     }
 
     @Override
     public void onWarrantyClicked(int position) {
-        getPresenter().getWarrantyCardImage(getDashboardActivity(), new WarrantyCardImageRequest(productList.get(position).getProduct_id()));
+        getPresenter().getWarrantyCardImage(getDashboardActivity(), new WarrantyCardImageRequest(productList.get(position).getWw_productid()));
     }
 
     @Override
     public void onLocationClicked(int position) {
         getDashboardActivity().addFragmentInContainer(new ProductMapFragment(), null, true
                 , true, BaseActivity.AnimationType.NONE, false);
+    }
+
+    @Subscribe
+    public void onEvent(ProductAdded event) {
+        getPresenter().yourProduct(getDashboardActivity());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        CommonUtility.unregister(this);
     }
 }

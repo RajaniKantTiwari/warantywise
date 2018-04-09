@@ -14,12 +14,15 @@ import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.InsurancePlansAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.PlansAdapter;
 import com.app.warantywise.utility.AppConstants;
+import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
+import com.app.warantywise.utility.GlideUtils;
 
 import java.util.ArrayList;
 
@@ -37,6 +40,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
     private InsurancePlansAdapter mInsurancePlanAdapter;
     private ArrayList<Plans> planList;
     private ArrayList<InsurancePlan> insurancePlanList;
+    private YourProduct yourProduct;
 
 
     @Nullable
@@ -48,7 +52,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
 
     @Override
     public void attachView() {
-      getPresenter().attachView(this);
+        getPresenter().attachView(this);
     }
 
     @Override
@@ -64,6 +68,16 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
 
     @Override
     public void initializeData() {
+        Bundle bundle = getArguments();
+        if (CommonUtility.isNotNull(bundle)) {
+            yourProduct = bundle.getParcelable(BundleConstants.PRODUCT);
+            if (CommonUtility.isNotNull(yourProduct)) {
+                GlideUtils.loadImage(getContext(), yourProduct.getProduct_image(), mBinding.ivProductImage, null, R.drawable.icon_placeholder);
+                mBinding.tvProductName.setText(yourProduct.getProductname());
+            }
+        }
+
+
         getDashboardActivity().setHeaderTitle(getResources().getString(R.string.your_product));
         //For Plan
         LinearLayoutManager plansManager = new LinearLayoutManager(getDashboardActivity());
@@ -83,15 +97,15 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
         mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
         mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
         //end
-        getPresenter().getExtendedWarranty(getDashboardActivity(),new ExtendeWarrantyRequest("1"));
+        getPresenter().getExtendedWarranty(getDashboardActivity(), new ExtendeWarrantyRequest("1"));
     }
 
     @Override
     public void onClick(View view) {
         if (view == mBinding.tvBuy) {
             CommonUtility.clicked(mBinding.tvBuy);
-            getDashboardActivity().addFragmentInContainer(new InsurancePaymentFragment(),null,true
-                    ,true, BaseActivity.AnimationType.NONE,false);
+            getDashboardActivity().addFragmentInContainer(new InsurancePaymentFragment(), null, true
+                    , true, BaseActivity.AnimationType.NONE, false);
         }
     }
 

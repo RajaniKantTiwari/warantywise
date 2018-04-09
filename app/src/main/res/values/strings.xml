@@ -203,6 +203,7 @@
     <string name="anniversary_date">Anniversary :</string>
     <string name="days">Days</string>
     <string name="year">Year</string>
+    <string name="two_year">2 year</string>
 
     <string-array name="left_drawer">
         <item>@string/home</item>

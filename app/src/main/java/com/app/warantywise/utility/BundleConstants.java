@@ -19,4 +19,5 @@ public interface BundleConstants {
     String PROFILE_DATA = "profile_data";
     String WARRANTY_IMAGE = "warranty_image";
     String IS_FIRST_TIME = "is_first_time";
+    String PRODUCT = "product";
 }

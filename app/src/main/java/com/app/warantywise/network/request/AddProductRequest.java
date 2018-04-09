@@ -12,7 +12,6 @@ public class AddProductRequest {
     private String purchasedate;
     private String extendedwarranty;
     private String warrantyperiod;
-    private String productownerid;
     private String manufacturer_id="";
     private String manufacturer_name;
     private String productimage="";
@@ -83,16 +82,6 @@ public class AddProductRequest {
 
     public void setExtendedwarranty(String extendedwarranty) {
         this.extendedwarranty = extendedwarranty;
-    }
-
-
-
-    public String getProductownerid() {
-        return productownerid;
-    }
-
-    public void setProductownerid(String productownerid) {
-        this.productownerid = productownerid;
     }
 
     public String getProductimage() {

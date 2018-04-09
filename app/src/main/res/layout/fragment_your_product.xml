@@ -35,21 +35,22 @@
                             android:orientation="vertical">
 
                             <com.app.warantywise.widget.CustomTextView
+                                android:id="@+id/tvProductName"
                                 style="@style/textview_title_wrap"
                                 android:padding="@dimen/margin_4"
-                                android:text="Worhlpool"
                                 app:customFont="@string/font_bold" />
 
                             <com.app.warantywise.widget.CustomTextView
+                                android:id="@+id/tvWarranty"
                                 style="@style/textview_description_smaller_wrap"
                                 android:text="Under Warranty"
                                 app:customFont="@string/font_bold" />
 
                             <com.app.warantywise.widget.CustomTextView
+                                android:id="@+id/tvDate"
                                 style="@style/textview_description_small_wrap"
                                 android:drawableStart="@drawable/calender"
                                 android:padding="@dimen/margin_4"
-                                android:text="27 may 2017"
                                 app:customFont="@string/font_bold" />
                         </LinearLayout>
                     </RelativeLayout>
@@ -119,6 +120,7 @@
                         android:textSize="@dimen/button_large"
                         app:customFont="@string/font_bold" />
                     <com.app.warantywise.widget.CustomTextView
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/margin_25"
                         android:layout_marginBottom="@dimen/margin_5"
                         style="@style/textview_description_wrap"
@@ -126,6 +128,7 @@
                         android:textColor="@color/button_text_color"
                         app:customFont="@string/font_bold" />
                     <android.support.v7.widget.RecyclerView
+                        android:visibility="gone"
                         android:id="@+id/rvInsurancePlan"
                         style="@style/match_wrap"/>
                 </LinearLayout>

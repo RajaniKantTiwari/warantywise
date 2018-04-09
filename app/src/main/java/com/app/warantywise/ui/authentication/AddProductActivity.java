@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ActivityAddProductBinding;
 import com.app.warantywise.event.EncodedBitmap;
+import com.app.warantywise.event.ProductAdded;
 import com.app.warantywise.network.request.AddProductRequest;
 import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
@@ -44,6 +45,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import net.alhazmy13.mediapicker.Image.ImagePicker;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -280,8 +282,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             mBinding.radioYes.setChecked(true);
             mBinding.radioNo.setChecked(false);
             mBinding.edExtradays.setVisibility(View.VISIBLE);
-
-
         } else if (mBinding.layoutNo == view) {
             mBinding.radioYes.setChecked(false);
             mBinding.radioNo.setChecked(true);
@@ -289,9 +289,11 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         } else if (mBinding.layoutDays == view) {
             mBinding.radioDays.setChecked(true);
             mBinding.radioYear.setChecked(false);
+            mBinding.tvWarrantyPeriod.setHint(getResources().getString(R.string.thirty_days));
         } else if (mBinding.layoutYear == view) {
             mBinding.radioDays.setChecked(false);
             mBinding.radioYear.setChecked(true);
+            mBinding.tvWarrantyPeriod.setHint(getResources().getString(R.string.two_year));
         } else if (mBinding.headerLayout.ivDrawer == view) {
             finish();
         }
@@ -305,7 +307,6 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         request.setPurchasedate(purchaseDate);
         request.setExtendedwarranty(mBinding.radioYes.isChecked() ? "yes" : "no");
         request.setWarrantyperiod(warrantyPeriod);
-        request.setProductownerid(PreferenceUtils.getAuthToken());
         request.setManufacturer_id(manufacturerId != null ? manufacturerId : "");
         request.setManufacturer_name(companyName);
         if (mBinding.edExtradays.getText().toString() != null &&
@@ -380,6 +381,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                     PreferenceUtils.setLogin(true);
                     ExplicitIntent.getsInstance().clearPreviousNavigateTo(this, DashBoardActivity.class);
                 } else {
+                    EventBus.getDefault().post(new ProductAdded());
                     finish();
                 }
 

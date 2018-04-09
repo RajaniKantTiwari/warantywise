@@ -20,6 +20,12 @@ public class YourProduct implements Parcelable {
     private String purchase_date;
     private String product_id;
     private String productname;
+    private String ww_productid;
+    private String master_product_id;
+    private String extended_warranty;
+    private String extend_warranty_period;
+
+
 
     public YourProduct() {
 
@@ -36,6 +42,11 @@ public class YourProduct implements Parcelable {
         purchase_date = in.readString();
         product_id = in.readString();
         productname=in.readString();
+        ww_productid=in.readString();
+        master_product_id=in.readString();
+        extended_warranty=in.readString();
+        extend_warranty_period=in.readString();
+
     }
 
     public static final Creator<YourProduct> CREATOR = new Creator<YourProduct>() {
@@ -49,6 +60,38 @@ public class YourProduct implements Parcelable {
             return new YourProduct[size];
         }
     };
+
+    public String getWw_productid() {
+        return ww_productid;
+    }
+
+    public void setWw_productid(String ww_productid) {
+        this.ww_productid = ww_productid;
+    }
+
+    public String getMaster_product_id() {
+        return master_product_id;
+    }
+
+    public void setMaster_product_id(String master_product_id) {
+        this.master_product_id = master_product_id;
+    }
+
+    public String getExtended_warranty() {
+        return extended_warranty;
+    }
+
+    public void setExtended_warranty(String extended_warranty) {
+        this.extended_warranty = extended_warranty;
+    }
+
+    public String getExtend_warranty_period() {
+        return extend_warranty_period;
+    }
+
+    public void setExtend_warranty_period(String extend_warranty_period) {
+        this.extend_warranty_period = extend_warranty_period;
+    }
 
     public String getProductname() {
         return productname;
@@ -146,5 +189,10 @@ public class YourProduct implements Parcelable {
         parcel.writeString(serial_no);
         parcel.writeString(purchase_date);
         parcel.writeString(product_id);
+        parcel.writeString(ww_productid);
+        parcel.writeString(master_product_id);
+        parcel.writeString(extended_warranty);
+        parcel.writeString(extend_warranty_period);
+
     }
 }
