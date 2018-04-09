@@ -42,20 +42,20 @@
 
             <RelativeLayout
                 style="@style/match_wrap"
-                android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
+                android:layout_marginStart="@dimen/margin_8"
                 android:background="@drawable/grey_corner_bg">
 
                 <com.app.warantywise.utility.ProductNameCompleteView
                     android:id="@+id/edProductName"
                     style="@style/match_wrap"
-                    android:imeOptions="flagNoExtractUi|actionSearch"
                     android:background="@null"
-                    android:padding="@dimen/margin_6"
                     android:hint="@string/please_enter_product_name"
+                    android:imeOptions="flagNoExtractUi|actionSearch"
                     android:inputType="text"
-                    android:textSize="@dimen/textSize_description_large"
-                    android:paddingRight="8dp"/>
+                    android:padding="@dimen/margin_6"
+                    android:paddingRight="8dp"
+                    android:textSize="@dimen/textSize_description_large" />
             </RelativeLayout>
 
             <com.app.warantywise.widget.CustomTextView
@@ -65,21 +65,22 @@
 
             <RelativeLayout
                 style="@style/match_wrap"
-                android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
+                android:layout_marginStart="@dimen/margin_8"
                 android:background="@drawable/grey_corner_bg">
 
                 <com.app.warantywise.utility.ProductNameCompleteView
                     android:id="@+id/edCompanyName"
                     style="@style/match_wrap"
-                    android:imeOptions="flagNoExtractUi|actionSearch"
                     android:background="@null"
-                    android:padding="@dimen/margin_6"
                     android:hint="@string/type_name_mention_on_bill"
+                    android:imeOptions="flagNoExtractUi|actionSearch"
                     android:inputType="textCapSentences"
-                    android:textSize="@dimen/textSize_description_large"
-                    android:paddingRight="8dp"/>
+                    android:padding="@dimen/margin_6"
+                    android:paddingRight="8dp"
+                    android:textSize="@dimen/textSize_description_large" />
             </RelativeLayout>
+
             <com.app.warantywise.widget.CustomTextView
                 style="@style/textview_product"
                 android:text="@string/model_no"
@@ -88,9 +89,9 @@
             <com.app.warantywise.widget.CustomEditText
                 android:id="@+id/tvModelNumber"
                 style="@style/edittext_add_product"
+                android:hint="@string/model_no"
                 android:imeOptions="actionNext"
                 android:inputType="text"
-                android:hint="@string/model_no"
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView
@@ -101,9 +102,9 @@
             <com.app.warantywise.widget.CustomEditText
                 android:id="@+id/tvSerialNumber"
                 style="@style/edittext_add_product"
+                android:hint="@string/product_serial_number"
                 android:imeOptions="actionNext"
                 android:inputType="text"
-                android:hint="@string/product_serial_number"
                 app:customFont="@string/font_regular" />
 
             <com.app.warantywise.widget.CustomTextView
@@ -123,12 +124,63 @@
                 android:text="@string/waranty_period"
                 app:customFont="@string/font_regular" />
 
-            <com.app.warantywise.widget.CustomEditText
-                android:id="@+id/tvWarrantyPeriod"
-                style="@style/edittext_add_product"
-                android:hint="@string/thirty_days"
-                android:inputType="number"
-                app:customFont="@string/font_regular" />
+            <RelativeLayout style="@style/match_wrap">
+
+                <com.app.warantywise.widget.CustomEditText
+                    android:id="@+id/tvWarrantyPeriod"
+                    style="@style/edittext_add_product"
+                    android:hint="@string/thirty_days"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    app:customFont="@string/font_regular" />
+                <LinearLayout
+                    style="@style/wrap_wrap"
+                    android:layout_alignParentEnd="true"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/layoutDays"
+                        style="@style/wrap_wrap">
+
+                        <RadioButton
+                            android:id="@+id/radioDays"
+                            style="@style/textview_description_wrap"
+                            android:buttonTint="@color/color_sky_blue"
+                            android:clickable="false"
+                            android:checked="true"
+                            android:scaleX="0.5"
+                            android:scaleY="0.5" />
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_small_wrap"
+                            android:paddingEnd="@dimen/margin_15"
+                            android:text="@string/days"
+                            android:textColor="@color/text_hint_color"
+                            app:customFont="@string/font_regular" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutYear"
+                        style="@style/wrap_wrap"
+                        android:paddingEnd="@dimen/margin_15"
+                        android:paddingStart="@dimen/margin_15">
+
+                        <RadioButton
+                            android:id="@+id/radioYear"
+                            style="@style/textview_description_wrap"
+                            android:buttonTint="@color/color_sky_blue"
+                            android:clickable="false"
+                            android:scaleX="0.5"
+                            android:scaleY="0.5" />
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_small_wrap"
+                            android:text="@string/year"
+                            android:textColor="@color/text_hint_color"
+                            app:customFont="@string/font_regular" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
 
             <com.app.warantywise.widget.CustomTextView
                 style="@style/textview_product"
@@ -179,25 +231,28 @@
                         app:customFont="@string/font_regular" />
                 </LinearLayout>
             </LinearLayout>
+
             <com.app.warantywise.widget.CustomEditText
                 android:id="@+id/edExtradays"
                 style="@style/edittext_add_product"
+                android:hint="@string/thirty_days"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:visibility="gone"
-                android:hint="@string/thirty_days"
                 app:customFont="@string/font_regular" />
-           <android.support.v7.widget.RecyclerView
-               android:id="@+id/rvDocument"
-               style="@style/match_wrap"
-               android:paddingStart="@dimen/margin_10"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvDocument"
+                style="@style/match_wrap"
+                android:paddingStart="@dimen/margin_10" />
 
             <com.app.warantywise.widget.CustomTextView
                 style="@style/textview_product"
-                android:textSize="@dimen/textSize_description_smaller"
                 android:text="@string/any_two_document_mendatory"
                 android:textColor="@color/red_term"
+                android:textSize="@dimen/textSize_description_smaller"
                 app:customFont="@string/font_regular" />
+
             <com.app.warantywise.widget.CustomTextView
                 android:id="@+id/tvSubmit"
                 android:layout_width="@dimen/margin_200"

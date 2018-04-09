@@ -99,6 +99,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.tvPurchaseDate.setOnClickListener(this);
         mBinding.layoutYes.setOnClickListener(this);
         mBinding.layoutNo.setOnClickListener(this);
+        mBinding.layoutDays.setOnClickListener(this);
+        mBinding.layoutYear.setOnClickListener(this);
         mBinding.headerLayout.ivDrawer.setOnClickListener(this);
         mBinding.edProductName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -284,6 +286,12 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             mBinding.radioYes.setChecked(false);
             mBinding.radioNo.setChecked(true);
             mBinding.edExtradays.setVisibility(View.GONE);
+        } else if (mBinding.layoutDays == view) {
+            mBinding.radioDays.setChecked(true);
+            mBinding.radioYear.setChecked(false);
+        } else if (mBinding.layoutYear == view) {
+            mBinding.radioDays.setChecked(false);
+            mBinding.radioYear.setChecked(true);
         } else if (mBinding.headerLayout.ivDrawer == view) {
             finish();
         }
@@ -313,11 +321,16 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 docNumber = docNumber + 1;
             }
         }
-        productName = mBinding.edProductName.toString();
+        productName = mBinding.edProductName.getText().toString();
         companyName = mBinding.edCompanyName.getText().toString();
         serialNumber = mBinding.tvSerialNumber.getText().toString();
         purchaseDate = mBinding.tvPurchaseDate.getText().toString();
         warrantyPeriod = mBinding.tvWarrantyPeriod.getText().toString();
+        if (CommonUtility.isNotNull(warrantyPeriod) && warrantyPeriod.trim().length() > 0) {
+            if(mBinding.radioYear.isChecked()){
+                warrantyPeriod= String.valueOf(Integer.parseInt(warrantyPeriod)*365);
+            }
+        }
         modelNumber = mBinding.tvModelNumber.getText().toString();
         if ((isNotNull(productName) && productName.trim().length() > 0)
                 && (isNotNull(companyName) && companyName.trim().length() > 0)

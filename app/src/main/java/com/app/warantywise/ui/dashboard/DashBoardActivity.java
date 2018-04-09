@@ -102,6 +102,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard);
         //CommonUtility.register(this);
+        openFragment(new YourProductListFragment(), null, true, false, NONE,false);
         hideSoftKeyboard(mBinding.getRoot());
         initDashboardComponent();
         attachView();
@@ -219,10 +220,10 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
         token.setDeviceType(AppConstants.DEVICETYPE);
         request.setInfo(token);
         //mPresenter.setDeviceToken(this, request);
-        changeIcon(NOTIFICATION_FRAGMENT);
+        /*changeIcon(NOTIFICATION_FRAGMENT);
         clearAllBackStack();
         setHeaderTitle(getResources().getString(R.string.message));
-        pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE, false);
+        pushFragment(new NotificationFragment(), null, R.id.container, true, false, NONE, false);*/
     }
 
     public void setListener() {
