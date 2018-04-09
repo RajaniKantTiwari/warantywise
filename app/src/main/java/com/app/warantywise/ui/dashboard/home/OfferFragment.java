@@ -13,6 +13,7 @@ import com.app.warantywise.databinding.FragmentOfferBinding;
 import com.app.warantywise.databinding.FragmentYourProductBinding;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
+import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.YourProduct;
@@ -75,6 +76,8 @@ public class OfferFragment extends DashboardFragment implements InsurancePlansAd
             if (CommonUtility.isNotNull(yourProduct)) {
                 GlideUtils.loadImage(getContext(), yourProduct.getProduct_image(), mBinding.ivProductImage, null, R.drawable.icon_placeholder);
                 mBinding.tvProductName.setText(yourProduct.getProductname());
+                getPresenter().getProductOffers(getDashboardActivity(), new OfferRequest(yourProduct.getMaster_product_id()));
+
             }
         }
 

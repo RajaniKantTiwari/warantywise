@@ -74,6 +74,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
             if (CommonUtility.isNotNull(yourProduct)) {
                 GlideUtils.loadImage(getContext(), yourProduct.getProduct_image(), mBinding.ivProductImage, null, R.drawable.icon_placeholder);
                 mBinding.tvProductName.setText(yourProduct.getProductname());
+                getPresenter().getExtendedWarranty(getDashboardActivity(), new ExtendeWarrantyRequest(yourProduct.getMaster_product_id()));
             }
         }
 
@@ -97,7 +98,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
         mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
         mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
         //end
-        getPresenter().getExtendedWarranty(getDashboardActivity(), new ExtendeWarrantyRequest("1"));
+
     }
 
     @Override

@@ -109,8 +109,8 @@ public class YourProductListFragment extends DashboardFragment implements
     }
     private void setWarrantyCardData(WarrantyCardImageData data) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(BundleConstants.OFFER, data.getInfo().size() > 0 ? data.getInfo().get(0) : null);
-        CommonUtility.showOfferDialog(getDashboardActivity(), bundle, this);
+        bundle.putParcelable(BundleConstants.WARRANTY_IMAGE, data.getInfo().size() > 0 ? data.getInfo().get(0) : null);
+        CommonUtility.showWarrantyImageDialog(getDashboardActivity(), bundle);
     }
     @Override
     public void onOfferClicked(int position) {
