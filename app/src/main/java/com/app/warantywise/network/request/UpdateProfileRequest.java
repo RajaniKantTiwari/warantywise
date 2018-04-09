@@ -7,13 +7,22 @@ package com.app.warantywise.network.request;
 public class UpdateProfileRequest {
     private int userid;
     private String name;
-    private String address;
-    private String city;
+    private String address="";
+    private String city="";
     private int pincode;
-    private String landmark;
+    private String landmark="";
     private String email;
     private String anniversary_date;
     private String dob;
+    private String mobileNumber;
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
 
     public int getUserid() {
         return userid;

@@ -24,9 +24,9 @@ public class DrawerAdapterLeft extends RecyclerView.Adapter<DrawerAdapterLeft.St
     private final AppCompatActivity activity;
     private DrawerLeftListener listener;
     private ArrayList<String> drawerList;
+
     private int[] drawerImageList = new int[]{R.drawable.ic_home,
-            R.drawable.waranty, R.drawable.my_insurance, R.drawable.edit_profile,
-            R.drawable.help, R.drawable.senior_citizen, R.drawable.add_file};
+            R.drawable.waranty, R.drawable.help, R.drawable.add_file};
 
     public interface DrawerLeftListener {
         void onLeftDrawerItemClicked(int adapterPosition);

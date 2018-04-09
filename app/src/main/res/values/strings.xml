@@ -205,10 +205,7 @@
     <string-array name="left_drawer">
         <item>@string/home</item>
         <item>@string/my_waranty</item>
-        <item>@string/my_insurance</item>
-        <item>@string/edit_profile</item>
         <item>@string/help</item>
-        <item>@string/senior_citizen</item>
         <item>@string/term_condition</item>
     </string-array>
 

@@ -71,7 +71,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 closeDrawerLeft();
                 openFragment(new DetailsFragment(), null, false, false, NONE, true);
                 break;
-            case AppConstants.INSURANCE:
+            /*case AppConstants.INSURANCE:
                 closeDrawerLeft();
                 openFragment(new InsurancePaymentFragment(), null, false, false, NONE, true);
                 break;
@@ -79,15 +79,15 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 closeDrawerLeft();
                 changeIcon(USER_FRAGMENT);
                 openFragment(new ProfileFragment(), null, false, false, NONE, true);
-                break;
+                break;*/
             case AppConstants.HELP:
                 closeDrawerLeft();
                 openFragment(new HelpSupportFragment(), null, false, false, NONE, true);
                 break;
-            case AppConstants.SENIOR_CITIZEN:
+            /*case AppConstants.SENIOR_CITIZEN:
                 closeDrawerLeft();
                 ExplicitIntent.getsInstance().navigateTo(this, SeniorCitizenActivity.class);
-                break;
+                break;*/
             case AppConstants.TERM_CONDITION:
                 closeDrawerLeft();
                 openFragment(new TermConditionFragment(), null, false, false, NONE, true);

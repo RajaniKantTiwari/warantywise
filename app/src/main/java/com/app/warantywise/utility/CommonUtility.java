@@ -579,6 +579,7 @@ public class CommonUtility {
         DatePickerDialog dpd=null;
 
         Calendar now = Calendar.getInstance();
+        now.add(Calendar.DATE, -6574);
         if (dpd == null) {
             dpd = DatePickerDialog.newInstance(
                     fragment,
@@ -587,6 +588,7 @@ public class CommonUtility {
                     now.get(Calendar.DAY_OF_MONTH)
             );
         }
+        dpd.setMaxDate(now);
         dpd.vibrate(false);
         dpd.setVersion(DatePickerDialog.Version.VERSION_1);
         dpd.setAccentColor(Color.parseColor("#9C27B0"));

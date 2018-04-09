@@ -148,12 +148,12 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
         } else if (mBinding.layoutPassword == view || mBinding.layoutProfile == view || mBinding.layoutEmail == view) {
             showProfileDialog();
         } else if (mBinding.tvUpdate == view) {
-            setData(updateProfileRequest);
+            setData();
             getPresenter().updateProfile(getDashboardActivity(), updateProfileRequest);
         }
     }
 
-    private void setData(UpdateProfileRequest updateProfileRequest) {
+    private void setData() {
         updateProfileRequest.setName(mBinding.tvName.getText().toString().trim());
         updateProfileRequest.setAnniversary_date(mBinding.tvAniversaryDate.getText().toString().trim());
         updateProfileRequest.setEmail(mBinding.tvEmail.getText().toString().trim());
@@ -304,7 +304,12 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
 
     @Override
     public void update(Profile profile) {
-
+        setData();
+        updateProfileRequest.setName(profile.getUserName());
+        updateProfileRequest.setMobileNumber(profile.getMobileNumber());
+        updateProfileRequest.setDob(profile.getDateOfBirth());
+        updateProfileRequest.setAnniversary_date(profile.getAniversery());
+        getPresenter().updateProfile(getDashboardActivity(), updateProfileRequest);
     }
 
     /**

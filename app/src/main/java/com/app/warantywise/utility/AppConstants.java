@@ -30,9 +30,9 @@ public interface AppConstants {
     int MYWARANTY = 1;
     int INSURANCE = 2;
     int EDIT_PROFILE = 3;
-    int HELP = 4;
+    int HELP = 2;
     int SENIOR_CITIZEN = 5;
-    int TERM_CONDITION = 6;
+    int TERM_CONDITION = 3;
     int REQUEST_CALL = 1;
 
     long SPLASH_TIME = 3000;
