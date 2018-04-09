@@ -66,6 +66,7 @@
                         android:orientation="vertical">
 
                         <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvUnderWarranty"
                             style="@style/textview_description_large_wrap"
                             android:background="@drawable/red_round"
                             android:padding="@dimen/margin_4"
@@ -79,6 +80,7 @@
                             app:customFont="@string/font_regular" />
 
                         <com.app.warantywise.widget.CustomTextView
+                            android:id="@+id/tvExpireDate"
                             style="@style/textview_description_large_wrap"
                             android:text="27 may 2009"
                             android:textColor="@color/button_text_color"

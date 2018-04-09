@@ -122,7 +122,9 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void onBuyInsuranceClicked(int position) {
-        getDashboardActivity().addFragmentInContainer(new InsuranceChoiceFragment(), null, true
+        Bundle bundle=new Bundle();
+        bundle.putParcelable(BundleConstants.PRODUCT,productList.get(position));
+        getDashboardActivity().addFragmentInContainer(new InsuranceChoiceFragment(), bundle, true
                 , true, BaseActivity.AnimationType.NONE, false);
     }
 

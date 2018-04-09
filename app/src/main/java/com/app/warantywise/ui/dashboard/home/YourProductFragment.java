@@ -12,10 +12,12 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentYourProductBinding;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
+import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.ui.base.BaseActivity;
+import com.app.warantywise.ui.dashboard.DashBoardActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.InsurancePlansAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.PlansAdapter;
@@ -41,12 +43,14 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
     private ArrayList<Plans> planList;
     private ArrayList<InsurancePlan> insurancePlanList;
     private YourProduct yourProduct;
+    private DashBoardActivity activity;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_your_product, container, false);
+        activity=getDashboardActivity();
         return mBinding.getRoot();
     }
 
@@ -74,7 +78,23 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
             if (CommonUtility.isNotNull(yourProduct)) {
                 GlideUtils.loadImage(getContext(), yourProduct.getProduct_image(), mBinding.ivProductImage, null, R.drawable.icon_placeholder);
                 mBinding.tvProductName.setText(yourProduct.getProductname());
+                mBinding.tvDate.setText(CommonUtility.dateYYYYMMDD(yourProduct.getWarranty_from()));
+                mBinding.tvExpireDate.setText(CommonUtility.dateYYYYMMDD(yourProduct.getWarranty_to()));
                 getPresenter().getExtendedWarranty(getDashboardActivity(), new ExtendeWarrantyRequest(yourProduct.getMaster_product_id()));
+                if (CommonUtility.isNotNull(yourProduct) && CommonUtility.isNotNull(yourProduct.getWarranty_to())) {
+                    mBinding.tvUnderWarranty.setText(CommonUtility.
+                            dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00") ?
+                            activity.getResources().getString(R.string.warranty_expire):activity.getResources().getString(R.string.under_warranty));
+                    mBinding.tvWarranty.setText(CommonUtility.
+                            dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00") ?
+                            activity.getResources().getString(R.string.warranty_expire):activity.getResources().getString(R.string.under_warranty));
+                    if (CommonUtility.dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00")) {
+                        mBinding.tvUnderWarranty.setBackgroundResource(R.drawable.red_round);
+                    } else {
+                        mBinding.tvUnderWarranty.setBackgroundResource(R.drawable.blue_round);
+                    }
+                }
+
             }
         }
 
