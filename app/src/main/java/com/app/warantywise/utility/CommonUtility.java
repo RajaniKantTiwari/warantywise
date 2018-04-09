@@ -51,6 +51,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -662,5 +663,15 @@ public class CommonUtility {
             e.printStackTrace();
         }
         return createdDate;
+    }
+    public static boolean dateComparision(String toDate,String currentDate) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            dateFormat.setTimeZone(TimeZone.getTimeZone(AppConstants.TIME_ZONE));
+        try {
+            return dateFormat.parse(toDate).before(dateFormat.parse(currentDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

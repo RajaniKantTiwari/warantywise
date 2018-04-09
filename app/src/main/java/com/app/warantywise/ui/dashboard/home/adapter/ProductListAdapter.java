@@ -13,6 +13,7 @@ import com.app.warantywise.databinding.ProductRowItemBinding;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.utility.GlideUtils;
+import com.app.warantywise.widget.CustomTextView;
 
 import java.util.ArrayList;
 
@@ -28,14 +29,18 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public interface ProductListListener {
         void onOfferClicked(int position);
+
         void onBuyInsuranceClicked(int position);
+
         void onExtendClicked(int position);
+
         void onWarrantyClicked(int position);
+
         void onLocationClicked(int position);
     }
 
     public ProductListAdapter(AppCompatActivity activity, ArrayList<YourProduct> productList, ProductListListener listener) {
-        this.activity=activity;
+        this.activity = activity;
         mInflater = LayoutInflater.from(activity);
         this.productList = productList;
         this.listener = listener;
@@ -51,7 +56,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         if (CommonUtility.isNotNull(productList) && productList.size() > position) {
-            GlideUtils.loadImage(activity,productList.get(position).getProduct_image(),holder.ivProductImage,null,R.drawable.icon_placeholder);
+            GlideUtils.loadImage(activity, productList.get(position).getProduct_image(), holder.ivProductImage, null, R.drawable.icon_placeholder);
             holder.setData(productList.get(position));
         }
     }
@@ -64,11 +69,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ProductRowItemBinding mBinding;
         private final ImageView ivProductImage;
+        private final CustomTextView tvUnderWarranty;
 
         public ProductViewHolder(ProductRowItemBinding itemView) {
             super(itemView.getRoot());
             mBinding = itemView;
-            ivProductImage=itemView.ivProductImage;
+            ivProductImage = itemView.ivProductImage;
+            tvUnderWarranty = itemView.tvUnderWarranty;
             mBinding.tvLocation.setOnClickListener(this);
             mBinding.tvWarranty.setOnClickListener(this);
             mBinding.tvExtend.setOnClickListener(this);
@@ -79,6 +86,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         public void setData(YourProduct product) {
             mBinding.setProductData(product);
+            if (CommonUtility.isNotNull(product) && CommonUtility.isNotNull(product.getWarranty_to())) {
+                tvUnderWarranty.setText(CommonUtility.
+                        dateComparision(product.getWarranty_to(), "2018-09-09 00:00:00") ?
+                         activity.getResources().getString(R.string.warranty_expire):activity.getResources().getString(R.string.under_warranty));
+                if (CommonUtility.dateComparision(product.getWarranty_to(), "2018-09-09 00:00:00")) {
+                    tvUnderWarranty.setBackgroundResource(R.drawable.red_round);
+                } else {
+                    tvUnderWarranty.setBackgroundResource(R.drawable.blue_round);
+                }
+            }
         }
 
         @Override

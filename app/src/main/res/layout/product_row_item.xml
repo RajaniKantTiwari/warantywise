@@ -68,6 +68,7 @@
                 android:orientation="vertical">
 
                 <com.app.warantywise.widget.CustomTextView
+                    android:id="@+id/tvUnderWarranty"
                     style="@style/textview_description_large_wrap"
                     android:background="@drawable/blue_round"
                     android:maxLines="1"
