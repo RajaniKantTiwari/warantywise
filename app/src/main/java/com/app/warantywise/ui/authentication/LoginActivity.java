@@ -3,7 +3,10 @@ package com.app.warantywise.ui.authentication;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ActivityLoginBinding;
@@ -42,6 +45,15 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
 
     public void setListener() {
         mBinding.tvSubmit.setOnClickListener(this);
+        mBinding.edMobileNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    login();
+                }
+                return false;
+            }
+        });
     }
 
     public void initializeData() {
@@ -79,14 +91,18 @@ public class LoginActivity extends CommonActivity implements MvpView, View.OnCli
     public void onClick(View view) {
         if (view == mBinding.tvSubmit) {
             CommonUtility.clicked(mBinding.tvSubmit);
-            if (isValid()) {
-                Bundle bundle = new Bundle();
-                bundle.putString(BundleConstants.USER_NAME, userName);
-                bundle.putString(BundleConstants.MOBILE_NUMBER, mobileNumber);
-                if (isNetworkConnected()) {
-                    presenter.getLoginDetail(this, new LoginRequest(userName, mobileNumber,
-                            PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
-                }
+            login();
+        }
+    }
+
+    private void login() {
+        if (isValid()) {
+            Bundle bundle = new Bundle();
+            bundle.putString(BundleConstants.USER_NAME, userName);
+            bundle.putString(BundleConstants.MOBILE_NUMBER, mobileNumber);
+            if (isNetworkConnected()) {
+                presenter.getLoginDetail(this, new LoginRequest(userName, mobileNumber,
+                        PreferenceUtils.getLatitude(), PreferenceUtils.getLongitude()));
             }
         }
     }

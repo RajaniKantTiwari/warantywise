@@ -48,7 +48,7 @@
                     android:id="@+id/edMobileNumber"
                     style="@style/edit_text_style_medium"
                     android:layout_marginTop="@dimen/margin_10"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="number"
                     android:paddingBottom="@dimen/margin_5"
                     android:paddingTop="@dimen/margin_5"

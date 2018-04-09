@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 import com.app.warantywise.BuildConfig;
 import com.app.warantywise.R;
-import com.app.warantywise.databinding.WarrantyImageDialogBinding;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.ui.authentication.AddProductActivity;
