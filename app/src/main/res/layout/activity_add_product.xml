@@ -23,16 +23,16 @@
                 android:textColor="@color/dark_black_color" />
 
             <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvName"
                 style="@style/textview_description_large_match"
                 android:layout_marginTop="@dimen/margin_3"
                 android:gravity="center_horizontal"
-                android:text="Mr. Ashok Kumar"
                 android:textColor="@color/dark_black_color" />
 
             <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvMobileNumber"
                 style="@style/textview_description_smaller_match"
                 android:gravity="center_horizontal"
-                android:text="999-999-999"
                 android:textColor="@color/dark_black_color" />
 
             <com.app.warantywise.widget.CustomTextView
@@ -135,6 +135,7 @@
                     app:customFont="@string/font_regular" />
                 <LinearLayout
                     style="@style/wrap_wrap"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     >
 

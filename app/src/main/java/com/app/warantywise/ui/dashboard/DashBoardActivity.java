@@ -22,6 +22,7 @@ import com.app.warantywise.injector.module.DashboardModule;
 import com.app.warantywise.network.request.DeviceToken;
 import com.app.warantywise.network.request.DeviceTokenRequest;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.ui.activity.MyOrderActivity;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.dashboard.drawer.HelpSupportFragment;
 import com.app.warantywise.ui.dashboard.home.DetailsFragment;
@@ -69,7 +70,7 @@ public class DashBoardActivity extends BaseActivity implements DrawerAdapterLeft
                 break;
             case AppConstants.MYWARANTY:
                 closeDrawerLeft();
-                showToast("Show My Order");
+                ExplicitIntent.getsInstance().navigateTo(this, MyOrderActivity.class);
                 //openFragment(new DetailsFragment(), null, false, false, NONE, true);
                 break;
             /*case AppConstants.INSURANCE:

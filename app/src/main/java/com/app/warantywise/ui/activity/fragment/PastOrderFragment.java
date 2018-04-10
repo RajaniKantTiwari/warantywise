@@ -14,9 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.app.warantywise.R;
-import com.app.warantywise.databinding.FragmentPastOrderBinding;
+import com.app.warantywise.databinding.FragmentsPastOrderBinding;
 import com.app.warantywise.network.request.Feedback;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.Order;
@@ -44,7 +43,7 @@ public class PastOrderFragment extends BaseFragment implements
         LiveOrderAdapter.OrderListener,
         OrderFeedbackDialogFragment.OrderDialogListener
         ,ContactDialogFragment.ContactDialogListener{
-    private FragmentPastOrderBinding mBinding;
+    private FragmentsPastOrderBinding mBinding;
     private LiveOrderAdapter mAdapter;
     private Intent callIntent;
     private ArrayList<Order> pastOrderList;
@@ -53,7 +52,7 @@ public class PastOrderFragment extends BaseFragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_past_order, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragments_past_order, container, false);
         mActivity = (MyOrderActivity) getActivity();
         initializeAdapter();
         return mBinding.getRoot();
@@ -84,7 +83,7 @@ public class PastOrderFragment extends BaseFragment implements
 
     @Override
     public void attachView() {
-        mActivity.getPresenter().attachView(this);
+        //mActivity.getPresenter().attachView(this);
     }
 
     @Override
@@ -98,20 +97,22 @@ public class PastOrderFragment extends BaseFragment implements
     }
 
     public void setPastOrder(ArrayList<Order> pastOrderList) {
-        this.pastOrderList.clear();
-        if(CommonUtility.isNotNull(pastOrderList)&&pastOrderList.size()>0){
-            this.pastOrderList.addAll(pastOrderList);
-            mBinding.rvOrder.setVisibility(View.VISIBLE);
-            mBinding.layoutNoData.layoutNoData.setVisibility(View.GONE);
-        }else{
-            mBinding.rvOrder.setVisibility(View.GONE);
-            mBinding.layoutNoData.layoutNoData.setVisibility(View.VISIBLE);
+        if(CommonUtility.isNotNull(pastOrderList)){
+            this.pastOrderList.clear();
+            if(CommonUtility.isNotNull(pastOrderList)&&pastOrderList.size()>0){
+                this.pastOrderList.addAll(pastOrderList);
+                mBinding.rvOrder.setVisibility(View.VISIBLE);
+                mBinding.layoutNoData.layoutNoData.setVisibility(View.GONE);
+            }else{
+                mBinding.rvOrder.setVisibility(View.GONE);
+                mBinding.layoutNoData.layoutNoData.setVisibility(View.VISIBLE);
+            }
+            mAdapter.notifyDataSetChanged();
         }
-        mAdapter.notifyDataSetChanged();
     }
 
     public void setVisibility(int visible) {
-        mBinding.layoutOrder.setVisibility(visible);
+        //mBinding.layoutOrder.setVisibility(visible);
     }
 
     @Override
@@ -143,7 +144,7 @@ public class PastOrderFragment extends BaseFragment implements
         feedback.setId(id);
         feedback.setRating(String.valueOf(rating));
         feedback.setComments(feedbackStr);
-        mActivity.getPresenter().submitFeedBack(mActivity, feedback);
+       // mActivity.getPresenter().submitFeedBack(mActivity, feedback);
     }
     private void openDialog(int position) {
         Bundle bundle = new Bundle();

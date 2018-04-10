@@ -14,9 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.app.warantywise.R;
-import com.app.warantywise.databinding.FragmentLiveOrderBinding;
+import com.app.warantywise.databinding.FragmentsLiveOrderBinding;
 import com.app.warantywise.network.request.Feedback;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.Order;
@@ -43,7 +42,7 @@ import static com.app.warantywise.utility.AppConstants.REQUEST_CALL;
 public class LiveOrderFragment extends BaseFragment implements
         LiveOrderAdapter.OrderListener,
         OrderFeedbackDialogFragment.OrderDialogListener,ContactDialogFragment.ContactDialogListener {
-    private FragmentLiveOrderBinding mBinding;
+    private FragmentsLiveOrderBinding mBinding;
     private Intent callIntent;
     private LiveOrderAdapter mAdapter;
     private ArrayList<Order> recentOrderList;
@@ -54,7 +53,7 @@ public class LiveOrderFragment extends BaseFragment implements
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_live_order, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragments_live_order, container, false);
         mActivity = (MyOrderActivity) getActivity();
         initializeAdapter();
         return mBinding.getRoot();
@@ -84,7 +83,7 @@ public class LiveOrderFragment extends BaseFragment implements
 
     @Override
     public void attachView() {
-        mActivity.getPresenter().attachView(this);
+       // mActivity.getPresenter().attachView(this);
 
     }
 
@@ -107,23 +106,26 @@ public class LiveOrderFragment extends BaseFragment implements
     }
 
     public void setLiveOrder(ArrayList<Order> recentOrderList) {
-        this.recentOrderList.clear();
-        if (CommonUtility.isNotNull(recentOrderList) && recentOrderList.size() > 0) {
-            this.recentOrderList.addAll(recentOrderList);
-        }
+        if(CommonUtility.isNotNull(recentOrderList))
+        {
+            this.recentOrderList.clear();
+            if (CommonUtility.isNotNull(recentOrderList) && recentOrderList.size() > 0) {
+                this.recentOrderList.addAll(recentOrderList);
+            }
 
-        if (CommonUtility.isNotNull(this.recentOrderList) && this.recentOrderList.size() > 0) {
-            mBinding.rvOrder.setVisibility(View.VISIBLE);
-            mBinding.layoutNoData.layoutNoData.setVisibility(View.GONE);
-        } else {
-            mBinding.rvOrder.setVisibility(View.GONE);
-            mBinding.layoutNoData.layoutNoData.setVisibility(View.VISIBLE);
+            if (CommonUtility.isNotNull(this.recentOrderList) && this.recentOrderList.size() > 0) {
+                mBinding.rvOrder.setVisibility(View.VISIBLE);
+                mBinding.layoutNoData.layoutNoData.setVisibility(View.GONE);
+            } else {
+                mBinding.rvOrder.setVisibility(View.GONE);
+                mBinding.layoutNoData.layoutNoData.setVisibility(View.VISIBLE);
+            }
+            mAdapter.notifyDataSetChanged();
         }
-        mAdapter.notifyDataSetChanged();
     }
 
     public void setVisibility(int visibility) {
-        mBinding.layoutOrder.setVisibility(visibility);
+        //mBinding.layoutOrder.setVisibility(visibility);
     }
 
     @Override
@@ -157,7 +159,7 @@ public class LiveOrderFragment extends BaseFragment implements
         feedback.setRating(String.valueOf(rating));
         this.rating=String.valueOf(rating);
         feedback.setComments(feedbackStr);
-        mActivity.getPresenter().submitFeedBack(mActivity, feedback);
+        //mActivity.getPresenter().submitFeedBack(mActivity, feedback);
     }
     private void openDialog(int position) {
         Bundle bundle = new Bundle();

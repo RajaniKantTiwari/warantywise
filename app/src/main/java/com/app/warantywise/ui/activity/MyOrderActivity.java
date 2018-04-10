@@ -31,8 +31,8 @@ import javax.inject.Inject;
 
 public class MyOrderActivity extends CommonActivity {
     private ActivityMyOrderBinding mBinding;
-    @Inject
-    CommonPresenter presenter;
+    //@Inject
+    //CommonPresenter presenter;
     private ArrayList<Order> recentOrderList;
     private ArrayList<Order> pastOrderList;
     private LiveOrderFragment liveOrderFragment;
@@ -56,7 +56,7 @@ public class MyOrderActivity extends CommonActivity {
         pastOrderFragment = new PastOrderFragment();
         pushFragment(pastOrderFragment, null, R.id.container, true, true, BaseActivity.AnimationType.NONE,true);
         pushFragment(liveOrderFragment, null, R.id.container, true, true, BaseActivity.AnimationType.NONE,true);
-        presenter.getMyOrder(this);
+        //presenter.getMyOrder(this);
     }
 
     public void setListener() {
@@ -68,12 +68,12 @@ public class MyOrderActivity extends CommonActivity {
     @Override
     public void attachView() {
         getActivityComponent().inject(this);
-        presenter.attachView(this);
+        //presenter.attachView(this);
     }
 
-    public CommonPresenter getPresenter() {
+    /*public CommonPresenter getPresenter() {
         return presenter;
-    }
+    }*/
 
     @Override
     public void onClick(View view) {
@@ -139,7 +139,4 @@ public class MyOrderActivity extends CommonActivity {
         pushFragment(fragment, bundle, android.R.id.content, addToBackStack, shouldAdd, animationType,true);
     }
 
-    public CommonPresenter getOrderPresenter() {
-      return presenter;
-    }
 }

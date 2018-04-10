@@ -218,6 +218,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         setList();
         mBinding.headerLayout.ivDrawer.setVisibility(View.GONE);
         mBinding.headerLayout.tvHeading.setText(getResources().getString(R.string.add_product));
+        mBinding.tvName.setText(PreferenceUtils.getUserName());
+        mBinding.tvMobileNumber.setText(PreferenceUtils.getUserMono());
         Intent intent = getIntent();
         if (CommonUtility.isNotNull(intent)) {
             Bundle bundle = intent.getExtras();
