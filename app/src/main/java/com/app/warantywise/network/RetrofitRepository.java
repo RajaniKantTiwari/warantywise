@@ -1,24 +1,29 @@
 package com.app.warantywise.network;
 
 import com.app.warantywise.network.request.AddProductRequest;
+import com.app.warantywise.network.request.Feedback;
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.UpdateProfileRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
+import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.request.dashboard.OfferRequest;
+import com.app.warantywise.network.request.dashboard.OrderDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
+import com.app.warantywise.network.response.OrderDetailData;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
 import com.app.warantywise.network.response.dashboard.CompanyDetailData;
 import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.ManufactorServiceCentorResponseData;
+import com.app.warantywise.network.response.dashboard.MerchantResponseData;
 import com.app.warantywise.network.response.dashboard.OfferResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.network.response.dashboard.ProductDetailsData;
@@ -139,6 +144,21 @@ public class RetrofitRepository implements Repository {
     @Override
     public Observable<ProfileData> viewProfile() {
         return apiService.viewProfile();
+    }
+
+    @Override
+    public Observable<BaseResponse> submitFeedBack(Feedback feedback) {
+        return apiService.submitFeedBack(feedback);
+    }
+
+    @Override
+    public Observable<MerchantResponseData> getMerchantDetail(MerchantRequest merchantRequest) {
+        return apiService.getMerchantDetails(merchantRequest);
+    }
+
+    @Override
+    public Observable<OrderDetailData> orderDetails(OrderDetailsRequest request) {
+        return apiService.orderDetails(request);
     }
 
 

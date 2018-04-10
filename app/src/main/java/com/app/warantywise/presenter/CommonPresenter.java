@@ -1,20 +1,26 @@
 package com.app.warantywise.presenter;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.widget.AdapterView;
 
 
 import com.app.warantywise.network.DefaultApiObserver;
 import com.app.warantywise.network.Repository;
 import com.app.warantywise.network.request.AddProductRequest;
+import com.app.warantywise.network.request.Feedback;
 import com.app.warantywise.network.request.LoginRequest;
 import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
+import com.app.warantywise.network.request.dashboard.MerchantRequest;
+import com.app.warantywise.network.request.dashboard.OrderDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
+import com.app.warantywise.network.response.OrderDetailData;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.CompanyDetailData;
+import com.app.warantywise.network.response.dashboard.MerchantResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.base.MvpView;
@@ -172,6 +178,55 @@ public class CommonPresenter implements Presenter<MvpView> {
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
                 mView.onError(call, 3);
+            }
+        });
+    }
+    public void getMerchantDetails(Activity activity, MerchantRequest merchantRequest) {
+        mView.showProgress();
+        mRepository.getMerchantDetail(merchantRequest).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<MerchantResponseData>(activity) {
+            @Override
+            public void onResponse(MerchantResponseData response) {
+                mView.hideProgress();
+                mView.onSuccess(response, 2);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(call, 2);
+            }
+        });
+    }
+    public void orderDetails(FragmentActivity activity,OrderDetailsRequest request) {
+        mView.showProgress();
+        mRepository.orderDetails(request).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).
+                subscribeWith(new DefaultApiObserver<OrderDetailData>(activity) {
+                    @Override
+                    public void onResponse(OrderDetailData response) {
+                        mView.hideProgress();
+                        mView.onSuccess(response, 1);
+                    }
+
+                    @Override
+                    public void onError(Throwable call, BaseResponse baseResponse) {
+                        mView.hideProgress();
+                        mView.onError(call, 1);
+                    }
+                });
+    }
+    public void submitFeedBack(Activity activity,Feedback feedback) {
+        mView.showProgress();
+        mRepository.submitFeedBack(feedback).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<BaseResponse>(activity) {
+            @Override
+            public void onResponse(BaseResponse response) {
+                mView.hideProgress();
+                mView.onSuccess(response, 1);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                mView.hideProgress();
+                mView.onError(call, 1);
             }
         });
     }

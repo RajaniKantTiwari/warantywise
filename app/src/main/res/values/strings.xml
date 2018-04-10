@@ -206,7 +206,28 @@
     <string name="two_year">2 year</string>
     <string name="warranty_expire">Warranty Expired</string>
     <string name="my_order">My Order</string>
-
+    <string name="live_order">Live Order</string>
+    <string name="past_order">Past Order</string>
+    <string name="from">From</string>
+    <string name="total"> Total </string>
+    <string name="order_date"> Order Date </string>
+    <string name="order_number">Order No.</string>
+    <string name="selling_price">S.Price</string>
+    <string name="qty">Qty</string>
+    <string name="mrp">mrp</string>
+    <string name="order_no">Order No.</string>
+    <string name="order_status"> Order Status </string>
+    <string name="give_feedback">Give Feedback</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="contact">Contact</string>
+    <string name="order_details"> Order Details </string>
+    <string name="sub_total">Sub Total :</string>
+    <string name="tax"> Tax </string>
+    <string name="shipping_charge">Shipping Charge</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="view_details">View Details</string>
+    <string name="call_us">Call Us</string>
+    <string name="chat">Chat</string>
     <string-array name="left_drawer">
         <item>@string/home</item>
         <item>@string/my_order</item>

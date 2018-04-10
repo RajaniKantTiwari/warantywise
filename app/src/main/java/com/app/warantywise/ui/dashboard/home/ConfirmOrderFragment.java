@@ -66,7 +66,7 @@ public class ConfirmOrderFragment extends DashboardFragment {
         } else if (view == mBinding.tvHome) {
             CommonUtility.clicked(mBinding.tvHome);
             getDashboardActivity().clearAllBackStack();
-            getDashboardActivity().addFragmentInContainer(new NotificationFragment(),
+            getDashboardActivity().addFragmentInContainer(new YourProductListFragment(),
                     null,true,true, BaseActivity.AnimationType.NONE,false);
         }
     }

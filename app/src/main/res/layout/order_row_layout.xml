@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        style="@style/match_wrap"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/match_wrap"
+            android:layout_marginEnd="@dimen/margin_15"
+            android:layout_marginStart="@dimen/margin_15"
+            android:layout_marginTop="@dimen/margin_6">
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_large_wrap"
+                android:text="@string/from"
+                android:textAllCaps="true"
+                android:textColor="@color/gr_color"
+                app:customFont="@string/font_regular"/>
+
+            <android.support.v4.widget.Space style="@style/layout_hori_wrap_1" />
+
+            <com.app.warantywise.widget.CustomTextView
+                style="@style/textview_description_large_wrap"
+                android:text="@string/total"
+                android:textAllCaps="true"
+                android:textColor="@color/gr_color"
+                app:customFont="@string/font_regular"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/match_wrap"
+            android:layout_marginEnd="@dimen/margin_15"
+            android:layout_marginStart="@dimen/margin_15"
+            android:layout_marginTop="@dimen/margin_3">
+
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvStoreName"
+                style="@style/textview_description_small_wrap"
+                android:textAllCaps="true"
+                android:textColor="@color/dark_black_color" />
+
+            <android.support.v4.widget.Space style="@style/layout_hori_wrap_1" />
+
+            <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvTotal"
+                style="@style/textview_description_small_wrap"
+                android:drawableStart="@drawable/rupee_black"
+                android:drawablePadding="@dimen/margin_5"
+                android:textAllCaps="true"
+                android:textColor="@color/dark_black_color" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

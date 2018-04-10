@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.app.warantywise.BuildConfig;
@@ -36,9 +37,11 @@ import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.authentication.LoginActivity;
 import com.app.warantywise.ui.base.BaseActivity;
+import com.app.warantywise.ui.dialogfrag.ContactDialogFragment;
 import com.app.warantywise.ui.dialogfrag.CustomDialogFragment;
 import com.app.warantywise.ui.dialogfrag.FeedbackDialogFragment;
 import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
+import com.app.warantywise.ui.dialogfrag.OrderFeedbackDialogFragment;
 import com.app.warantywise.ui.dialogfrag.PlanDetailDialogFragment;
 import com.app.warantywise.ui.dialogfrag.ProfileDialogFragment;
 import com.app.warantywise.ui.dialogfrag.WarrantyImageDialogFragment;
@@ -112,6 +115,14 @@ public class CommonUtility {
     public static void showOrderDialog(AppCompatActivity activity, Bundle bundle, FeedbackDialogFragment.FeedbackDialogListener listener) {
         FragmentManager fm = activity.getSupportFragmentManager();
         FeedbackDialogFragment alertdFragment = new FeedbackDialogFragment();
+        alertdFragment.addListener(listener);
+        alertdFragment.setArguments(bundle);
+        // Show Alert CustomDialogFragment
+        alertdFragment.show(fm, "");
+    }
+    public static void showOrderDialog(AppCompatActivity activity, Bundle bundle, OrderFeedbackDialogFragment.OrderDialogListener listener) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        OrderFeedbackDialogFragment alertdFragment = new OrderFeedbackDialogFragment();
         alertdFragment.addListener(listener);
         alertdFragment.setArguments(bundle);
         // Show Alert CustomDialogFragment
@@ -676,5 +687,23 @@ public class CommonUtility {
             e.printStackTrace();
         }
         return false;
+    }
+    public static void setRating(RatingBar ratingBar){
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override public void onRatingChanged(RatingBar ratingBar, float rating,
+                                                  boolean fromUser) {
+                if(rating<1.0f)
+                    ratingBar.setRating(1.0f);
+            }
+        });
+    }
+    public static void showContactDialog(AppCompatActivity activity, Bundle bundle, ContactDialogFragment.ContactDialogListener listener) {
+        FragmentManager fm = activity.getSupportFragmentManager();
+        ContactDialogFragment alertdFragment = new ContactDialogFragment();
+        alertdFragment.addListener(listener);
+        alertdFragment.setArguments(bundle);
+        // Show Alert CustomDialogFragment
+        alertdFragment.show(fm, "");
     }
 }

@@ -19,7 +19,7 @@ public interface AppConstants {
     String SUCCESS = "success";
     String FORBIDDEN = "403";
     String UN_AUTHORIZED = "401";
-
+    String ORDER_DETAILS = "order_details";
     String TIME_ZONE="GMT";
     String PROFILE_UPDATE_PARAMETER = "profileUrl";
     int LOGOUT = 101;
@@ -28,9 +28,10 @@ public interface AppConstants {
     int DEVICE_TOKEN_RESPONSE=1;
     int HOME =0;
     int MYWARANTY = 1;
-    int INSURANCE = 2;
-    int EDIT_PROFILE = 3;
+    String STORE_NAME = "store_name";
+    String ID = "id";
     int HELP = 2;
+    String PRODUCT_INFO = "product_info";
     int SENIOR_CITIZEN = 5;
     int TERM_CONDITION = 3;
     int REQUEST_CALL = 1;
