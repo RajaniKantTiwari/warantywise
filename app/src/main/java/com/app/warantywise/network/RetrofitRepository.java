@@ -17,6 +17,7 @@ import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
+import com.app.warantywise.network.response.MyOrderData;
 import com.app.warantywise.network.response.OrderDetailData;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
@@ -159,6 +160,11 @@ public class RetrofitRepository implements Repository {
     @Override
     public Observable<OrderDetailData> orderDetails(OrderDetailsRequest request) {
         return apiService.orderDetails(request);
+    }
+
+    @Override
+    public Observable<MyOrderData> getMyOrder() {
+        return apiService.getMyOrder();
     }
 
 

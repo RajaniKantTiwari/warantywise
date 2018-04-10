@@ -18,6 +18,7 @@ import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
+import com.app.warantywise.network.response.MyOrderData;
 import com.app.warantywise.network.response.OrderDetailData;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.AllProductData;
@@ -111,4 +112,7 @@ public interface ApiService {
 
     @POST("cartorder/orderdetails")
     Observable<OrderDetailData> orderDetails(@Body OrderDetailsRequest request);
+
+    @GET("cart/myorder")
+    Observable<MyOrderData> getMyOrder();
 }

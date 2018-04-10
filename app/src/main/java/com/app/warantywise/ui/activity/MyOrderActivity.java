@@ -10,6 +10,8 @@ import android.view.View;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ActivityMyOrderBinding;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.MyOrder;
+import com.app.warantywise.network.response.MyOrderData;
 import com.app.warantywise.network.response.Order;
 import com.app.warantywise.presenter.CommonPresenter;
 import com.app.warantywise.ui.activity.fragment.LiveOrderFragment;

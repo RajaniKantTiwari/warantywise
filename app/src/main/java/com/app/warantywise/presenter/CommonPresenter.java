@@ -17,11 +17,13 @@ import com.app.warantywise.network.request.dashboard.OrderDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
+import com.app.warantywise.network.response.MyOrderData;
 import com.app.warantywise.network.response.OrderDetailData;
 import com.app.warantywise.network.response.VerifyMobileResponse;
 import com.app.warantywise.network.response.dashboard.CompanyDetailData;
 import com.app.warantywise.network.response.dashboard.MerchantResponseData;
 import com.app.warantywise.network.response.dashboard.ProductDetailData;
+import com.app.warantywise.ui.activity.MyOrderActivity;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.base.MvpView;
 import com.app.warantywise.ui.base.Presenter;
@@ -227,6 +229,22 @@ public class CommonPresenter implements Presenter<MvpView> {
             public void onError(Throwable call, BaseResponse baseResponse) {
                 mView.hideProgress();
                 mView.onError(call, 1);
+            }
+        });
+    }
+    public void getMyOrder(MyOrderActivity activity) {
+        activity.showProgress();
+        mRepository.getMyOrder().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DefaultApiObserver<MyOrderData>(activity) {
+            @Override
+            public void onResponse(MyOrderData response) {
+                activity.hideProgress();
+                activity.onSuccess(response, 1);
+            }
+
+            @Override
+            public void onError(Throwable call, BaseResponse baseResponse) {
+                activity.hideProgress();
+                activity.onError(call, 1);
             }
         });
     }

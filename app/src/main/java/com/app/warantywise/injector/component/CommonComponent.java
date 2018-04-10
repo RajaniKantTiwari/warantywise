@@ -4,6 +4,7 @@ package com.app.warantywise.injector.component;
 
 import com.app.warantywise.injector.module.CommonModule;
 import com.app.warantywise.injector.scope.PerActivity;
+import com.app.warantywise.ui.activity.MyOrderActivity;
 import com.app.warantywise.ui.activity.OrderDetailsActivity;
 import com.app.warantywise.ui.authentication.AddProductActivity;
 import com.app.warantywise.ui.dashboard.user.ProfileFragment;
@@ -21,5 +22,6 @@ public interface CommonComponent {
     void inject(VerifyAccountActivity activity);
     void inject(AddProductActivity activity);
     void inject(OrderDetailsActivity activity);
+    void inject(MyOrderActivity activity);
 
 }
