@@ -127,7 +127,7 @@
             <RelativeLayout style="@style/match_wrap">
 
                 <com.app.warantywise.widget.CustomEditText
-                    android:id="@+id/tvWarrantyPeriod"
+                    android:id="@+id/edWarrantyPeriod"
                     style="@style/edittext_add_product"
                     android:hint="@string/thirty_days"
                     android:inputType="number"
@@ -233,14 +233,67 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <com.app.warantywise.widget.CustomEditText
-                android:id="@+id/edExtradays"
-                style="@style/edittext_add_product"
-                android:hint="@string/thirty_days"
-                android:imeOptions="actionNext"
-                android:inputType="number"
-                android:visibility="gone"
-                app:customFont="@string/font_regular" />
+            <RelativeLayout
+                android:id="@+id/layoutExtra"
+                style="@style/match_wrap"
+                android:visibility="gone">
+
+                <com.app.warantywise.widget.CustomEditText
+                    android:id="@+id/edExtradays"
+                    style="@style/edittext_add_product"
+                    android:hint="@string/thirty_days"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    app:customFont="@string/font_regular" />
+                <LinearLayout
+                    style="@style/wrap_wrap"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/layoutExtraDays"
+                        style="@style/wrap_wrap">
+
+                        <RadioButton
+                            android:id="@+id/radioExtraDays"
+                            style="@style/textview_description_wrap"
+                            android:buttonTint="@color/color_sky_blue"
+                            android:clickable="false"
+                            android:checked="true"
+                            android:scaleX="0.5"
+                            android:scaleY="0.5" />
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_small_wrap"
+                            android:paddingEnd="@dimen/margin_15"
+                            android:text="@string/days"
+                            android:textColor="@color/text_hint_color"
+                            app:customFont="@string/font_regular" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutExtraYear"
+                        style="@style/wrap_wrap"
+                        android:paddingEnd="@dimen/margin_15"
+                        android:paddingStart="@dimen/margin_15">
+
+                        <RadioButton
+                            android:id="@+id/radioExtraYear"
+                            style="@style/textview_description_wrap"
+                            android:buttonTint="@color/color_sky_blue"
+                            android:clickable="false"
+                            android:scaleX="0.5"
+                            android:scaleY="0.5" />
+
+                        <com.app.warantywise.widget.CustomTextView
+                            style="@style/textview_description_small_wrap"
+                            android:text="@string/year"
+                            android:textColor="@color/text_hint_color"
+                            app:customFont="@string/font_regular" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvDocument"

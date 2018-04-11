@@ -103,6 +103,8 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         mBinding.layoutNo.setOnClickListener(this);
         mBinding.layoutDays.setOnClickListener(this);
         mBinding.layoutYear.setOnClickListener(this);
+        mBinding.layoutExtraDays.setOnClickListener(this);
+        mBinding.layoutExtraYear.setOnClickListener(this);
         mBinding.headerLayout.ivDrawer.setOnClickListener(this);
         mBinding.edProductName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -283,21 +285,33 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         } else if (mBinding.layoutYes == view) {
             mBinding.radioYes.setChecked(true);
             mBinding.radioNo.setChecked(false);
-            mBinding.edExtradays.setVisibility(View.VISIBLE);
+            mBinding.layoutExtra.setVisibility(View.VISIBLE);
         } else if (mBinding.layoutNo == view) {
             mBinding.radioYes.setChecked(false);
             mBinding.radioNo.setChecked(true);
-            mBinding.edExtradays.setVisibility(View.GONE);
+            mBinding.layoutExtra.setVisibility(View.GONE);
         } else if (mBinding.layoutDays == view) {
             mBinding.radioDays.setChecked(true);
             mBinding.radioYear.setChecked(false);
-            mBinding.tvWarrantyPeriod.setHint(getResources().getString(R.string.thirty_days));
+            mBinding.edWarrantyPeriod.setHint(getResources().getString(R.string.thirty_days));
+            mBinding.edWarrantyPeriod.setText("");
         } else if (mBinding.layoutYear == view) {
             mBinding.radioDays.setChecked(false);
             mBinding.radioYear.setChecked(true);
-            mBinding.tvWarrantyPeriod.setHint(getResources().getString(R.string.two_year));
+            mBinding.edWarrantyPeriod.setHint(getResources().getString(R.string.two_year));
+            mBinding.edWarrantyPeriod.setText("");
         } else if (mBinding.headerLayout.ivDrawer == view) {
             finish();
+        } else if (mBinding.layoutExtraDays == view) {
+            mBinding.radioExtraDays.setChecked(true);
+            mBinding.radioExtraYear.setChecked(false);
+            mBinding.edExtradays.setHint(getResources().getString(R.string.thirty_days));
+            mBinding.edExtradays.setText("");
+        } else if (mBinding.layoutExtraYear == view) {
+            mBinding.radioExtraDays.setChecked(false);
+            mBinding.radioExtraYear.setChecked(true);
+            mBinding.edExtradays.setHint(getResources().getString(R.string.two_year));
+            mBinding.edExtradays.setText("");
         }
     }
 
@@ -312,8 +326,13 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         request.setManufacturer_id(manufacturerId != null ? manufacturerId : "");
         request.setManufacturer_name(companyName);
         if (mBinding.edExtradays.getText().toString() != null &&
-                mBinding.edExtradays.getText().toString().length() > 0) {
-            request.setExtended_warranty_days(mBinding.edExtradays.getText().toString());
+                mBinding.edExtradays.getText().toString().trim().length() > 0) {
+            if(mBinding.radioExtraDays.isChecked()){
+                request.setExtended_warranty_days(mBinding.edExtradays.getText().toString().trim());
+            }else{
+                request.setExtended_warranty_days(String.valueOf(Integer.parseInt(mBinding.edExtradays.getText().toString().trim())*365));
+            }
+
         }
     }
 
@@ -328,10 +347,10 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         companyName = mBinding.edCompanyName.getText().toString();
         serialNumber = mBinding.tvSerialNumber.getText().toString();
         purchaseDate = mBinding.tvPurchaseDate.getText().toString();
-        warrantyPeriod = mBinding.tvWarrantyPeriod.getText().toString();
+        warrantyPeriod = mBinding.edWarrantyPeriod.getText().toString();
         if (CommonUtility.isNotNull(warrantyPeriod) && warrantyPeriod.trim().length() > 0) {
-            if(mBinding.radioYear.isChecked()){
-                warrantyPeriod= String.valueOf(Integer.parseInt(warrantyPeriod)*365);
+            if (mBinding.radioYear.isChecked()) {
+                warrantyPeriod = String.valueOf(Integer.parseInt(warrantyPeriod) * 365);
             }
         }
         modelNumber = mBinding.tvModelNumber.getText().toString();

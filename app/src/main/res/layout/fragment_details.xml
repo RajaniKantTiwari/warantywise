@@ -185,7 +185,7 @@
                             android:layout_marginTop="@dimen/margin_10"
                             android:textColor="@color/button_text_color"/>
                         <com.app.warantywise.widget.CustomTextView
-                            android:id="@+id/tvWarrantyPeriod"
+                            android:id="@+id/edWarrantyPeriod"
                             style="@style/textview_description_match"
                             android:layout_marginTop="@dimen/margin_5"
                             android:layout_marginBottom="@dimen/margin_10"/>
