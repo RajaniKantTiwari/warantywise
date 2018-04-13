@@ -12,9 +12,10 @@ import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentYourProductBinding;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
-import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCard;
+import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCardData;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
@@ -40,7 +41,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
     private FragmentYourProductBinding mBinding;
     private PlansAdapter mPlanAdapter;
     private InsurancePlansAdapter mInsurancePlanAdapter;
-    private ArrayList<Plans> planList;
+    private ArrayList<ExtendedWarrantyCard> warrantyCardList;
     private ArrayList<InsurancePlan> insurancePlanList;
     private YourProduct yourProduct;
     private DashBoardActivity activity;
@@ -50,7 +51,7 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_your_product, container, false);
-        activity=getDashboardActivity();
+        activity = getDashboardActivity();
         return mBinding.getRoot();
     }
 
@@ -84,10 +85,10 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
                 if (CommonUtility.isNotNull(yourProduct) && CommonUtility.isNotNull(yourProduct.getWarranty_to())) {
                     mBinding.tvUnderWarranty.setText(CommonUtility.
                             dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00") ?
-                            activity.getResources().getString(R.string.warranty_expire):activity.getResources().getString(R.string.under_warranty));
+                            activity.getResources().getString(R.string.warranty_expire) : activity.getResources().getString(R.string.under_warranty));
                     mBinding.tvWarranty.setText(CommonUtility.
                             dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00") ?
-                            activity.getResources().getString(R.string.warranty_expire):activity.getResources().getString(R.string.under_warranty));
+                            activity.getResources().getString(R.string.warranty_expire) : activity.getResources().getString(R.string.under_warranty));
                     if (CommonUtility.dateComparision(yourProduct.getWarranty_to(), "2018-09-09 00:00:00")) {
                         mBinding.tvUnderWarranty.setBackgroundResource(R.drawable.red_round);
                     } else {
@@ -103,10 +104,8 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
         //For Plan
         LinearLayoutManager plansManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvPlan.setLayoutManager(plansManager);
-        planList = new ArrayList<>();
-        CommonUtility.setPlan(planList);
-        CommonUtility.setRecyclerViewHeight(mBinding.rvPlan, planList, AppConstants.PLANHEIGHT);
-        mPlanAdapter = new PlansAdapter(getDashboardActivity(), planList, this);
+        warrantyCardList = new ArrayList<>();
+        mPlanAdapter = new PlansAdapter(getDashboardActivity(), warrantyCardList, this);
         mBinding.rvPlan.setAdapter(mPlanAdapter);
 
         //for Insurance plan
@@ -132,7 +131,23 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
+        if (CommonUtility.isNotNull(response)) {
+            if (requestCode == 1) {
+             setInsuranceList(response);
+            }else if(requestCode==2){
 
+            }
+        }
+    }
+
+    private void setInsuranceList(BaseResponse response) {
+        ExtendedWarrantyCardData data=(ExtendedWarrantyCardData)response;
+        warrantyCardList.clear();
+        if(CommonUtility.isNotNull(data.getInfo())){
+            warrantyCardList.addAll(data.getInfo());
+            CommonUtility.setRecyclerViewHeight(mBinding.rvPlan, warrantyCardList, AppConstants.PLANHEIGHT);
+            mPlanAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -151,15 +166,15 @@ public class YourProductFragment extends DashboardFragment implements InsuranceP
 
     @Override
     public void onPlanClicked(int position) {
-        for (int i = 0; i < planList.size(); i++) {
-            Plans plan = planList.get(i);
+        for (int i = 0; i < warrantyCardList.size(); i++) {
+            ExtendedWarrantyCard warrantyCard = warrantyCardList.get(i);
             if (i == position) {
-                plan.setChecked(true);
-                CommonUtility.showPlanDetailDialogFragment(getBaseActivity(),null);
+                warrantyCard.setChecked(true);
+                CommonUtility.showPlanDetailDialogFragment(getBaseActivity(), null);
             } else {
-                plan.setChecked(false);
+                warrantyCard.setChecked(false);
             }
-            planList.set(i, plan);
+            warrantyCardList.set(i, warrantyCard);
         }
         mPlanAdapter.notifyDataSetChanged();
     }

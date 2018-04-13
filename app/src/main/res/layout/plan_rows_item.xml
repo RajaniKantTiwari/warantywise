@@ -2,11 +2,7 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-        <variable
-            name="plans"
-            type="com.app.warantywise.network.request.dashboard.Plans" />
-    </data>
+
 
     <RelativeLayout
         android:id="@+id/layoutPlans"
@@ -21,24 +17,24 @@
             android:paddingStart="@dimen/margin_10">
 
             <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvAmount"
                 style="@style/textview_description_large_wrap"
                 android:layout_width="@dimen/margin_70"
-                android:text="@={plans.planRate}"
                 android:textColor="@color/red_col"/>
 
             <android.support.v4.widget.Space style="@style/layout_hori_match_1" />
 
             <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvWarranty"
                 style="@style/textview_description_small_wrap"
-                android:layout_width="@dimen/margin_70"
-                android:text="@={plans.planRate}"/>
+                android:layout_width="@dimen/margin_70"/>
 
             <android.support.v4.widget.Space style="@style/layout_hori_match_1" />
 
             <com.app.warantywise.widget.CustomTextView
+                android:id="@+id/tvWarrantyDescription"
                 style="@style/textview_description_small_wrap"
                 android:layout_width="@dimen/margin_160"
-                android:text="@={plans.replaceMentService}"
                 android:textColor="@color/grey_color"
                 app:customFont="@string/font_regular" />
 

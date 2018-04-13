@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 
-
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.PlanRowsItemBinding;
-import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCard;
 import com.app.warantywise.utility.CommonUtility;
 import com.app.warantywise.widget.CustomTextView;
@@ -37,7 +35,7 @@ public class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlanHolder> 
         mInflater = LayoutInflater.from(activity);
         this.activity = activity;
         this.plansList = daysList;
-        this.listener=listener;
+        this.listener = listener;
     }
 
     @Override
@@ -70,15 +68,15 @@ public class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlanHolder> 
             super(itemView.getRoot());
             this.itemView = itemView;
             radioBtn = itemView.radio;
-            tvAmount=itemView.tvAmount;
-            tvWarranty=itemView.tvWarranty;
-            tvWarrantyDescription=itemView.tvWarrantyDescription;
+            tvAmount = itemView.tvAmount;
+            tvWarranty = itemView.tvWarranty;
+            tvWarrantyDescription = itemView.tvWarrantyDescription;
             itemView.layoutPlans.setOnClickListener(this);
 
         }
 
         public void setPlans(ExtendedWarrantyCard plans, PlanHolder holder) {
-            holder.tvAmount.setText(CommonUtility.addStrings(activity.getResources().getString(R.string.rs),plans.getAmount()));
+            holder.tvAmount.setText(CommonUtility.addStrings(activity.getResources().getString(R.string.rs), plans.getAmount()));
             holder.tvWarranty.setText(null);
             holder.tvWarrantyDescription.setText(plans.getWarranty_descr());
             if (CommonUtility.isNotNull(plans)) {

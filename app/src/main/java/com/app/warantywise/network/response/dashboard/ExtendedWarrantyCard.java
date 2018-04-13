@@ -44,6 +44,8 @@ public class ExtendedWarrantyCard implements Parcelable {
     private String pincode;
     private String logged_at;
     private String mobile;
+    private boolean isChecked;
+    private String amount;
 
     public ExtendedWarrantyCard() {
 
@@ -86,6 +88,8 @@ public class ExtendedWarrantyCard implements Parcelable {
         pincode = in.readString();
         logged_at = in.readString();
         mobile = in.readString();
+        isChecked=in.readByte() != 0;
+        amount=in.readString();
     }
 
     public static final Creator<ExtendedWarrantyCard> CREATOR = new Creator<ExtendedWarrantyCard>() {
@@ -99,6 +103,14 @@ public class ExtendedWarrantyCard implements Parcelable {
             return new ExtendedWarrantyCard[size];
         }
     };
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public String getId() {
         return id;
@@ -388,6 +400,14 @@ public class ExtendedWarrantyCard implements Parcelable {
         this.mobile = mobile;
     }
 
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -431,5 +451,7 @@ public class ExtendedWarrantyCard implements Parcelable {
         parcel.writeString(pincode);
         parcel.writeString(logged_at);
         parcel.writeString(mobile);
+        parcel.writeByte((byte) (isChecked ? 1 : 0));
+        parcel.writeString(amount);
     }
 }
