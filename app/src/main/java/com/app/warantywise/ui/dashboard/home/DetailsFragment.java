@@ -64,6 +64,12 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
 
     public void setListener() {
         mBinding.tvUnderWarranty.setOnClickListener(this);
+        mBinding.tvLocation.setOnClickListener(this);
+    }
+
+    private void onLocationClicked() {
+        getDashboardActivity().addFragmentInContainer(new ProductMapFragment(), null, true
+                , true, BaseActivity.AnimationType.NONE, false);
     }
 
     @Override
@@ -72,8 +78,8 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
     }
 
     public void initializeData() {
-        Bundle bundle=getArguments();
-        if(CommonUtility.isNotNull(bundle)){
+        Bundle bundle = getArguments();
+        if (CommonUtility.isNotNull(bundle)) {
             yourProduct = bundle.getParcelable(BundleConstants.PRODUCT);
             getPresenter().getMyProductDetails(getDashboardActivity(), new ProductsRequest(yourProduct.getWw_productid()));
             getPresenter().getMyProductFeedback(getDashboardActivity(), new ProductsRequest(yourProduct.getWw_productid()));
@@ -110,6 +116,8 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
             CommonUtility.clicked(mBinding.tvUnderWarranty);
             getDashboardActivity().addFragmentInContainer(new ServiceCenterDetailsFragment(), null, true
                     , true, BaseActivity.AnimationType.NONE, false);
+        } else if (view == mBinding.tvLocation) {
+            onLocationClicked();
         }
     }
 
@@ -155,9 +163,9 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
     @Override
     public void onItemClick(int position) {
         Bundle bundle = new Bundle();
-        bundle.putInt(BundleConstants.POSITION,position);
-        bundle.putParcelableArrayList(BundleConstants.IMAGE_LIST,productList);
-        ExplicitIntent.getsInstance().navigateToZoom(getDashboardActivity(), ZoomAnimationImageActivity.class,bundle);
+        bundle.putInt(BundleConstants.POSITION, position);
+        bundle.putParcelableArrayList(BundleConstants.IMAGE_LIST, productList);
+        ExplicitIntent.getsInstance().navigateToZoom(getDashboardActivity(), ZoomAnimationImageActivity.class, bundle);
     }
 
 }
