@@ -55,7 +55,11 @@ public class YourProductListFragment extends DashboardFragment implements
 
     @Override
     public void attachView() {
-        getPresenter().attachView(this);
+        try {
+            getPresenter().attachView(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

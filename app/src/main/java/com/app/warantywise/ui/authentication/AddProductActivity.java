@@ -9,6 +9,7 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -327,10 +328,10 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
         request.setManufacturer_name(companyName);
         if (mBinding.edExtradays.getText().toString() != null &&
                 mBinding.edExtradays.getText().toString().trim().length() > 0) {
-            if(mBinding.radioExtraDays.isChecked()){
+            if (mBinding.radioExtraDays.isChecked()) {
                 request.setExtended_warranty_days(mBinding.edExtradays.getText().toString().trim());
-            }else{
-                request.setExtended_warranty_days(String.valueOf(Integer.parseInt(mBinding.edExtradays.getText().toString().trim())*365));
+            } else {
+                request.setExtended_warranty_days(String.valueOf(Integer.parseInt(mBinding.edExtradays.getText().toString().trim()) * 365));
             }
 
         }
@@ -389,6 +390,7 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
+        Log.e("BaseResponseAre",response.toString());
         if (CommonUtility.isNotNull(response)) {
             if (requestCode == 1) {
                 ProductDetailData data = (ProductDetailData) response;
@@ -410,6 +412,16 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
                 CompanyDetailData data = (CompanyDetailData) response;
                 companyDetailList.clear();
                 companyDetailList.addAll(data.getInfo());
+                ArrayAdapter<CompanyDetail> companyNameNameAdapter = new CompanyNameCustomArrayAdapter(this, R.layout.product_name_row, companyDetailList);
+                mBinding.edCompanyName.setAdapter(companyNameNameAdapter);
+            }
+        } else {
+            if (requestCode == 1) {
+                productDetailList.clear();
+                ArrayAdapter<ProductDetail> productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
+                mBinding.edProductName.setAdapter(productNameAdapter);
+            } else if (requestCode == 3) {
+                companyDetailList.clear();
                 ArrayAdapter<CompanyDetail> companyNameNameAdapter = new CompanyNameCustomArrayAdapter(this, R.layout.product_name_row, companyDetailList);
                 mBinding.edCompanyName.setAdapter(companyNameNameAdapter);
             }
