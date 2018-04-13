@@ -15,6 +15,7 @@ import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
+import com.app.warantywise.ui.dashboard.home.adapter.InsurancePlanAdapters;
 import com.app.warantywise.ui.dashboard.home.adapter.InsurancePlansAdapter;
 import com.app.warantywise.ui.dashboard.home.adapter.PlansAdapter;
 import com.app.warantywise.ui.dialogfrag.OfferDialogFragment;
@@ -29,11 +30,11 @@ import java.util.ArrayList;
  * To inject activity reference.
  */
 
-public class InsuranceChoiceFragment extends DashboardFragment implements InsurancePlansAdapter.PlanInsuranceListener,
+public class InsuranceChoiceFragment extends DashboardFragment implements InsurancePlanAdapters.PlanListener,
         PlansAdapter.PlanListener,OfferDialogFragment.OfferDialogListener {
 
     private FragmentInsuranceBinding mBinding;
-    private PlansAdapter mPlanAdapter;
+    private InsurancePlanAdapters mPlanAdapter;
     private InsurancePlansAdapter mInsurancePlanAdapter;
     private ArrayList<Plans> planList;
     private ArrayList<InsurancePlan> insurancePlanList;
@@ -70,7 +71,7 @@ public class InsuranceChoiceFragment extends DashboardFragment implements Insura
         planList = new ArrayList<>();
         CommonUtility.setPlan(planList);
         CommonUtility.setRecyclerViewHeight(mBinding.rvPlan, planList, AppConstants.PLANHEIGHT);
-        mPlanAdapter = new PlansAdapter(getDashboardActivity(), planList, this);
+        mPlanAdapter = new InsurancePlanAdapters(getDashboardActivity(), planList, this);
         mBinding.rvPlan.setAdapter(mPlanAdapter);
 
         //for Insurance plan
@@ -79,7 +80,7 @@ public class InsuranceChoiceFragment extends DashboardFragment implements Insura
         insurancePlanList = new ArrayList<>();
         CommonUtility.setInsurancePlan(insurancePlanList);
         CommonUtility.setRecyclerViewHeight(mBinding.rvInsurancePlan, planList, AppConstants.INSURANCE_PLANHEIGHT);
-        mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
+        //mInsurancePlanAdapter = new InsurancePlansAdapter(getDashboardActivity(), insurancePlanList, this);
         mBinding.rvInsurancePlan.setAdapter(mInsurancePlanAdapter);
         //end
         getPresenter().getProductInsurance(getDashboardActivity(),new ProductInsuranceRequest("1"));
@@ -95,7 +96,7 @@ public class InsuranceChoiceFragment extends DashboardFragment implements Insura
 
     }
 
-    @Override
+   /* @Override
     public void setOnInsuranceItemClick(int position) {
         for (int i = 0; i < insurancePlanList.size(); i++) {
             InsurancePlan plan = insurancePlanList.get(i);
@@ -107,7 +108,7 @@ public class InsuranceChoiceFragment extends DashboardFragment implements Insura
             insurancePlanList.set(i, plan);
         }
         mInsurancePlanAdapter.notifyDataSetChanged();
-    }
+    }*/
 
     @Override
     public void onPlanClicked(int position) {

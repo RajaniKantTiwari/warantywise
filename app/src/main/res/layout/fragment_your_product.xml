@@ -116,6 +116,7 @@
                         android:elevation="@dimen/margin_5"
                         android:gravity="center_horizontal"
                         android:padding="@dimen/margin_6"
+                        android:layout_marginBottom="@dimen/margin_20"
                         android:text="@string/buy"
                         android:textAllCaps="true"
                         android:textColor="@color/button_text_color"

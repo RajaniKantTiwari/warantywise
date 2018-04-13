@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.ImageFullscreenPreviewBinding;
+import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.response.dashboard.StoreImages;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.utility.CommonUtility;
@@ -26,9 +27,9 @@ public class ImageViewPager extends PagerAdapter {
 
     private LayoutInflater layoutInflater;
     private ImageFullscreenPreviewBinding mBinding;
-    private ArrayList<StoreImages> storeImageList;
+    private ArrayList<Product> storeImageList;
     private Activity activity;
-    public ImageViewPager(BaseActivity activity, ArrayList<StoreImages> storeImageList) {
+    public ImageViewPager(BaseActivity activity, ArrayList<Product> storeImageList) {
         layoutInflater=LayoutInflater.from(activity);
         this.activity=activity;
         this.storeImageList=storeImageList;
@@ -42,13 +43,13 @@ public class ImageViewPager extends PagerAdapter {
     }
 
     private void initializeData(ViewGroup container, int position) {
-        StoreImages image = storeImageList.get(position);
+        Product image = storeImageList.get(position);
            /* Glide.with(getActivity()).load(image.getLarge())
                     .thumbnail(0.5f)
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageViewPreview);*/
-        GlideUtils.loadImageWithZoom(activity,image.getPath(),mBinding.ivPreview);
+        GlideUtils.loadImageWithZoom(activity,image.getImageUrl(),mBinding.ivPreview);
         container.addView(mBinding.getRoot());
     }
 

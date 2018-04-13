@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentZoomImageSliderBinding;
+import com.app.warantywise.network.request.Product;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.StoreImages;
 import com.app.warantywise.ui.base.BaseActivity;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 
 
 public class ZoomAnimationImageActivity extends BaseActivity {
-    private ArrayList<StoreImages> storeImageList;
+    private ArrayList<Product> storeImageList;
     private ImageViewPager mImageAdapter;
     private int selectedPosition = 0;
     private Animation animation;
@@ -64,7 +65,7 @@ public class ZoomAnimationImageActivity extends BaseActivity {
     private void displayMetaInfo(int position) {
         if(CommonUtility.isNotNull(storeImageList)&&storeImageList.size()>position){
             mBinding.tvCount.setText((position + 1) + " of " + storeImageList.size());
-            StoreImages storeImage = storeImageList.get(position);
+            Product storeImage = storeImageList.get(position);
             //lblTitle.setText(storeImage.getCreated_at());
         }
     }

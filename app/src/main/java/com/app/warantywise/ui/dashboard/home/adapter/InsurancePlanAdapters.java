@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import com.app.warantywise.R;
-import com.app.warantywise.databinding.PlanRowsItemBinding;
-import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCard;
+import com.app.warantywise.databinding.InsuranPlanRowItemBinding;
+import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.utility.CommonUtility;
-import com.app.warantywise.widget.CustomTextView;
 
 import java.util.ArrayList;
 
@@ -20,18 +19,18 @@ import java.util.ArrayList;
  * Created by ashok on 25/12/17.
  */
 
-public class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlanHolder> {
+public class InsurancePlanAdapters extends RecyclerView.Adapter<InsurancePlanAdapters.PlanHolder> {
     private final LayoutInflater mInflater;
     private final AppCompatActivity activity;
-    private PlanRowsItemBinding mBinding;
-    private ArrayList<ExtendedWarrantyCard> plansList;
+    private InsuranPlanRowItemBinding mBinding;
+    private ArrayList<Plans> plansList;
     private PlanListener listener;
 
     public interface PlanListener {
         void onPlanClicked(int position);
     }
 
-    public PlansAdapter(AppCompatActivity activity, ArrayList<ExtendedWarrantyCard> daysList, PlanListener listener) {
+    public InsurancePlanAdapters(AppCompatActivity activity, ArrayList<Plans> daysList, PlanListener listener) {
         mInflater = LayoutInflater.from(activity);
         this.activity = activity;
         this.plansList = daysList;
@@ -40,7 +39,7 @@ public class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlanHolder> 
 
     @Override
     public PlanHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mBinding = DataBindingUtil.inflate(mInflater, R.layout.plan_rows_item, parent, false);
+        mBinding = DataBindingUtil.inflate(mInflater, R.layout.insuran_plan_row_item, parent, false);
         return new PlanHolder(mBinding);
     }
 
@@ -59,26 +58,17 @@ public class PlansAdapter extends RecyclerView.Adapter<PlansAdapter.PlanHolder> 
 
     class PlanHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final RadioButton radioBtn;
-        private final CustomTextView tvAmount;
-        private final CustomTextView tvWarranty;
-        private final CustomTextView tvWarrantyDescription;
-        private PlanRowsItemBinding itemView;
+        private InsuranPlanRowItemBinding itemView;
 
-        public PlanHolder(PlanRowsItemBinding itemView) {
+        public PlanHolder(InsuranPlanRowItemBinding itemView) {
             super(itemView.getRoot());
             this.itemView = itemView;
             radioBtn = itemView.radio;
-            tvAmount = itemView.tvAmount;
-            tvWarranty = itemView.tvWarranty;
-            tvWarrantyDescription = itemView.tvWarrantyDescription;
             itemView.layoutPlans.setOnClickListener(this);
 
         }
 
-        public void setPlans(ExtendedWarrantyCard plans, PlanHolder holder) {
-            holder.tvAmount.setText(CommonUtility.addStrings(activity.getResources().getString(R.string.rs), plans.getAmount()));
-            holder.tvWarranty.setText(null);
-            holder.tvWarrantyDescription.setText(plans.getWarranty_descr());
+        public void setPlans(Plans plans, PlanHolder holder) {
             if (CommonUtility.isNotNull(plans)) {
                 if (plans.isChecked()) {
                     holder.radioBtn.setChecked(true);

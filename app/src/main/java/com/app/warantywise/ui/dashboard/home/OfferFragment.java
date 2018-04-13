@@ -10,12 +10,11 @@ import android.view.ViewGroup;
 
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentOfferBinding;
-import com.app.warantywise.databinding.FragmentYourProductBinding;
-import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
 import com.app.warantywise.network.request.dashboard.InsurancePlan;
 import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.Plans;
 import com.app.warantywise.network.response.BaseResponse;
+import com.app.warantywise.network.response.dashboard.ExtendedWarrantyCard;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashBoardActivity;
@@ -41,7 +40,7 @@ public class OfferFragment extends DashboardFragment implements InsurancePlansAd
     private FragmentOfferBinding mBinding;
     private PlansAdapter mPlanAdapter;
     private InsurancePlansAdapter mInsurancePlanAdapter;
-    private ArrayList<Plans> planList;
+    private ArrayList<ExtendedWarrantyCard> warrantyCardList;
     private ArrayList<InsurancePlan> insurancePlanList;
     private YourProduct yourProduct;
     private DashBoardActivity activity;
@@ -102,10 +101,10 @@ public class OfferFragment extends DashboardFragment implements InsurancePlansAd
         //For Plan
         LinearLayoutManager plansManager = new LinearLayoutManager(getDashboardActivity());
         mBinding.rvPlan.setLayoutManager(plansManager);
-        planList = new ArrayList<>();
-        CommonUtility.setPlan(planList);
-        CommonUtility.setRecyclerViewHeight(mBinding.rvPlan, planList, AppConstants.PLANHEIGHT);
-        mPlanAdapter = new PlansAdapter(getDashboardActivity(), planList, this);
+        warrantyCardList = new ArrayList<>();
+        //CommonUtility.setPlan(warrantyCardList);
+        CommonUtility.setRecyclerViewHeight(mBinding.rvPlan, warrantyCardList, AppConstants.PLANHEIGHT);
+        mPlanAdapter = new PlansAdapter(getDashboardActivity(), warrantyCardList, this);
         mBinding.rvPlan.setAdapter(mPlanAdapter);
 
         //for Insurance plan
@@ -149,15 +148,15 @@ public class OfferFragment extends DashboardFragment implements InsurancePlansAd
 
     @Override
     public void onPlanClicked(int position) {
-        for (int i = 0; i < planList.size(); i++) {
-            Plans plan = planList.get(i);
+        for (int i = 0; i < warrantyCardList.size(); i++) {
+            ExtendedWarrantyCard plan = warrantyCardList.get(i);
             if (i == position) {
                 plan.setChecked(true);
                 CommonUtility.showPlanDetailDialogFragment(getBaseActivity(),null);
             } else {
                 plan.setChecked(false);
             }
-            planList.set(i, plan);
+            warrantyCardList.set(i, plan);
         }
         mPlanAdapter.notifyDataSetChanged();
     }

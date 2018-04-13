@@ -229,6 +229,8 @@
     <string name="call_us">Call Us</string>
     <string name="chat">Chat</string>
     <string name="rs">Rs&#160;</string>
+    <string name="store_details">Store Details</string>
+    <string name="service_center">Service Center</string>
     <string-array name="left_drawer">
         <item>@string/home</item>
         <item>@string/my_order</item>

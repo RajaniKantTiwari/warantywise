@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <RelativeLayout
@@ -20,14 +19,14 @@
                 android:id="@+id/tvAmount"
                 style="@style/textview_description_large_wrap"
                 android:layout_width="@dimen/margin_70"
-                android:textColor="@color/red_col"/>
+                android:textColor="@color/red_col" />
 
             <android.support.v4.widget.Space style="@style/layout_hori_match_1" />
 
             <com.app.warantywise.widget.CustomTextView
                 android:id="@+id/tvWarranty"
                 style="@style/textview_description_small_wrap"
-                android:layout_width="@dimen/margin_70"/>
+                android:layout_width="@dimen/margin_70" />
 
             <android.support.v4.widget.Space style="@style/layout_hori_match_1" />
 
@@ -40,6 +39,7 @@
 
             <android.support.v4.widget.Space style="@style/layout_hori_match_3" />
         </LinearLayout>
+
         <RadioButton
             android:id="@+id/radio"
             style="@style/wrap_wrap"

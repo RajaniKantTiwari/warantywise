@@ -151,11 +151,22 @@
                         android:paddingEnd="@dimen/margin_15"
                         android:layout_below="@+id/div"
                         android:orientation="vertical">
+                        <RelativeLayout
+                            style="@style/match_wrap">
                         <com.app.warantywise.widget.CustomTextView
-                            style="@style/textview_description_match"
+                            style="@style/textview_description_wrap"
                             android:text="@string/company_name"
                             android:layout_marginTop="@dimen/margin_10"
                             android:textColor="@color/button_text_color"/>
+                            <com.app.warantywise.widget.CustomTextView
+                                style="@style/textview_description_wrap"
+                                android:text="@string/service_center"
+                                android:layout_alignParentEnd="true"
+                                android:drawableEnd="@drawable/location"
+                                android:drawablePadding="@dimen/margin_7"
+                                android:layout_marginTop="@dimen/margin_10"
+                                android:textColor="@color/button_text_color"/>
+                        </RelativeLayout>
                         <com.app.warantywise.widget.CustomTextView
                             android:id="@+id/tvCompanyName"
                             style="@style/textview_description_match"

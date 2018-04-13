@@ -12,23 +12,23 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentDetailsBinding;
 import com.app.warantywise.network.request.Product;
-import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductDetails;
 import com.app.warantywise.network.response.dashboard.ProductDetailsData;
 import com.app.warantywise.network.response.dashboard.ReviewResponse;
 import com.app.warantywise.network.response.dashboard.YourProduct;
+import com.app.warantywise.ui.activity.ZoomAnimationImageActivity;
 import com.app.warantywise.ui.adapter.DetailsAdapter;
 import com.app.warantywise.ui.base.BaseActivity;
 import com.app.warantywise.ui.dashboard.DashboardFragment;
 import com.app.warantywise.ui.dashboard.home.adapter.ReviewAdapter;
 import com.app.warantywise.utility.BundleConstants;
 import com.app.warantywise.utility.CommonUtility;
+import com.app.warantywise.utility.ExplicitIntent;
 import com.app.warantywise.utility.GlideUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DetailsFragment extends DashboardFragment implements DetailsAdapter.DetailsListener {
 
@@ -36,7 +36,7 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
     private ReviewAdapter mReviewAdapter;
     private ArrayList<ReviewResponse> reviewList;
     private DetailsAdapter detailsAdapter;
-    private List<Product> productList = new ArrayList<>();
+    private ArrayList<Product> productList = new ArrayList<>();
     private YourProduct yourProduct;
 
     @Nullable
@@ -154,7 +154,10 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
 
     @Override
     public void onItemClick(int position) {
-
+        Bundle bundle = new Bundle();
+        bundle.putInt(BundleConstants.POSITION,position);
+        bundle.putParcelableArrayList(BundleConstants.IMAGE_LIST,productList);
+        ExplicitIntent.getsInstance().navigateToZoom(getDashboardActivity(), ZoomAnimationImageActivity.class,bundle);
     }
 
 }

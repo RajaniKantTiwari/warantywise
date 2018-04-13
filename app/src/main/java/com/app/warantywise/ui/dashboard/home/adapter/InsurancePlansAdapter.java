@@ -29,7 +29,7 @@ public class InsurancePlansAdapter extends RecyclerView.Adapter<InsurancePlansAd
         void setOnInsuranceItemClick(int position);
     }
 
-    public InsurancePlansAdapter(AppCompatActivity activity, ArrayList<InsurancePlan> insurancePlanList, PlanInsuranceListener listener) {
+    public InsurancePlansAdapter(AppCompatActivity activity, ArrayList<InsurancePlan> insurancePlanList, InsurancePlansAdapter.PlanInsuranceListener listener) {
         mInflater = LayoutInflater.from(activity);
         this.activity = activity;
         this.insurancePlanList = insurancePlanList;
