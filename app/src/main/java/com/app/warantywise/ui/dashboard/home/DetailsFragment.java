@@ -12,11 +12,13 @@ import android.view.ViewGroup;
 import com.app.warantywise.R;
 import com.app.warantywise.databinding.FragmentDetailsBinding;
 import com.app.warantywise.network.request.Product;
+import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.dashboard.ProductDetails;
 import com.app.warantywise.network.response.dashboard.ProductDetailsData;
 import com.app.warantywise.network.response.dashboard.ReviewResponse;
+import com.app.warantywise.network.response.dashboard.WarrantyCardImageData;
 import com.app.warantywise.network.response.dashboard.YourProduct;
 import com.app.warantywise.ui.activity.ZoomAnimationImageActivity;
 import com.app.warantywise.ui.adapter.DetailsAdapter;
@@ -65,6 +67,11 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
     public void setListener() {
         mBinding.tvUnderWarranty.setOnClickListener(this);
         mBinding.tvLocation.setOnClickListener(this);
+        mBinding.layoutPolicyDetails.layoutWarranty.setOnClickListener(this);
+        mBinding.layoutPolicyDetails.layoutExtendedWarranty.setOnClickListener(this);
+        mBinding.layoutPolicyDetails.layoutBuyInsurance.setOnClickListener(this);
+        mBinding.layoutPolicyDetails.layoutOffer.setOnClickListener(this);
+
     }
 
     private void onLocationClicked() {
@@ -118,7 +125,41 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
                     , true, BaseActivity.AnimationType.NONE, false);
         } else if (view == mBinding.tvLocation) {
             onLocationClicked();
+        } else if (view == mBinding.layoutPolicyDetails.layoutWarranty) {
+            warranty();
+        } else if (view == mBinding.layoutPolicyDetails.layoutExtendedWarranty) {
+            extendWarranty();
+        } else if (view == mBinding.layoutPolicyDetails.layoutBuyInsurance) {
+            buyInsurance();
+        } else if (view == mBinding.layoutPolicyDetails.layoutOffer) {
+            offers();
         }
+    }
+
+    private void offers() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(BundleConstants.PRODUCT, yourProduct);
+        //It would be modifiy
+        getDashboardActivity().addFragmentInContainer(new OfferFragment(), bundle, true
+                , true, BaseActivity.AnimationType.NONE, false);
+    }
+
+    private void buyInsurance() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(BundleConstants.PRODUCT, yourProduct);
+        getDashboardActivity().addFragmentInContainer(new InsuranceChoiceFragment(), bundle, true
+                , true, BaseActivity.AnimationType.NONE, false);
+    }
+
+    private void warranty() {
+        getPresenter().getWarrantyCardImage(this, getDashboardActivity(), new WarrantyCardImageRequest(yourProduct.getWw_productid()));
+    }
+
+    private void extendWarranty() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(BundleConstants.PRODUCT, yourProduct);
+        getDashboardActivity().addFragmentInContainer(new YourProductFragment(), bundle, true
+                , true, BaseActivity.AnimationType.NONE, false);
     }
 
     @Override
@@ -128,8 +169,17 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
                 setProductData(response);
             } else if (requestCode == 3) {
                 setReviewsData(response);
+            } else if (requestCode == 4) {
+                WarrantyCardImageData data = (WarrantyCardImageData) response;
+                setWarrantyCardData(data);
             }
         }
+    }
+
+    private void setWarrantyCardData(WarrantyCardImageData data) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(BundleConstants.WARRANTY_IMAGE, data.getInfo().size() > 0 ? data.getInfo().get(0) : null);
+        CommonUtility.showWarrantyImageDialog(getDashboardActivity(), bundle);
     }
 
     private void setReviewsData(BaseResponse response) {
@@ -141,10 +191,12 @@ public class DetailsFragment extends DashboardFragment implements DetailsAdapter
         if (CommonUtility.isNotNull(data) && CommonUtility.isNotNull(data.getInfo()) && data.getInfo().size() > 0) {
             ProductDetails details = data.getInfo().get(0);
             if (CommonUtility.isNotNull(details)) {
-                GlideUtils.loadImage(getContext(), details.getProduct_image(), mBinding.storeImage, null, R.drawable.icon_placeholder);
-                mBinding.tvTotalRating.setText(null);
-                mBinding.ratingBar.setRating(0);
-                mBinding.productName.setText(null);
+                GlideUtils.loadImage(getContext(), details.getProduct_main_image(), mBinding.storeImage, null, R.drawable.icon_placeholder);
+                mBinding.tvTotalRating.setText(details.getTotal_reviews());
+                if(CommonUtility.isNotNull(details.getRating())){
+                    mBinding.ratingBar.setRating(CommonUtility.setRating(details.getRating()));
+                }
+                mBinding.productName.setText(details.getProduct_name());
                 mBinding.tvDetails.setText(details.getModel_no());
                 mBinding.tvDate.setText(CommonUtility.dateYYYYMMDD(details.getWarranty_from()));
                 mBinding.tvCompanyName.setText(null);

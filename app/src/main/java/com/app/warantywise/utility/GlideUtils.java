@@ -305,20 +305,20 @@ public class GlideUtils {
 
     //load simple image with progress bar
     public static void loadImageWithZoom(final Context mContext, String imageUrl, final ImageView imageView) {
-        final CircularAnimatedDrawable animPlaceholder =
+        /*final CircularAnimatedDrawable animPlaceholder =
                 CircularAnimatedDrawable.getInstance(mContext.getResources().getColor(R.color.progresscolor), 6);
-        animPlaceholder.start();
+        animPlaceholder.start();*/
         Glide.with(mContext)
                 .load(imageUrl)
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .format(DecodeFormat.PREFER_ARGB_8888)
-                .placeholder(animPlaceholder)
+                .placeholder(R.drawable.icon_placeholder)
                 .into(new BitmapImageViewTarget(imageView) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         super.onResourceReady(resource, glideAnimation);
-                        animPlaceholder.stop();
+                        //animPlaceholder.stop();
                     }
 
                     @Override

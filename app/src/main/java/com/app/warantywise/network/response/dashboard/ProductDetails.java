@@ -36,6 +36,28 @@ public class ProductDetails implements Parcelable{
     private String insrnce_count;
     private String ext_wrnty_count;
     private String offers_count;
+    private String current_status;
+    private String transfer_status;
+    private String new_owner_id;
+    private String product_name;
+    private String description;
+    private String product_main_image;
+    private String default_warranty_days;
+    private String lng;
+    private String product_category;
+
+    private String manufacturer_id;
+    private String icon;
+    private String mrp_price;
+    private String avg_price;
+    private String product_category_id;
+    private String product_sub_category;
+    private String rating;
+    private String total_reviews;
+    private String tags;
+
+
+
     public ProductDetails(){
 
     }
@@ -81,6 +103,150 @@ public class ProductDetails implements Parcelable{
             return new ProductDetails[size];
         }
     };
+
+    public String getCurrent_status() {
+        return current_status;
+    }
+
+    public void setCurrent_status(String current_status) {
+        this.current_status = current_status;
+    }
+
+    public String getTransfer_status() {
+        return transfer_status;
+    }
+
+    public void setTransfer_status(String transfer_status) {
+        this.transfer_status = transfer_status;
+    }
+
+    public String getNew_owner_id() {
+        return new_owner_id;
+    }
+
+    public void setNew_owner_id(String new_owner_id) {
+        this.new_owner_id = new_owner_id;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getProduct_main_image() {
+        return product_main_image;
+    }
+
+    public void setProduct_main_image(String product_main_image) {
+        this.product_main_image = product_main_image;
+    }
+
+    public String getDefault_warranty_days() {
+        return default_warranty_days;
+    }
+
+    public void setDefault_warranty_days(String default_warranty_days) {
+        this.default_warranty_days = default_warranty_days;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
+    public String getProduct_category() {
+        return product_category;
+    }
+
+    public void setProduct_category(String product_category) {
+        this.product_category = product_category;
+    }
+
+    public String getManufacturer_id() {
+        return manufacturer_id;
+    }
+
+    public void setManufacturer_id(String manufacturer_id) {
+        this.manufacturer_id = manufacturer_id;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getMrp_price() {
+        return mrp_price;
+    }
+
+    public void setMrp_price(String mrp_price) {
+        this.mrp_price = mrp_price;
+    }
+
+    public String getAvg_price() {
+        return avg_price;
+    }
+
+    public void setAvg_price(String avg_price) {
+        this.avg_price = avg_price;
+    }
+
+    public String getProduct_category_id() {
+        return product_category_id;
+    }
+
+    public void setProduct_category_id(String product_category_id) {
+        this.product_category_id = product_category_id;
+    }
+
+    public String getProduct_sub_category() {
+        return product_sub_category;
+    }
+
+    public void setProduct_sub_category(String product_sub_category) {
+        this.product_sub_category = product_sub_category;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getTotal_reviews() {
+        return total_reviews;
+    }
+
+    public void setTotal_reviews(String total_reviews) {
+        this.total_reviews = total_reviews;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
     public String getId() {
         return id;
