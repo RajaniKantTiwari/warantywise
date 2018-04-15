@@ -390,14 +390,20 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
 
     @Override
     public void onSuccess(BaseResponse response, int requestCode) {
-        Log.e("BaseResponseAre",response.toString());
         if (CommonUtility.isNotNull(response)) {
             if (requestCode == 1) {
-                ProductDetailData data = (ProductDetailData) response;
-                productDetailList.clear();
-                productDetailList.addAll(data.getInfo());
-                ArrayAdapter<ProductDetail> productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
-                mBinding.edProductName.setAdapter(productNameAdapter);
+                    ProductDetailData data = (ProductDetailData) response;
+                    productDetailList.clear();
+                    if(CommonUtility.isNotNull(data)&&
+                            CommonUtility.isNotNull(data.getInfo())
+                            &&data.getInfo().size()>0){
+                        productDetailList.addAll(data.getInfo());
+                        ArrayAdapter<ProductDetail> productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
+                        mBinding.edProductName.setAdapter(productNameAdapter);
+                    }else{
+                        mBinding.edProductName.dismissDropDown();
+                    }
+
             } else if (requestCode == 2 && response.getStatus().equalsIgnoreCase(AppConstants.SUCCESS)) {
                 showToast(response.getMsg());
                 if (isfirstTime) {
@@ -411,19 +417,16 @@ public class AddProductActivity extends CommonActivity implements ProductAdapter
             } else if (requestCode == 3) {
                 CompanyDetailData data = (CompanyDetailData) response;
                 companyDetailList.clear();
-                companyDetailList.addAll(data.getInfo());
-                ArrayAdapter<CompanyDetail> companyNameNameAdapter = new CompanyNameCustomArrayAdapter(this, R.layout.product_name_row, companyDetailList);
-                mBinding.edCompanyName.setAdapter(companyNameNameAdapter);
-            }
-        } else {
-            if (requestCode == 1) {
-                productDetailList.clear();
-                ArrayAdapter<ProductDetail> productNameAdapter = new ProductNameCustomArrayAdapter(this, R.layout.product_name_row, productDetailList);
-                mBinding.edProductName.setAdapter(productNameAdapter);
-            } else if (requestCode == 3) {
-                companyDetailList.clear();
-                ArrayAdapter<CompanyDetail> companyNameNameAdapter = new CompanyNameCustomArrayAdapter(this, R.layout.product_name_row, companyDetailList);
-                mBinding.edCompanyName.setAdapter(companyNameNameAdapter);
+                if(CommonUtility.isNotNull(data)&&
+                        CommonUtility.isNotNull(data.getInfo())
+                        &&data.getInfo().size()>0) {
+                    companyDetailList.addAll(data.getInfo());
+                    ArrayAdapter<CompanyDetail> companyNameNameAdapter = new CompanyNameCustomArrayAdapter(this, R.layout.product_name_row, companyDetailList);
+                    mBinding.edCompanyName.setAdapter(companyNameNameAdapter);
+                }else{
+                    mBinding.edCompanyName.dismissDropDown();
+                }
+
             }
         }
     }
