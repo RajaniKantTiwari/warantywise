@@ -40,7 +40,6 @@ import net.alhazmy13.mediapicker.Image.ImagePicker;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -260,14 +259,14 @@ public class ProfileFragment extends DashboardFragment implements MvpView, View.
         profilePicFilePath = filePath;
         File f = new File(filePath);
         if (f.exists()) {
-            GlideUtils.loadImageProfilePic(getDashboardActivity(), filePath, mBinding.ivProfile, null, R.drawable.avatar);
+            GlideUtils.loadImage(getDashboardActivity(), filePath, mBinding.ivProfile, null, R.drawable.avatar);
         }
     }
 
     private void gotoCropper(Uri sourceUri) {
         CropImage.activity(sourceUri).setAspectRatio(1, 1)
                 .setGuidelines(CropImageView.Guidelines.ON)
-                .setCropShape(CropImageView.CropShape.OVAL)
+                .setCropShape(CropImageView.CropShape.RECTANGLE)
                 .start(getDashboardActivity());
     }
 
