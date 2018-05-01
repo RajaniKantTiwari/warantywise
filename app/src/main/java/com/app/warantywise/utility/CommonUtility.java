@@ -112,7 +112,7 @@ public class CommonUtility {
     }
 
 
-    public static void showOrderDialog(AppCompatActivity activity, Bundle bundle, FeedbackDialogFragment.FeedbackDialogListener listener) {
+    public static void showFeedbackDialog(AppCompatActivity activity, Bundle bundle, FeedbackDialogFragment.FeedbackDialogListener listener) {
         FragmentManager fm = activity.getSupportFragmentManager();
         FeedbackDialogFragment alertdFragment = new FeedbackDialogFragment();
         alertdFragment.addListener(listener);

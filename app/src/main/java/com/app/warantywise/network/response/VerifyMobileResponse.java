@@ -1,7 +1,5 @@
 package com.app.warantywise.network.response;
 
-import com.app.warantywise.network.response.BaseResponse;
-
 /**
  * Created by ashok on 24/12/17.
  */

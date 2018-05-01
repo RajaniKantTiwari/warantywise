@@ -9,13 +9,18 @@ import com.app.warantywise.network.request.VerifyMobileRequest;
 import com.app.warantywise.network.request.WarrantyCardImageRequest;
 import com.app.warantywise.network.request.dashboard.CompanyDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ExtendeWarrantyRequest;
+import com.app.warantywise.network.request.dashboard.GenerateMyOrder;
 import com.app.warantywise.network.request.dashboard.MerchantRequest;
 import com.app.warantywise.network.request.dashboard.OrderDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductInsuranceRequest;
 import com.app.warantywise.network.request.dashboard.OfferRequest;
 import com.app.warantywise.network.request.dashboard.ProductDetailsRequest;
 import com.app.warantywise.network.request.dashboard.ProductsRequest;
+import com.app.warantywise.network.request.dashboard.ServiceCenterFeedback;
 import com.app.warantywise.network.request.dashboard.ServiceCenterRequest;
+import com.app.warantywise.network.request.dashboard.UpdateEmail;
+import com.app.warantywise.network.request.dashboard.UpdateMobile;
+import com.app.warantywise.network.request.dashboard.UpdatePassword;
 import com.app.warantywise.network.response.BaseResponse;
 import com.app.warantywise.network.response.LoginResponse;
 import com.app.warantywise.network.response.MyOrderData;
@@ -115,4 +120,19 @@ public interface ApiService {
 
     @GET("cart/myorder")
     Observable<MyOrderData> getMyOrder();
+
+    @POST("register/update_login_email")
+    Observable<BaseResponse> updateEmail(@Body UpdateEmail request);
+
+    @POST("register/update_login_number")
+    Observable<BaseResponse> updateMobile(@Body UpdateMobile request);
+
+    @POST("register/updatepassword")
+    Observable<BaseResponse> updatePassword(@Body UpdatePassword request);
+
+    @POST("product/generate_my_order")
+    Observable<BaseResponse> generateMyOrder(@Body GenerateMyOrder request);
+
+    @POST("product/add_service_center_feedback")
+    Observable<BaseResponse> serviceCenterFeedback(@Body ServiceCenterFeedback request);
 }
